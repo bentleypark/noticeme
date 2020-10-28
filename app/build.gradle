@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
     id 'com.github.ben-manes.versions' version "0.33.0"
 }
 
@@ -58,6 +59,12 @@ dependencies {
     implementation Libs.constraintlayout
     implementation Libs.material
 
+    implementation Libs.retrofit
+    implementation Libs.gson
+    implementation Libs.gsonConverter
+    implementation Libs.okhttp
+    implementation Libs.loggingInterceptor
+
     implementation Libs.hiltAndroid
     implementation Libs.hiltViewModel
     kapt Libs.hiltAndroidCompiler
@@ -66,6 +73,11 @@ dependencies {
     testImplementation Libs.junit4
     androidTestImplementation Libs.junitExt
     androidTestImplementation Libs.espressoCore
+}
+
+kapt {
+    useBuildCache = true
+    correctErrorTypes true
 }
 
 def isNonStable = { String version ->
