@@ -1,0 +1,26 @@
+ext.flavorConfig = {
+
+    flavorDimensions "version"
+
+    productFlavors {
+        staging {
+            dimension "version"
+            ext.myApplicationIdSuffix = '.debug'
+        }
+//        paid {
+//            dimension "pricing"
+//            ext.myApplicationIdSuffix = '.paid'
+//        }
+    }
+
+    productFlavors.all { flavor ->
+        if (flavor.hasProperty('myApplicationIdSuffix') && isApplicationProject()) {
+            flavor.applicationIdSuffix = flavor.myApplicationIdSuffix
+        }
+    }
+
+}
+
+def isApplicationProject() {
+    return project.android.class.simpleName.startsWith('BaseAppModuleExtension')
+}
