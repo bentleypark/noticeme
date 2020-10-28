@@ -50,12 +50,18 @@ android {
 dependencies {
     implementation project(Modules.commonUi)
     implementation project(Modules.commonUtils)
+    implementation project(Modules.data)
 
     implementation Libs.kotlinStdLib
     implementation Libs.appcompat
     implementation Libs.coreKtx
     implementation Libs.constraintlayout
     implementation Libs.material
+
+    implementation Libs.hiltAndroid
+    implementation Libs.hiltViewModel
+    kapt Libs.hiltAndroidCompiler
+    kapt Libs.hiltCompiler
 
     testImplementation Libs.junit4
     androidTestImplementation Libs.junitExt
