@@ -1,0 +1,5 @@
+include ':app'
+include ':common:ui'
+include ':common:utils'
+include ':data'
+rootProject.name = "noticeme"
