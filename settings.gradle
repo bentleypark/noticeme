@@ -1,2 +1,4 @@
 include ':app'
+include ':common:ui'
+include ':common:utils'
 rootProject.name = "noticeme"

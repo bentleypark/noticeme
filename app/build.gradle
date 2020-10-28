@@ -48,6 +48,8 @@ android {
 }
 
 dependencies {
+    implementation project(Modules.commonUi)
+    implementation project(Modules.commonUtils)
 
     implementation Libs.kotlinStdLib
     implementation Libs.appcompat

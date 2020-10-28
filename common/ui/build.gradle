@@ -1,0 +1,56 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 25
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    lintOptions {
+        abortOnError false
+        disable 'UnsafeExperimentalUsageError', 'UnsafeExperimentalUsageWarning', 'ContentDescription'
+    }
+}
+
+dependencies {
+    implementation Libs.kotlinStdLib
+    implementation Libs.appcompat
+
+    // Coroutine
+    implementation Libs.coroutineAndroid
+    implementation Libs.coroutineCore
+
+    // RxJava
+    implementation Libs.rxJava
+    implementation Libs.rxAndroid
+
+    // Square
+    implementation Libs.retrofit
+
+    // Debug
+    implementation Libs.timber
+}
