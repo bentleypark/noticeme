@@ -59,6 +59,8 @@ dependencies {
     implementation Libs.constraintlayout
     implementation Libs.material
 
+    implementation Libs.startUp
+
     implementation Libs.retrofit
     implementation Libs.gson
     implementation Libs.gsonConverter

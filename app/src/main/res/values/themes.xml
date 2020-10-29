@@ -19,6 +19,14 @@
         <item name="android:textViewStyle">@style/NotoSansTextViewStyle</item>
     </style>
 
+    <!-- Splash Activity theme. -->
+    <style name="FullscreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
     <style name="NotoSansTextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
         <item name="android:fontFamily">@font/noto_regular</item>
     </style>
