@@ -1,7 +1,7 @@
 package com.project.noticeme.data.api
 
-import com.bentley.data.model.Blog
-import com.bentley.data.repository.BlogNetworkEntity
+import com.project.noticeme.data.model.Blog
+import com.project.noticeme.data.repository.BlogNetworkEntity
 import javax.inject.Inject
 
 class NetworkMapper @Inject constructor() : EntityMapper<BlogNetworkEntity, Blog> {
