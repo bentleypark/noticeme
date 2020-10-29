@@ -1,8 +1,8 @@
 package com.project.noticeme.di
 
-import com.bentley.data.api.ApiService
-import com.bentley.data.api.NetworkMapper
-import com.bentley.data.repository.MainRepository
+import com.project.noticeme.data.api.ApiService
+import com.project.noticeme.data.api.NetworkMapper
+import com.project.noticeme.data.repository.MainRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
