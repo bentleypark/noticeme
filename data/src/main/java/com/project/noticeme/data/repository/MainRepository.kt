@@ -1,9 +1,9 @@
-package com.bentley.data.repository
+package com.project.noticeme.data.repository
 
-import com.bentley.data.api.ApiService
-import com.bentley.data.api.NetworkMapper
-import com.bentley.data.model.Blog
-import com.bentley.data.state.DataState
+import com.project.noticeme.data.api.ApiService
+import com.project.noticeme.data.api.NetworkMapper
+import com.project.noticeme.data.model.Blog
+import com.project.noticeme.data.state.DataState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

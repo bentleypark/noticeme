@@ -1,4 +1,4 @@
-package com.bentley.data.repository
+package com.project.noticeme.data.repository
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

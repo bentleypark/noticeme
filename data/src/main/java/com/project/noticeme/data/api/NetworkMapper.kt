@@ -1,13 +1,10 @@
-package com.bentley.data.api
+package com.project.noticeme.data.api
 
 import com.bentley.data.model.Blog
 import com.bentley.data.repository.BlogNetworkEntity
 import javax.inject.Inject
 
-class NetworkMapper
-@Inject
-constructor():
-    EntityMapper<BlogNetworkEntity, Blog> {
+class NetworkMapper @Inject constructor() : EntityMapper<BlogNetworkEntity, Blog> {
 
     override fun mapFromEntity(entity: BlogNetworkEntity): Blog {
         return Blog(
@@ -29,9 +26,7 @@ constructor():
         )
     }
 
-
-    fun mapFromEntityList(entities: List<BlogNetworkEntity>): List<Blog>{
+    fun mapFromEntityList(entities: List<BlogNetworkEntity>): List<Blog> {
         return entities.map { mapFromEntity(it) }
     }
-
 }
