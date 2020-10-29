@@ -1,4 +1,4 @@
-package com.bentley.data.api
+package com.project.noticeme.data.api
 
 interface EntityMapper <Entity, DomainModel>{
 

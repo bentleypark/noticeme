@@ -1,4 +1,4 @@
-package com.bentley.data.state
+package com.project.noticeme.data.state
 
 sealed class DataState<out R> {
 

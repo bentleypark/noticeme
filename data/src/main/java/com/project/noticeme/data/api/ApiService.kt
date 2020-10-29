@@ -1,6 +1,6 @@
-package com.bentley.data.api
+package com.project.noticeme.data.api
 
-import com.bentley.data.repository.BlogNetworkEntity
+import com.project.noticeme.data.repository.BlogNetworkEntity
 import retrofit2.http.GET
 
 interface ApiService {

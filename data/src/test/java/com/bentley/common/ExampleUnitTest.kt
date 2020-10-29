@@ -1,4 +1,4 @@
-package com.bentley.base
+package com.bentley.common
 
 import org.junit.Test
 

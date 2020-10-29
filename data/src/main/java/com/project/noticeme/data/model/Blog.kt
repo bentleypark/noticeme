@@ -1,4 +1,4 @@
-package com.bentley.data.model
+package com.project.noticeme.data.model
 
 data class Blog(
     var id: Int,

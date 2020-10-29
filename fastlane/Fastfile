@@ -1,0 +1,104 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    gradle(task: "clean assembleRelease")
+    crashlytics
+  
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store
+  end
+
+
+  desc "Test Change Log maintenance"
+    lane :updatechangelog do |options|
+    lastTag = options[:section_identifier]
+    changelog = read_changelog(
+    changelog_path: 'CHANGELOG.md',	# Specify path to CHANGELOG.md
+    #section_identifier: '[Released]',	# Specify what section to read
+    #excluded_markdown_elements: ['-', '###']	# Specify which markdown elements should be excluded
+  ) # Read changelog
+
+  stamp_changelog(
+    section_identifier: lastTag, # Specify identifier to stamp the Unreleased section with
+    git_tag: lastTag, # Specify reference to git tag associated with this section
+   )
+   end
+
+  desc "Runs a changelog_from_git_commits"
+    lane :changelog do |options|
+      lastTag = options[:between]
+      changeLog = changelog_from_git_commits(
+          between: [lastTag, "HEAD"],
+          pretty: "- %s",
+          date_format: "short",
+          match_lightweight_tag: false,
+          merge_commit_filtering: "exclude_merges"
+      )
+      end
+
+  desc "Deploy apk file to slack channel"
+    lane :deploy_build do
+     gradle(task: "clean")
+     gradle(task: "assemble", build_type: "Debug", flavor: "Staging",
+     properties: {
+      'android.injected.signing.store.file'=> ENV['ANDROID_APP_SIGNING_KEY'],
+      'android.injected.signing.store.password'=> ENV['ANDROID_APP_SIGNING_PASSWORD'],
+      'android.injected.signing.key.alias'=> ENV['ANDROID_APP_SIGNING_ALIAS'],
+      'android.injected.signing.key.password'=> ENV['ANDROID_APP_SIGNING_PASSWORD']
+    })
+    slack(message: "Build Successful!")
+    slack_url = ENV["SLACK_URL"]
+    upload_to_slack()
+  end
+
+  desc "Upload the APK to Slack channel"
+  private_lane :upload_to_slack do |options|
+    file_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+    file_name = file_path.gsub(/\/.*\//,"")
+    access_token = ENV["SLACK_ACCESS_TOKEN"]
+    channel_name = "apk_release"
+    sh "echo Uploading " + file_name + " to Slack"
+    sh "curl https://slack.com/api/files.upload -F token=\"" + access_token + "\" -F channels=\"" + channel_name + "\" -F title=\"" + file_name + "\" -F filename=\"" + file_name + "\" -F file=@" + file_path
+  end
+
+  after_all do |lane|
+   if lane == :deploy_build
+  	slack(message: "successful deploy")
+          slack_url = ENV["SLACK_URL"]
+  	end
+
+  	error do |lane, exception|
+  		slack(message: exception.message,success:false)
+  		slack_url = ENV["SLACK_URL"]
+  	end
+   end
+end
+
