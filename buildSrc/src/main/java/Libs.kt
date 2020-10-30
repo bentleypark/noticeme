@@ -66,6 +66,7 @@ object Libs {
     const val junitExt = "androidx.test.ext:junit:${Versions.junitExtVersion}"
 
     // Lifecycle
+    const val lifeCyle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifeCycleVersion}"
     const val viewModel =
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifeCycleVersion}"
     const val extensions =
