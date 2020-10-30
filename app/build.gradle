@@ -71,6 +71,10 @@ dependencies {
     implementation Libs.liveData
 
     implementation Libs.startUp
+    implementation Libs.navUi
+    implementation Libs.navUiKtx
+    implementation Libs.navFragment
+    implementation Libs.navFragmentKtx
 
     implementation Libs.retrofit
     implementation Libs.gson
