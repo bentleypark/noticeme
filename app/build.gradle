@@ -65,6 +65,7 @@ dependencies {
     implementation Libs.activity
     implementation Libs.activityKtx
     implementation Libs.legacySupport
+    implementation Libs.recyclerview
 
     implementation Libs.lifeCyle
     implementation Libs.viewModel
