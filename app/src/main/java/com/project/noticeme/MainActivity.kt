@@ -2,12 +2,26 @@ package com.project.noticeme
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.findNavController
+import com.project.noticeme.common.ex.viewBinding
+import com.project.noticeme.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private val binding by viewBinding(ActivityMainBinding::inflate)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
+        setupNavigationController()
+//        findNavController(R.id.fragment_container).navigate(R.id.homeFragment)
+    }
+
+    private fun setupNavigationController() {
+        val navController = findNavController(R.id.nav_host_fragment)
+        val navInflater = navController.navInflater
+        val navGraph = navInflater.inflate(R.navigation.main_nav)
+        navController.graph = navGraph
     }
 }

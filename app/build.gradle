@@ -49,15 +49,33 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(Modules.commonUi)
     implementation project(Modules.commonUtils)
     implementation project(Modules.data)
 
     implementation Libs.kotlinStdLib
+    implementation Libs.coroutineCore
+    implementation Libs.coroutineAndroid
+
     implementation Libs.appcompat
     implementation Libs.coreKtx
     implementation Libs.constraintlayout
     implementation Libs.material
+    implementation Libs.activity
+    implementation Libs.activityKtx
+    implementation Libs.legacySupport
+    implementation Libs.recyclerview
+
+    implementation Libs.lifeCyle
+    implementation Libs.viewModel
+    implementation Libs.liveData
+
+    implementation Libs.startUp
+    implementation Libs.navUi
+    implementation Libs.navUiKtx
+    implementation Libs.navFragment
+    implementation Libs.navFragmentKtx
 
     implementation Libs.retrofit
     implementation Libs.gson
@@ -76,7 +94,6 @@ dependencies {
 }
 
 kapt {
-    useBuildCache = true
     correctErrorTypes true
 }
 

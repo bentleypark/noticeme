@@ -22,6 +22,8 @@ object Libs {
 
     const val hiltPlugin =  "com.google.dagger:hilt-android-gradle-plugin:${Versions.hiltVersion}"
 
+    const val navSafeArgPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navSafArgPluginVersion}"
+
     // Kotlin
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlinVersion}"
 
@@ -66,6 +68,7 @@ object Libs {
     const val junitExt = "androidx.test.ext:junit:${Versions.junitExtVersion}"
 
     // Lifecycle
+    const val lifeCyle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifeCycleVersion}"
     const val viewModel =
         "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifeCycleVersion}"
     const val extensions =

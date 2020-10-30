@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Noticeme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Noticeme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -17,7 +17,21 @@
         <item name="android:radioButtonStyle">@style/NotoSansRadioButtonStyle</item>
         <item name="android:checkboxStyle">@style/NotoSansCheckboxStyle</item>
         <item name="android:textViewStyle">@style/NotoSansTextViewStyle</item>
+        <!-- Default Activity Animation. -->
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
+
+    <!-- Splash Activity theme. -->
+    <style name="FullscreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
+    <style name="Theme.Noticeme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Noticeme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="NotoSansTextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
         <item name="android:fontFamily">@font/noto_regular</item>
@@ -33,5 +47,10 @@
     </style>
     <style name="NotoSansCheckboxStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.CheckBox">
         <item name="android:fontFamily">@font/noto_regular</item>
+    </style>
+
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 </resources>
