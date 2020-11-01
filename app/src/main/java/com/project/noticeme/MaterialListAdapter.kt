@@ -1,22 +1,21 @@
 package com.project.noticeme
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.project.noticeme.data.model.Material
+import com.project.noticeme.data.model.Consumable
 import com.project.noticeme.databinding.MaterialItemBinding
 
-class MaterialListAdapter(private val list: List<Material>) :
+class MaterialListAdapter(private val list: List<Consumable>) :
     RecyclerView.Adapter<MaterialListAdapter.MaterialListViewHolder>() {
 
     private lateinit var bindingItem: MaterialItemBinding
 
     inner class MaterialListViewHolder(private val binding: MaterialItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Material) {
+        fun bind(item: Consumable) {
             binding.tvTitle.text = item.title
-            binding.tvExpireTime.text = item.expireDate
+            binding.tvExpireTime.text = item.duration
         }
     }
 

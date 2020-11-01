@@ -20,6 +20,13 @@ android {
         versionName Config.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.incremental": "true"
+                ]
+            }
+        }
     }
 
     buildTypes {
@@ -87,6 +94,11 @@ dependencies {
     implementation Libs.hiltViewModel
     kapt Libs.hiltAndroidCompiler
     kapt Libs.hiltCompiler
+
+    // Room
+    implementation Libs.roomRuntime
+    implementation Libs.roomKtx
+    kapt Libs.roomCompiler
 
     testImplementation Libs.junit4
     androidTestImplementation Libs.junitExt

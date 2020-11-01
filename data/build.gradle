@@ -15,6 +15,13 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.incremental": "true"
+                ]
+            }
+        }
     }
 
     buildTypes {
@@ -55,8 +62,14 @@ dependencies {
     // Debug
     implementation Libs.timber
 
+    // Dagger-hilt
     implementation Libs.hiltAndroid
     implementation Libs.hiltViewModel
     kapt Libs.hiltAndroidCompiler
     kapt Libs.hiltCompiler
+
+    // Room
+    implementation Libs.roomRuntime
+    implementation Libs.roomKtx
+    kapt Libs.roomCompiler
 }
