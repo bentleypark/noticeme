@@ -20,7 +20,7 @@ data class ConsumableEntity(
     var category: String,
 
     @ColumnInfo(name = "duration")
-    val duration: String
+    val duration: Long
 ) {
     companion object {
         const val TABLE_NAME = "consumables"

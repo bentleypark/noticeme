@@ -17,7 +17,7 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun provideBlogDb(@ApplicationContext context: Context): ConsumableDatabase {
+    fun provideConsumableDb(@ApplicationContext context: Context): ConsumableDatabase {
         return Room
             .databaseBuilder(
                 context,
@@ -30,7 +30,7 @@ class RoomModule {
 
     @Singleton
     @Provides
-    fun provideBlogDAO(consumableDatabase: ConsumableDatabase): ConsumableDao {
+    fun provideConsumableDAO(consumableDatabase: ConsumableDatabase): ConsumableDao {
         return consumableDatabase.consumableDao()
     }
 }

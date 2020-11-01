@@ -4,18 +4,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.noticeme.data.model.Consumable
+import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.databinding.MaterialItemBinding
 
-class MaterialListAdapter(private val list: List<Consumable>) :
-    RecyclerView.Adapter<MaterialListAdapter.MaterialListViewHolder>() {
+class ConsumableListAdapter(private val list: List<ConsumableEntity>) :
+    RecyclerView.Adapter<ConsumableListAdapter.MaterialListViewHolder>() {
 
     private lateinit var bindingItem: MaterialItemBinding
 
     inner class MaterialListViewHolder(private val binding: MaterialItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Consumable) {
+        fun bind(item: ConsumableEntity) {
             binding.tvTitle.text = item.title
-            binding.tvExpireTime.text = item.duration
+            binding.ivMaterialImg.setImageResource(item.image)
+//            binding.tvExpireTime.text = item.duration.toString()
         }
     }
 

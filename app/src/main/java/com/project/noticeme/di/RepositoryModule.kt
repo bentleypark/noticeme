@@ -3,6 +3,7 @@ package com.project.noticeme.di
 import com.project.noticeme.data.api.ApiService
 import com.project.noticeme.data.api.NetworkMapper
 import com.project.noticeme.data.repository.MainRepository
+import com.project.noticeme.data.room.ConsumableDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,11 +17,11 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideMainRepository(
-//        blogDao: BlogDao,
-        apiService: ApiService,
+        consumableDao: ConsumableDao,
+//        apiService: ApiService,
 //        cacheMapper: CacheMapper,
-        networkMapper: NetworkMapper
+//        networkMapper: NetworkMapper
     ): MainRepository {
-        return MainRepository(apiService, networkMapper)
+        return MainRepository(consumableDao)
     }
 }

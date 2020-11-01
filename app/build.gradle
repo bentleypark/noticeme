@@ -20,13 +20,13 @@ android {
         versionName Config.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [
-                        "room.incremental": "true"
-                ]
-            }
-        }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments = [
+//                        "room.incremental": "true"
+//                ]
+//            }
+//        }
     }
 
     buildTypes {

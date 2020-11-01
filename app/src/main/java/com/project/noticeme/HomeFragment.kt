@@ -6,17 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(),
     ViewBindingHolder<FragmentHomeBinding> by ViewBindingHolderImpl() {
 
     private val viewModel: HomeViewModel by viewModels()
-    private lateinit var listAdapter: MaterialListAdapter
+    private lateinit var listAdapter: ConsumableListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +31,8 @@ class HomeFragment : Fragment(),
         viewModel.materialList.observe(
             viewLifecycleOwner, {
 
-                listAdapter = MaterialListAdapter(it)
+                listAdapter = ConsumableListAdapter(it)
+
                 val size = resources.getDimensionPixelSize(R.dimen.material_item_size)
                 binding!!.rvList.apply {
                     adapter = listAdapter
