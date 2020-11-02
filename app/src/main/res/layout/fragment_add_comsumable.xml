@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainActivity_background"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.add.AddConsumableFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -23,19 +23,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
+                <!--            <ImageView-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_gravity="start|center_vertical"-->
+                <!--                android:background="@drawable/ic_main_logo"/>-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="start|center_vertical"
-                    android:background="@drawable/ic_main_logo"/>
+                    android:layout_gravity="center_horizontal"
+                    app:endIconMode="clear_text"
+                    app:hintEnabled="false">
+
+                    <EditText
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/editext_search_layout_background"
+                        android:hint="소모품 검색"
+                        android:imeOptions="actionSend"
+                        android:inputType="text"
+                        android:maxLength="23"
+                        android:textColorHint="#d4d4d4"
+                        android:textSize="16sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
                     android:id="@+id/btn_setting"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="15dp"
-                    android:background="@drawable/btn_setting" />
+                    android:background="@drawable/ic_btn_search" />
             </FrameLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -43,20 +64,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.88" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
@@ -72,45 +79,16 @@
             android:background="@drawable/main_background_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline3">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="80dp"
-                android:fontFamily="@font/noto_bold"
-                android:text="다음 교체"
-                android:textColor="#60979e"
-                android:textSize="18sp" />
-
-        </RelativeLayout>
+            app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_list"
+            android:id="@+id/category_list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_add"
-            app:layout_constraintEnd_toStartOf="@+id/btn_add"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/above_layout"
-            tools:listitem="@layout/consumable_item" />
-
-        <ImageButton
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/ic_btn_add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
+            tools:listitem="@layout/category_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

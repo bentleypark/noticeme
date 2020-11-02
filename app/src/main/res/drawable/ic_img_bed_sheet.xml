@@ -1,0 +1,16 @@
+<vector android:height="60dp" android:viewportHeight="250"
+    android:viewportWidth="250" android:width="60dp"
+    xmlns:aapt="http://schemas.android.com/aapt" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:pathData="M125,125m-125,0a125,125 0,1 1,250 0a125,125 0,1 1,-250 0">
+        <aapt:attr name="android:fillColor">
+            <gradient android:endX="125" android:endY="250"
+                android:startX="125" android:startY="0" android:type="linear">
+                <item android:color="#FF53671A" android:offset="0"/>
+                <item android:color="#FF727A17" android:offset="1"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path android:fillColor="#fff" android:pathData="M125,125m-113,0a113,113 0,1 1,226 0a113,113 0,1 1,-226 0"/>
+    <path android:fillColor="#6F6F6F" android:pathData="M184.933,165.648l-18.683,-72.66L166.25,64.082c0,-1.15 -0.933,-2.083 -2.083,-2.083L80.833,61.999c-1.15,0 -2.083,0.933 -2.083,2.083v28.904l-18.683,72.661c-0.044,0.169 -0.067,0.344 -0.067,0.519v18.75c0,1.15 0.933,2.083 2.083,2.083h120.834c1.15,0 2.083,-0.933 2.083,-2.083v-18.75c0,-0.175 -0.023,-0.35 -0.067,-0.519zM82.917,66.167h79.166v25h-4.166v-8.334c0,-1.15 -0.933,-2.083 -2.084,-2.083h-29.166c-1.151,0 -2.084,0.933 -2.084,2.083v8.334h-4.166v-8.334c0,-1.15 -0.933,-2.083 -2.084,-2.083L89.167,80.75c-1.15,0 -2.084,0.933 -2.084,2.083v8.334h-4.166v-25zM153.75,84.917L153.75,99.5h-25L128.75,84.917h25zM116.25,84.917L116.25,99.5h-25L91.25,84.917h25zM82.448,95.333h4.635v6.25c0,1.151 0.933,2.084 2.084,2.084h29.166c1.151,0 2.084,-0.933 2.084,-2.084v-6.25h4.166v6.25c0,1.151 0.933,2.084 2.084,2.084h29.166c1.151,0 2.084,-0.933 2.084,-2.084v-6.25h4.635L166.838,112L78.163,112l4.285,-16.667zM77.083,116.167h90.834l1.07,4.166L76.021,120.333l1.062,-4.166zM180.833,182.833L64.167,182.833v-16.404l10.78,-41.929h95.105l10.781,41.929v16.404z"/>
+    <path android:fillColor="#6F6F6F" android:pathData="M176.667,164.083H128.75v4.167h47.917v-4.167zM124.584,164.083h-4.167v4.167h4.167v-4.167zM116.25,164.083H68.333v4.167h47.917v-4.167z"/>
+</vector>

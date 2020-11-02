@@ -1,9 +1,7 @@
 package com.project.noticeme.data.model
 
-data class Material(
+data class ConsumableCategory(
     val id: Int,
     val title: String,
     val image: Int,
-    val category: String,
-    val expireDate: String
 )
