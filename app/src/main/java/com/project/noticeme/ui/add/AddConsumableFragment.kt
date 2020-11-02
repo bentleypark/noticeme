@@ -13,7 +13,6 @@ import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.databinding.FragmentAddComsumableBinding
-import com.project.noticeme.ui.home.SpaceDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,15 +53,6 @@ class AddConsumableFragment : Fragment(),
     }
 
     companion object {
-        private var fragment: AddConsumableFragment? = null
-
-        @JvmStatic
-        fun newInstance() =
-            fragment ?: synchronized(this) {
-                fragment ?: AddConsumableFragment().also { fragment = it }
-            }
-
         private const val SPAN_COUNT_PORTRAIT = 3
-        private const val CATEGORY_COUNT = 5
     }
 }
