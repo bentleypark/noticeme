@@ -42,7 +42,7 @@ object Versions {
     const val lifeCycleVersion = "2.2.0"
     const val roomVersion = "2.2.5"
     const val navigationVersion = "2.3.1"
-    const val startupVersion = "1.0.0-beta01"
+    const val startupVersion = "1.0.0"
 
     const val testVersion = "1.3.0"
     const val espressoVersion = "3.3.0"

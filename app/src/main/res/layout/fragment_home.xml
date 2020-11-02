@@ -27,7 +27,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:background="@drawable/ic_main_logo"/>
+                    android:background="@drawable/ic_main_logo" />
 
                 <ImageButton
                     android:id="@+id/btn_setting"
@@ -95,11 +95,22 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/btn_add"
             app:layout_constraintEnd_toStartOf="@+id/btn_add"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/above_layout"
             tools:listitem="@layout/consumable_item" />
+
+        <ImageView
+            android:id="@+id/iv_guide_msg"
+            android:layout_width="205dp"
+            android:layout_height="122dp"
+            android:background="@drawable/guide_msg"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/btn_add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/btn_add"

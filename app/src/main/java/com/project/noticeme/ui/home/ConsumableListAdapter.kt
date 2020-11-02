@@ -7,7 +7,7 @@ import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
 
 
-class ConsumableListAdapter(private val list: List<ConsumableEntity>) :
+class ConsumableListAdapter(private val list: MutableList<ConsumableEntity>) :
     RecyclerView.Adapter<ConsumableListAdapter.ConsumableListViewHolder>() {
 
     private lateinit var bindingItem: ConsumableItemBinding
@@ -33,4 +33,9 @@ class ConsumableListAdapter(private val list: List<ConsumableEntity>) :
     }
 
     override fun getItemCount() = list.size
+
+    fun addAll(items: MutableList<ConsumableEntity>) {
+        list.addAll(items)
+        notifyDataSetChanged()
+    }
 }

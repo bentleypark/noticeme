@@ -11,6 +11,6 @@ interface ConsumableDao {
     @Query("SELECT * FROM consumables")
     suspend fun get(): List<ConsumableEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(blogEntity: ConsumableEntity)
 }

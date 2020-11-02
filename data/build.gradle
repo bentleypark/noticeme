@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.github.ben-manes.versions' version "0.33.0"
 }
 
 android {
@@ -72,4 +73,20 @@ dependencies {
     implementation Libs.roomRuntime
     implementation Libs.roomKtx
     kapt Libs.roomCompiler
+}
+
+kapt {
+    correctErrorTypes true
+}
+
+def isNonStable = { String version ->
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it -> version.toUpperCase().contains(it) }
+    def regex = /^[0-9,.v-]+(-r)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+dependencyUpdates {
+    rejectVersionIf {
+        isNonStable(it.candidate.version)
+    }
 }
