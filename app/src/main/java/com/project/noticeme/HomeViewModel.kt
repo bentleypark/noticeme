@@ -19,7 +19,7 @@ constructor(
 
     private val _materialList = liveData {
         val dataList = mutableListOf<ConsumableEntity>()
-//        for (i in 0..7) {
+
         dataList.add(
             ConsumableEntity(
                 0,
@@ -59,15 +59,21 @@ constructor(
                 TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 7
             )
         )
-        insertData(dataList)
         emit(dataList.toImmutableList())
     }
     val materialList: LiveData<List<ConsumableEntity>>
         get() = _materialList
 
-    fun insertData(list: List<ConsumableEntity>) {
+    var dataList = emptyList<ConsumableEntity>()
+
+    private fun insertData(list: List<ConsumableEntity>) {
         viewModelScope.launch {
             mainRepository.insertConsumable(list)
         }
+    }
+
+    init {
+        dataList = InitialComsumableData.fetchData()
+        insertData(dataList)
     }
 }
