@@ -1,10 +1,10 @@
-package com.project.noticeme
+package com.project.noticeme.ui.home
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.project.noticeme.R
 import com.project.noticeme.common.base.BaseViewModel
-import com.project.noticeme.data.model.Consumable
 import com.project.noticeme.data.repository.MainRepository
 import com.project.noticeme.data.room.ConsumableEntity
 import kotlinx.coroutines.launch

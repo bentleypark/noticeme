@@ -1,9 +1,8 @@
-package com.project.noticeme
+package com.project.noticeme.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.project.noticeme.data.model.Consumable
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.databinding.MaterialItemBinding
 

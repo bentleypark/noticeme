@@ -1,5 +1,6 @@
-package com.project.noticeme
+package com.project.noticeme.ui.home
 
+import com.project.noticeme.R
 import com.project.noticeme.data.room.ConsumableEntity
 import okhttp3.internal.toImmutableList
 import java.util.concurrent.TimeUnit

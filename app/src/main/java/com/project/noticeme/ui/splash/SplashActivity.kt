@@ -1,8 +1,10 @@
-package com.project.noticeme
+package com.project.noticeme.ui.splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import com.project.noticeme.ui.MainActivity
+import com.project.noticeme.R
 import com.project.noticeme.common.ex.launchActivityWithFinish
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
