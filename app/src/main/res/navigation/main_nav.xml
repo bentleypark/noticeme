@@ -8,5 +8,18 @@
         android:id="@+id/homeFragment"
         android:name="com.project.noticeme.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addConsumableFragment"
+            app:destination="@id/addConsumableFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_enter" />
+    </fragment>
+    <fragment
+        android:id="@+id/addConsumableFragment"
+        android:name="com.project.noticeme.ui.add.AddConsumableFragment"
+        android:label="fragment_add_comsumable"
+        tools:layout="@layout/fragment_add_comsumable" />
 </navigation>

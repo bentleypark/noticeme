@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
@@ -26,8 +27,8 @@ class HomeFragment : Fragment(),
     ): View? = initBinding(FragmentHomeBinding.inflate(layoutInflater), this) {
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         viewModel.materialList.observe(
             viewLifecycleOwner, {
@@ -44,5 +45,9 @@ class HomeFragment : Fragment(),
                 }
             }
         )
+
+        binding!!.btnAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_addConsumableFragment)
+        }
     }
 }
