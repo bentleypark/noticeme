@@ -5,7 +5,7 @@ import com.project.noticeme.data.room.ConsumableEntity
 import okhttp3.internal.toImmutableList
 import java.util.concurrent.TimeUnit
 
-object InitialComsumableData {
+object InitialConsumableData {
     private val dataList = mutableListOf<ConsumableEntity>()
 
     fun fetchData(): List<ConsumableEntity> {

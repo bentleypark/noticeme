@@ -17,7 +17,7 @@ constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val _materialList = liveData {
+    private val _consumableList = liveData {
         val dataList = mutableListOf<ConsumableEntity>()
 
         dataList.add(
@@ -61,8 +61,8 @@ constructor(
         )
         emit(dataList.toImmutableList())
     }
-    val materialList: LiveData<List<ConsumableEntity>>
-        get() = _materialList
+    val consumableList: LiveData<List<ConsumableEntity>>
+        get() = _consumableList
 
     var dataList = emptyList<ConsumableEntity>()
 
@@ -73,7 +73,7 @@ constructor(
     }
 
     init {
-        dataList = InitialComsumableData.fetchData()
+        dataList = InitialConsumableData.fetchData()
         insertData(dataList)
     }
 }

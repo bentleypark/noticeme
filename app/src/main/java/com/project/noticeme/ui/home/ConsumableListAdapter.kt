@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.noticeme.data.room.ConsumableEntity
-import com.project.noticeme.databinding.MaterialItemBinding
+import com.project.noticeme.databinding.ConsumableItemBinding
+
 
 class ConsumableListAdapter(private val list: List<ConsumableEntity>) :
-    RecyclerView.Adapter<ConsumableListAdapter.MaterialListViewHolder>() {
+    RecyclerView.Adapter<ConsumableListAdapter.ConsumableListViewHolder>() {
 
-    private lateinit var bindingItem: MaterialItemBinding
+    private lateinit var bindingItem: ConsumableItemBinding
 
-    inner class MaterialListViewHolder(private val binding: MaterialItemBinding) :
+    inner class ConsumableListViewHolder(private val binding: ConsumableItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ConsumableEntity) {
             binding.tvTitle.text = item.title
@@ -20,13 +21,13 @@ class ConsumableListAdapter(private val list: List<ConsumableEntity>) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MaterialListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConsumableListViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        bindingItem = MaterialItemBinding.inflate(layoutInflater)
-        return MaterialListViewHolder(bindingItem)
+        bindingItem = ConsumableItemBinding.inflate(layoutInflater)
+        return ConsumableListViewHolder(bindingItem)
     }
 
-    override fun onBindViewHolder(holder: MaterialListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ConsumableListViewHolder, position: Int) {
         val item = list[position]
         holder.bind(item)
     }
