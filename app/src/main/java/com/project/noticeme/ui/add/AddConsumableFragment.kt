@@ -50,6 +50,10 @@ class AddConsumableFragment : Fragment(),
                     setHasFixedSize(true)
                 }
             })
+
+        binding!!.btnBack.setOnClickListener {
+            findNavController().navigate(R.id.action_addConsumableFragment_pop)
+        }
     }
 
     companion object {
