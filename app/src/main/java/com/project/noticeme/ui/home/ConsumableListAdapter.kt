@@ -1,19 +1,26 @@
 package com.project.noticeme.ui.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
+import kotlinx.android.extensions.LayoutContainer
 
 
-class ConsumableListAdapter(private val list: MutableList<ConsumableEntity>) :
+class ConsumableListAdapter(
+    private val list: MutableList<ConsumableEntity>) :
     RecyclerView.Adapter<ConsumableListAdapter.ConsumableListViewHolder>() {
 
     private lateinit var bindingItem: ConsumableItemBinding
 
     inner class ConsumableListViewHolder(private val binding: ConsumableItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root), LayoutContainer {
+
+        override val containerView: View?
+            get() = binding.root
+
         fun bind(item: ConsumableEntity) {
             binding.tvTitle.text = item.title
             binding.ivMaterialImg.setImageResource(item.image)

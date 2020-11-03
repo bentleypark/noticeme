@@ -24,6 +24,8 @@ object Libs {
 
     const val navSafeArgPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navSafArgPluginVersion}"
 
+    const val kotlinAndroidExtension = "org.jetbrains.kotlin:kotlin-android-extensions-runtime:${Versions.kotlinVersion}"
+
     // Kotlin
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlinVersion}"
 
