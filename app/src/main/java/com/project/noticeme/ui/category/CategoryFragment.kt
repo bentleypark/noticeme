@@ -25,13 +25,13 @@ class CategoryFragment : Fragment(),
     private val viewModel: CategoryViewModel by viewModels()
     private lateinit var listAdapter: ConsumableCategoryListAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().navigate(R.id.action_categoryFragment_pop)
-        }
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//        requireActivity().onBackPressedDispatcher.addCallback(this) {
+//            findNavController().navigate(R.id.action_categoryFragment_pop)
+//        }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

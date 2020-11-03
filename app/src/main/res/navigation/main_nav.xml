@@ -36,6 +36,11 @@
         android:id="@+id/categoryDetailFragment"
         android:name="com.project.noticeme.ui.category.CategoryDetailFragment"
         android:label="fragment_category_detail"
-        tools:layout="@layout/fragment_category_detail" />
+        tools:layout="@layout/fragment_category_detail" >
+        <action
+            android:id="@+id/action_categoryDetailFragment_pop"
+            app:popUpTo="@id/categoryDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

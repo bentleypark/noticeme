@@ -34,7 +34,16 @@ constructor(
         }
     }
 
-    suspend fun findConsumableWithCategory(search: String) {
+    suspend fun findConsumableWithCategory(search: String): Flow<DataState<List<ConsumableEntity>>> =
+        flow {
 
-    }
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                val resultList = consumableDao.findConsumableWithCategory(search)
+                emit(DataState.Success(resultList))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
 }

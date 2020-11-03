@@ -134,7 +134,7 @@ object InitialConsumableData {
                 24,
                 "렌즈케이스",
                 R.drawable.ic_img_makeup_brush,
-                "침실",
+                "개인위생",
                 TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 90
             )
         )
