@@ -3,7 +3,6 @@ package com.project.noticeme.ui.category
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.project.noticeme.common.base.BaseViewModel
 import com.project.noticeme.data.repository.MainRepository

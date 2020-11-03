@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.project.noticeme.R
@@ -61,8 +60,5 @@ class CategoryFragment : Fragment(),
 
     companion object {
         private const val SPAN_COUNT_PORTRAIT = 3
-
-        fun actionCategoryFragmentToCategoryDetialFragment(
-            categoryName: String = ""): NavDirections = CategoryFragmentDirections.actionAddConsumableFragmentToCategoryDetailFragment()
     }
 }

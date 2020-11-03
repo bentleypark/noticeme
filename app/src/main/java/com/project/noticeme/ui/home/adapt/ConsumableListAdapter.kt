@@ -9,7 +9,6 @@ import com.project.noticeme.databinding.ConsumableItemBinding
 import kotlinx.android.extensions.LayoutContainer
 import java.util.concurrent.TimeUnit
 
-
 class ConsumableListAdapter(
     private val list: MutableList<ConsumableEntity>
 ) :
