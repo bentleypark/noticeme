@@ -2,8 +2,11 @@ package com.project.noticeme.common.ex
 
 import android.app.Activity
 import android.content.Intent
+import android.view.Gravity
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
 inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
@@ -19,4 +22,11 @@ inline fun <reified T : Activity> Activity.launchActivityWithFinish() {
     startActivity(intent)
     overridePendingTransition(0, 0)
     finish()
+}
+
+fun Fragment.makeToast(text: String) {
+    val toast = Toast.makeText(activity, text, Toast.LENGTH_SHORT)
+
+//    toast.setGravity(Gravity.BOTTOM, 0, 150)
+    toast.show()
 }

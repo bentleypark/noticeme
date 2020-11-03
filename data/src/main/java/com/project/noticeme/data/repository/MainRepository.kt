@@ -15,24 +15,21 @@ constructor(
 //    private val cacheMapper: CacheMapper,
 //    private val networkMapper: NetworkMapper
 ) {
-    suspend fun insertConsumable(consumables: List<ConsumableEntity>) {
-//            : Flow<DataState<List<ConsumableEntity>>> =
-//        flow {
-//        emit(DataState.Loading)
-        delay(1000)
-        try {
-//            val networkBlogs = apiService.get()
-//            val blogs = networkMapper.mapFromEntityList(networkBlogs)
-            for (consumable in consumables) {
-                consumableDao.insert(consumable)
+    suspend fun insertConsumable(consumables: List<ConsumableEntity>): Flow<DataState<String>> =
+
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+
+            try {
+                for (consumable in consumables) {
+                    consumableDao.insert(consumable)
+                }
+                emit(DataState.Success("작업이 완료되었습니다."))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
             }
-            val cachedBlogs = consumableDao.get()
-            Timber.d("${cachedBlogs[0].title}")
-//            emit(DataState.Success(cachedBlogs))
-        } catch (e: Exception) {
-//            emit(DataState.Error(e))
         }
-    }
 
     suspend fun findConsumableWithCategory(search: String): Flow<DataState<List<ConsumableEntity>>> =
         flow {

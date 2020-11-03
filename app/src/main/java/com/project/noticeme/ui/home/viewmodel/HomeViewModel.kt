@@ -3,11 +3,16 @@ package com.project.noticeme.ui.home.viewmodel
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.project.noticeme.App
 import com.project.noticeme.R
 import com.project.noticeme.common.base.BaseViewModel
+import com.project.noticeme.common.utils.preference.PreferenceUtil
 import com.project.noticeme.data.repository.MainRepository
 import com.project.noticeme.data.room.ConsumableEntity
+import com.project.noticeme.data.state.DataState
 import com.project.noticeme.ui.home.initialdata.InitialConsumableData
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import okhttp3.internal.toImmutableList
 import java.util.concurrent.TimeUnit
@@ -67,14 +72,30 @@ constructor(
 
     var dataList = emptyList<ConsumableEntity>()
 
+    private val _dataState = MutableLiveData<DataState<String>>()
+
+    val dataState: LiveData<DataState<String>>
+        get() = _dataState
+
+    init {
+        checkIsInitialDataSet()
+    }
+
     private fun insertData(list: List<ConsumableEntity>) {
         viewModelScope.launch {
             mainRepository.insertConsumable(list)
+                .onEach { dataState ->
+                    _dataState.value = dataState
+                }
+                .launchIn(viewModelScope)
         }
     }
 
-    init {
-        dataList = InitialConsumableData.fetchData()
-        insertData(dataList)
+    private fun checkIsInitialDataSet() {
+        val result = PreferenceUtil.getInitialData(App.globalApplicationContext)
+        if(!result) {
+            dataList = InitialConsumableData.fetchData()
+            insertData(dataList)
+        }
     }
 }
