@@ -41,6 +41,7 @@ class HomeFragment : Fragment(),
 //                binding!!.apply {
 //                    rvList.isVisible = false
 //                    ivGuideMsg.isVisible = false
+//                    emptyList.isVisible = false
 //                }
 //
 //                if (it.isNotEmpty()) {
@@ -49,6 +50,7 @@ class HomeFragment : Fragment(),
 //                    listAdapter.addAll(consumableList)
 //                } else {
 //                    binding.ivGuideMsg.isVisible = true
+//                    binding.emptyList.isVisible = true
 //                }
             }
         )
