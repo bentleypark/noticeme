@@ -9,14 +9,17 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.common.utils.preference.PreferenceUtil
 import com.project.noticeme.data.room.ConsumableEntity
+import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentHomeBinding
+import com.project.noticeme.ui.home.adapt.UserConsumableListAdapter
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -27,8 +30,8 @@ class HomeFragment : Fragment(),
     ViewBindingHolder<FragmentHomeBinding> by ViewBindingHolderImpl() {
 
     private val viewModel: HomeViewModel by viewModels()
-    private var consumableList = mutableListOf<ConsumableEntity>()
-//    private val listAdapter = ConsumableListAdapter(consumableList)
+    private var consumableList = mutableListOf<UserConsumableEntity>()
+    private val listAdapter = UserConsumableListAdapter(consumableList)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,15 +46,20 @@ class HomeFragment : Fragment(),
         setUpObserve()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getUserConsumableData()
+    }
+
     private fun setUpView() {
-//        val size = resources.getDimensionPixelSize(R.dimen.material_item_size)
-//        binding!!.rvList.apply {
-//            adapter = listAdapter
-//            layoutManager =
-//                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//            setHasFixedSize(true)
-//            addItemDecoration(SpaceDecoration(size))
-//        }
+        val size = resources.getDimensionPixelSize(R.dimen.material_item_size)
+        binding!!.rvList.apply {
+            adapter = listAdapter
+            layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            setHasFixedSize(true)
+            addItemDecoration(SpaceDecoration(size))
+        }
 
         binding!!.btnAdd.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_addConsumableFragment)
@@ -85,23 +93,38 @@ class HomeFragment : Fragment(),
                 }
             )
 
-            consumableList.observe(
+            consumableList?.observe(
                 viewLifecycleOwner, {
 
-//                binding!!.apply {
-//                    rvList.isVisible = false
-//                    ivGuideMsg.isVisible = false
-//                    emptyList.isVisible = false
-//                }
-//
-//                if (it.isNotEmpty()) {
-//                    binding.rvList.isVisible = true
-//                    consumableList = it.toMutableList()
-//                    listAdapter.addAll(consumableList)
-//                } else {
-//                    binding.ivGuideMsg.isVisible = true
-//                    binding.emptyList.isVisible = true
-//                }
+                    binding!!.apply {
+                        rvList.isVisible = false
+                        ivGuideMsg.isVisible = false
+                        emptyList.isVisible = false
+                        progressCircular.isVisible = false
+                    }
+                    if (it != null) {
+                        when (it) {
+                            is DataState.Success<List<UserConsumableEntity>> -> {
+                                binding.progressCircular.isVisible = false
+                                if (it.data.isNotEmpty()) {
+                                    lifecycleScope.launch {
+                                        binding.rvList.isVisible = true
+                                        listAdapter.addAll(it.data.toMutableList())
+                                    }
+                                } else {
+                                    binding.ivGuideMsg.isVisible = true
+                                    binding.emptyList.isVisible = true
+                                }
+                            }
+
+                            is DataState.Loading -> {
+                                binding.apply {
+                                    progressCircular.isVisible = true
+                                    rvList.isVisible = false
+                                }
+                            }
+                        }
+                    }
                 }
             )
         }

@@ -1,4 +1,4 @@
-package com.project.noticeme.ui.home.adapt
+package com.project.noticeme.ui.category.adapt
 
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +14,7 @@ import java.util.concurrent.TimeUnit
 class ConsumableListAdapter(
     private val list: MutableList<ConsumableEntity>,
     private val viewmodel: CategoryDetailViewModel
-) :
-    RecyclerView.Adapter<ConsumableListAdapter.ConsumableListViewHolder>() {
+) : RecyclerView.Adapter<ConsumableListAdapter.ConsumableListViewHolder>() {
 
     private lateinit var bindingItem: ConsumableItemBinding
 
@@ -34,6 +33,7 @@ class ConsumableListAdapter(
                     viewmodel.insert(
                         UserConsumableEntity(
                             item.title,
+                            item.image,
                             item.duration,
                             System.currentTimeMillis(),
                             "없음"
@@ -56,11 +56,6 @@ class ConsumableListAdapter(
     }
 
     override fun getItemCount() = list.size
-
-    fun addAll(items: MutableList<ConsumableEntity>) {
-        list.addAll(items)
-        notifyDataSetChanged()
-    }
 
     private fun getDurationWithDay(milliseconds: Long): String {
         return "${(milliseconds / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS))}일"

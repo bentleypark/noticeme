@@ -18,7 +18,7 @@ import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentCategoryDetailBinding
 import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
 import com.project.noticeme.ui.home.SpaceDecoration
-import com.project.noticeme.ui.home.adapt.ConsumableListAdapter
+import com.project.noticeme.ui.category.adapt.ConsumableListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

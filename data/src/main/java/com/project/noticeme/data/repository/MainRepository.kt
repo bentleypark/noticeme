@@ -70,4 +70,16 @@ constructor(
                 emit(DataState.Error(e))
             }
         }
+
+    suspend fun getUserConsumable(): Flow<DataState<List<UserConsumableEntity>>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                val resultList = userConsumableDao.get()
+                emit(DataState.Success(resultList))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
 }

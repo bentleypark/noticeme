@@ -96,6 +96,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp"
             android:visibility="invisible"
+            android:scrollbars="vertical"
+            android:scrollbarSize="2dp"
             app:layout_constraintBottom_toTopOf="@+id/btn_add"
             app:layout_constraintEnd_toStartOf="@+id/btn_add"
             app:layout_constraintStart_toStartOf="parent"

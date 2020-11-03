@@ -11,8 +11,8 @@ data class UserConsumableEntity(
     @ColumnInfo(name = "title")
     val title: String = "",
 
-//    @ColumnInfo(name = "image")
-//    val image: Int,
+    @ColumnInfo(name = "image")
+    val image: Int,
 
 //    @ColumnInfo(name = "category")
 //    val category: String,

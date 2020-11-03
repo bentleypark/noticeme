@@ -9,6 +9,7 @@ import com.project.noticeme.common.base.BaseViewModel
 import com.project.noticeme.common.utils.preference.PreferenceUtil
 import com.project.noticeme.data.repository.MainRepository
 import com.project.noticeme.data.room.ConsumableEntity
+import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.ui.home.initialdata.InitialConsumableData
 import kotlinx.coroutines.flow.launchIn
@@ -24,51 +25,8 @@ constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val _consumableList = liveData {
-        val dataList = mutableListOf<ConsumableEntity>()
-
-        dataList.add(
-            ConsumableEntity(
-                0,
-                "칫솔",
-                R.drawable.ic_img_toothbrush,
-                "욕실",
-                TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 90
-            )
-        )
-
-        dataList.add(
-            ConsumableEntity(
-                1,
-                "면도기",
-                R.drawable.ic_img_razor,
-                "개인위생",
-                TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 14
-            )
-        )
-
-        dataList.add(
-            ConsumableEntity(
-                2,
-                "수세미",
-                R.drawable.ic_img_scrubbers,
-                "주방",
-                TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 30
-            )
-        )
-
-        dataList.add(
-            ConsumableEntity(
-                3,
-                "베개 커버",
-                R.drawable.ic_img_pillow_cover,
-                "침실",
-                TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 7
-            )
-        )
-        emit(dataList.toImmutableList())
-    }
-    val consumableList: LiveData<List<ConsumableEntity>>
+    private val _consumableList = MutableLiveData<DataState<List<UserConsumableEntity>>>()
+    val consumableList: LiveData<DataState<List<UserConsumableEntity>>>?
         get() = _consumableList
 
     var dataList = emptyList<ConsumableEntity>()
@@ -80,10 +38,10 @@ constructor(
 
     init {
         checkIsInitialDataSet()
+        getUserConsumableData()
     }
 
     private fun insertData(list: List<ConsumableEntity>) {
-        Timber.d("insertData")
         viewModelScope.launch {
             mainRepository.insertConsumable(list)
                 .onEach { dataState ->
@@ -100,5 +58,19 @@ constructor(
             dataList = InitialConsumableData.fetchData()
             insertData(dataList)
         }
+    }
+
+     fun getUserConsumableData() {
+        viewModelScope.launch {
+            mainRepository.getUserConsumable()
+                .onEach { dataState ->
+                    _consumableList.value = dataState
+                }
+                .launchIn(viewModelScope)
+        }
+    }
+
+    fun flushUserConsumableData() {
+        _consumableList.value = null
     }
 }
