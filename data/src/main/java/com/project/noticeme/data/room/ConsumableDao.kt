@@ -13,4 +13,10 @@ interface ConsumableDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(blogEntity: ConsumableEntity)
+
+    @Query("SELECT * FROM consumables WHERE category LIKE :search")
+    suspend fun findConsumableWithCategory(search: String): List<ConsumableEntity>
+
+    @Query("SELECT * FROM consumables WHERE title LIKE :search")
+    suspend fun findConsumableWithTitle(search: String): ConsumableEntity
 }

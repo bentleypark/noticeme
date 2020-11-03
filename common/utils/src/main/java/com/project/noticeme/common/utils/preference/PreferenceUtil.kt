@@ -17,6 +17,13 @@ object PreferenceUtil {
 
     fun getPhaseData(context: Context) = getPref(context).getString("phaseData", "")
 
+    fun setInitialData(context: Context, state: Boolean) {
+        val pref = getPref(context)
+        pref.edit { putBoolean("initialData", state) }
+    }
+
+    fun getInitialData(context: Context) = getPref(context).getBoolean("initialData", false)
+
 //    fun setPhaseData(context: Context, phaseData: PhraseData) {
 //        val pref = getPref(context)
 //        val gson = GsonBuilder().create()

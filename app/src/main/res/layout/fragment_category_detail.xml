@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainActivity_background"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.category.CategoryDetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -24,18 +24,22 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/btn_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:background="@drawable/ic_main_logo" />
+                    android:background="@drawable/ic_arrow_back" />
 
-                <ImageButton
-                    android:id="@+id/btn_setting"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/btn_setting" />
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/noto_bold"
+                    android:text="카테고리"
+                    android:textColor="#ababab"
+                    android:textSize="20sp" />
+
             </FrameLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -43,20 +47,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.88" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"
@@ -82,7 +72,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="80dp"
                 android:fontFamily="@font/noto_bold"
-                android:text="다음 교체"
+                android:text="교체 주기"
                 android:textColor="#60979e"
                 android:textSize="18sp" />
 
@@ -91,58 +81,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="16dp"
             android:visibility="invisible"
-            android:scrollbars="vertical"
-            android:scrollbarSize="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_add"
-            app:layout_constraintEnd_toStartOf="@+id/btn_add"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/above_layout"
             tools:listitem="@layout/consumable_item" />
-
-        <FrameLayout
-            android:id="@+id/empty_list"
-            android:layout_width="310dp"
-            android:layout_height="90dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/dash_line"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/above_layout">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="소모품 리스트가 비었습니다."
-                android:textColor="#cecece"
-                android:textSize="18sp" />
-
-        </FrameLayout>
-
-        <ImageView
-            android:id="@+id/iv_guide_msg"
-            android:layout_width="205dp"
-            android:layout_height="122dp"
-            android:background="@drawable/guide_msg"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/btn_add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/ic_btn_add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/progress_circular"
@@ -150,7 +96,6 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:translationZ="2dp"
-            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

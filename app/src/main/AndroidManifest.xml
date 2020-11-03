@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Noticeme"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.add.AddConsumableActivity"></activity>
+        <activity android:name=".ui.category.AddConsumableActivity"></activity>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/FullscreenTheme">

@@ -1,4 +1,4 @@
-package com.project.noticeme.ui.add
+package com.project.noticeme.ui.category
 
 import android.graphics.Rect
 import android.view.View

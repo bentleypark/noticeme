@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
     id 'com.github.ben-manes.versions' version "0.33.0"
 }
 
@@ -85,6 +87,10 @@ dependencies {
 
     implementation Libs.hiltAndroid
     implementation Libs.hiltViewModel
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     kapt Libs.hiltAndroidCompiler
     kapt Libs.hiltCompiler
 
@@ -93,6 +99,11 @@ dependencies {
     implementation Libs.roomKtx
     kapt Libs.roomCompiler
 
+    implementation Libs.timber
+    implementation Libs.stetho
+    implementation Libs.stethoOkhttp3
+    debugImplementation Libs.leakcanary
+
     testImplementation Libs.junit4
     androidTestImplementation Libs.junitExt
     androidTestImplementation Libs.espressoCore
@@ -100,6 +111,10 @@ dependencies {
 
 kapt {
     correctErrorTypes true
+}
+
+androidExtensions {
+    experimental = true
 }
 
 def isNonStable = { String version ->

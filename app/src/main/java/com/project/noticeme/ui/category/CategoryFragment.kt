@@ -1,4 +1,4 @@
-package com.project.noticeme.ui.add
+package com.project.noticeme.ui.category
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,32 +12,35 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
-import com.project.noticeme.databinding.FragmentAddComsumableBinding
+import com.project.noticeme.databinding.FragmentCategoryBinding
+import com.project.noticeme.ui.category.adapt.ConsumableCategoryListAdapter
+import com.project.noticeme.ui.category.viewmodel.CategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddConsumableFragment : Fragment(),
-    ViewBindingHolder<FragmentAddComsumableBinding> by ViewBindingHolderImpl() {
+class CategoryFragment : Fragment(),
+    ViewBindingHolder<FragmentCategoryBinding> by ViewBindingHolderImpl() {
 
-    private val viewModel: AddConsumableViewModel by viewModels()
+    private val viewModel: CategoryViewModel by viewModels()
     private lateinit var listAdapter: ConsumableCategoryListAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().navigate(R.id.action_addConsumableFragment_pop)
-        }
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//        requireActivity().onBackPressedDispatcher.addCallback(this) {
+//            findNavController().navigate(R.id.action_categoryFragment_pop)
+//        }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentAddComsumableBinding.inflate(layoutInflater), this) {
+    ): View? = initBinding(FragmentCategoryBinding.inflate(layoutInflater), this) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         viewModel.categoryList.observe(viewLifecycleOwner,
             {
@@ -52,7 +55,7 @@ class AddConsumableFragment : Fragment(),
             })
 
         binding!!.btnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_addConsumableFragment_pop)
+            findNavController().navigate(R.id.action_categoryFragment_pop)
         }
     }
 

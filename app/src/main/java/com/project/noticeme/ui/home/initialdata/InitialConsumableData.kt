@@ -1,4 +1,4 @@
-package com.project.noticeme.ui.home
+package com.project.noticeme.ui.home.initialdata
 
 import com.project.noticeme.R
 import com.project.noticeme.data.room.ConsumableEntity
@@ -79,15 +79,6 @@ object InitialConsumableData {
             )
         )
 
-        dataList.add(
-            ConsumableEntity(
-                14,
-                "플라스틱용기",
-                R.drawable.ic_img_scrubbers,
-                "주방",
-                TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 90
-            )
-        )
 
         dataList.add(
             ConsumableEntity(
@@ -113,7 +104,7 @@ object InitialConsumableData {
             ConsumableEntity(
                 22,
                 "소프트렌즈",
-                R.drawable.ic_img_makeup_brush,
+                R.drawable.ic_img_soft_lens,
                 "개인위생",
                 TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 300
             )
@@ -123,7 +114,7 @@ object InitialConsumableData {
             ConsumableEntity(
                 23,
                 "하드렌즈",
-                R.drawable.ic_img_makeup_brush,
+                R.drawable.ic_img_hard_lens,
                 "개인위생",
                 TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 720
             )
@@ -134,7 +125,7 @@ object InitialConsumableData {
                 24,
                 "렌즈케이스",
                 R.drawable.ic_img_makeup_brush,
-                "침실",
+                "개인위생",
                 TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 90
             )
         )
@@ -153,7 +144,7 @@ object InitialConsumableData {
             ConsumableEntity(
                 31,
                 "베개커버",
-                R.drawable.ic_img_blanket,
+                R.drawable.ic_img_pillow_cover,
                 "침실",
                 TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 7
             )
@@ -163,7 +154,7 @@ object InitialConsumableData {
             ConsumableEntity(
                 32,
                 "침대시트",
-                R.drawable.ic_img_blanket,
+                R.drawable.ic_img_bed_sheet,
                 "침실",
                 TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 10
             )
