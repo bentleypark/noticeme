@@ -2,15 +2,17 @@ package com.project.noticeme.data.repository
 
 import com.project.noticeme.data.room.ConsumableDao
 import com.project.noticeme.data.room.ConsumableEntity
+import com.project.noticeme.data.room.UserConsumableDao
+import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import timber.log.Timber
 
 class MainRepository
 constructor(
     private val consumableDao: ConsumableDao,
+    private val userConsumableDao: UserConsumableDao
 //    private val apiService: ApiService,
 //    private val cacheMapper: CacheMapper,
 //    private val networkMapper: NetworkMapper
@@ -39,6 +41,18 @@ constructor(
             try {
                 val resultList = consumableDao.findConsumableWithCategory(search)
                 emit(DataState.Success(resultList))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
+
+    suspend fun insertUserConsumable(userConsumables: UserConsumableEntity): Flow<DataState<UserConsumableEntity>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+
+
             } catch (e: Exception) {
                 emit(DataState.Error(e))
             }

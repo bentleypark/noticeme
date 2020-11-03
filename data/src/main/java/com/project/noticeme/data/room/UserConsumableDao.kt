@@ -8,5 +8,5 @@ import androidx.room.OnConflictStrategy
 interface UserConsumableDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(userConsumable: UserConsumableEnityty)
+    suspend fun insert(userConsumable: UserConsumableEntity)
 }
