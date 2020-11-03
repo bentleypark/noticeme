@@ -5,12 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.noticeme.data.room.ConsumableEntity
+import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
+import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
 import kotlinx.android.extensions.LayoutContainer
 import java.util.concurrent.TimeUnit
 
 class ConsumableListAdapter(
-    private val list: MutableList<ConsumableEntity>
+    private val list: MutableList<ConsumableEntity>,
+    private val viewmodel: CategoryDetailViewModel
 ) :
     RecyclerView.Adapter<ConsumableListAdapter.ConsumableListViewHolder>() {
 
@@ -23,9 +26,21 @@ class ConsumableListAdapter(
             get() = binding.root
 
         fun bind(item: ConsumableEntity) {
-            binding.tvTitle.text = item.title
-            binding.ivMaterialImg.setImageResource(item.image)
-            binding.tvExpireTime.text = getDurationWithDay(item.duration)
+            binding.apply {
+                tvTitle.text = item.title
+                ivMaterialImg.setImageResource(item.image)
+                tvExpireTime.text = getDurationWithDay(item.duration)
+                consumableItem.setOnClickListener {
+                    viewmodel.insert(
+                        UserConsumableEntity(
+                            item.title,
+                            item.duration,
+                            System.currentTimeMillis(),
+                            "없음"
+                        )
+                    )
+                }
+            }
         }
     }
 

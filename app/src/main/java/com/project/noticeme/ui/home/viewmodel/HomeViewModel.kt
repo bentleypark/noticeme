@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import okhttp3.internal.toImmutableList
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class HomeViewModel @ViewModelInject
@@ -82,6 +83,7 @@ constructor(
     }
 
     private fun insertData(list: List<ConsumableEntity>) {
+        Timber.d("insertData")
         viewModelScope.launch {
             mainRepository.insertConsumable(list)
                 .onEach { dataState ->
@@ -93,7 +95,8 @@ constructor(
 
     private fun checkIsInitialDataSet() {
         val result = PreferenceUtil.getInitialData(App.globalApplicationContext)
-        if(!result) {
+        Timber.d("$result")
+        if (!result) {
             dataList = InitialConsumableData.fetchData()
             insertData(dataList)
         }

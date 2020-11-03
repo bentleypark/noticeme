@@ -46,13 +46,26 @@ constructor(
             }
         }
 
-    suspend fun insertUserConsumable(userConsumables: UserConsumableEntity): Flow<DataState<UserConsumableEntity>> =
+    suspend fun findConsumableWithTitle(title: String): Flow<DataState<ConsumableEntity>> =
+        flow {
+
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                val result = consumableDao.findConsumableWithTitle(title)
+                emit(DataState.Success(result))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
+
+    suspend fun insertUserConsumable(userConsumables: UserConsumableEntity): Flow<DataState<Boolean>> =
         flow {
             emit(DataState.Loading)
             delay(1000)
             try {
-
-
+                userConsumableDao.insert(userConsumables)
+                emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
             }

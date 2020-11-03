@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
@@ -18,7 +17,6 @@ import com.project.noticeme.common.utils.preference.PreferenceUtil
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentHomeBinding
-import com.project.noticeme.ui.home.adapt.ConsumableListAdapter
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -30,7 +28,7 @@ class HomeFragment : Fragment(),
 
     private val viewModel: HomeViewModel by viewModels()
     private var consumableList = mutableListOf<ConsumableEntity>()
-    private val listAdapter = ConsumableListAdapter(consumableList)
+//    private val listAdapter = ConsumableListAdapter(consumableList)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,16 +44,16 @@ class HomeFragment : Fragment(),
     }
 
     private fun setUpView() {
-        val size = resources.getDimensionPixelSize(R.dimen.material_item_size)
-        binding!!.rvList.apply {
-            adapter = listAdapter
-            layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            setHasFixedSize(true)
-            addItemDecoration(SpaceDecoration(size))
-        }
+//        val size = resources.getDimensionPixelSize(R.dimen.material_item_size)
+//        binding!!.rvList.apply {
+//            adapter = listAdapter
+//            layoutManager =
+//                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+//            setHasFixedSize(true)
+//            addItemDecoration(SpaceDecoration(size))
+//        }
 
-        binding.btnAdd.setOnClickListener {
+        binding!!.btnAdd.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_addConsumableFragment)
         }
     }
