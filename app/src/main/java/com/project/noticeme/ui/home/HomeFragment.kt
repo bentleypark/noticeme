@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.noticeme.R
@@ -20,6 +21,8 @@ import com.project.noticeme.databinding.FragmentHomeBinding
 import com.project.noticeme.ui.home.adapt.ConsumableListAdapter
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(),
@@ -72,10 +75,13 @@ class HomeFragment : Fragment(),
                         }
 
                         is DataState.Loading -> {
-                            binding!!.apply {
-                                progressCircular.isVisible = true
+                            lifecycleScope.launch {
+                                binding!!.apply {
+                                    progressCircular.isVisible = true
+                                }
+                                delay(1000)
+                                makeToast("초기 데이터 설정 중입니다. 잠시만 기다려주세요!")
                             }
-                            makeToast("초기 데이터 설정 중입니다. 잠시만 기다려주세요!")
                         }
                     }
                 }
