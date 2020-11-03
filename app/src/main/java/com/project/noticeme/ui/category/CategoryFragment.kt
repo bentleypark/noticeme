@@ -7,19 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
-import com.project.noticeme.databinding.FragmentAddComsumableBinding
+import com.project.noticeme.databinding.FragmentCategoryBinding
 import com.project.noticeme.ui.category.adapt.ConsumableCategoryListAdapter
 import com.project.noticeme.ui.category.viewmodel.CategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CategoryFragment : Fragment(),
-    ViewBindingHolder<FragmentAddComsumableBinding> by ViewBindingHolderImpl() {
+    ViewBindingHolder<FragmentCategoryBinding> by ViewBindingHolderImpl() {
 
     private val viewModel: CategoryViewModel by viewModels()
     private lateinit var listAdapter: ConsumableCategoryListAdapter
@@ -28,14 +29,14 @@ class CategoryFragment : Fragment(),
         super.onCreate(savedInstanceState)
 
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            findNavController().navigate(R.id.action_addConsumableFragment_pop)
+            findNavController().navigate(R.id.action_categoryFragment_pop)
         }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentAddComsumableBinding.inflate(layoutInflater), this) {
+    ): View? = initBinding(FragmentCategoryBinding.inflate(layoutInflater), this) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,11 +55,14 @@ class CategoryFragment : Fragment(),
             })
 
         binding!!.btnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_addConsumableFragment_pop)
+            findNavController().navigate(R.id.action_categoryFragment_pop)
         }
     }
 
     companion object {
         private const val SPAN_COUNT_PORTRAIT = 3
+
+        fun actionCategoryFragmentToCategoryDetialFragment(
+            categoryName: String = ""): NavDirections = CategoryFragmentDirections.actionAddConsumableFragmentToCategoryDetailFragment()
     }
 }

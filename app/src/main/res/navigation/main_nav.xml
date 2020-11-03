@@ -11,27 +11,27 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_addConsumableFragment"
-            app:destination="@id/addConsumableFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_addConsumableActivity"
-            app:destination="@id/addConsumableActivity" />
-
+            app:destination="@id/categoryFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addConsumableFragment"
+        android:id="@+id/categoryFragment"
         android:name="com.project.noticeme.ui.category.CategoryFragment"
-        android:label="fragment_add_comsumable"
-        tools:layout="@layout/fragment_category" >
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category">
         <action
-            android:id="@+id/action_addConsumableFragment_pop"
-            app:popUpTo="@id/addConsumableFragment"
+            android:id="@+id/action_categoryFragment_pop"
+            app:popUpTo="@id/categoryFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_addConsumableFragment_to_categoryDetailFragment"
+            app:destination="@id/categoryDetailFragment">
+            <argument
+                android:name="categoryName"
+                android:defaultValue='""'
+                app:argType="string" />
+        </action>
     </fragment>
-    <activity
-        android:id="@+id/addConsumableActivity"
-        android:name="com.project.noticeme.ui.category.AddConsumableActivity"
-        android:label="activity_add_consumable"
-        tools:layout="@layout/fragment_category" />
+
     <fragment
         android:id="@+id/categoryDetailFragment"
         android:name="com.project.noticeme.ui.category.CategoryDetailFragment"
