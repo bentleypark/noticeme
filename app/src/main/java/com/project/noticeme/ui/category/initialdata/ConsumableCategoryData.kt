@@ -1,4 +1,4 @@
-package com.project.noticeme.ui.add
+package com.project.noticeme.ui.category.initialdata
 
 import com.project.noticeme.R
 import com.project.noticeme.data.model.ConsumableCategory

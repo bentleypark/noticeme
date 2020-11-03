@@ -1,4 +1,4 @@
-package com.project.noticeme.ui.add
+package com.project.noticeme.ui.category.adapt
 
 import android.view.LayoutInflater
 import android.view.View

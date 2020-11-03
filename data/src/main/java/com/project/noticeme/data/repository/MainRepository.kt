@@ -34,4 +34,7 @@ constructor(
         }
     }
 
+    suspend fun findConsumableWithCategory(search: String) {
+
+    }
 }

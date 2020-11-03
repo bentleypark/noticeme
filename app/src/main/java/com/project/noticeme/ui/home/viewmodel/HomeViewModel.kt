@@ -1,4 +1,4 @@
-package com.project.noticeme.ui.home
+package com.project.noticeme.ui.home.viewmodel
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
@@ -7,6 +7,7 @@ import com.project.noticeme.R
 import com.project.noticeme.common.base.BaseViewModel
 import com.project.noticeme.data.repository.MainRepository
 import com.project.noticeme.data.room.ConsumableEntity
+import com.project.noticeme.ui.home.initialdata.InitialConsumableData
 import kotlinx.coroutines.launch
 import okhttp3.internal.toImmutableList
 import java.util.concurrent.TimeUnit

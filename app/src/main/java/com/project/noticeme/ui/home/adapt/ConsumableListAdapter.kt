@@ -1,4 +1,4 @@
-package com.project.noticeme.ui.home
+package com.project.noticeme.ui.home.adapt
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,4 +1,4 @@
-package com.project.noticeme.ui.add
+package com.project.noticeme.ui.category
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,13 +13,15 @@ import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.databinding.FragmentAddComsumableBinding
+import com.project.noticeme.ui.category.adapt.ConsumableCategoryListAdapter
+import com.project.noticeme.ui.category.viewmodel.CategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddConsumableFragment : Fragment(),
+class CategoryFragment : Fragment(),
     ViewBindingHolder<FragmentAddComsumableBinding> by ViewBindingHolderImpl() {
 
-    private val viewModel: AddConsumableViewModel by viewModels()
+    private val viewModel: CategoryViewModel by viewModels()
     private lateinit var listAdapter: ConsumableCategoryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {

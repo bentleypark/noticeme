@@ -19,9 +19,9 @@
     </fragment>
     <fragment
         android:id="@+id/addConsumableFragment"
-        android:name="com.project.noticeme.ui.add.AddConsumableFragment"
+        android:name="com.project.noticeme.ui.category.CategoryFragment"
         android:label="fragment_add_comsumable"
-        tools:layout="@layout/fragment_add_comsumable" >
+        tools:layout="@layout/fragment_category" >
         <action
             android:id="@+id/action_addConsumableFragment_pop"
             app:popUpTo="@id/addConsumableFragment"
@@ -29,8 +29,13 @@
     </fragment>
     <activity
         android:id="@+id/addConsumableActivity"
-        android:name="com.project.noticeme.ui.add.AddConsumableActivity"
+        android:name="com.project.noticeme.ui.category.AddConsumableActivity"
         android:label="activity_add_consumable"
-        tools:layout="@layout/fragment_add_comsumable" />
+        tools:layout="@layout/fragment_category" />
+    <fragment
+        android:id="@+id/categoryDetailFragment"
+        android:name="com.project.noticeme.ui.category.CategoryDetailFragment"
+        android:label="fragment_category_detail"
+        tools:layout="@layout/fragment_category_detail" />
 
 </navigation>
