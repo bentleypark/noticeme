@@ -82,4 +82,16 @@ constructor(
                 emit(DataState.Error(e))
             }
         }
+
+    suspend fun delete(item: UserConsumableEntity): Flow<DataState<Boolean>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                val result = userConsumableDao.delete(item)
+                emit(DataState.Success(true))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
 }

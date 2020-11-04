@@ -8,8 +8,8 @@ import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
 import kotlinx.android.extensions.LayoutContainer
 
-class UserConsumableListAdapter(private val list: MutableList<UserConsumableEntity>):
-    RecyclerView.Adapter<UserConsumableListAdapter.UserConsumableListViewHolder> (){
+class UserConsumableListAdapter(private val list: MutableList<UserConsumableEntity>) :
+    RecyclerView.Adapter<UserConsumableListAdapter.UserConsumableListViewHolder>() {
 
     private lateinit var bindingItem: ConsumableItemBinding
 
@@ -48,5 +48,12 @@ class UserConsumableListAdapter(private val list: MutableList<UserConsumableEnti
         list.clear()
         list.addAll(items)
         notifyDataSetChanged()
+    }
+
+    fun removeAt(position: Int): UserConsumableEntity {
+        val item = list[position]
+        list.removeAt(position)
+        notifyItemRemoved(position)
+        return item
     }
 }

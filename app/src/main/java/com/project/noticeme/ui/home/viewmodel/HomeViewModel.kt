@@ -36,6 +36,11 @@ constructor(
     val dataState: LiveData<DataState<String>>
         get() = _dataState
 
+    private val _deleteResult = MutableLiveData<DataState<Boolean>>()
+
+    val deleteResult: LiveData<DataState<Boolean>>
+        get() = _deleteResult
+
     init {
         checkIsInitialDataSet()
         getUserConsumableData()
@@ -60,7 +65,7 @@ constructor(
         }
     }
 
-     fun getUserConsumableData() {
+    fun getUserConsumableData() {
         viewModelScope.launch {
             mainRepository.getUserConsumable()
                 .onEach { dataState ->
@@ -70,7 +75,13 @@ constructor(
         }
     }
 
-    fun flushUserConsumableData() {
-        _consumableList.value = null
+    fun delete(item: UserConsumableEntity) {
+        viewModelScope.launch {
+            mainRepository.delete(item)
+                .onEach { dataState ->
+                    _deleteResult.value = dataState
+                }
+                .launchIn(viewModelScope)
+        }
     }
 }

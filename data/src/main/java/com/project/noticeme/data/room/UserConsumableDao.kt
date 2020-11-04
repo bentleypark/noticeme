@@ -1,9 +1,6 @@
 package com.project.noticeme.data.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface UserConsumableDao {
@@ -13,4 +10,7 @@ interface UserConsumableDao {
 
     @Query("SELECT * FROM userConsumables")
     suspend fun get(): List<UserConsumableEntity>
+
+    @Delete
+    suspend fun delete(item: UserConsumableEntity)
 }
