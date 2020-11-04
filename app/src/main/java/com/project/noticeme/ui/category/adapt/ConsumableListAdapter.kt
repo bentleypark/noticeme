@@ -36,6 +36,7 @@ class ConsumableListAdapter(
                             item.image,
                             item.duration,
                             System.currentTimeMillis(),
+                            System.currentTimeMillis() + item.duration,
                             "없음"
                         )
                     )

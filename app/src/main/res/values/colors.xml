@@ -7,5 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
     <color name="mainActivity_background">#f4f9ff</color>
+    <color name="expired_day_color_red">#ec4612</color>
 </resources>

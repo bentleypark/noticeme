@@ -23,6 +23,9 @@ data class UserConsumableEntity(
     @ColumnInfo(name = "startDate")
     val startDate: Long,
 
+    @ColumnInfo(name = "endDate")
+    val endDate: Long,
+
     @ColumnInfo(name = "priority")
     val priority: String
 ) {
