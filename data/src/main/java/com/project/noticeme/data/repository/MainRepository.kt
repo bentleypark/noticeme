@@ -94,4 +94,16 @@ constructor(
                 emit(DataState.Error(e))
             }
         }
+
+    suspend fun getUserConsumableWithTitle(input: String): Flow<DataState<UserConsumableEntity>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                val resultList = userConsumableDao.getWithTitle(input)
+                emit(DataState.Success(resultList))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
 }

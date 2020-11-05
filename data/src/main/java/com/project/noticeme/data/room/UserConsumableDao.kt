@@ -13,4 +13,7 @@ interface UserConsumableDao {
 
     @Delete
     suspend fun delete(item: UserConsumableEntity)
+
+    @Query("SELECT * FROM userConsumables WHERE title LIKE :input")
+    suspend fun getWithTitle(input: String): UserConsumableEntity
 }

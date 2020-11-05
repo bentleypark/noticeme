@@ -126,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/noto_bold"
-                    android:textColor="@color/black"
+                    android:textColor="#505050"
                     android:textSize="18sp"
                     tools:text="칫솔" />
             </RelativeLayout>
@@ -187,7 +187,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/noto_bold"
                 android:inputType="number"
-                android:textColor="@color/black"
+                android:textColor="#505050"
                 android:textSize="18sp"
                 tools:text="90" />
         </androidx.cardview.widget.CardView>
@@ -214,9 +214,9 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/noto_bold"
+                    android:text="일"
                     android:textColor="#aaaaaa"
-                    android:textSize="20sp"
-                    tools:text="일" />
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -250,51 +250,74 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_priority1"
+                style="?attr/materialButtonToggleGroupStyle"
                 android:layout_width="75dp"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/priority_button_group_selector"
                 android:fontFamily="@font/noto_bold"
+                android:stateListAnimator="@null"
                 android:text="낮음"
                 android:textColor="#d2d2d2"
                 android:textSize="20sp"
+                app:cornerRadius="5dp"
                 app:strokeColor="#f4f9ff"
                 app:strokeWidth="5dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_priority2"
+                style="?attr/materialButtonToggleGroupStyle"
                 android:layout_width="75dp"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/priority_button_group_selector"
                 android:fontFamily="@font/noto_bold"
+                android:stateListAnimator="@null"
                 android:text="중간"
                 android:textColor="#d2d2d2"
                 android:textSize="20sp"
+                app:cornerRadius="5dp"
                 app:strokeColor="#f4f9ff"
                 app:strokeWidth="5dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_priority3"
+                style="?attr/materialButtonToggleGroupStyle"
                 android:layout_width="75dp"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/priority_button_group_selector"
                 android:fontFamily="@font/noto_bold"
+                android:stateListAnimator="@null"
                 android:text="높음"
                 android:textColor="#d2d2d2"
                 android:textSize="20sp"
+                app:cornerRadius="5dp"
                 app:strokeColor="#f4f9ff"
                 app:strokeWidth="5dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_priority0"
-                android:layout_width="85dp"
-                android:layout_height="80dp"
+                style="?attr/materialButtonToggleGroupStyle"
+                android:layout_width="75dp"
+                android:layout_height="60dp"
                 android:backgroundTint="@color/priority_button_group_selector"
                 android:fontFamily="@font/noto_bold"
+                android:stateListAnimator="@null"
                 android:text="없음"
                 android:textColor="#d2d2d2"
                 android:textSize="20sp"
+                app:cornerRadius="5dp"
                 app:strokeColor="#f4f9ff"
-                app:strokeWidth="15dp" />
+                app:strokeWidth="5dp" />
         </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_circular"
+            style="?android:progressBarStyleLarge"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:translationZ="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
