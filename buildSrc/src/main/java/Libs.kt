@@ -27,7 +27,7 @@ object Libs {
     const val kotlinAndroidExtension = "org.jetbrains.kotlin:kotlin-android-extensions-runtime:${Versions.kotlinVersion}"
 
     // Kotlin
-    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlinVersion}"
+    const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}"
 
     // Coroutines
     const val coroutineAndroid =

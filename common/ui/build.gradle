@@ -2,17 +2,18 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'com.github.ben-manes.versions' version "0.34.0"
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion Config.compileSdkVersion
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         minSdkVersion Config.minSdkVersion
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion Config.targetSdkVersion
+        versionCode Config.versionCode
+        versionName Config.versionName
     }
 
     buildTypes {
@@ -55,4 +56,16 @@ dependencies {
 
     // Debug
     implementation Libs.timber
+}
+
+def isNonStable = { String version ->
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it -> version.toUpperCase().contains(it) }
+    def regex = /^[0-9,.v-]+(-r)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+dependencyUpdates {
+    rejectVersionIf {
+        isNonStable(it.candidate.version)
+    }
 }

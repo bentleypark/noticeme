@@ -17,10 +17,10 @@ object Versions {
     const val kotlinVersion = "1.4.10"
 
     // Coroutines
-    const val androidVersion = "1.4.0"
+    const val androidVersion = "1.4.1"
 
     // RxJava
-    const val rxJavaVersion = "2.2.19"
+    const val rxJavaVersion = "2.2.20"
     const val rxAndroidVersion = "2.1.1"
 
     const val junitVersion = "4.13.1"

@@ -9,7 +9,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
@@ -19,6 +21,7 @@ import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentHomeBinding
 import com.project.noticeme.ui.home.adapt.UserConsumableListAdapter
+import com.project.noticeme.ui.home.utils.SwipeToDeleteCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -43,6 +46,7 @@ class HomeFragment : Fragment(),
 
         setUpView()
         setUpObserve()
+        registerDeleteDataItemAction()
     }
 
     override fun onResume() {
@@ -131,25 +135,25 @@ class HomeFragment : Fragment(),
         }
     }
 
-//    private fun registerDeleteDataItemAction() {
-//        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
-//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-//
-//                viewModel.delete(listAdapter.removeAt(viewHolder.adapterPosition))
-//                viewModel.deleteResult.observe(
-//                    viewLifecycleOwner,
-//                    {
-//                        when (it) {
-//                            is DataState.Success<Boolean> -> {
-//                                makeToast("소모품이 삭제돠었습니다.")
-//                            }
-//                        }
-//                    }
-//                )
-//            }
-//        }
-//
-//        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-//        itemTouchHelper.attachToRecyclerView(binding!!.rvList)
-//    }
+    private fun registerDeleteDataItemAction() {
+        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                viewModel.delete(listAdapter.removeAt(viewHolder.adapterPosition))
+                viewModel.deleteResult.observe(
+                    viewLifecycleOwner,
+                    {
+                        when (it) {
+                            is DataState.Success<Boolean> -> {
+                                makeToast("소모품이 삭제돠었습니다.")
+                            }
+                        }
+                    }
+                )
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding!!.rvList)
+    }
 }
