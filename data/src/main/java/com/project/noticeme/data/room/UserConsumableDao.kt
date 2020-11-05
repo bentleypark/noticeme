@@ -8,7 +8,7 @@ interface UserConsumableDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(userConsumable: UserConsumableEntity)
 
-    @Query("SELECT * FROM userConsumables")
+    @Query("SELECT * FROM userConsumables ORDER BY startDate DESC")
     suspend fun get(): List<UserConsumableEntity>
 
     @Delete

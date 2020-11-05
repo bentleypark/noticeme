@@ -14,8 +14,8 @@ data class UserConsumableEntity(
     @ColumnInfo(name = "image")
     val image: Int,
 
-//    @ColumnInfo(name = "category")
-//    val category: String,
+    @ColumnInfo(name = "category")
+    val category: String,
 
     @ColumnInfo(name = "duration")
     val duration: Long,
@@ -27,7 +27,7 @@ data class UserConsumableEntity(
     val endDate: Long,
 
     @ColumnInfo(name = "priority")
-    val priority: String
+    val priority: Int
 ) {
     companion object {
         const val TABLE_NAME = "userConsumables"

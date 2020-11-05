@@ -26,6 +26,7 @@ import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.internal.toImmutableList
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(),
@@ -114,7 +115,8 @@ class HomeFragment : Fragment(),
                                 if (it.data.isNotEmpty()) {
                                     lifecycleScope.launch {
                                         binding.rvList.isVisible = true
-                                        listAdapter.addAll(it.data.toMutableList())
+                                        listAdapter.addAll(it.data.sortedByDescending { item -> item.priority }
+                                            .toMutableList())
                                     }
                                 } else {
                                     binding.ivGuideMsg.isVisible = true

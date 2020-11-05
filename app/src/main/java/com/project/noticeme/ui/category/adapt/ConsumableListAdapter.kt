@@ -34,10 +34,11 @@ class ConsumableListAdapter(
                         UserConsumableEntity(
                             item.title,
                             item.image,
+                            item.category,
                             item.duration,
                             System.currentTimeMillis(),
                             System.currentTimeMillis() + item.duration,
-                            "없음"
+                            0
                         )
                     )
                 }
