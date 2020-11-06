@@ -8,8 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
+import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentConsumableDetailBinding
@@ -21,19 +24,82 @@ class ConsumableDetailFragment : Fragment(),
     ViewBindingHolder<FragmentConsumableDetailBinding> by ViewBindingHolderImpl() {
 
     private val viewModel: ConsumableDetailViewModel by viewModels()
+    private lateinit var userConsumableItem: UserConsumableEntity
+    var prioirty = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentConsumableDetailBinding.inflate(layoutInflater), this) {
-    }
+    ): View? = initBinding(FragmentConsumableDetailBinding.inflate(layoutInflater), this) {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val title = arguments?.getString("item_title")
-        viewModel.getwithTitle(title!!)
+        viewModel.getWithTitle(title!!)
+        setView()
+        setObserve()
+    }
 
+    private fun getDurationWithDay(milliseconds: Long): String {
+        return "${(milliseconds / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS))}"
+    }
+
+
+    private fun setView() {
+        binding!!.apply {
+            btnBack.setOnClickListener {
+                findNavController().navigate(R.id.action_consumableDetailFragment_pop)
+            }
+
+            dataPicker.init(
+                2020, 11, 5
+            ) { view, year, monthOfYear, dayOfMonth ->
+
+            }
+
+            priorityBtnGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+                when (checkedId) {
+                    btnPriority0.id -> {
+                        prioirty = 0
+                    }
+
+                    btnPriority1.id -> {
+                        prioirty = 1
+                    }
+
+                    btnPriority2.id -> {
+                        prioirty = 2
+                    }
+
+                    btnPriority3.id -> {
+                        prioirty = 3
+                    }
+                }
+            }
+
+            tvConfirm.setOnClickListener {
+                progressCircular.isVisible = true
+                val duration = tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
+                    1,
+                    TimeUnit.DAYS
+                )
+                val title = tvTitle.text.toString()
+                viewModel.update(
+                    UserConsumableEntity(
+                        title,
+                        userConsumableItem.image,
+                        userConsumableItem.category,
+                        duration,
+                        userConsumableItem.startDate,
+                        userConsumableItem.endDate,
+                        prioirty
+                    )
+                )
+            }
+        }
+    }
+
+    private fun setObserve() {
         viewModel.userConsumableItem.observe(viewLifecycleOwner,
             {
                 when (it) {
@@ -42,20 +108,40 @@ class ConsumableDetailFragment : Fragment(),
                             progressCircular.isVisible = false
                         }
 
-                        val item = it.data
+                        userConsumableItem = it.data
                         binding.apply {
-                            tvTitle.text = item.title
+                            tvTitle.text = userConsumableItem.title
                             tvDuration.text =
-                                SpannableStringBuilder(getDurationWithDay(item.duration))
+                                SpannableStringBuilder(getDurationWithDay(userConsumableItem.duration))
+                        }
+                        prioirty = userConsumableItem.priority
+                        binding.apply {
+                            when (prioirty) {
+                                0 -> priorityBtnGroup.check(btnPriority0.id)
+                                1 -> priorityBtnGroup.check(btnPriority1.id)
+                                2 -> priorityBtnGroup.check(btnPriority2.id)
+                                3 -> priorityBtnGroup.check(btnPriority3.id)
+                            }
                         }
                     }
                 }
             }
         )
-    }
 
-    private fun getDurationWithDay(milliseconds: Long): String {
-        return "${(milliseconds / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS))}"
+        viewModel.dataStateForUpdate.observe(viewLifecycleOwner,
+            {
+                when (it) {
+                    is DataState.Success<Boolean> -> {
+                        binding!!.apply {
+                            progressCircular.isVisible = false
+                        }
+
+                        makeToast("소모품의 정보가 수정돠었습니다.")
+                        findNavController().navigate(R.id.action_consumableDetailFragment_pop)
+                    }
+                }
+            }
+        )
     }
 
     companion object {

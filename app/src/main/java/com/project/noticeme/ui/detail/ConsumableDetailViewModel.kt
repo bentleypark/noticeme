@@ -21,11 +21,25 @@ constructor(
     val userConsumableItem: LiveData<DataState<UserConsumableEntity>>
     get() = _userConsumableItem
 
-    fun getwithTitle(title: String) {
+    private val _dataStateForUpdate = MutableLiveData<DataState<Boolean>>()
+    val dataStateForUpdate: LiveData<DataState<Boolean>>
+    get() = _dataStateForUpdate
+
+    fun getWithTitle(title: String) {
         viewModelScope.launch{
             mainRepository.getUserConsumableWithTitle(title)
                 .onEach { dataState ->
                     _userConsumableItem.value = dataState
+                }
+                .launchIn(viewModelScope)
+        }
+    }
+
+    fun update(item: UserConsumableEntity) {
+        viewModelScope.launch{
+            mainRepository.update(item)
+                .onEach { dataState ->
+                    _dataStateForUpdate.value = dataState
                 }
                 .launchIn(viewModelScope)
         }

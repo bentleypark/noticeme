@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainActivity_background"
+
     tools:context=".ui.category.CategoryDetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -38,6 +38,7 @@
                     android:layout_marginHorizontal="20dp"
                     android:fontFamily="@font/noto_bold"
                     android:text="확인"
+                    android:clickable="true"
                     android:textColor="@color/above_layout_text_color"
                     android:textSize="20sp" />
 
@@ -155,7 +156,7 @@
                 android:layout_marginTop="8dp"
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
-                android:calendarTextColor="@color/black"
+                android:theme="@style/MyDatePickerStyle"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintHorizontal_bias="0.24"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -244,6 +245,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/item_duration" />
 
             <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/priority_btn_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"

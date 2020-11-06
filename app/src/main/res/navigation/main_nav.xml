@@ -49,6 +49,11 @@
         android:id="@+id/consumableDetailFragment"
         android:name="com.project.noticeme.ui.detail.ConsumableDetailFragment"
         android:label="fragment_consumable_detail"
-        tools:layout="@layout/fragment_consumable_detail" />
+        tools:layout="@layout/fragment_consumable_detail" >
+        <action
+            android:id="@+id/action_consumableDetailFragment_pop"
+            app:popUpTo="@id/consumableDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

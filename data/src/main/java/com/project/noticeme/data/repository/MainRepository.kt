@@ -88,7 +88,7 @@ constructor(
             emit(DataState.Loading)
             delay(1000)
             try {
-                val result = userConsumableDao.delete(item)
+                userConsumableDao.delete(item)
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
@@ -102,6 +102,18 @@ constructor(
             try {
                 val resultList = userConsumableDao.getWithTitle(input)
                 emit(DataState.Success(resultList))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
+
+    suspend fun update(item: UserConsumableEntity): Flow<DataState<Boolean>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                userConsumableDao.update(item)
+                emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
             }
