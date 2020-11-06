@@ -126,3 +126,5 @@ dependencyUpdates {
         isNonStable(it.candidate.version)
     }
 }
+
+//apply plugin: 'com.google.gms.google-services'

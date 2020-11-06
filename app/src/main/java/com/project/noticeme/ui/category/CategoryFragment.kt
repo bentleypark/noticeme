@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
@@ -37,6 +38,7 @@ class CategoryFragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = initBinding(FragmentCategoryBinding.inflate(layoutInflater), this) {
+        MobileAds.initialize(activity) {}
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

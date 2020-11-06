@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupNavigationController()
-        MobileAds.initialize(this) {}
     }
 
     private fun setupNavigationController() {
