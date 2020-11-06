@@ -107,5 +107,8 @@ object Versions {
 
     // Hilt
     const val hiltVersion = "2.29.1-alpha"
-    const val hiltViewmodels = "1.0.0-alpha02"
+    const val hiltViewModel = "1.0.0-alpha02"
+
+    // Admob
+    const val admobVersion = "19.5.0"
 }

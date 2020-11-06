@@ -194,6 +194,9 @@ object Libs {
     const val hiltAndroid =  "com.google.dagger:hilt-android:${Versions.hiltVersion}"
     const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}"
 
-    const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltViewmodels}"
-    const val hiltCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltViewmodels}"
+    const val hiltViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hiltViewModel}"
+    const val hiltCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltViewModel}"
+
+    // Admob
+    const val admob = "com.google.android.gms:play-services-ads:${Versions.admobVersion}"
 }

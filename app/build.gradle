@@ -100,6 +100,8 @@ dependencies {
     implementation Libs.stethoOkhttp3
     debugImplementation Libs.leakcanary
 
+    implementation Libs.admob
+
     testImplementation Libs.junit4
     androidTestImplementation Libs.junitExt
     androidTestImplementation Libs.espressoCore

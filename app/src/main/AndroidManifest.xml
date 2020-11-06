@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Noticeme"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.category.AddConsumableActivity"></activity>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/FullscreenTheme">
@@ -37,6 +36,9 @@
                 android:name="com.project.noticeme.common.utils.initializer.TimberInitializer"
                 android:value="androidx.startup" />
         </provider>
-    </application>
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713" />
+    </application>
 </manifest>
