@@ -98,7 +98,7 @@ dependencies {
     implementation Libs.timber
     implementation Libs.stetho
     implementation Libs.stethoOkhttp3
-    debugImplementation Libs.leakcanary
+//    debugImplementation Libs.leakcanary
 
     implementation Libs.admob
 
