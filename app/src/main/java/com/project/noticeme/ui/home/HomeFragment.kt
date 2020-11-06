@@ -101,13 +101,13 @@ class HomeFragment : Fragment(),
 
             consumableList?.observe(
                 viewLifecycleOwner, {
-
                     binding!!.apply {
                         rvList.isVisible = false
                         ivGuideMsg.isVisible = false
                         emptyList.isVisible = false
                         progressCircular.isVisible = false
                     }
+
                     if (it != null) {
                         when (it) {
                             is DataState.Success<List<UserConsumableEntity>> -> {
