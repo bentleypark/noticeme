@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
@@ -96,6 +97,10 @@ class ConsumableDetailFragment : Fragment(),
                     )
                 )
             }
+
+            tvDelete.setOnClickListener {
+                openDeleteDialog()
+            }
         }
     }
 
@@ -142,6 +147,53 @@ class ConsumableDetailFragment : Fragment(),
                 }
             }
         )
+
+        viewModel.deleteResult.observe(
+            viewLifecycleOwner,
+            {
+                when (it) {
+                    is DataState.Success<Boolean> -> {
+                        findNavController().navigate(R.id.action_consumableDetailFragment_pop)
+                        makeToast("소모품이 삭제돠었습니다.")
+                    }
+                }
+            }
+        )
+    }
+
+    private fun openDeleteDialog() {
+        MaterialAlertDialogBuilder(
+            requireContext(), R.style.AlertDialogTheme
+        )
+            .setTitle("소모품을 삭제하시겠습니까?")
+            .setPositiveButton("확인") { dialog, _ ->
+                dialog.dismiss()
+                deleteItem()
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun deleteItem() {
+        binding!!.apply {
+            viewModel.delete(
+                UserConsumableEntity(
+                    userConsumableItem.title,
+                    userConsumableItem.image,
+                    userConsumableItem.category,
+                    tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
+                        1,
+                        TimeUnit.DAYS
+                    ),
+                    userConsumableItem.startDate,
+                    userConsumableItem.endDate,
+                    prioirty
+                )
+            )
+        }
     }
 
     companion object {

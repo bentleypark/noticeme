@@ -36,9 +36,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginHorizontal="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:fontFamily="@font/noto_bold"
                     android:text="확인"
-                    android:clickable="true"
                     android:textColor="@color/above_layout_text_color"
                     android:textSize="20sp" />
 
@@ -48,6 +49,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="80dp"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:fontFamily="@font/noto_bold"
                     android:text="삭제"
                     android:textColor="@color/above_layout_text_color"

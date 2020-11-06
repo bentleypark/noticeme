@@ -68,4 +68,36 @@
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:textSize">20sp</item>
     </style>
+
+    <!-- Material Dialog theme. -->
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:windowMinWidthMajor">40%</item>
+        <item name="android:windowMinWidthMinor">40%</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AlertButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AlertButtonStyle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/AlertDialogBodyTextStyle</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/AlertDialogTitleTextStyle</item>
+    </style>
+
+    <style name="AlertDialogTitleTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#727272</item>
+    </style>
+
+    <style name="AlertDialogBodyTextStyle" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#727272</item>
+    </style>
+
+    <style name="AlertButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#727272</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAllCaps">false</item>
+<!--        <item name="rippleColor">@color/dialog_button_pressed</item>-->
+    </style>
 </resources>
