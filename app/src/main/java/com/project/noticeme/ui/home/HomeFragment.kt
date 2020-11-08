@@ -152,8 +152,15 @@ class HomeFragment : Fragment(),
                     viewLifecycleOwner,
                     {
                         when (it) {
-                            is DataState.Success<Boolean> -> {
+                            is DataState.Success<List<UserConsumableEntity>> -> {
                                 makeToast("소모품이 삭제돠었습니다.")
+                                if(it.data.isEmpty()) {
+                                    binding!!.apply {
+                                        ivGuideMsg.isVisible = true
+                                        emptyList.isVisible = true
+                                        rvList.isVisible = false
+                                    }
+                                }
                             }
                         }
                     }

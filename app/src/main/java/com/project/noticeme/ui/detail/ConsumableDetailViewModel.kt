@@ -51,7 +51,7 @@ constructor(
 
     fun delete(item: UserConsumableEntity) {
         viewModelScope.launch {
-            mainRepository.delete(item)
+            mainRepository.deleteFromDetial(item)
                 .onEach { dataState ->
                     _deleteResult.value = dataState
                 }
