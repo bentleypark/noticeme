@@ -17,10 +17,10 @@ object Versions {
     const val kotlinVersion = "1.4.10"
 
     // Coroutines
-    const val androidVersion = "1.4.0"
+    const val androidVersion = "1.4.1"
 
     // RxJava
-    const val rxJavaVersion = "2.2.19"
+    const val rxJavaVersion = "2.2.20"
     const val rxAndroidVersion = "2.1.1"
 
     const val junitVersion = "4.13.1"
@@ -107,5 +107,8 @@ object Versions {
 
     // Hilt
     const val hiltVersion = "2.29.1-alpha"
-    const val hiltViewmodels = "1.0.0-alpha02"
+    const val hiltViewModel = "1.0.0-alpha02"
+
+    // Admob
+    const val admobVersion = "19.5.0"
 }

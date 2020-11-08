@@ -53,7 +53,7 @@ object InitialConsumableData {
             ConsumableEntity(
                 11,
                 "행주",
-                R.drawable.ic_img_scrubbers,
+                R.drawable.ic_img_dishcloth,
                 "주방",
                 TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 7
             )
@@ -63,7 +63,7 @@ object InitialConsumableData {
             ConsumableEntity(
                 12,
                 "고무장갑",
-                R.drawable.ic_img_scrubbers,
+                R.drawable.ic_img_rubber_glove,
                 "주방",
                 TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 90
             )
@@ -73,7 +73,7 @@ object InitialConsumableData {
             ConsumableEntity(
                 13,
                 "플라스틱용기",
-                R.drawable.ic_img_scrubbers,
+                R.drawable.ic_img_plastic,
                 "주방",
                 TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 90
             )

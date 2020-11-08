@@ -27,7 +27,7 @@ object ConsumableCategoryData {
             )
 
             dataList.add(
-                ConsumableCategory(4, "직접입력", R.drawable.ic_category_add)
+                ConsumableCategory(4, "나의 목록", R.drawable.ic_category_user_custom)
             )
         }
 

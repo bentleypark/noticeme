@@ -1,7 +1,4 @@
 buildscript {
-    ext {
-        kotlin_version = '1.4.10'
-    }
     repositories {
         google()
         jcenter()
@@ -9,10 +6,10 @@ buildscript {
     dependencies {
         classpath Libs.androidGradlePlugin
         classpath Libs.kotlinGradlePlugin
+        classpath Libs.googleService
         classpath Libs.hiltPlugin
         classpath Libs.navSafeArgPlugin
         classpath Libs.kotlinAndroidExtension
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 

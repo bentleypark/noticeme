@@ -36,15 +36,19 @@
     <style name="NotoSansTextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
         <item name="android:fontFamily">@font/noto_regular</item>
     </style>
+
     <style name="NotoSansButtonStyle" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
         <item name="android:fontFamily">@font/noto_regular</item>
     </style>
+
     <style name="NotoSansEditTextStyle" parent="@android:style/Widget.DeviceDefault.EditText">
         <item name="android:fontFamily">@font/noto_regular</item>
     </style>
+
     <style name="NotoSansRadioButtonStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.RadioButton">
         <item name="android:fontFamily">@font/noto_regular</item>
     </style>
+
     <style name="NotoSansCheckboxStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.CheckBox">
         <item name="android:fontFamily">@font/noto_regular</item>
     </style>
@@ -52,5 +56,48 @@
     <style name="WindowAnimationTransition">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="MyDatePickerStyle" parent="android:Widget.Material.Light.DatePicker">
+<!--        <item name="android:textColorPrimary">@color/black</item>-->
+        <item name="android:dateTextAppearance">@style/dateTextAppearance</item>
+    </style>
+
+    <style name="dateTextAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:numbersTextColor">@color/black</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- Material Dialog theme. -->
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="android:windowMinWidthMajor">40%</item>
+        <item name="android:windowMinWidthMinor">40%</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AlertButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AlertButtonStyle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/AlertDialogBodyTextStyle</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/AlertDialogTitleTextStyle</item>
+    </style>
+
+    <style name="AlertDialogTitleTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody1</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#727272</item>
+    </style>
+
+    <style name="AlertDialogBodyTextStyle" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#727272</item>
+    </style>
+
+    <style name="AlertButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">#727272</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAllCaps">false</item>
+<!--        <item name="rippleColor">@color/dialog_button_pressed</item>-->
     </style>
 </resources>

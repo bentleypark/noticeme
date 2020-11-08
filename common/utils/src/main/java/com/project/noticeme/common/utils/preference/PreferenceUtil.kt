@@ -5,7 +5,7 @@ import androidx.core.content.edit
 import com.google.gson.GsonBuilder
 
 object PreferenceUtil {
-    private fun getPref(context: Context) =
+     fun getPref(context: Context) =
         context.getSharedPreferences(PreferenceUtil.javaClass.name, Context.MODE_PRIVATE)
 
     fun setToken(context: Context, token: String) {

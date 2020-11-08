@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_homeFragment_to_addConsumableFragment"
             app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_consumableDetailFragment"
+            app:destination="@id/consumableDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -40,6 +43,16 @@
         <action
             android:id="@+id/action_categoryDetailFragment_pop"
             app:popUpTo="@id/categoryDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/consumableDetailFragment"
+        android:name="com.project.noticeme.ui.detail.ConsumableDetailFragment"
+        android:label="fragment_consumable_detail"
+        tools:layout="@layout/fragment_consumable_detail" >
+        <action
+            android:id="@+id/action_consumableDetailFragment_pop"
+            app:popUpTo="@id/consumableDetailFragment"
             app:popUpToInclusive="true" />
     </fragment>
 

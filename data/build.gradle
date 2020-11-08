@@ -4,18 +4,18 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'com.github.ben-manes.versions' version "0.33.0"
+    id 'com.github.ben-manes.versions' version "0.34.0"
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion Config.compileSdkVersion
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         minSdkVersion Config.minSdkVersion
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion Config.targetSdkVersion
+        versionCode Config.versionCode
+        versionName Config.versionName
     }
 
     buildTypes {
@@ -44,10 +44,6 @@ dependencies {
     // Coroutine
     implementation Libs.coroutineAndroid
     implementation Libs.coroutineCore
-
-    // RxJava
-    implementation Libs.rxJava
-    implementation Libs.rxAndroid
 
     // Square
     implementation Libs.retrofit

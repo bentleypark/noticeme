@@ -82,4 +82,54 @@ constructor(
                 emit(DataState.Error(e))
             }
         }
+
+    suspend fun delete(item: UserConsumableEntity): Flow<DataState<List<UserConsumableEntity>>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                userConsumableDao.delete(item)
+//                emit(DataState.Success(true))
+                val resultList = userConsumableDao.get()
+                emit(DataState.Success(resultList))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
+
+    suspend fun deleteFromDetial(item: UserConsumableEntity): Flow<DataState<Boolean>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                userConsumableDao.delete(item)
+                emit(DataState.Success(true))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
+
+    suspend fun getUserConsumableWithTitle(input: String): Flow<DataState<UserConsumableEntity>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                val resultList = userConsumableDao.getWithTitle(input)
+                emit(DataState.Success(resultList))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
+
+    suspend fun update(item: UserConsumableEntity): Flow<DataState<Boolean>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                userConsumableDao.update(item)
+                emit(DataState.Success(true))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
 }
