@@ -108,7 +108,7 @@ class HomeFragment : Fragment(),
             consumableList?.observe(
                 viewLifecycleOwner, {
                     binding!!.apply {
-                        rvList.isVisible = false
+                        rvList.visibility = View.GONE
                         ivGuideMsg.isVisible = false
                         emptyList.isVisible = false
                         progressCircular.isVisible = false
@@ -133,7 +133,7 @@ class HomeFragment : Fragment(),
                             is DataState.Loading -> {
                                 binding.apply {
                                     progressCircular.isVisible = true
-                                    rvList.isVisible = false
+//                                    rvList.isVisible = false
                                 }
                             }
                         }
@@ -154,7 +154,7 @@ class HomeFragment : Fragment(),
                         when (it) {
                             is DataState.Success<List<UserConsumableEntity>> -> {
                                 makeToast("소모품이 삭제돠었습니다.")
-                                if(it.data.isEmpty()) {
+                                if (it.data.isEmpty()) {
                                     binding!!.apply {
                                         ivGuideMsg.isVisible = true
                                         emptyList.isVisible = true
