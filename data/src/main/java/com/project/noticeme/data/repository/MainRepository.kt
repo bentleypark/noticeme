@@ -97,7 +97,7 @@ constructor(
             }
         }
 
-    suspend fun deleteFromDetial(item: UserConsumableEntity): Flow<DataState<Boolean>> =
+    suspend fun deleteFromDetail(item: UserConsumableEntity): Flow<DataState<Boolean>> =
         flow {
             emit(DataState.Loading)
             delay(1000)
@@ -132,4 +132,18 @@ constructor(
                 emit(DataState.Error(e))
             }
         }
+
+    suspend fun insertCustomConsumable(consumable: ConsumableEntity): Flow<DataState<Boolean>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+
+            try {
+                consumableDao.insert(consumable)
+                emit(DataState.Success(true))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
 }
+

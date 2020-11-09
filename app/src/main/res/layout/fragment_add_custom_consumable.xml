@@ -316,6 +316,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:translationZ="2dp"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

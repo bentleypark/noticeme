@@ -7,9 +7,9 @@ import com.project.noticeme.data.room.ConsumableEntity.Companion.TABLE_NAME
 
 @Entity(tableName = TABLE_NAME)
 data class ConsumableEntity(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    var id: Int,
+    var id: Int = 0,
     @ColumnInfo(name = "title")
     var title: String,
 

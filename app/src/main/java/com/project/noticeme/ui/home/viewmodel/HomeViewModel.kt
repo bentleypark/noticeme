@@ -29,7 +29,7 @@ constructor(
     val consumableList: LiveData<DataState<List<UserConsumableEntity>>>?
         get() = _consumableList
 
-    var dataList = emptyList<ConsumableEntity>()
+    var dataList= emptyList<ConsumableEntity>()
 
     private val _dataState = MutableLiveData<DataState<String>>()
 
