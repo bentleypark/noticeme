@@ -97,7 +97,7 @@ class ConsumableDetailFragment : Fragment(),
                         userConsumableItem.category,
                         duration,
                         startDate,
-                        userConsumableItem.endDate,
+                        startDate + duration,
                         prioirty
                     )
                 )

@@ -30,7 +30,7 @@ class UserConsumableListAdapter(private val list: MutableList<UserConsumableEnti
             binding.apply {
                 tvTitle.text = item.title
                 ivMaterialImg.setImageResource(item.image)
-                val result = getExpiredDay(item.startDate, item.endDate)
+                val result = getExpiredDay(System.currentTimeMillis(), item.endDate)
                 if (result > 0) {
                     tvExpireTime.text = "-${result}일"
                 } else {
