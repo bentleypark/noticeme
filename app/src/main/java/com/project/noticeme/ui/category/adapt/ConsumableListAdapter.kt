@@ -32,6 +32,7 @@ class ConsumableListAdapter(
                 consumableItem.setOnClickListener {
                     viewmodel.insert(
                         UserConsumableEntity(
+                            0,
                             item.title,
                             item.image,
                             item.category,

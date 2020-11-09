@@ -65,7 +65,8 @@
         tools:layout="@layout/fragment_add_custom_consumable" >
         <action
             android:id="@+id/action_addCustomConsumableFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_addCustomConsumableFragment_pop"
             app:popUpTo="@id/addCustomConsumableFragment"

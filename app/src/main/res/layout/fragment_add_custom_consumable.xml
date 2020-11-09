@@ -99,7 +99,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_title"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
                 android:background="?attr/selectableItemBackground"
                 app:cardCornerRadius="6dp"
@@ -169,7 +169,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_duration"
                 android:layout_width="85dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
                 android:background="?attr/selectableItemBackground"
                 app:cardCornerRadius="6dp"

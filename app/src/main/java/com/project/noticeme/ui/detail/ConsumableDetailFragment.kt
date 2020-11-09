@@ -80,13 +80,17 @@ class ConsumableDetailFragment : Fragment(),
 
             tvConfirm.setOnClickListener {
                 progressCircular.isVisible = true
+
                 val duration = tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
                     1,
                     TimeUnit.DAYS
                 )
+
                 val title = tvTitle.text.toString()
+
                 viewModel.update(
                     UserConsumableEntity(
+                        userConsumableItem.id,
                         title,
                         userConsumableItem.image,
                         userConsumableItem.category,
@@ -161,6 +165,7 @@ class ConsumableDetailFragment : Fragment(),
         )
     }
 
+
     private fun openDeleteDialog() {
         MaterialAlertDialogBuilder(
             requireContext(), R.style.AlertDialogTheme
@@ -181,6 +186,7 @@ class ConsumableDetailFragment : Fragment(),
         binding!!.apply {
             viewModel.delete(
                 UserConsumableEntity(
+                    userConsumableItem.id,
                     userConsumableItem.title,
                     userConsumableItem.image,
                     userConsumableItem.category,
