@@ -63,6 +63,10 @@ class CategoryFragment : Fragment(),
 
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
+
+        binding.btnAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_categoryFragment_to_addCustomConsumableFragment)
+        }
     }
 
     companion object {

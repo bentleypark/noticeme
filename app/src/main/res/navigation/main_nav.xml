@@ -33,6 +33,9 @@
                 android:defaultValue='""'
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_categoryFragment_to_addCustomConsumableFragment"
+            app:destination="@id/addCustomConsumableFragment" />
     </fragment>
 
     <fragment
@@ -53,6 +56,16 @@
         <action
             android:id="@+id/action_consumableDetailFragment_pop"
             app:popUpTo="@id/consumableDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCustomConsumableFragment"
+        android:name="com.project.noticeme.ui.add.AddCustomConsumableFragment"
+        android:label="fragment_add_custom_consumable"
+        tools:layout="@layout/fragment_add_custom_consumable" >
+        <action
+            android:id="@+id/action_addCustomConsumableFragment_pop"
+            app:popUpTo="@id/addCustomConsumableFragment"
             app:popUpToInclusive="true" />
     </fragment>
 

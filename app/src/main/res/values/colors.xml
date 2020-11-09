@@ -11,4 +11,5 @@
     <color name="mainActivity_background">#f4f9ff</color>
     <color name="expired_day_color_red">#ec4612</color>
     <color name="above_layout_text_color">#60979e</color>
+    <color name="edit_hint_color">#d4d4d4</color>
 </resources>

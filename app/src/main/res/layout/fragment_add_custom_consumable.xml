@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainActivity_background"
+    tools:context=".ui.category.CategoryDetailFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.Noticeme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.Noticeme.PopupOverlay">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:background="@drawable/ic_arrow_back" />
+
+                <TextView
+                    android:id="@+id/tv_confirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginHorizontal="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/noto_bold"
+                    android:text="확인"
+                    android:textColor="@color/above_layout_text_color"
+                    android:textSize="20sp" />
+
+            </FrameLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.07" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.07" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.93" />
+
+            <RelativeLayout
+                android:id="@+id/above_layout"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/main_background_color"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+            <TextView
+                android:id="@+id/tv_guide_msg1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_bold"
+                android:text="소모품명"
+                android:textColor="@color/above_layout_text_color"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toBottomOf="@+id/above_layout" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/item_title"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="7dp"
+                android:background="?attr/selectableItemBackground"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_guide_msg1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="12dp">
+
+                    <EditText
+                        android:id="@+id/tv_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/noto_bold"
+                        android:hint="e.g.)에어컨 필터"
+                        android:inputType="text"
+                        android:textColor="#505050"
+                        android:textColorHint="@color/edit_hint_color"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_guide_msg2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/noto_bold"
+                android:text="마지막 교체시기가 언제인가요?"
+                android:textColor="@color/above_layout_text_color"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toBottomOf="@+id/item_title" />
+
+            <DatePicker
+                android:id="@+id/dataPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                android:theme="@style/MyDatePickerStyle"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintHorizontal_bias="0.24"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_guide_msg2" />
+
+            <TextView
+                android:id="@+id/tv_guide_msg3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/noto_bold"
+                android:text="얼마나 자주 교체할거에요?"
+                android:textColor="@color/above_layout_text_color"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toBottomOf="@+id/dataPicker" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/item_duration"
+                android:layout_width="85dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="7dp"
+                android:background="?attr/selectableItemBackground"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_guide_msg3">
+
+                <EditText
+                    android:id="@+id/tv_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/noto_bold"
+                    android:hint="e.g.)30"
+                    android:layout_marginStart="6dp"
+                    android:inputType="number"
+                    android:textColor="#505050"
+                    android:textColorHint="@color/edit_hint_color"
+                    android:textSize="15sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="7dp"
+                android:background="?attr/selectableItemBackground"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintStart_toEndOf="@+id/item_duration"
+                app:layout_constraintTop_toBottomOf="@+id/tv_guide_msg3">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:id="@+id/tv_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/noto_bold"
+                        android:text="일"
+                        android:textColor="#aaaaaa"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/tv_day"
+                        android:background="@drawable/ic_arrow_drop_down" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_guide_msg4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/noto_bold"
+                android:text="우선 순위"
+                android:textColor="@color/above_layout_text_color"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toBottomOf="@+id/item_duration" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/priority_btn_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                app:checkedButton="@+id/btn_priority0"
+                app:layout_constraintStart_toStartOf="@+id/guideline1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_guide_msg4"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_priority1"
+                    style="?attr/materialButtonToggleGroupStyle"
+                    android:layout_width="75dp"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/priority_button_group_selector"
+                    android:fontFamily="@font/noto_bold"
+                    android:stateListAnimator="@null"
+                    android:text="낮음"
+                    android:textColor="#d2d2d2"
+                    android:textSize="20sp"
+                    app:cornerRadius="5dp"
+                    app:strokeColor="#f4f9ff"
+                    app:strokeWidth="5dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_priority2"
+                    style="?attr/materialButtonToggleGroupStyle"
+                    android:layout_width="75dp"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/priority_button_group_selector"
+                    android:fontFamily="@font/noto_bold"
+                    android:stateListAnimator="@null"
+                    android:text="중간"
+                    android:textColor="#d2d2d2"
+                    android:textSize="20sp"
+                    app:cornerRadius="5dp"
+                    app:strokeColor="#f4f9ff"
+                    app:strokeWidth="5dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_priority3"
+                    style="?attr/materialButtonToggleGroupStyle"
+                    android:layout_width="75dp"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/priority_button_group_selector"
+                    android:fontFamily="@font/noto_bold"
+                    android:stateListAnimator="@null"
+                    android:text="높음"
+                    android:textColor="#d2d2d2"
+                    android:textSize="20sp"
+                    app:cornerRadius="5dp"
+                    app:strokeColor="#f4f9ff"
+                    app:strokeWidth="5dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_priority0"
+                    style="?attr/materialButtonToggleGroupStyle"
+                    android:layout_width="75dp"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/priority_button_group_selector"
+                    android:fontFamily="@font/noto_bold"
+                    android:stateListAnimator="@null"
+                    android:text="없음"
+                    android:textColor="#d2d2d2"
+                    android:textSize="20sp"
+                    app:cornerRadius="5dp"
+                    app:strokeColor="#f4f9ff"
+                    app:strokeWidth="5dp" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/progress_circular"
+                style="?android:progressBarStyleLarge"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:translationZ="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
