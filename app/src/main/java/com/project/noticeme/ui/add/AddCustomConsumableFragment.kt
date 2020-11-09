@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -22,11 +23,14 @@ import com.project.noticeme.databinding.FragmentAddCustomConsumableBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class AddCustomConsumableFragment : Fragment(),
-    ViewBindingHolder<FragmentAddCustomConsumableBinding> by ViewBindingHolderImpl() {
+    ViewBindingHolder<FragmentAddCustomConsumableBinding> by ViewBindingHolderImpl(),
+    DatePicker.OnDateChangedListener {
 
     private val viewModel: AddCustomConsumableViewModel by viewModels()
     private val randomIcon = listOf(
@@ -42,6 +46,7 @@ class AddCustomConsumableFragment : Fragment(),
         R.drawable.ic_random_icon_10_planet
     )
     var prioirty = 0
+    var startDate: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,6 +88,11 @@ class AddCustomConsumableFragment : Fragment(),
                     1,
                     TimeUnit.DAYS
                 )
+
+                if (startDate == 0.toLong()) {
+                    startDate = System.currentTimeMillis()
+                }
+
                 viewModel.insertUserConsumable(
                     UserConsumableEntity(
                         0,
@@ -90,11 +100,23 @@ class AddCustomConsumableFragment : Fragment(),
                         randomIcon.random(),
                         "나의 목록",
                         duration,
-                        System.currentTimeMillis(),
-                        System.currentTimeMillis() + duration,
+                        startDate,
+                        startDate + duration,
                         prioirty
                     )
                 )
+            }
+
+            val calendar = Calendar.getInstance()
+            calendar.timeInMillis = System.currentTimeMillis()
+            dataPicker.init(
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ) { _, year, monthOfYear, dayOfMonth ->
+                Timber.d("dateChange()")
+                calendar.set(year, monthOfYear, dayOfMonth)
+                startDate = calendar.timeInMillis
             }
         }
 
@@ -150,5 +172,11 @@ class AddCustomConsumableFragment : Fragment(),
 
     companion object {
         fun newInstance() = AddCustomConsumableFragment()
+    }
+
+    override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+        val cal = Calendar.getInstance()
+        cal.set(year, monthOfYear, dayOfMonth)
+        startDate = cal.timeInMillis
     }
 }

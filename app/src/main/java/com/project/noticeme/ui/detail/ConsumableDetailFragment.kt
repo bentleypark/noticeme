@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,8 @@ import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentConsumableDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
@@ -27,6 +30,7 @@ class ConsumableDetailFragment : Fragment(),
     private val viewModel: ConsumableDetailViewModel by viewModels()
     private lateinit var userConsumableItem: UserConsumableEntity
     var prioirty = 0
+    var startDate: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,12 +54,6 @@ class ConsumableDetailFragment : Fragment(),
         binding!!.apply {
             btnBack.setOnClickListener {
                 findNavController().navigate(R.id.action_consumableDetailFragment_pop)
-            }
-
-            dataPicker.init(
-                2020, 11, 5
-            ) { view, year, monthOfYear, dayOfMonth ->
-
             }
 
             priorityBtnGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
@@ -87,6 +85,9 @@ class ConsumableDetailFragment : Fragment(),
                 )
 
                 val title = tvTitle.text.toString()
+                if (startDate == 0.toLong()) {
+                    startDate = userConsumableItem.startDate
+                }
 
                 viewModel.update(
                     UserConsumableEntity(
@@ -95,7 +96,7 @@ class ConsumableDetailFragment : Fragment(),
                         userConsumableItem.image,
                         userConsumableItem.category,
                         duration,
-                        userConsumableItem.startDate,
+                        startDate,
                         userConsumableItem.endDate,
                         prioirty
                     )
@@ -105,6 +106,7 @@ class ConsumableDetailFragment : Fragment(),
             tvDelete.setOnClickListener {
                 openDeleteDialog()
             }
+
         }
     }
 
@@ -131,6 +133,17 @@ class ConsumableDetailFragment : Fragment(),
                                 2 -> priorityBtnGroup.check(btnPriority2.id)
                                 3 -> priorityBtnGroup.check(btnPriority3.id)
                             }
+                        }
+                        val calendar = Calendar.getInstance()
+                        calendar.timeInMillis = userConsumableItem.startDate
+                        binding.dataPicker.init(
+                            calendar.get(Calendar.YEAR),
+                            calendar.get(Calendar.MONTH),
+                            calendar.get(Calendar.DAY_OF_MONTH)
+                        ) { _, year, monthOfYear, dayOfMonth ->
+                            Timber.d("dateChange()")
+                            calendar.set(year, monthOfYear, dayOfMonth)
+                            startDate = calendar.timeInMillis
                         }
                     }
                 }
