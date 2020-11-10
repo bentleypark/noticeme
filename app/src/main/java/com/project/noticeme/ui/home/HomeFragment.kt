@@ -24,6 +24,7 @@ import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentHomeBinding
 import com.project.noticeme.ui.home.adapt.UserConsumableListAdapter
 import com.project.noticeme.ui.home.utils.SwipeToDeleteCallback
+import com.project.noticeme.ui.home.utils.SwipeToTestCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -51,6 +52,7 @@ class HomeFragment : Fragment(),
         setUpView()
         setUpObserve()
         registerDeleteDataItemAction()
+        registerTestItemAction()
     }
 
     override fun onResume() {
@@ -168,6 +170,16 @@ class HomeFragment : Fragment(),
             }
         }
 
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding!!.rvList)
+    }
+
+    private fun registerTestItemAction() {
+        val swipeHandler = object : SwipeToTestCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                makeToast("초기화")
+            }
+        }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding!!.rvList)
     }

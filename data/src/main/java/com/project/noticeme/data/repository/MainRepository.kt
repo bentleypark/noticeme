@@ -46,7 +46,7 @@ constructor(
             }
         }
 
-    suspend fun findConsumableWithTitle(title: String): Flow<DataState<ConsumableEntity>> =
+    suspend fun findConsumableWithTitle(title: String): Flow<DataState<List<ConsumableEntity>>> =
         flow {
 
             emit(DataState.Loading)
