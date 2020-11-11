@@ -44,7 +44,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginEnd="12dp"
                     ads:layout_constraintBottom_toBottomOf="parent"
-                    ads:layout_constraintEnd_toEndOf="parent"
+                    ads:layout_constraintEnd_toStartOf="@+id/btn_search"
                     ads:layout_constraintStart_toEndOf="@+id/btn_back"
                     ads:layout_constraintTop_toTopOf="parent"
                     app:endIconMode="clear_text"
@@ -58,7 +58,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/editext_search_layout_background"
                         android:hint="소모품 검색: e.g.)칫솔"
-                        android:imeOptions="actionSearch|flagNoExtractUi"
+                        android:imeOptions="actionSearch"
                         android:inputType="text"
                         android:maxLength="23"
                         android:maxLines="1"
@@ -69,7 +69,20 @@
                         android:textColorHint="@color/gray_50"
                         android:textCursorDrawable="@null"
                         android:textSize="16sp" />
+
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/btn_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    ads:layout_constraintBottom_toBottomOf="parent"
+                    ads:layout_constraintEnd_toEndOf="parent"
+                    ads:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_btn_search" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -106,6 +119,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="24dp"
+            android:elevation="5dp"
             android:visibility="gone"
             ads:layout_constraintBottom_toBottomOf="@+id/btn_add"
             app:layout_constraintEnd_toEndOf="parent"

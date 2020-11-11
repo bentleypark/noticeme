@@ -1,13 +1,12 @@
 package com.project.noticeme.ui.search
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.text.SpannableStringBuilder
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -15,17 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
-import com.project.noticeme.common.ex.hideKeyboard
-import com.project.noticeme.common.ex.makeGone
-import com.project.noticeme.common.ex.makeVisible
-import com.project.noticeme.common.ex.showKeyboard
+import com.project.noticeme.common.ex.*
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.SearchHistoryEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentSearchBinding
 import com.project.noticeme.ui.category.adapt.ConsumableListAdapter
 import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
-import com.project.noticeme.ui.detail.ConsumableDetailViewModel
 import com.project.noticeme.ui.home.SpaceDecoration
 import com.project.noticeme.ui.search.history.SearchHistoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,6 +49,13 @@ class SearchFragment : Fragment(),
         binding!!.etSearch.apply {
             requestFocus()
             showKeyboard()
+
+            setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    search()
+                }
+                true
+            }
         }
 
         binding.btnBack.setOnClickListener {
@@ -68,19 +70,6 @@ class SearchFragment : Fragment(),
             findNavController().navigate(R.id.action_searchFragment_to_addCustomConsumableFragment)
         }
 
-        searchAdapter = ConsumableListAdapter(mutableListOf(), detailViewModel)
-        binding.searchList.apply {
-            layoutManager =
-                LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.VERTICAL,
-                    false
-                )
-            setHasFixedSize(true)
-            addItemDecoration(SpaceDecoration(resources.getDimensionPixelSize(R.dimen.material_item_size)))
-        }
-
-
         searchHistoryAdapter =
             SearchHistoryAdapter(
                 mutableListOf(
@@ -88,6 +77,7 @@ class SearchFragment : Fragment(),
                     SearchHistoryEntity(0, "11.11", "칫솔")
                 )
             )
+
         binding.rvSearchHistory.apply {
             adapter = searchHistoryAdapter
             layoutManager =
@@ -100,43 +90,43 @@ class SearchFragment : Fragment(),
             addItemDecoration(SpaceDecoration(resources.getDimensionPixelSize(R.dimen.material_item_size)))
         }
 
-        binding.etSearch.setOnFocusChangeListener { _, hasFocus ->
-            binding.searchHistoryLayout.isGone = !hasFocus
+//        binding.etSearch.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//                lifecycleScope.launch {
+//                    delay(1000)
+//                    val inputText = s.toString().trim()
+//                    if (inputText.isNotEmpty()) {
+//                        viewModel.searchWithTitle(inputText)
+//                        binding.searchHistoryLayout.makeGone()
+//                    } else {
+//                        binding.apply {
+//                            searchHistoryLayout.makeVisible()
+//                            tvGuideMsg.makeGone()
+//                            tvSearchResultEmpty.makeGone()
+//                            btnAdd.makeGone()
+//
+//                            etSearch.apply {
+//                                requestFocus()
+//                                showKeyboard()
+//                            }
+//                        }
+//                        if (searchAdapter.itemCount != 0) {
+//                            searchAdapter.clear()
+//                        }
+//                    }
+//                }
+//            }
+//        })
+
+        binding.btnSearch.setOnClickListener {
+            search()
         }
-
-        binding.etSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                lifecycleScope.launch {
-                    delay(1000)
-                    val inputText = s.toString().trim()
-                    if (inputText.isNotEmpty()) {
-                        viewModel.searchWithTitle(inputText)
-                        binding.searchHistoryLayout.makeGone()
-                    } else {
-                        binding.apply {
-                            searchHistoryLayout.makeVisible()
-                            tvGuideMsg.makeGone()
-                            tvSearchResultEmpty.makeGone()
-                            btnAdd.makeGone()
-
-                            etSearch.apply {
-                                requestFocus()
-                                showKeyboard()
-                            }
-                        }
-                        if (searchAdapter.itemCount != 0) {
-                            searchAdapter.clear()
-                        }
-                    }
-                }
-            }
-        })
 
         viewModel.searchList.observe(
             viewLifecycleOwner,
@@ -144,14 +134,21 @@ class SearchFragment : Fragment(),
                 when (it) {
                     is DataState.Success<List<ConsumableEntity>> -> {
                         binding.apply {
-                            searchList.makeGone()
                             progressCircular.makeGone()
+                            tvSearchResultEmpty.makeGone()
+                            tvGuideMsg.makeGone()
+                            btnAdd.makeGone()
                         }
 
                         if (it.data.isNotEmpty()) {
                             binding.progressCircular.makeGone()
                             binding.searchList.makeVisible()
-                            searchAdapter.addAll(it.data)
+                            binding.apply {
+                                etSearch.apply {
+                                    clearFocus()
+                                    hideKeyboard()
+                                }
+                            }
                         } else {
                             binding.apply {
                                 tvSearchResultEmpty.makeVisible()
@@ -162,6 +159,20 @@ class SearchFragment : Fragment(),
                                     hideKeyboard()
                                 }
                             }
+                        }
+
+                        searchAdapter =
+                            ConsumableListAdapter(it.data.toMutableList(), detailViewModel)
+                        binding.searchList.apply {
+                            adapter = searchAdapter
+                            layoutManager =
+                                LinearLayoutManager(
+                                    context,
+                                    LinearLayoutManager.VERTICAL,
+                                    false
+                                )
+                            setHasFixedSize(true)
+                            addItemDecoration(SpaceDecoration(resources.getDimensionPixelSize(R.dimen.material_item_size)))
                         }
                     }
 
@@ -176,6 +187,44 @@ class SearchFragment : Fragment(),
                 }
             }
         )
+
+        detailViewModel.dataState.observe(viewLifecycleOwner, {
+            when (it) {
+                is DataState.Success<Boolean> -> {
+                    makeToast("소모품이 추가되었습니다.")
+                }
+                is DataState.Error -> {
+                    makeToast("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
+                }
+            }
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        binding!!.etSearch.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.apply {
+                    tvSearchResultEmpty.makeGone()
+                    tvGuideMsg.makeGone()
+                    btnAdd.makeGone()
+                    searchHistoryLayout.makeVisible()
+                    searchList.makeGone()
+                }
+            }
+        }
+    }
+
+    private fun search() {
+        lifecycleScope.launch {
+            delay(1000)
+            val inputText = SpannableStringBuilder(binding!!.etSearch.text).toString().trim()
+            if (inputText.isNotEmpty()) {
+                viewModel.searchWithTitle(inputText)
+                binding.searchHistoryLayout.makeGone()
+            }
+        }
     }
 
     companion object {

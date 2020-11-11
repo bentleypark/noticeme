@@ -11,6 +11,7 @@ import com.project.noticeme.data.state.DataState
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 class SearchViewModel @ViewModelInject
@@ -25,6 +26,7 @@ constructor(private val mainRepository: MainRepository) : BaseViewModel() {
         viewModelScope.launch {
             mainRepository.findConsumableWithTitle(title)
                 .onEach { dataState ->
+                    Timber.d("$dataState")
                     _searchList.value = dataState
                 }
                 .launchIn(viewModelScope)
