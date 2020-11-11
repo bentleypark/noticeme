@@ -18,6 +18,6 @@ interface SearchHistoryDao {
     @Delete
     suspend fun delete(userHistory: SearchHistoryEntity)
 
-    @Query("SELECT * FROM searchHistory")
+    @Query("SELECT * FROM searchHistory ORDER BY id DESC")
     suspend fun get(): List<SearchHistoryEntity>
 }

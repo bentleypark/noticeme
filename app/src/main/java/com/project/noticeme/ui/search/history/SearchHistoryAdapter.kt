@@ -6,9 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.noticeme.data.room.SearchHistoryEntity
 import com.project.noticeme.databinding.SearchHistoryItemBinding
+import com.project.noticeme.ui.search.SearchViewModel
 import kotlinx.android.extensions.LayoutContainer
 
-class SearchHistoryAdapter(private val list: MutableList<SearchHistoryEntity>) :
+class SearchHistoryAdapter(
+    private val list: MutableList<SearchHistoryEntity>,
+    private val viewModel: SearchViewModel
+) :
     RecyclerView.Adapter<SearchHistoryAdapter.SearchHistoryViewHolder>() {
 
     private lateinit var bindingItem: SearchHistoryItemBinding
@@ -25,6 +29,9 @@ class SearchHistoryAdapter(private val list: MutableList<SearchHistoryEntity>) :
                 binding.tvTitle.text = item.keyword
                 btnDelete.setOnClickListener {
                     delete(position)
+                }
+                selectedItem.setOnClickListener {
+                    viewModel.updateHistoryTitle(item.keyword)
                 }
             }
         }
@@ -48,14 +55,21 @@ class SearchHistoryAdapter(private val list: MutableList<SearchHistoryEntity>) :
         notifyItemInserted(0)
     }
 
+    fun addAll(data: List<SearchHistoryEntity>) {
+        list.clear()
+        list.addAll(data)
+        notifyDataSetChanged()
+    }
+
     fun clear() {
+        viewModel.deleteAllHistory()
         list.clear()
         notifyDataSetChanged()
     }
 
     fun delete(position: Int) {
+        viewModel.deleteHistory(list[position])
         list.removeAt(position)
-//        notifyItemRemoved(position)
         notifyDataSetChanged()
     }
 }

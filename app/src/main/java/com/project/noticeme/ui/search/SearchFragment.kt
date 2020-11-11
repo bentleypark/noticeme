@@ -73,10 +73,7 @@ class SearchFragment : Fragment(),
 
         searchHistoryAdapter =
             SearchHistoryAdapter(
-                mutableListOf(
-                    SearchHistoryEntity(0, "11.11", "칫솔"),
-                    SearchHistoryEntity(0, "11.11", "칫솔")
-                )
+                mutableListOf(), viewModel
             )
 
         binding.rvSearchHistory.apply {
@@ -193,6 +190,24 @@ class SearchFragment : Fragment(),
             }
         )
 
+        viewModel.searchHistoryList.observe(
+            viewLifecycleOwner,
+            {
+                when (it) {
+                    is DataState.Success<List<SearchHistoryEntity>> -> {
+                        searchHistoryAdapter.addAll(it.data)
+                    }
+                }
+            }
+        )
+
+        viewModel.selectedHistoryTitle.observe(
+            viewLifecycleOwner,
+            {
+                searchWithHistory(it)
+            }
+        )
+
         detailViewModel.dataState.observe(viewLifecycleOwner, {
             when (it) {
                 is DataState.Success<Boolean> -> {
@@ -207,22 +222,24 @@ class SearchFragment : Fragment(),
 
     override fun onResume() {
         super.onResume()
-
         binding!!.etSearch.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 binding.apply {
-                    tvSearchResultEmpty.makeGone()
-                    tvGuideMsg.makeGone()
-                    btnAdd.makeGone()
-                    searchHistoryLayout.makeVisible()
-                    searchList.makeGone()
+                    lifecycleScope.launch {
+                        viewModel.getSearchHistory()
+                        delay(1000)
+                        tvSearchResultEmpty.makeGone()
+                        tvGuideMsg.makeGone()
+                        btnAdd.makeGone()
+                        searchHistoryLayout.makeVisible()
+                        searchList.makeGone()
+                    }
                 }
             }
         }
     }
 
     private fun search() {
-
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = System.currentTimeMillis()
         val currentDate =
@@ -233,9 +250,18 @@ class SearchFragment : Fragment(),
             val inputText = SpannableStringBuilder(binding!!.etSearch.text).toString().trim()
             if (inputText.isNotEmpty()) {
                 viewModel.searchWithTitle(inputText)
-                searchHistoryAdapter.add(SearchHistoryEntity(0, currentDate, inputText))
+                val historyItem = SearchHistoryEntity(0, currentDate, inputText)
+                searchHistoryAdapter.add(historyItem)
+                viewModel.insertSearchHistory(historyItem)
                 binding.searchHistoryLayout.makeGone()
             }
+        }
+    }
+
+    private fun searchWithHistory(title: String) {
+        lifecycleScope.launch {
+            viewModel.searchWithTitle(title)
+            binding!!.searchHistoryLayout.makeGone()
         }
     }
 
