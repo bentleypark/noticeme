@@ -95,7 +95,6 @@ class AddCustomConsumableFragment : Fragment(),
 
                 viewModel.insertUserConsumable(
                     UserConsumableEntity(
-                        0,
                         SpannableStringBuilder(tvTitle.text).toString(),
                         randomIcon.random(),
                         "나의 목록",
@@ -163,7 +162,7 @@ class AddCustomConsumableFragment : Fragment(),
                             tvTitle.hideKeyboard()
                             tvDuration.hideKeyboard()
                         }
-                        makeToast("소모품이 추가되었습니다. \n추가된 소모품은 홈스크린과 나의 소모품 카테고리에서 확인할 수 있습니다.")
+                        makeToast("소모품이 추가되었습니다. \n추가된 소모품은 홈스크린과 나의 목록에서 확인할 수 있습니다.")
                         findNavController().navigate(R.id.action_addCustomConsumableFragment_pop)
                     }
                 }

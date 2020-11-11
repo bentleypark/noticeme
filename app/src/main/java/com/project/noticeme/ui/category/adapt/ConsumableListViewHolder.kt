@@ -23,7 +23,6 @@ class ConsumableListViewHolder(private val binding: ConsumableItemBinding, priva
             consumableItem.setOnClickListener {
                 viewModel.insert(
                     UserConsumableEntity(
-                        0,
                         item.title,
                         item.image,
                         item.category,

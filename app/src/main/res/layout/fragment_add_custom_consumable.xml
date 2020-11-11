@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     tools:context=".ui.category.CategoryDetailFragment">
-<!--    android:background="@color/mainActivity_background"-->
+    <!--    android:background="@color/mainActivity_background"-->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -125,6 +125,7 @@
                         android:inputType="text"
                         android:textColor="#505050"
                         android:textColorHint="@color/edit_hint_color"
+                        android:textCursorDrawable="@null"
                         android:textSize="18sp" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
@@ -183,12 +184,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginStart="6dp"
                     android:fontFamily="@font/noto_bold"
                     android:hint="e.g.)30"
-                    android:layout_marginStart="6dp"
                     android:inputType="number"
                     android:textColor="#505050"
                     android:textColorHint="@color/edit_hint_color"
+                    android:textCursorDrawable="@null"
                     android:textSize="15sp" />
             </androidx.cardview.widget.CardView>
 

@@ -8,6 +8,7 @@ import com.project.noticeme.data.state.DataState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 class MainRepository
 constructor(
@@ -53,6 +54,7 @@ constructor(
             delay(1000)
             try {
                 val result = consumableDao.findConsumableWithTitle(title)
+                Timber.d("${result.size}")
                 emit(DataState.Success(result))
             } catch (e: Exception) {
                 emit(DataState.Error(e))

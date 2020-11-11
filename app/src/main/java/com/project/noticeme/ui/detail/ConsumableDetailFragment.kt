@@ -91,7 +91,6 @@ class ConsumableDetailFragment : Fragment(),
 
                 viewModel.update(
                     UserConsumableEntity(
-                        userConsumableItem.id,
                         title,
                         userConsumableItem.image,
                         userConsumableItem.category,
@@ -199,7 +198,6 @@ class ConsumableDetailFragment : Fragment(),
         binding!!.apply {
             viewModel.delete(
                 UserConsumableEntity(
-                    userConsumableItem.id,
                     userConsumableItem.title,
                     userConsumableItem.image,
                     userConsumableItem.category,

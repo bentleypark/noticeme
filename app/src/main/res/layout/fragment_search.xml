@@ -8,14 +8,6 @@
     android:background="@color/mainActivity_background"
     tools:context=".ui.category.CategoryFragment">
 
-    <View
-        android:id="@+id/transparent_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/search_layover_bg"
-        android:elevation="1dp"
-        android:visibility="gone" />
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,19 +36,6 @@
                     ads:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_arrow_back" />
 
-                <ImageView
-                    android:id="@+id/btn_back2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:paddingLeft="@dimen/search_icon_padding"
-                    android:paddingRight="@dimen/search_icon_padding"
-                    android:visibility="gone"
-                    ads:layout_constraintBottom_toBottomOf="parent"
-                    ads:layout_constraintStart_toStartOf="parent"
-                    ads:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_arrow_back" />
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -64,10 +43,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginEnd="12dp"
-                    android:visibility="gone"
                     ads:layout_constraintBottom_toBottomOf="parent"
                     ads:layout_constraintEnd_toEndOf="parent"
-                    ads:layout_constraintStart_toEndOf="@+id/btn_back2"
+                    ads:layout_constraintStart_toEndOf="@+id/btn_back"
                     ads:layout_constraintTop_toTopOf="parent"
                     app:endIconMode="clear_text"
                     app:hintEnabled="false">
@@ -91,27 +69,7 @@
                         android:textColorHint="@color/gray_50"
                         android:textCursorDrawable="@null"
                         android:textSize="16sp" />
-
                 </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageButton
-                    android:id="@+id/btn_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="16dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    ads:layout_constraintBottom_toBottomOf="parent"
-                    ads:layout_constraintEnd_toEndOf="parent"
-                    ads:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_btn_search" />
-
-                <!--                <ListView-->
-                <!--                    android:id="@+id/suggestion_list"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:divider="@null"-->
-                <!--                    android:dividerHeight="0dp" />-->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -127,6 +85,13 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.05" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
+
         <RelativeLayout
             android:id="@+id/above_layout"
             android:layout_width="match_parent"
@@ -135,15 +100,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/category_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/above_layout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_list"
@@ -156,57 +112,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/above_layout" />
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/iv_guide_msg"-->
-        <!--            android:layout_width="205dp"-->
-        <!--            android:layout_height="122dp"-->
-        <!--            android:background="@drawable/guide_msg2"-->
-        <!--            android:visibility="visible"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/btn_add"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent" />-->
-
-        <ImageButton
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/ic_btn_add"
-            app:layout_constraintBottom_toTopOf="@+id/adView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.core.widget.ContentLoadingProgressBar
-            android:id="@+id/progress_circular"
-            style="?android:progressBarStyleLarge"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:translationZ="2dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <RelativeLayout
             android:id="@+id/search_history_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
-            android:visibility="gone"
             ads:layout_constraintEnd_toEndOf="parent"
             ads:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3">
@@ -231,5 +141,55 @@
                 android:layout_marginTop="10dp"
                 tools:listitem="@layout/search_history_item" />
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_search_result_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/noto_bold"
+            android:text="검색 결과가 없습니다."
+            android:textColor="#7c7c7c"
+            android:textSize="20sp"
+            android:visibility="gone"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintTop_toBottomOf="@+id/above_layout" />
+
+        <TextView
+            android:id="@+id/tv_guide_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:fontFamily="@font/noto_bold"
+            android:text="찾으시는 물건이 없나요?\n아래 버튼으로 직접 등록해 보세요!"
+            android:textAlignment="center"
+            android:textColor="#505050"
+            android:textSize="25sp"
+            android:visibility="gone"
+            ads:layout_constraintBottom_toTopOf="@+id/btn_add"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/ic_btn_add"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress_circular"
+        style="?android:progressBarStyleLarge"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:translationZ="2dp"
+        android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

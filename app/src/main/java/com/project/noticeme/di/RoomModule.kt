@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.project.noticeme.data.room.ConsumableDao
 import com.project.noticeme.data.room.ConsumableDatabase
+import com.project.noticeme.data.room.SearchHistoryDao
 import com.project.noticeme.data.room.UserConsumableDao
 import dagger.Module
 import dagger.Provides
@@ -40,5 +41,11 @@ class RoomModule {
     @Provides
     fun provideUserConsumableDao(consumableDatabase: ConsumableDatabase): UserConsumableDao {
         return consumableDatabase.userConsumableDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideSearchHistoryDao(consumableDatabase: ConsumableDatabase): SearchHistoryDao {
+        return consumableDatabase.searchHistoryDao()
     }
 }
