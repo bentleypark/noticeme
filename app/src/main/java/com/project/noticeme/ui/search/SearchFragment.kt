@@ -27,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.util.*
 
 @AndroidEntryPoint
 class SearchFragment : Fragment(),
@@ -128,6 +129,10 @@ class SearchFragment : Fragment(),
             search()
         }
 
+        binding.btnDeleteAll.setOnClickListener {
+            searchHistoryAdapter.clear()
+        }
+
         viewModel.searchList.observe(
             viewLifecycleOwner,
             {
@@ -217,11 +222,18 @@ class SearchFragment : Fragment(),
     }
 
     private fun search() {
+
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = System.currentTimeMillis()
+        val currentDate =
+            "${calendar.get(Calendar.MONTH) + 1}.${calendar.get(Calendar.DAY_OF_MONTH)}"
+
         lifecycleScope.launch {
             delay(1000)
             val inputText = SpannableStringBuilder(binding!!.etSearch.text).toString().trim()
             if (inputText.isNotEmpty()) {
                 viewModel.searchWithTitle(inputText)
+                searchHistoryAdapter.add(SearchHistoryEntity(0, currentDate, inputText))
                 binding.searchHistoryLayout.makeGone()
             }
         }

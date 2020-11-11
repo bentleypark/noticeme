@@ -19,9 +19,14 @@ class SearchHistoryAdapter(private val list: MutableList<SearchHistoryEntity>) :
         override val containerView: View?
             get() = binding.root
 
-        fun bind(item: SearchHistoryEntity) {
-            binding.tvDate.text = item.date
-            binding.tvTitle.text = item.keyword
+        fun bind(item: SearchHistoryEntity, position: Int) {
+            binding.apply {
+                tvDate.text = item.date
+                binding.tvTitle.text = item.keyword
+                btnDelete.setOnClickListener {
+                    delete(position)
+                }
+            }
         }
     }
 
@@ -33,8 +38,24 @@ class SearchHistoryAdapter(private val list: MutableList<SearchHistoryEntity>) :
 
     override fun onBindViewHolder(holder: SearchHistoryViewHolder, position: Int) {
         val item = list[position]
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     override fun getItemCount() = list.size
+
+    fun add(item: SearchHistoryEntity) {
+        list.add(0, item)
+        notifyItemInserted(0)
+    }
+
+    fun clear() {
+        list.clear()
+        notifyDataSetChanged()
+    }
+
+    fun delete(position: Int) {
+        list.removeAt(position)
+//        notifyItemRemoved(position)
+        notifyDataSetChanged()
+    }
 }

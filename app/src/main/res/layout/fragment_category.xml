@@ -162,6 +162,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:background="@drawable/ic_btn_add"
+            android:elevation="10dp"
+            android:foreground="?attr/selectableItemBackground"
             app:layout_constraintBottom_toTopOf="@+id/adView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
