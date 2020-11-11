@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
+import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,6 +14,7 @@ import com.google.android.gms.ads.MobileAds
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
+import com.project.noticeme.common.ex.makeGone
 import com.project.noticeme.databinding.FragmentCategoryBinding
 import com.project.noticeme.ui.category.adapt.ConsumableCategoryListAdapter
 import com.project.noticeme.ui.category.viewmodel.CategoryViewModel
@@ -26,14 +27,6 @@ class CategoryFragment : Fragment(),
     private val viewModel: CategoryViewModel by viewModels()
     private lateinit var listAdapter: ConsumableCategoryListAdapter
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        requireActivity().onBackPressedDispatcher.addCallback(this) {
-//            findNavController().navigate(R.id.action_categoryFragment_pop)
-//        }
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +36,6 @@ class CategoryFragment : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         viewModel.categoryList.observe(viewLifecycleOwner,
             {
@@ -63,6 +55,27 @@ class CategoryFragment : Fragment(),
 
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
+
+        binding.btnAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_categoryFragment_to_addCustomConsumableFragment)
+        }
+
+        binding.etSearch.setOnFocusChangeListener { _, hasFocus ->
+            binding.searchHistoryLayout.isGone = !hasFocus
+        }
+
+
+        binding.btnSearch.setOnClickListener {
+            binding.apply {
+                findNavController().navigate(R.id.action_categoryFragment_to_searchFragment)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        binding!!.searchHistoryLayout.makeGone()
     }
 
     companion object {

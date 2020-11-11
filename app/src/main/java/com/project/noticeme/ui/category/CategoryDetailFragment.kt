@@ -47,7 +47,18 @@ class CategoryDetailFragment : Fragment(),
                         is DataState.Success<List<ConsumableEntity>> -> {
                             binding.apply {
                                 progressCircular.isVisible = false
-                                rvList.isVisible = true
+                            }
+
+                            if (it.data.isEmpty()) {
+                                binding.apply {
+                                    rvList.isVisible = false
+                                    emptyList.isVisible = true
+                                }
+                            } else {
+                                binding.apply {
+                                    rvList.isVisible = true
+                                    emptyList.isVisible = false
+                                }
                             }
 
                             listAdapter = ConsumableListAdapter(it.data.toMutableList(), viewModel)

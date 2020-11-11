@@ -21,7 +21,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                1,
+                0,
                 "치간칫솔",
                 R.drawable.ic_img_interdental_toothbrush,
                 "욕실",
@@ -31,7 +31,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                2,
+                0,
                 "샤워타월",
                 R.drawable.ic_img_shower_towel,
                 "욕실",
@@ -41,7 +41,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                10,
+                0,
                 "수세미",
                 R.drawable.ic_img_scrubbers,
                 "주방",
@@ -51,7 +51,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                11,
+                0,
                 "행주",
                 R.drawable.ic_img_dishcloth,
                 "주방",
@@ -61,7 +61,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                12,
+                0,
                 "고무장갑",
                 R.drawable.ic_img_rubber_glove,
                 "주방",
@@ -71,7 +71,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                13,
+                0,
                 "플라스틱용기",
                 R.drawable.ic_img_plastic,
                 "주방",
@@ -82,7 +82,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                20,
+                0,
                 "면도날",
                 R.drawable.ic_img_razor,
                 "개인위생",
@@ -92,7 +92,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                21,
+                0,
                 "메이크업브러쉬",
                 R.drawable.ic_img_makeup_brush,
                 "개인위생",
@@ -112,7 +112,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                23,
+                0,
                 "하드렌즈",
                 R.drawable.ic_img_hard_lens,
                 "개인위생",
@@ -122,7 +122,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                24,
+                0,
                 "렌즈케이스",
                 R.drawable.ic_img_makeup_brush,
                 "개인위생",
@@ -132,7 +132,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                30,
+                0,
                 "이불",
                 R.drawable.ic_img_blanket,
                 "침실",
@@ -142,7 +142,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                31,
+                0,
                 "베개커버",
                 R.drawable.ic_img_pillow_cover,
                 "침실",
@@ -152,7 +152,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                32,
+                0,
                 "침대시트",
                 R.drawable.ic_img_bed_sheet,
                 "침실",

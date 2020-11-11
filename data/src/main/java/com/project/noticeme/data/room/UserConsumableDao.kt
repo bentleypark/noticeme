@@ -19,4 +19,7 @@ interface UserConsumableDao {
 
     @Update
     suspend fun update(item: UserConsumableEntity)
+
+//    @Query("SELECT id FROM userConsumables WHERE title LIKE :input")
+//    suspend fun getWithID(input: String): Int
 }

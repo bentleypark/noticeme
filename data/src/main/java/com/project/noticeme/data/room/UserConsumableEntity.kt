@@ -7,9 +7,13 @@ import androidx.room.PrimaryKey
 @Entity(tableName = UserConsumableEntity.TABLE_NAME)
 data class UserConsumableEntity(
 
+//    @PrimaryKey(autoGenerate = true)
+//    @ColumnInfo(name = "id")
+//    var id: Int = 0,
+
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "title")
-    val title: String = "",
+    val title: String,
 
     @ColumnInfo(name = "image")
     val image: Int,

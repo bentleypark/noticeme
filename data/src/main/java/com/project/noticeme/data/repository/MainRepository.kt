@@ -1,18 +1,17 @@
 package com.project.noticeme.data.repository
 
-import com.project.noticeme.data.room.ConsumableDao
-import com.project.noticeme.data.room.ConsumableEntity
-import com.project.noticeme.data.room.UserConsumableDao
-import com.project.noticeme.data.room.UserConsumableEntity
+import com.project.noticeme.data.room.*
 import com.project.noticeme.data.state.DataState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 class MainRepository
 constructor(
     private val consumableDao: ConsumableDao,
-    private val userConsumableDao: UserConsumableDao
+    private val userConsumableDao: UserConsumableDao,
+    private val searchHistoryDao: SearchHistoryDao
 //    private val apiService: ApiService,
 //    private val cacheMapper: CacheMapper,
 //    private val networkMapper: NetworkMapper
@@ -46,13 +45,14 @@ constructor(
             }
         }
 
-    suspend fun findConsumableWithTitle(title: String): Flow<DataState<ConsumableEntity>> =
+    suspend fun findConsumableWithTitle(title: String): Flow<DataState<List<ConsumableEntity>>> =
         flow {
 
             emit(DataState.Loading)
             delay(1000)
             try {
                 val result = consumableDao.findConsumableWithTitle(title)
+                Timber.d("${result.size}")
                 emit(DataState.Success(result))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
@@ -97,7 +97,7 @@ constructor(
             }
         }
 
-    suspend fun deleteFromDetial(item: UserConsumableEntity): Flow<DataState<Boolean>> =
+    suspend fun deleteFromDetail(item: UserConsumableEntity): Flow<DataState<Boolean>> =
         flow {
             emit(DataState.Loading)
             delay(1000)
@@ -132,4 +132,67 @@ constructor(
                 emit(DataState.Error(e))
             }
         }
+
+    suspend fun insertCustomConsumable(consumable: ConsumableEntity): Flow<DataState<Boolean>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+
+            try {
+                consumableDao.insert(consumable)
+                emit(DataState.Success(true))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
+
+    suspend fun insertSearchHistory(userHistory: SearchHistoryEntity): Flow<DataState<Boolean>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+
+            try {
+                searchHistoryDao.insert(userHistory)
+                emit(DataState.Success(true))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
+
+    suspend fun getSearchHistory(): Flow<DataState<List<SearchHistoryEntity>>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                val resultList = searchHistoryDao.get()
+                emit(DataState.Success(resultList))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
+
+    suspend fun deleteAllHistory(): Flow<DataState<Boolean>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                searchHistoryDao.deleteAll()
+                emit(DataState.Success(true))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
+
+    suspend fun deleteHistory(userHistory: SearchHistoryEntity): Flow<DataState<Boolean>> =
+        flow {
+            emit(DataState.Loading)
+            delay(1000)
+            try {
+                searchHistoryDao.delete(userHistory)
+                emit(DataState.Success(true))
+            } catch (e: Exception) {
+                emit(DataState.Error(e))
+            }
+        }
 }
+

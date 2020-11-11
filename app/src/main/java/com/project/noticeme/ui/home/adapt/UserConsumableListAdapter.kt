@@ -13,6 +13,7 @@ import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
 import kotlinx.android.extensions.LayoutContainer
 import java.util.concurrent.TimeUnit
+import kotlin.math.absoluteValue
 
 class UserConsumableListAdapter(private val list: MutableList<UserConsumableEntity>) :
     RecyclerView.Adapter<UserConsumableListAdapter.UserConsumableListViewHolder>() {
@@ -30,7 +31,7 @@ class UserConsumableListAdapter(private val list: MutableList<UserConsumableEnti
             binding.apply {
                 tvTitle.text = item.title
                 ivMaterialImg.setImageResource(item.image)
-                val result = getExpiredDay(item.startDate, item.endDate)
+                val result = getExpiredDay(System.currentTimeMillis(), item.endDate)
                 if (result > 0) {
                     tvExpireTime.text = "-${result}일"
                 } else {
@@ -40,7 +41,7 @@ class UserConsumableListAdapter(private val list: MutableList<UserConsumableEnti
                             null
                         )
                     )
-                    tvExpireTime.text = "+${result}일"
+                    tvExpireTime.text = "+${result.absoluteValue}일"
                 }
 
                 consumableItem.setOnClickListener {

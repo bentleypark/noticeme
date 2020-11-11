@@ -5,7 +5,7 @@
     android:id="@+id/category_item"
     android:layout_width="96dp"
     android:layout_height="110dp"
-
+    android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView

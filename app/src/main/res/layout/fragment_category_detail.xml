@@ -44,13 +44,9 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline3"
@@ -58,6 +54,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.95" />
 
             <RelativeLayout
                 android:id="@+id/above_layout"
@@ -69,7 +72,7 @@
                 app:layout_constraintTop_toTopOf="@+id/guideline3">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/above_layout_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -84,16 +87,46 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="10dp"
+                android:scrollbars="vertical"
                 android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/guideline1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/above_layout"
                 tools:listitem="@layout/consumable_item" />
+
+            <FrameLayout
+                android:id="@+id/empty_list"
+                android:layout_width="310dp"
+                android:layout_height="90dp"
+                android:background="@drawable/dash_line"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/above_layout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="소모품 리스트가 비었습니다."
+                    android:textColor="#cecece"
+                    android:textSize="18sp" />
+            </FrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_search_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_deleteAll"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                tools:listitem="@layout/search_history_item" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progress_circular"
