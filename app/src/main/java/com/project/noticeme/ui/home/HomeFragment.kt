@@ -19,6 +19,7 @@ import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.common.utils.preference.PreferenceUtil
+import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentHomeBinding
@@ -30,6 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.internal.toImmutableList
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(),
@@ -38,6 +40,10 @@ class HomeFragment : Fragment(),
     private val viewModel: HomeViewModel by viewModels()
     private var consumableList = mutableListOf<UserConsumableEntity>()
     private val listAdapter = UserConsumableListAdapter(consumableList)
+
+    @Inject
+    lateinit var pref: SharedPreferenceManager
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,10 +94,10 @@ class HomeFragment : Fragment(),
                             binding!!.apply {
                                 progressCircular.isVisible = false
                             }
-                            if (!PreferenceUtil.getInitialData(requireContext())) {
+                            if (!pref.getInitialData()) {
                                 makeToast(it.data)
                             }
-                            PreferenceUtil.setInitialData(requireContext(), true)
+                            pref.setInitialData(true)
                         }
 
                         is DataState.Loading -> {

@@ -2,7 +2,8 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
-    id 'com.github.ben-manes.versions' version "0.35.0"
+    id 'kotlin-kapt'
+    id 'com.github.ben-manes.versions' version "0.36.0"
 }
 
 android {
@@ -38,6 +39,7 @@ dependencies {
     implementation Libs.kotlinStdLib
     implementation Libs.appcompat
     implementation Libs.coreKtx
+    implementation Libs.preference
 
     // JetPack
     implementation Libs.startUp
@@ -47,6 +49,12 @@ dependencies {
 
     // Square
     implementation Libs.okhttp
+
+    // Dagger-hilt
+    implementation Libs.hiltAndroid
+    implementation Libs.hiltViewModel
+    kapt Libs.hiltAndroidCompiler
+    kapt Libs.hiltCompiler
 
     // Debug
     implementation Libs.timber
