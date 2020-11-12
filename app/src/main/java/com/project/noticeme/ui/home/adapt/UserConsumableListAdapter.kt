@@ -11,11 +11,16 @@ import com.project.noticeme.App
 import com.project.noticeme.R
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
+import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import kotlinx.android.extensions.LayoutContainer
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import kotlin.math.absoluteValue
 
-class UserConsumableListAdapter(private val list: MutableList<UserConsumableEntity>) :
+class UserConsumableListAdapter(
+    private val list: MutableList<UserConsumableEntity>,
+    private val viewModel: HomeViewModel
+) :
     RecyclerView.Adapter<UserConsumableListAdapter.UserConsumableListViewHolder>() {
 
     private lateinit var bindingItem: ConsumableItemBinding
@@ -27,7 +32,7 @@ class UserConsumableListAdapter(private val list: MutableList<UserConsumableEnti
             get() = binding.root
 
         @SuppressLint("SetTextI18n")
-        fun bind(item: UserConsumableEntity) {
+        fun bind(item: UserConsumableEntity, position: Int) {
             binding.apply {
                 tvTitle.text = item.title
                 ivMaterialImg.setImageResource(item.image)
@@ -51,6 +56,16 @@ class UserConsumableListAdapter(private val list: MutableList<UserConsumableEnti
                         R.id.action_homeFragment_to_consumableDetailFragment, args
                     )
                 }
+
+                btnDelete.setOnClickListener {
+                    Timber.d("btnDelete")
+                    viewModel.delete(list[position])
+                    removeAt(position)
+                }
+
+                btnReset.setOnClickListener {
+                    Timber.d("btnReset")
+                }
             }
         }
     }
@@ -66,7 +81,7 @@ class UserConsumableListAdapter(private val list: MutableList<UserConsumableEnti
 
     override fun onBindViewHolder(holder: UserConsumableListViewHolder, position: Int) {
         val item = list[position]
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     override fun getItemCount() = list.size

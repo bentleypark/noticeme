@@ -18,19 +18,18 @@ import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.makeToast
-import com.project.noticeme.common.utils.preference.PreferenceUtil
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentHomeBinding
 import com.project.noticeme.ui.home.adapt.UserConsumableListAdapter
+import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.utils.SwipeToDeleteCallback
 import com.project.noticeme.ui.home.utils.SwipeToTestCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import okhttp3.internal.toImmutableList
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -39,7 +38,7 @@ class HomeFragment : Fragment(),
 
     private val viewModel: HomeViewModel by viewModels()
     private var consumableList = mutableListOf<UserConsumableEntity>()
-    private val listAdapter = UserConsumableListAdapter(consumableList)
+    private lateinit var listAdapter :UserConsumableListAdapter
 
     @Inject
     lateinit var pref: SharedPreferenceManager
@@ -57,8 +56,8 @@ class HomeFragment : Fragment(),
 
         setUpView()
         setUpObserve()
-        registerDeleteDataItemAction()
-        registerTestItemAction()
+//        registerDeleteDataItemAction()
+//        registerTestItemAction()
     }
 
     override fun onResume() {
@@ -67,8 +66,15 @@ class HomeFragment : Fragment(),
     }
 
     private fun setUpView() {
+        val swipeHelperCallback = SwipeHelperCallback().apply {
+            setClamp(250f)
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
+        itemTouchHelper.attachToRecyclerView(binding!!.rvList)
+
+        listAdapter = UserConsumableListAdapter(consumableList, viewModel)
         val size = resources.getDimensionPixelSize(R.dimen.material_item_size)
-        binding!!.rvList.apply {
+        binding.rvList.apply {
             adapter = listAdapter
             layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -105,7 +111,6 @@ class HomeFragment : Fragment(),
                                 binding!!.apply {
                                     progressCircular.isVisible = true
                                 }
-                                delay(1000)
                                 makeToast("초기 데이터 설정 중입니다. 잠시만 기다려주세요!")
                             }
                         }
