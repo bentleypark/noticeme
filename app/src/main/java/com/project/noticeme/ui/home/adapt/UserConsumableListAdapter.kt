@@ -42,6 +42,12 @@ class UserConsumableListAdapter(
                 ivMaterialImg.setImageResource(item.image)
                 val result = getExpiredDay(System.currentTimeMillis(), item.endDate)
                 if (result > 0) {
+                    tvExpireTime.setTextColor(
+                        App.globalApplicationContext.resources.getColor(
+                            R.color.black,
+                            null
+                        )
+                    )
                     tvExpireTime.text = "-${result}일"
                 } else {
                     tvExpireTime.setTextColor(
