@@ -133,6 +133,16 @@ object InitialConsumableData {
         dataList.add(
             ConsumableEntity(
                 0,
+                "브래지어",
+                R.drawable.ic_img_underware,
+                "개인위생",
+                TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 180
+            )
+        )
+
+        dataList.add(
+            ConsumableEntity(
+                0,
                 "이불",
                 R.drawable.ic_img_blanket,
                 "침실",
