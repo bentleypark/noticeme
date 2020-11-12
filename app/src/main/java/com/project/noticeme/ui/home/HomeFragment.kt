@@ -3,6 +3,7 @@ package com.project.noticeme.ui.home
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -38,7 +39,7 @@ class HomeFragment : Fragment(),
 
     private val viewModel: HomeViewModel by viewModels()
     private var consumableList = mutableListOf<UserConsumableEntity>()
-    private lateinit var listAdapter :UserConsumableListAdapter
+    private lateinit var listAdapter: UserConsumableListAdapter
 
     @Inject
     lateinit var pref: SharedPreferenceManager
@@ -146,8 +147,20 @@ class HomeFragment : Fragment(),
                             is DataState.Loading -> {
                                 binding.apply {
                                     progressCircular.isVisible = true
-//                                    rvList.isVisible = false
                                 }
+                            }
+                        }
+                    }
+                }
+            )
+
+            dataStateForUpdate.observe(
+                viewLifecycleOwner,
+                {
+                    when (it) {
+                        is DataState.Success<Boolean> -> {
+                            if (it.data) {
+                                viewModel.getUserConsumableData()
                             }
                         }
                     }
@@ -156,42 +169,33 @@ class HomeFragment : Fragment(),
         }
     }
 
-    private fun registerDeleteDataItemAction() {
-        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//    private fun registerDeleteDataItemAction() {
+//        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//
+//                viewModel.delete(listAdapter.removeAt(viewHolder.adapterPosition))
+//                viewModel.deleteResult.observe(
+//                    viewLifecycleOwner,
+//                    {
+//                        when (it) {
+//                            is DataState.Success<List<UserConsumableEntity>> -> {
+//                                makeToast("소모품이 삭제돠었습니다.")
+//                                if (it.data.isEmpty()) {
+//                                    binding!!.apply {
+//                                        ivGuideMsg.isVisible = true
+//                                        emptyList.isVisible = true
+//                                        rvList.isVisible = false
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                )
+//            }
+//        }
+//
+//        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+//        itemTouchHelper.attachToRecyclerView(binding!!.rvList)
+//    }
 
-                viewModel.delete(listAdapter.removeAt(viewHolder.adapterPosition))
-                viewModel.deleteResult.observe(
-                    viewLifecycleOwner,
-                    {
-                        when (it) {
-                            is DataState.Success<List<UserConsumableEntity>> -> {
-                                makeToast("소모품이 삭제돠었습니다.")
-                                if (it.data.isEmpty()) {
-                                    binding!!.apply {
-                                        ivGuideMsg.isVisible = true
-                                        emptyList.isVisible = true
-                                        rvList.isVisible = false
-                                    }
-                                }
-                            }
-                        }
-                    }
-                )
-            }
-        }
-
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(binding!!.rvList)
-    }
-
-    private fun registerTestItemAction() {
-        val swipeHandler = object : SwipeToTestCallback(requireContext()) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                makeToast("초기화")
-            }
-        }
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(binding!!.rvList)
-    }
 }

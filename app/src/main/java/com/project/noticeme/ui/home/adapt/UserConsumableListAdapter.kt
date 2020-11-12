@@ -13,6 +13,7 @@ import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import kotlinx.android.extensions.LayoutContainer
+import okhttp3.internal.checkDuration
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import kotlin.math.absoluteValue
@@ -58,13 +59,11 @@ class UserConsumableListAdapter(
                 }
 
                 btnDelete.setOnClickListener {
-                    Timber.d("btnDelete")
-                    viewModel.delete(list[position])
                     removeAt(position)
                 }
 
                 btnReset.setOnClickListener {
-                    Timber.d("btnReset")
+                    updateAt(position)
                 }
             }
         }
@@ -92,11 +91,27 @@ class UserConsumableListAdapter(
         notifyDataSetChanged()
     }
 
-    fun removeAt(position: Int): UserConsumableEntity {
-        val item = list[position]
+    fun removeAt(position: Int) {
+        viewModel.delete(list[position])
         list.removeAt(position)
         notifyItemRemoved(position)
-        return item
+    }
+
+    fun updateAt(position: Int) {
+        val item = list[position]
+        val currentDate = System.currentTimeMillis()
+        viewModel.update(
+            UserConsumableEntity(
+                item.title,
+                item.image,
+                item.category,
+                item.duration,
+                currentDate,
+                currentDate + item.duration,
+                item.priority
+            )
+        )
+        notifyItemChanged(position)
     }
 
     private fun getExpiredDay(startDate: Long, endDate: Long): Long {

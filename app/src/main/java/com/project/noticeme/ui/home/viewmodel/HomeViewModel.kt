@@ -43,6 +43,10 @@ constructor(
     val deleteResult: LiveData<DataState<List<UserConsumableEntity>>>
         get() = _deleteResult
 
+    private val _dataStateForUpdate = MutableLiveData<DataState<Boolean>>()
+    val dataStateForUpdate: LiveData<DataState<Boolean>>
+        get() = _dataStateForUpdate
+
     init {
         checkIsInitialDataSet()
         getUserConsumableData()
@@ -81,6 +85,16 @@ constructor(
             mainRepository.delete(item)
                 .onEach { dataState ->
                     _deleteResult.value = dataState
+                }
+                .launchIn(viewModelScope)
+        }
+    }
+
+    fun update(item: UserConsumableEntity) {
+        viewModelScope.launch{
+            mainRepository.update(item)
+                .onEach { dataState ->
+                    _dataStateForUpdate.value = dataState
                 }
                 .launchIn(viewModelScope)
         }
