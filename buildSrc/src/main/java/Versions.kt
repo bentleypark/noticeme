@@ -36,6 +36,7 @@ object Versions {
     const val viewpager2Version = "1.0.0"
     const val swipeRefreshLayoutVersion = "1.1.0"
     const val databindingVersion = "4.0.1"
+    const val prefernceVersion = "1.1.1"
 
     // Jetpack
     const val workVersion = "2.4.0"
