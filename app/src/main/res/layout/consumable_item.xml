@@ -7,40 +7,40 @@
     android:layout_height="100dp"
     android:foreground="?attr/selectableItemBackground">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="15dp"
-        android:background="#629fa8">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="11dp"
+            android:background="#629fa8">
 
-        <ImageButton
-            android:id="@+id/btn_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="15dp"
-            android:background="#00000000"
-            android:foreground="?attr/selectableItemBackground"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_delete" />
+            <ImageButton
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="15dp"
+                android:background="#00000000"
+                android:foreground="?attr/selectableItemBackground"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_delete" />
 
-        <ImageButton
-            android:id="@+id/btn_reset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="80dp"
-            android:background="#00000000"
-            android:foreground="?attr/selectableItemBackground"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_btn_reset" />
+            <ImageButton
+                android:id="@+id/btn_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="70dp"
+                android:background="#00000000"
+                android:foreground="?attr/selectableItemBackground"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_btn_reset" />
+        </FrameLayout>
 
-    </FrameLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/swipe_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/swipe_item"
         android:background="@color/white"
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp"
