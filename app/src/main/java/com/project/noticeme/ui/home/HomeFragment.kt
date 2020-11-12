@@ -68,7 +68,7 @@ class HomeFragment : Fragment(),
 
     private fun setUpView() {
         val swipeHelperCallback = SwipeHelperCallback().apply {
-            setClamp(250f)
+            setClamp(400f)
         }
         val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding!!.rvList)
