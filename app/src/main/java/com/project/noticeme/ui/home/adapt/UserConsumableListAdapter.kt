@@ -1,12 +1,14 @@
 package com.project.noticeme.ui.home.adapt
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.noticeme.App
 import com.project.noticeme.R
 import com.project.noticeme.data.room.UserConsumableEntity
@@ -20,7 +22,8 @@ import kotlin.math.absoluteValue
 
 class UserConsumableListAdapter(
     private val list: MutableList<UserConsumableEntity>,
-    private val viewModel: HomeViewModel
+    private val viewModel: HomeViewModel,
+    private val context: Context
 ) :
     RecyclerView.Adapter<UserConsumableListAdapter.UserConsumableListViewHolder>() {
 
@@ -58,12 +61,17 @@ class UserConsumableListAdapter(
                     )
                 }
 
+               btnDelete.isEnabled = false
+               btnReset.isEnabled = false
+
                 btnDelete.setOnClickListener {
-                    removeAt(position)
+//                    removeAt(position)
+                    openDeleteDialog(context, position)
                 }
 
                 btnReset.setOnClickListener {
-                    updateAt(position)
+//                    updateAt(position)
+                    openResetDialog(context, position)
                 }
             }
         }
@@ -91,7 +99,7 @@ class UserConsumableListAdapter(
         notifyDataSetChanged()
     }
 
-    fun removeAt(position: Int) {
+    private fun removeAt(position: Int) {
         viewModel.delete(list[position])
         list.removeAt(position)
         notifyItemRemoved(position)
@@ -116,5 +124,37 @@ class UserConsumableListAdapter(
 
     private fun getExpiredDay(startDate: Long, endDate: Long): Long {
         return (endDate - startDate) / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
+    }
+
+    private fun openDeleteDialog(context: Context, position: Int) {
+        MaterialAlertDialogBuilder(
+            context, R.style.AlertDialogTheme
+        )
+            .setTitle("소모품을 삭제하시겠습니까?")
+            .setPositiveButton("확인") { dialog, _ ->
+                dialog.dismiss()
+                removeAt(position)
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun openResetDialog(context: Context, position: Int) {
+        MaterialAlertDialogBuilder(
+            context, R.style.AlertDialogTheme
+        )
+            .setTitle("소모품의 교체 날짜를 오늘 날짜로 변경하시겠습니까?")
+            .setPositiveButton("확인") { dialog, _ ->
+                dialog.dismiss()
+                updateAt(position)
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+            .show()
     }
 }

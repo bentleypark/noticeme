@@ -38,9 +38,8 @@ constructor(
     val dataState: LiveData<DataState<String>>
         get() = _dataState
 
-    private val _deleteResult = MutableLiveData<DataState<List<UserConsumableEntity>>>()
-
-    val deleteResult: LiveData<DataState<List<UserConsumableEntity>>>
+    private val _deleteResult = MutableLiveData<DataState<Boolean>>()
+    val deleteResult: LiveData<DataState<Boolean>>
         get() = _deleteResult
 
     private val _dataStateForUpdate = MutableLiveData<DataState<Boolean>>()

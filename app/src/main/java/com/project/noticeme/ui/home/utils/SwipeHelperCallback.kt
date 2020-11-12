@@ -84,6 +84,10 @@ class SwipeHelperCallback : ItemTouchHelper.Callback() {
                 isCurrentlyActive
             )
 
+            viewHolder.let {
+                getDeleteView(it).isEnabled = true
+                getResetView(it).isEnabled = true
+            }
         }
     }
 
@@ -120,6 +124,14 @@ class SwipeHelperCallback : ItemTouchHelper.Callback() {
 
     private fun getView(viewHolder: RecyclerView.ViewHolder): View {
         return (viewHolder as UserConsumableListAdapter.UserConsumableListViewHolder).itemView.swipe_item
+    }
+
+    private fun getDeleteView(viewHolder: RecyclerView.ViewHolder): View {
+        return (viewHolder as UserConsumableListAdapter.UserConsumableListViewHolder).itemView.btn_delete
+    }
+
+    private fun getResetView(viewHolder: RecyclerView.ViewHolder): View {
+        return (viewHolder as UserConsumableListAdapter.UserConsumableListViewHolder).itemView.btn_reset
     }
 
     fun setClamp(clamp: Float) {

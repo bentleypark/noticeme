@@ -83,15 +83,13 @@ constructor(
             }
         }
 
-    suspend fun delete(item: UserConsumableEntity): Flow<DataState<List<UserConsumableEntity>>> =
+    suspend fun delete(item: UserConsumableEntity): Flow<DataState<Boolean>> =
         flow {
             emit(DataState.Loading)
             delay(1000)
             try {
                 userConsumableDao.delete(item)
-//                emit(DataState.Success(true))
-                val resultList = userConsumableDao.get()
-                emit(DataState.Success(resultList))
+                emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
             }

@@ -73,7 +73,7 @@ class HomeFragment : Fragment(),
         val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding!!.rvList)
 
-        listAdapter = UserConsumableListAdapter(consumableList, viewModel)
+        listAdapter = UserConsumableListAdapter(consumableList, viewModel, requireContext())
         val size = resources.getDimensionPixelSize(R.dimen.material_item_size)
         binding.rvList.apply {
             adapter = listAdapter
@@ -161,6 +161,21 @@ class HomeFragment : Fragment(),
                         is DataState.Success<Boolean> -> {
                             if (it.data) {
                                 viewModel.getUserConsumableData()
+                            }
+                        }
+                    }
+                }
+            )
+
+            deleteResult.observe(
+                viewLifecycleOwner,
+                {
+                    when (it) {
+                        is DataState.Success<Boolean> -> {
+                            if (it.data) {
+                                if (listAdapter.itemCount == 0) {
+                                    viewModel.getUserConsumableData()
+                                }
                             }
                         }
                     }
