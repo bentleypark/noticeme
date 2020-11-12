@@ -60,11 +60,6 @@ class CategoryFragment : Fragment(),
             findNavController().navigate(R.id.action_categoryFragment_to_addCustomConsumableFragment)
         }
 
-        binding.etSearch.setOnFocusChangeListener { _, hasFocus ->
-            binding.searchHistoryLayout.isGone = !hasFocus
-        }
-
-
         binding.btnSearch.setOnClickListener {
             binding.apply {
                 findNavController().navigate(R.id.action_categoryFragment_to_searchFragment)
