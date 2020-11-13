@@ -138,6 +138,10 @@ class SwipeHelperCallback : ItemTouchHelper.Callback() {
         this.clamp = clamp
     }
 
+    fun clear() {
+        this.currentDx = 0f
+    }
+
     fun removePreviousClamp(recyclerView: RecyclerView) {
         if (currentPosition == previousPosition)
             return

@@ -1,9 +1,9 @@
 package com.project.noticeme.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.project.noticeme.R
@@ -25,11 +24,8 @@ import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentHomeBinding
 import com.project.noticeme.ui.home.adapt.UserConsumableListAdapter
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
-import com.project.noticeme.ui.home.utils.SwipeToDeleteCallback
-import com.project.noticeme.ui.home.utils.SwipeToTestCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,6 +36,9 @@ class HomeFragment : Fragment(),
     private val viewModel: HomeViewModel by viewModels()
     private var consumableList = mutableListOf<UserConsumableEntity>()
     private lateinit var listAdapter: UserConsumableListAdapter
+    private val swipeHelperCallback = SwipeHelperCallback().apply {
+        setClamp(420f)
+    }
 
     @Inject
     lateinit var pref: SharedPreferenceManager
@@ -66,14 +65,18 @@ class HomeFragment : Fragment(),
         viewModel.getUserConsumableData()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setUpView() {
-        val swipeHelperCallback = SwipeHelperCallback().apply {
-            setClamp(420f)
-        }
+
         val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
         itemTouchHelper.attachToRecyclerView(binding!!.rvList)
 
-        listAdapter = UserConsumableListAdapter(consumableList, viewModel, requireContext())
+        listAdapter = UserConsumableListAdapter(
+            consumableList,
+            viewModel,
+            requireContext(),
+            swipeHelperCallback
+        )
         val size = resources.getDimensionPixelSize(R.dimen.material_item_size)
         binding.rvList.apply {
             adapter = listAdapter
@@ -81,6 +84,10 @@ class HomeFragment : Fragment(),
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
             addItemDecoration(SpaceDecoration(size))
+            setOnTouchListener { _, _ ->
+                swipeHelperCallback.removePreviousClamp(this)
+                false
+            }
         }
 
         binding.btnAdd.setOnClickListener {
@@ -160,7 +167,9 @@ class HomeFragment : Fragment(),
                     when (it) {
                         is DataState.Success<Boolean> -> {
                             if (it.data) {
-                                viewModel.getUserConsumableData()
+                                lifecycleScope.launch {
+                                    refresh()
+                                }
                             }
                         }
                     }
@@ -182,6 +191,10 @@ class HomeFragment : Fragment(),
                 }
             )
         }
+    }
+
+    private fun refresh() {
+        findNavController().navigate(R.id.action_homeFragment_self)
     }
 
 //    private fun registerDeleteDataItemAction() {

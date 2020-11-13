@@ -13,17 +13,17 @@ import com.project.noticeme.App
 import com.project.noticeme.R
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
+import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import kotlinx.android.extensions.LayoutContainer
-import okhttp3.internal.checkDuration
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import kotlin.math.absoluteValue
 
 class UserConsumableListAdapter(
     private val list: MutableList<UserConsumableEntity>,
     private val viewModel: HomeViewModel,
-    private val context: Context
+    private val context: Context,
+    swipeHelperCallback: SwipeHelperCallback
 ) :
     RecyclerView.Adapter<UserConsumableListAdapter.UserConsumableListViewHolder>() {
 
@@ -67,16 +67,14 @@ class UserConsumableListAdapter(
                     )
                 }
 
-               btnDelete.isEnabled = false
-               btnReset.isEnabled = false
+                btnDelete.isEnabled = false
+                btnReset.isEnabled = false
 
                 btnDelete.setOnClickListener {
-//                    removeAt(position)
                     openDeleteDialog(context, position)
                 }
 
                 btnReset.setOnClickListener {
-//                    updateAt(position)
                     openResetDialog(context, position)
                 }
             }
@@ -105,13 +103,18 @@ class UserConsumableListAdapter(
         notifyDataSetChanged()
     }
 
+    fun clearAll() {
+        list.clear()
+        notifyDataSetChanged()
+    }
+
     private fun removeAt(position: Int) {
         viewModel.delete(list[position])
         list.removeAt(position)
         notifyItemRemoved(position)
     }
 
-    fun updateAt(position: Int) {
+    private fun updateAt(position: Int) {
         val item = list[position]
         val currentDate = System.currentTimeMillis()
         viewModel.update(
@@ -125,7 +128,6 @@ class UserConsumableListAdapter(
                 item.priority
             )
         )
-        notifyItemChanged(position)
     }
 
     private fun getExpiredDay(startDate: Long, endDate: Long): Long {
