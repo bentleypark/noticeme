@@ -112,6 +112,7 @@ class UserConsumableListAdapter(
         viewModel.delete(list[position])
         list.removeAt(position)
         notifyItemRemoved(position)
+        notifyItemRangeChanged(position, itemCount)
     }
 
     private fun updateAt(position: Int) {
