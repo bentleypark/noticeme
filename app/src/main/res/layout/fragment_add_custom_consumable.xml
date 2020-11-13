@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/mainActivity_background"
     tools:context=".ui.category.CategoryDetailFragment">
-    <!--    android:background="@color/mainActivity_background"-->
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,12 +23,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/btn_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start|center_vertical"
-                    android:background="@drawable/ic_arrow_back" />
+                    android:background="#00000000"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_arrow_back" />
 
                 <TextView
                     android:id="@+id/tv_confirm"

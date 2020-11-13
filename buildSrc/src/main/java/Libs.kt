@@ -56,6 +56,7 @@ object Libs {
         "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshLayoutVersion}"
     const val databindingCompiler =
         "com.android.databinding:compiler:${Versions.databindingVersion}"
+    const val preference = "androidx.preference:preference-ktx:${Versions.prefernceVersion}"
 
     // Work
     const val workRuntime = "androidx.work:work-runtime:${Versions.workVersion}"

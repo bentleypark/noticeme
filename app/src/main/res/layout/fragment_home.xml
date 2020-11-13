@@ -32,8 +32,8 @@
 
                 <ImageButton
                     android:id="@+id/btn_setting"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="15dp"
                     android:background="@drawable/btn_setting" />
@@ -135,17 +135,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageButton
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/btn_add"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginBottom="8dp"-->
+        <!--            android:background="@drawable/ic_btn_add"-->
+        <!--            android:elevation="50dp"-->
+        <!--            android:foreground="?attr/selectableItemBackground"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/adView"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent" />-->
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:background="@android:color/white"
             android:foreground="?attr/selectableItemBackground"
-            android:elevation="50dp"
-            android:background="@drawable/ic_btn_add"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@android:color/white"
+            app:fabSize="auto"
             app:layout_constraintBottom_toTopOf="@+id/adView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:maxImageSize="50dp"
+            app:tint="#629FA8" />
 
         <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/progress_circular"

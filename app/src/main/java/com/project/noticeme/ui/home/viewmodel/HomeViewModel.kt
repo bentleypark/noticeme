@@ -7,6 +7,7 @@ import com.project.noticeme.App
 import com.project.noticeme.R
 import com.project.noticeme.common.base.BaseViewModel
 import com.project.noticeme.common.utils.preference.PreferenceUtil
+import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.repository.MainRepository
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit
 class HomeViewModel @ViewModelInject
 constructor(
     private val mainRepository: MainRepository,
+    private val pref: SharedPreferenceManager,
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -29,17 +31,20 @@ constructor(
     val consumableList: LiveData<DataState<List<UserConsumableEntity>>>?
         get() = _consumableList
 
-    var dataList= emptyList<ConsumableEntity>()
+    var dataList = emptyList<ConsumableEntity>()
 
     private val _dataState = MutableLiveData<DataState<String>>()
 
     val dataState: LiveData<DataState<String>>
         get() = _dataState
 
-    private val _deleteResult = MutableLiveData<DataState<List<UserConsumableEntity>>>()
-
-    val deleteResult: LiveData<DataState<List<UserConsumableEntity>>>
+    private val _deleteResult = MutableLiveData<DataState<Boolean>>()
+    val deleteResult: LiveData<DataState<Boolean>>
         get() = _deleteResult
+
+    private val _dataStateForUpdate = MutableLiveData<DataState<Boolean>>()
+    val dataStateForUpdate: LiveData<DataState<Boolean>>
+        get() = _dataStateForUpdate
 
     init {
         checkIsInitialDataSet()
@@ -57,8 +62,7 @@ constructor(
     }
 
     private fun checkIsInitialDataSet() {
-        val result = PreferenceUtil.getInitialData(App.globalApplicationContext)
-        Timber.d("$result")
+        val result = pref.getInitialData()
         if (!result) {
             dataList = InitialConsumableData.fetchData()
             insertData(dataList)
@@ -80,6 +84,16 @@ constructor(
             mainRepository.delete(item)
                 .onEach { dataState ->
                     _deleteResult.value = dataState
+                }
+                .launchIn(viewModelScope)
+        }
+    }
+
+    fun update(item: UserConsumableEntity) {
+        viewModelScope.launch{
+            mainRepository.update(item)
+                .onEach { dataState ->
+                    _dataStateForUpdate.value = dataState
                 }
                 .launchIn(viewModelScope)
         }

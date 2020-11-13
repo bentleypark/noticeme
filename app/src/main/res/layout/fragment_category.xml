@@ -28,91 +28,31 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/Theme.Noticeme.PopupOverlay">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/btn_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:paddingLeft="@dimen/search_icon_padding"
-                    android:paddingRight="@dimen/search_icon_padding"
-                    ads:layout_constraintBottom_toBottomOf="parent"
-                    ads:layout_constraintStart_toStartOf="parent"
-                    ads:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_arrow_back" />
-
-                <ImageView
-                    android:id="@+id/btn_back2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:paddingLeft="@dimen/search_icon_padding"
-                    android:paddingRight="@dimen/search_icon_padding"
-                    android:visibility="gone"
-                    ads:layout_constraintBottom_toBottomOf="parent"
-                    ads:layout_constraintStart_toStartOf="parent"
-                    ads:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_arrow_back" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginEnd="12dp"
-                    android:visibility="gone"
-                    ads:layout_constraintBottom_toBottomOf="parent"
-                    ads:layout_constraintEnd_toEndOf="parent"
-                    ads:layout_constraintStart_toEndOf="@+id/btn_back2"
-                    ads:layout_constraintTop_toTopOf="parent"
-                    app:endIconMode="clear_text"
-                    app:hintEnabled="false">
-
-                    <EditText
-                        android:id="@+id/et_search"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="start"
-                        android:layout_weight="1"
-                        android:background="@drawable/editext_search_layout_background"
-                        android:hint="소모품 검색: e.g.)칫솔"
-                        android:imeOptions="actionSearch|flagNoExtractUi"
-                        android:inputType="text"
-                        android:maxLength="23"
-                        android:maxLines="1"
-                        android:paddingLeft="@dimen/search_view_text_padding"
-                        android:paddingRight="@dimen/search_view_text_padding"
-                        android:textAlignment="viewStart"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/gray_50"
-                        android:textCursorDrawable="@null"
-                        android:textSize="16sp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_gravity="start|center_vertical"
+                    android:background="#00000000"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_arrow_back" />
 
                 <ImageButton
                     android:id="@+id/btn_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|center_vertical"
+                    android:layout_marginHorizontal="20dp"
                     android:layout_marginEnd="16dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    ads:layout_constraintBottom_toBottomOf="parent"
-                    ads:layout_constraintEnd_toEndOf="parent"
-                    ads:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_btn_search" />
+                    android:background="#00000000"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_btn_search" />
 
-                <!--                <ListView-->
-                <!--                    android:id="@+id/suggestion_list"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:divider="@null"-->
-                <!--                    android:dividerHeight="0dp" />-->
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -156,17 +96,34 @@
         <!--            app:layout_constraintEnd_toEndOf="parent"-->
         <!--            app:layout_constraintStart_toStartOf="parent" />-->
 
-        <ImageButton
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/btn_add"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginBottom="8dp"-->
+        <!--            android:background="@drawable/ic_btn_add"-->
+        <!--            android:elevation="10dp"-->
+        <!--            android:foreground="?attr/selectableItemBackground"-->
+        <!--            app:layout_constraintBottom_toTopOf="@+id/adView"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent" />-->
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/ic_btn_add"
-            android:elevation="10dp"
+            android:background="@android:color/white"
             android:foreground="?attr/selectableItemBackground"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@android:color/white"
+            app:fabSize="auto"
             app:layout_constraintBottom_toTopOf="@+id/adView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:maxImageSize="50dp"
+            app:tint="#629FA8" />
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"

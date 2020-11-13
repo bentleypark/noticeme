@@ -1,21 +1,30 @@
 package com.project.noticeme.ui.home.adapt
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.noticeme.App
 import com.project.noticeme.R
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
+import com.project.noticeme.ui.home.utils.SwipeHelperCallback
+import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import kotlinx.android.extensions.LayoutContainer
 import java.util.concurrent.TimeUnit
 import kotlin.math.absoluteValue
 
-class UserConsumableListAdapter(private val list: MutableList<UserConsumableEntity>) :
+class UserConsumableListAdapter(
+    private val list: MutableList<UserConsumableEntity>,
+    private val viewModel: HomeViewModel,
+    private val context: Context,
+    swipeHelperCallback: SwipeHelperCallback
+) :
     RecyclerView.Adapter<UserConsumableListAdapter.UserConsumableListViewHolder>() {
 
     private lateinit var bindingItem: ConsumableItemBinding
@@ -27,12 +36,18 @@ class UserConsumableListAdapter(private val list: MutableList<UserConsumableEnti
             get() = binding.root
 
         @SuppressLint("SetTextI18n")
-        fun bind(item: UserConsumableEntity) {
+        fun bind(item: UserConsumableEntity, position: Int) {
             binding.apply {
                 tvTitle.text = item.title
                 ivMaterialImg.setImageResource(item.image)
                 val result = getExpiredDay(System.currentTimeMillis(), item.endDate)
                 if (result > 0) {
+                    tvExpireTime.setTextColor(
+                        App.globalApplicationContext.resources.getColor(
+                            R.color.black,
+                            null
+                        )
+                    )
                     tvExpireTime.text = "-${result}일"
                 } else {
                     tvExpireTime.setTextColor(
@@ -51,6 +66,17 @@ class UserConsumableListAdapter(private val list: MutableList<UserConsumableEnti
                         R.id.action_homeFragment_to_consumableDetailFragment, args
                     )
                 }
+
+                btnDelete.isEnabled = false
+                btnReset.isEnabled = false
+
+                btnDelete.setOnClickListener {
+                    openDeleteDialog(context, position)
+                }
+
+                btnReset.setOnClickListener {
+                    openResetDialog(context, position)
+                }
             }
         }
     }
@@ -66,7 +92,7 @@ class UserConsumableListAdapter(private val list: MutableList<UserConsumableEnti
 
     override fun onBindViewHolder(holder: UserConsumableListViewHolder, position: Int) {
         val item = list[position]
-        holder.bind(item)
+        holder.bind(item, position)
     }
 
     override fun getItemCount() = list.size
@@ -77,14 +103,67 @@ class UserConsumableListAdapter(private val list: MutableList<UserConsumableEnti
         notifyDataSetChanged()
     }
 
-    fun removeAt(position: Int): UserConsumableEntity {
-        val item = list[position]
+    fun clearAll() {
+        list.clear()
+        notifyDataSetChanged()
+    }
+
+    private fun removeAt(position: Int) {
+        viewModel.delete(list[position])
         list.removeAt(position)
         notifyItemRemoved(position)
-        return item
+        notifyItemRangeChanged(position, itemCount)
+    }
+
+    private fun updateAt(position: Int) {
+        val item = list[position]
+        val currentDate = System.currentTimeMillis()
+        viewModel.update(
+            UserConsumableEntity(
+                item.title,
+                item.image,
+                item.category,
+                item.duration,
+                currentDate,
+                currentDate + item.duration,
+                item.priority
+            )
+        )
     }
 
     private fun getExpiredDay(startDate: Long, endDate: Long): Long {
         return (endDate - startDate) / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
+    }
+
+    private fun openDeleteDialog(context: Context, position: Int) {
+        MaterialAlertDialogBuilder(
+            context, R.style.AlertDialogTheme
+        )
+            .setTitle("소모품을 삭제하시겠습니까?")
+            .setPositiveButton("확인") { dialog, _ ->
+                dialog.dismiss()
+                removeAt(position)
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun openResetDialog(context: Context, position: Int) {
+        MaterialAlertDialogBuilder(
+            context, R.style.AlertDialogTheme
+        )
+            .setTitle("소모품의 교체 날짜를 오늘 날짜로 변경하시겠습니까?")
+            .setPositiveButton("확인") { dialog, _ ->
+                dialog.dismiss()
+                updateAt(position)
+            }
+            .setNegativeButton("취소") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+            .show()
     }
 }

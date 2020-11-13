@@ -1,11 +1,12 @@
 package com.project.noticeme.common.utils.preference
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.google.gson.GsonBuilder
+import javax.inject.Inject
 
 object PreferenceUtil {
-     fun getPref(context: Context) =
+    fun getPref(context: Context) =
         context.getSharedPreferences(PreferenceUtil.javaClass.name, Context.MODE_PRIVATE)
 
     fun setToken(context: Context, token: String) {
@@ -32,4 +33,19 @@ object PreferenceUtil {
 //            putString("phaseData", gson.toJson(phaseData))
 //        }
 //    }
+}
+
+class SharedPreferenceManager @Inject constructor(
+    private val pref: SharedPreferences
+) {
+
+    fun getInitialData() = pref.getBoolean(KEY_INITIAL_DATA, false)
+
+    fun setInitialData(state: Boolean) {
+        pref.edit { putBoolean(KEY_INITIAL_DATA, state) }
+    }
+
+    companion object {
+        const val KEY_INITIAL_DATA = "initialData"
+    }
 }

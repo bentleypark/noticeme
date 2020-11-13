@@ -47,19 +47,7 @@ class SearchFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding!!.etSearch.apply {
-            requestFocus()
-            showKeyboard()
-
-            setOnEditorActionListener { _, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    search()
-                }
-                true
-            }
-        }
-
-        binding.btnBack.setOnClickListener {
+        binding!!.btnBack.setOnClickListener {
             binding.etSearch.apply {
                 clearFocus()
                 hideKeyboard()
@@ -222,17 +210,30 @@ class SearchFragment : Fragment(),
 
     override fun onResume() {
         super.onResume()
-        binding!!.etSearch.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                binding.apply {
-                    lifecycleScope.launch {
-                        viewModel.getSearchHistory()
-                        delay(1000)
-                        tvSearchResultEmpty.makeGone()
-                        tvGuideMsg.makeGone()
-                        btnAdd.makeGone()
-                        searchHistoryLayout.makeVisible()
-                        searchList.makeGone()
+
+        binding!!.etSearch.apply {
+            requestFocus()
+            showKeyboard()
+
+            setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    search()
+                }
+                true
+            }
+
+            setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    binding.apply {
+                        lifecycleScope.launch {
+                            viewModel.getSearchHistory()
+                            delay(1000)
+                            tvSearchResultEmpty.makeGone()
+                            tvGuideMsg.makeGone()
+                            btnAdd.makeGone()
+                            searchHistoryLayout.makeVisible()
+                            searchList.makeGone()
+                        }
                     }
                 }
             }
