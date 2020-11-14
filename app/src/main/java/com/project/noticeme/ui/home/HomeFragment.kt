@@ -18,6 +18,7 @@ import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.makeToast
+import com.project.noticeme.common.ex.runLayoutAnimation
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
@@ -144,6 +145,7 @@ class HomeFragment : Fragment(),
                                         binding.rvList.isVisible = true
                                         listAdapter.addAll(it.data.sortedByDescending { item -> item.priority }
                                             .toMutableList())
+                                        binding.rvList.runLayoutAnimation()
                                     }
                                 } else {
                                     binding.ivGuideMsg.isVisible = true

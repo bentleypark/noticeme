@@ -6,11 +6,15 @@ import android.content.Intent
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.project.noticeme.common.ui.R
 
 inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
     crossinline bindingInflater: (LayoutInflater) -> T
@@ -50,4 +54,12 @@ fun View.makeVisible() {
 
 fun View.makeGone() {
     this.visibility = View.GONE
+}
+
+fun RecyclerView.runLayoutAnimation() {
+    val context = this.context
+    val controller: LayoutAnimationController =
+        AnimationUtils.loadLayoutAnimation(context, R.anim.layout_anmiation_fall_down)
+    this.layoutAnimation = controller
+    this.scheduleLayoutAnimation()
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="material_item_size">5dp</dimen>
+    <dimen name="material_item_size">1dp</dimen>
 
     <dimen name="search_icon_padding">6dp</dimen>
     <dimen name="search_view_text_padding">8dp</dimen>

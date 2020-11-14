@@ -42,6 +42,7 @@ android {
 dependencies {
     implementation Libs.kotlinStdLib
     implementation Libs.appcompat
+    implementation Libs.recyclerview
 
     // Coroutine
     implementation Libs.coroutineAndroid

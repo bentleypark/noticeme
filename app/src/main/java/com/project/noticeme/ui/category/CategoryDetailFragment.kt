@@ -13,6 +13,7 @@ import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.makeToast
+import com.project.noticeme.common.ex.runLayoutAnimation
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentCategoryDetailBinding
@@ -74,6 +75,7 @@ class CategoryDetailFragment : Fragment(),
                                     )
                                 setHasFixedSize(true)
                                 addItemDecoration(SpaceDecoration(size))
+                                runLayoutAnimation()
                             }
                         }
                         is DataState.Loading -> {
