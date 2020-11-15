@@ -10,6 +10,7 @@ import android.widget.DatePicker
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
@@ -106,6 +107,8 @@ class ConsumableDetailFragment : Fragment(),
                 openDeleteDialog()
             }
 
+            val adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
         }
     }
 
