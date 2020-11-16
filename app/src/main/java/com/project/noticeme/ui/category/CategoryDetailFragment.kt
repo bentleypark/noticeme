@@ -13,7 +13,9 @@ import com.google.android.gms.ads.AdRequest
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
+import com.project.noticeme.common.ex.makeGone
 import com.project.noticeme.common.ex.makeToast
+import com.project.noticeme.common.ex.makeVisible
 import com.project.noticeme.common.ex.runLayoutAnimation
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.state.DataState
@@ -50,18 +52,20 @@ class CategoryDetailFragment : Fragment(),
                     when (it) {
                         is DataState.Success<List<ConsumableEntity>> -> {
                             binding.apply {
-                                progressCircular.isVisible = false
+                                progressCircular.makeGone()
                             }
 
                             if (it.data.isEmpty()) {
                                 binding.apply {
-                                    rvList.isVisible = false
-                                    emptyList.isVisible = true
+                                    rvList.makeGone()
+                                    aboveLayoutTitle.makeGone()
+                                    emptyList.makeVisible()
                                 }
                             } else {
                                 binding.apply {
-                                    rvList.isVisible = true
-                                    emptyList.isVisible = false
+                                    rvList.makeVisible()
+                                    aboveLayoutTitle.makeVisible()
+                                    emptyList.makeGone()
                                 }
                             }
 
