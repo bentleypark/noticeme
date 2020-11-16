@@ -11,11 +11,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.hideKeyboard
 import com.project.noticeme.common.ex.makeToast
+import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
@@ -23,7 +25,6 @@ import com.project.noticeme.databinding.FragmentAddCustomConsumableBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -100,7 +101,7 @@ class AddCustomConsumableFragment : Fragment(),
                         "나의 목록",
                         duration,
                         startDate,
-                        startDate + duration,
+                        startDate + duration + DAY_MILLISECONDS,
                         prioirty
                     )
                 )
@@ -113,7 +114,6 @@ class AddCustomConsumableFragment : Fragment(),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             ) { _, year, monthOfYear, dayOfMonth ->
-                Timber.d("dateChange()")
                 calendar.set(year, monthOfYear, dayOfMonth)
                 startDate = calendar.timeInMillis
             }
@@ -167,6 +167,9 @@ class AddCustomConsumableFragment : Fragment(),
                     }
                 }
             })
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
     companion object {

@@ -6,15 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.makeToast
+import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentConsumableDetailBinding
@@ -39,7 +40,7 @@ class ConsumableDetailFragment : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val title = arguments?.getString("item_title")
+        val title = arguments?.getString(ARGS_KEY)
         viewModel.getWithTitle(title!!)
         setView()
         setObserve()
@@ -79,10 +80,7 @@ class ConsumableDetailFragment : Fragment(),
             tvConfirm.setOnClickListener {
                 progressCircular.isVisible = true
 
-                val duration = tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
-                    1,
-                    TimeUnit.DAYS
-                )
+                val duration = tvDuration.text.toString().toInt() * DAY_MILLISECONDS
 
                 val title = tvTitle.text.toString()
                 if (startDate == 0.toLong()) {
@@ -96,7 +94,7 @@ class ConsumableDetailFragment : Fragment(),
                         userConsumableItem.category,
                         duration,
                         startDate,
-                        startDate + duration,
+                        startDate + duration + DAY_MILLISECONDS,
                         prioirty
                     )
                 )
@@ -106,6 +104,8 @@ class ConsumableDetailFragment : Fragment(),
                 openDeleteDialog()
             }
 
+            val adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
         }
     }
 
@@ -201,10 +201,7 @@ class ConsumableDetailFragment : Fragment(),
                     userConsumableItem.title,
                     userConsumableItem.image,
                     userConsumableItem.category,
-                    tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
-                        1,
-                        TimeUnit.DAYS
-                    ),
+                    tvDuration.text.toString().toInt() * DAY_MILLISECONDS,
                     userConsumableItem.startDate,
                     userConsumableItem.endDate,
                     prioirty
@@ -215,5 +212,7 @@ class ConsumableDetailFragment : Fragment(),
 
     companion object {
         fun newInstance() = ConsumableDetailFragment()
+
+        const val ARGS_KEY = "itemTitle"
     }
 }

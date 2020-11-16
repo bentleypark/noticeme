@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
@@ -128,11 +129,13 @@ class SearchFragment : Fragment(),
                             tvSearchResultEmpty.makeGone()
                             tvGuideMsg.makeGone()
                             btnAdd.makeGone()
+                            adView.makeGone()
                         }
 
                         if (it.data.isNotEmpty()) {
                             binding.progressCircular.makeGone()
                             binding.searchList.makeVisible()
+                            binding.adView.makeVisible()
                             binding.apply {
                                 etSearch.apply {
                                     clearFocus()
@@ -144,6 +147,7 @@ class SearchFragment : Fragment(),
                                 tvSearchResultEmpty.makeVisible()
                                 tvGuideMsg.makeVisible()
                                 btnAdd.makeVisible()
+                                binding.adView.makeVisible()
                                 etSearch.apply {
                                     clearFocus()
                                     hideKeyboard()
@@ -152,7 +156,7 @@ class SearchFragment : Fragment(),
                         }
 
                         searchAdapter =
-                            ConsumableListAdapter(it.data.toMutableList(), detailViewModel)
+                            ConsumableListAdapter(it.data.toMutableList(), detailViewModel, requireContext())
                         binding.searchList.apply {
                             adapter = searchAdapter
                             layoutManager =
@@ -177,6 +181,9 @@ class SearchFragment : Fragment(),
                 }
             }
         )
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
 
         viewModel.searchHistoryList.observe(
             viewLifecycleOwner,
@@ -233,6 +240,7 @@ class SearchFragment : Fragment(),
                             btnAdd.makeGone()
                             searchHistoryLayout.makeVisible()
                             searchList.makeGone()
+                            adView.makeGone()
                         }
                     }
                 }

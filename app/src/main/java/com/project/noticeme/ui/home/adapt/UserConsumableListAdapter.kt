@@ -2,21 +2,22 @@ package com.project.noticeme.ui.home.adapt
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.noticeme.App
 import com.project.noticeme.R
+import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
+import com.project.noticeme.ui.home.HomeFragmentDirections
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import kotlinx.android.extensions.LayoutContainer
-import java.util.concurrent.TimeUnit
 import kotlin.math.absoluteValue
 
 class UserConsumableListAdapter(
@@ -41,31 +42,7 @@ class UserConsumableListAdapter(
                 tvTitle.text = item.title
                 ivMaterialImg.setImageResource(item.image)
                 val result = getExpiredDay(System.currentTimeMillis(), item.endDate)
-                if (result > 0) {
-                    tvExpireTime.setTextColor(
-                        App.globalApplicationContext.resources.getColor(
-                            R.color.black,
-                            null
-                        )
-                    )
-                    tvExpireTime.text = "-${result}일"
-                } else {
-                    tvExpireTime.setTextColor(
-                        App.globalApplicationContext.resources.getColor(
-                            R.color.expired_day_color_red,
-                            null
-                        )
-                    )
-                    tvExpireTime.text = "+${result.absoluteValue}일"
-                }
-
-                consumableItem.setOnClickListener {
-                    val args = Bundle()
-                    args.putString("item_title", item.title)
-                    it.findNavController().navigate(
-                        R.id.action_homeFragment_to_consumableDetailFragment, args
-                    )
-                }
+                getExpiredDayForTextView(result, tvExpireTime)
 
                 btnDelete.isEnabled = false
                 btnReset.isEnabled = false
@@ -76,6 +53,12 @@ class UserConsumableListAdapter(
 
                 btnReset.setOnClickListener {
                     openResetDialog(context, position)
+                }
+
+                consumableItem.setOnClickListener {
+                    it.findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToConsumableDetailFragment(item.title)
+                    )
                 }
             }
         }
@@ -103,11 +86,6 @@ class UserConsumableListAdapter(
         notifyDataSetChanged()
     }
 
-    fun clearAll() {
-        list.clear()
-        notifyDataSetChanged()
-    }
-
     private fun removeAt(position: Int) {
         viewModel.delete(list[position])
         list.removeAt(position)
@@ -125,14 +103,47 @@ class UserConsumableListAdapter(
                 item.category,
                 item.duration,
                 currentDate,
-                currentDate + item.duration,
+                currentDate + item.duration + DAY_MILLISECONDS,
                 item.priority
             )
         )
     }
 
     private fun getExpiredDay(startDate: Long, endDate: Long): Long {
-        return (endDate - startDate) / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
+        return (endDate - startDate) / DAY_MILLISECONDS
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun getExpiredDayForTextView(result: Long, textView: TextView) {
+        when {
+            result > 0 -> {
+                textView.setTextColor(
+                    App.globalApplicationContext.resources.getColor(
+                        R.color.black,
+                        null
+                    )
+                )
+                textView.text = "-${result}일"
+            }
+            result == 0.toLong() -> {
+                textView.setTextColor(
+                    App.globalApplicationContext.resources.getColor(
+                        R.color.expired_day_color_red,
+                        null
+                    )
+                )
+                textView.text = "D-Day"
+            }
+            else -> {
+                textView.setTextColor(
+                    App.globalApplicationContext.resources.getColor(
+                        R.color.expired_day_color_red,
+                        null
+                    )
+                )
+                textView.text = "+${result.absoluteValue}일"
+            }
+        }
     }
 
     private fun openDeleteDialog(context: Context, position: Int) {

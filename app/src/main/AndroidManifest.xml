@@ -25,7 +25,20 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".service.NotificationJobFireBaseService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".service.AlarmBroadCastReceiver"
+            android:enabled="true"
+            android:exported="true" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

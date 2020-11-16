@@ -8,14 +8,6 @@
     android:background="@color/mainActivity_background"
     tools:context=".ui.category.CategoryFragment">
 
-    <View
-        android:id="@+id/transparent_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/search_layover_bg"
-        android:elevation="1dp"
-        android:visibility="gone" />
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,6 +32,16 @@
                     android:background="#00000000"
                     android:foreground="?attr/selectableItemBackground"
                     android:src="@drawable/ic_arrow_back" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/noto_bold"
+                    android:text="카테고리"
+                    android:textColor="#ababab"
+                    android:textSize="20sp" />
 
                 <ImageButton
                     android:id="@+id/btn_search"
@@ -85,29 +87,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/above_layout" />
 
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/iv_guide_msg"-->
-        <!--            android:layout_width="205dp"-->
-        <!--            android:layout_height="122dp"-->
-        <!--            android:background="@drawable/guide_msg2"-->
-        <!--            android:visibility="visible"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/btn_add"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent" />-->
-
-        <!--        <ImageButton-->
-        <!--            android:id="@+id/btn_add"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginBottom="8dp"-->
-        <!--            android:background="@drawable/ic_btn_add"-->
-        <!--            android:elevation="10dp"-->
-        <!--            android:foreground="?attr/selectableItemBackground"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/adView"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent" />-->
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_add"
             android:layout_width="wrap_content"
@@ -149,36 +128,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <RelativeLayout
-            android:id="@+id/search_history_layout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/white"
-            android:visibility="gone"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline3">
-
-            <TextView
-                android:id="@+id/btn_deleteAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="16dp"
-                android:text="전체삭제"
-                android:textColor="#888888"
-                android:textSize="12sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_search_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btn_deleteAll"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="10dp"
-                tools:listitem="@layout/search_history_item" />
-        </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

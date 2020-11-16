@@ -23,10 +23,10 @@ class ConsumableCategoryListAdapter(private val list: List<ConsumableCategory>) 
             binding.tvCategoryTitle.text = item.title
             binding.ivCategoryImg.setImageResource(item.image)
             binding.categoryItem.setOnClickListener {
-                val args = Bundle()
-                args.putString("category_name", item.title)
+//                val args = Bundle()
+//                args.putString("category_name", item.title)
                 it.findNavController().navigate(
-                    R.id.action_addConsumableFragment_to_categoryDetailFragment, args
+                    CategoryFragmentDirections.actionCategoryFragmentToCategoryDetailFragment(item.title)
                 )
             }
         }

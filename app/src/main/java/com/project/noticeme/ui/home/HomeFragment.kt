@@ -18,6 +18,7 @@ import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.makeToast
+import com.project.noticeme.common.ex.runLayoutAnimation
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
@@ -88,6 +89,7 @@ class HomeFragment : Fragment(),
                 swipeHelperCallback.removePreviousClamp(this)
                 false
             }
+            runLayoutAnimation()
         }
 
         binding.btnAdd.setOnClickListener {
