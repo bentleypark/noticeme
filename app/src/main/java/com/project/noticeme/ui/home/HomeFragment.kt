@@ -1,6 +1,11 @@
 package com.project.noticeme.ui.home
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,11 +28,14 @@ import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentHomeBinding
+import com.project.noticeme.service.AlarmBroadCastReceiver
+import com.project.noticeme.service.JobSchedulerStart
 import com.project.noticeme.ui.home.adapt.UserConsumableListAdapter
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint

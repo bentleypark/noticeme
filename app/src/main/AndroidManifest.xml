@@ -35,10 +35,7 @@
             </intent-filter>
         </service>
 
-        <receiver
-            android:name=".service.AlarmBroadCastReceiver"
-            android:enabled="true"
-            android:exported="true" />
+        <receiver android:name=".service.AlarmBroadCastReceiver" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"
