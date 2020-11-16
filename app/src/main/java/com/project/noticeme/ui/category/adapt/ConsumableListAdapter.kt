@@ -26,15 +26,4 @@ class ConsumableListAdapter(
     }
 
     override fun getItemCount() = list.size
-
-    fun addAll(items: List<ConsumableEntity>) {
-        list.clear()
-        list.addAll(items)
-        notifyDataSetChanged()
-    }
-
-    fun clear() {
-        list.clear()
-        notifyDataSetChanged()
-    }
 }

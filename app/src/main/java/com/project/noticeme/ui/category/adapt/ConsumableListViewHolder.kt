@@ -2,6 +2,7 @@ package com.project.noticeme.ui.category.adapt
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
@@ -9,7 +10,10 @@ import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
 import kotlinx.android.extensions.LayoutContainer
 import java.util.concurrent.TimeUnit
 
-class ConsumableListViewHolder(private val binding: ConsumableItemBinding, private val viewModel: CategoryDetailViewModel) :
+class ConsumableListViewHolder(
+    private val binding: ConsumableItemBinding,
+    private val viewModel: CategoryDetailViewModel
+) :
     RecyclerView.ViewHolder(binding.root), LayoutContainer {
 
     override val containerView: View?
@@ -28,7 +32,7 @@ class ConsumableListViewHolder(private val binding: ConsumableItemBinding, priva
                         item.category,
                         item.duration,
                         System.currentTimeMillis(),
-                        System.currentTimeMillis() + item.duration,
+                        System.currentTimeMillis() + item.duration + DAY_MILLISECONDS,
                         0
                     )
                 )

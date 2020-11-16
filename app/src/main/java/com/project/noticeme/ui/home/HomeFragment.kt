@@ -89,6 +89,7 @@ class HomeFragment : Fragment(),
                 swipeHelperCallback.removePreviousClamp(this)
                 false
             }
+            runLayoutAnimation()
         }
 
         binding.btnAdd.setOnClickListener {
@@ -145,7 +146,6 @@ class HomeFragment : Fragment(),
                                         binding.rvList.isVisible = true
                                         listAdapter.addAll(it.data.sortedByDescending { item -> item.priority }
                                             .toMutableList())
-                                        binding.rvList.runLayoutAnimation()
                                     }
                                 } else {
                                     binding.ivGuideMsg.isVisible = true

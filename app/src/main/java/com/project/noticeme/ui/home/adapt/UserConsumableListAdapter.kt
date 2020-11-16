@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.noticeme.App
 import com.project.noticeme.R
+import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import kotlinx.android.extensions.LayoutContainer
-import java.util.concurrent.TimeUnit
 import kotlin.math.absoluteValue
 
 class UserConsumableListAdapter(
@@ -132,7 +132,7 @@ class UserConsumableListAdapter(
     }
 
     private fun getExpiredDay(startDate: Long, endDate: Long): Long {
-        return (endDate - startDate) / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
+        return (endDate - startDate) / DAY_MILLISECONDS
     }
 
     private fun openDeleteDialog(context: Context, position: Int) {
