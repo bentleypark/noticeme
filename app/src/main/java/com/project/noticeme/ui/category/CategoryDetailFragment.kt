@@ -69,7 +69,7 @@ class CategoryDetailFragment : Fragment(),
                                 }
                             }
 
-                            listAdapter = ConsumableListAdapter(it.data.toMutableList(), viewModel)
+                            listAdapter = ConsumableListAdapter(it.data.toMutableList(), viewModel, requireContext())
 
                             val size = resources.getDimensionPixelSize(R.dimen.material_item_size)
                             binding.rvList.apply {

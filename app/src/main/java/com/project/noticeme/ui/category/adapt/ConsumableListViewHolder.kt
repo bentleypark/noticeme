@@ -1,18 +1,21 @@
 package com.project.noticeme.ui.category.adapt
 
+import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
+import com.project.noticeme.service.JobSchedulerStart
 import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
 import kotlinx.android.extensions.LayoutContainer
 import java.util.concurrent.TimeUnit
 
 class ConsumableListViewHolder(
     private val binding: ConsumableItemBinding,
-    private val viewModel: CategoryDetailViewModel
+    private val viewModel: CategoryDetailViewModel,
+    private val context: Context
 ) :
     RecyclerView.ViewHolder(binding.root), LayoutContainer {
 
@@ -25,6 +28,7 @@ class ConsumableListViewHolder(
             ivMaterialImg.setImageResource(item.image)
             tvExpireTime.text = getDurationWithDay(item.duration)
             consumableItem.setOnClickListener {
+                JobSchedulerStart.start(context)
                 viewModel.insert(
                     UserConsumableEntity(
                         item.title,

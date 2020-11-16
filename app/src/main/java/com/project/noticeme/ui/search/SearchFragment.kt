@@ -156,7 +156,7 @@ class SearchFragment : Fragment(),
                         }
 
                         searchAdapter =
-                            ConsumableListAdapter(it.data.toMutableList(), detailViewModel)
+                            ConsumableListAdapter(it.data.toMutableList(), detailViewModel, requireContext())
                         binding.searchList.apply {
                             adapter = searchAdapter
                             layoutManager =
