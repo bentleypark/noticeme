@@ -14,6 +14,7 @@ import com.project.noticeme.R
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
+import com.project.noticeme.ui.home.HomeFragmentDirections
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import kotlinx.android.extensions.LayoutContainer
@@ -60,10 +61,8 @@ class UserConsumableListAdapter(
                 }
 
                 consumableItem.setOnClickListener {
-                    val args = Bundle()
-                    args.putString("item_title", item.title)
                     it.findNavController().navigate(
-                        R.id.action_homeFragment_to_consumableDetailFragment, args
+                        HomeFragmentDirections.actionHomeFragmentToConsumableDetailFragment(item.title)
                     )
                 }
 

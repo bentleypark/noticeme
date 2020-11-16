@@ -39,8 +39,10 @@ class CategoryDetailFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding!!.tvTitle.text = arguments?.getString("category_name")
-        val categoryName = arguments?.getString("category_name")
+        val itemTitle = arguments?.getString(ARGS_KEY)
+
+        binding!!.tvTitle.text = itemTitle
+        val categoryName = itemTitle
         viewModel.findConsumableWithCategory(categoryName!!)
         viewModel.apply {
             consumableList.observe(viewLifecycleOwner,
@@ -110,5 +112,7 @@ class CategoryDetailFragment : Fragment(),
 
     companion object {
         fun newInstance() = CategoryDetailFragment()
+
+        const val ARGS_KEY = "categoryName"
     }
 }

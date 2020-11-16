@@ -40,7 +40,7 @@ class ConsumableDetailFragment : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val title = arguments?.getString("item_title")
+        val title = arguments?.getString(ARGS_KEY)
         viewModel.getWithTitle(title!!)
         setView()
         setObserve()
@@ -218,5 +218,7 @@ class ConsumableDetailFragment : Fragment(),
 
     companion object {
         fun newInstance() = ConsumableDetailFragment()
+
+        const val ARGS_KEY = "itemTitle"
     }
 }
