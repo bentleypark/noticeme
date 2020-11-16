@@ -7,8 +7,8 @@ This is android app which informs you of daily routine job at the right time.
 
 ## Screemshot
 
-![screensho01](images/screensho01.png)
+![screenshot01](images/screenshot01.png)
 
-![screensho02](images/screensho02.png)
+![screenshot02](images/screenshot02.png)
 
-![screensho03](images/screensho03.png)
+![screenshot03](images/screenshot03.png)
