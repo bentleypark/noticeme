@@ -22,14 +22,14 @@ class JobSchedulerStart {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 manager.setExactAndAllowWhileIdle(
                     AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + 5000,
+                    System.currentTimeMillis() + 15000,
                     pendingIntent
                 )
                 Timber.d("setExactAndAllowWhileIdle")
             } else
                 manager.setExact(
                     AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + 5000,
+                    System.currentTimeMillis() + 15000,
                     pendingIntent
                 )
         }
