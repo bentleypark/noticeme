@@ -86,7 +86,6 @@
                 android:text="다음 교체"
                 android:textColor="#60979e"
                 android:textSize="18sp" />
-
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -98,7 +97,7 @@
             android:scrollbarSize="2dp"
             android:scrollbars="vertical"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/blur_view"
+            app:layout_constraintBottom_toTopOf="@+id/btn_add"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/above_layout"
             tools:listitem="@layout/consumable_item" />
@@ -132,27 +131,6 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <!--        <ImageButton-->
-        <!--            android:id="@+id/btn_add"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginBottom="8dp"-->
-        <!--            android:background="@drawable/ic_btn_add"-->
-        <!--            android:elevation="50dp"-->
-        <!--            android:foreground="?attr/selectableItemBackground"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/adView"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent" />-->
-
-        <View
-            android:id="@+id/blur_view"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginBottom="1dp"
-            android:background="@drawable/blur_background"
-            ads:layout_constraintBottom_toTopOf="@+id/btn_add"
-            ads:layout_constraintTop_toBottomOf="@+id/rv_list" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_add"
