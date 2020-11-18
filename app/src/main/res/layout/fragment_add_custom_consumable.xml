@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.07" />
+                app:layout_constraintGuide_percent="0.08" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline1"
@@ -82,7 +82,7 @@
             <RelativeLayout
                 android:id="@+id/above_layout"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="30dp"
                 android:background="@drawable/main_background_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
