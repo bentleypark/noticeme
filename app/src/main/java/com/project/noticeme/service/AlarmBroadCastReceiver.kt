@@ -15,6 +15,7 @@ import android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 import androidx.core.app.NotificationCompat
 import com.project.noticeme.R
 import com.project.noticeme.ui.MainActivity
+import timber.log.Timber
 
 class AlarmBroadCastReceiver : BroadcastReceiver() {
 
