@@ -28,7 +28,7 @@ constructor(
 ) : BaseViewModel() {
 
     private val _consumableList = MutableLiveData<DataState<List<UserConsumableEntity>>>()
-    val consumableList: LiveData<DataState<List<UserConsumableEntity>>>?
+    val consumableList: LiveData<DataState<List<UserConsumableEntity>>>
         get() = _consumableList
 
     var dataList = emptyList<ConsumableEntity>()

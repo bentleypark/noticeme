@@ -28,6 +28,12 @@ constructor(private val mainRepository: MainRepository) : BaseViewModel() {
     val dataState: LiveData<DataState<Boolean>>
         get() = _dataState
 
+    private val userConsumableList = MutableLiveData<List<UserConsumableEntity>>()
+
+    init {
+        getUserConsumableData()
+    }
+
     fun findConsumableWithCategory(categoryName: String) {
         viewModelScope.launch {
             mainRepository.findConsumableWithCategory(categoryName)
@@ -57,4 +63,18 @@ constructor(private val mainRepository: MainRepository) : BaseViewModel() {
                 .launchIn(viewModelScope)
         }
     }
+
+    private fun getUserConsumableData() {
+        Timber.d("getUserConsumableData")
+        viewModelScope.launch {
+            mainRepository.getUserConsumableFromDetail()
+                .onEach { dataState ->
+                    userConsumableList.value = dataState
+                }
+                .launchIn(viewModelScope)
+        }
+    }
+
+    fun checkIfItemIsAlreadyInserted(title: String) =
+        (userConsumableList.value!!.find { it.title == title } != null)
 }

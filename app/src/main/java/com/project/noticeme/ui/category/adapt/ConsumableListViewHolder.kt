@@ -3,6 +3,7 @@ package com.project.noticeme.ui.category.adapt
 import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
@@ -19,7 +20,7 @@ class ConsumableListViewHolder(
 ) :
     RecyclerView.ViewHolder(binding.root), LayoutContainer {
 
-    override val containerView: View?
+    override val containerView: View
         get() = binding.root
 
     fun bind(item: ConsumableEntity) {
@@ -28,18 +29,23 @@ class ConsumableListViewHolder(
             ivMaterialImg.setImageResource(item.image)
             tvExpireTime.text = getDurationWithDay(item.duration)
             consumableItem.setOnClickListener {
-                JobSchedulerStart.start(context)
-                viewModel.insert(
-                    UserConsumableEntity(
-                        item.title,
-                        item.image,
-                        item.category,
-                        item.duration,
-                        System.currentTimeMillis(),
-                        System.currentTimeMillis() + item.duration + DAY_MILLISECONDS,
-                        0
+
+                if(!viewModel.checkIfItemIsAlreadyInserted(item.title)){
+                    JobSchedulerStart.start(context)
+                    viewModel.insert(
+                        UserConsumableEntity(
+                            item.title,
+                            item.image,
+                            item.category,
+                            item.duration,
+                            System.currentTimeMillis(),
+                            System.currentTimeMillis() + item.duration + DAY_MILLISECONDS,
+                            0
+                        )
                     )
-                )
+                } else {
+                    context.makeToast("이미 추가된 소모품입니다!")
+                }
             }
         }
     }

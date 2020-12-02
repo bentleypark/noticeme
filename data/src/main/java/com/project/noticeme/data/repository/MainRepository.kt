@@ -83,6 +83,17 @@ constructor(
             }
         }
 
+    suspend fun getUserConsumableFromDetail(): Flow<List<UserConsumableEntity>> =
+        flow {
+            delay(1000)
+            try {
+                val resultList = userConsumableDao.get()
+                emit(resultList)
+            } catch (e: Exception) {
+                Timber.e(e)
+            }
+        }
+
     suspend fun delete(item: UserConsumableEntity): Flow<DataState<Boolean>> =
         flow {
             emit(DataState.Loading)

@@ -3,7 +3,6 @@ package com.project.noticeme.common.ex
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -62,4 +61,8 @@ fun RecyclerView.runLayoutAnimation() {
         AnimationUtils.loadLayoutAnimation(context, R.anim.layout_anmiation_fall_down)
     this.layoutAnimation = controller
     this.scheduleLayoutAnimation()
+}
+
+fun Context.makeToast(text: String) {
+    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
