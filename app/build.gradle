@@ -6,6 +6,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.github.ben-manes.versions' version "0.36.0"
+    id 'io.sentry.android.gradle'
 }
 
 //apply from: "${rootProject.projectDir}/flavors.gradle"
@@ -27,6 +28,17 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [environment: "production"]
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "noticeme-${variant.versionName}.apk"
+                }
+            }
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [environment: "staging"]
         }
     }
 
@@ -98,6 +110,7 @@ dependencies {
     implementation Libs.timber
     implementation Libs.stetho
     implementation Libs.stethoOkhttp3
+    implementation Libs.sentry
 //    debugImplementation Libs.leakcanary
 
     implementation Libs.admob
@@ -127,6 +140,13 @@ dependencyUpdates {
     rejectVersionIf {
         isNonStable(it.candidate.version)
     }
+}
+
+sentry {
+    autoProguardConfig true
+    autoUpload true
+    uploadNativeSymbols false
+    includeNativeSources false
 }
 
 //apply plugin: 'com.google.gms.google-services'

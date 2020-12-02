@@ -2,6 +2,7 @@ package com.project.noticeme.data.repository
 
 import com.project.noticeme.data.room.*
 import com.project.noticeme.data.state.DataState
+import io.sentry.Sentry
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -29,6 +30,7 @@ constructor(
                 emit(DataState.Success("작업이 완료되었습니다."))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -42,6 +44,7 @@ constructor(
                 emit(DataState.Success(resultList))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -56,6 +59,7 @@ constructor(
                 emit(DataState.Success(result))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -68,6 +72,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -80,6 +85,7 @@ constructor(
                 emit(DataState.Success(resultList))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -91,6 +97,7 @@ constructor(
                 emit(resultList)
             } catch (e: Exception) {
                 Timber.e(e)
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -103,6 +110,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -127,6 +135,7 @@ constructor(
                 emit(DataState.Success(resultList))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -139,6 +148,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -152,6 +162,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -165,6 +176,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -177,6 +189,7 @@ constructor(
                 emit(DataState.Success(resultList))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -189,6 +202,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -201,6 +215,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 }

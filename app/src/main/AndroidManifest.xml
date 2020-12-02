@@ -61,6 +61,22 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
-    </application>
 
+        <meta-data
+            android:name="io.sentry.dsn"
+            android:value="https://13443f8315eb43048ef1160219005269@o485982.ingest.sentry.io/5542089" />
+        <meta-data
+            android:name="io.sentry.debug"
+            android:value="true" />
+        <meta-data
+            android:name="io.sentry.session-tracking.enable"
+            android:value="true" />
+        <meta-data
+            android:name="io.sentry.environment"
+            android:value="${environment}" />
+        <meta-data
+            android:name="io.sentry.ndk.enable"
+            android:value="false" />
+
+    </application>
 </manifest>

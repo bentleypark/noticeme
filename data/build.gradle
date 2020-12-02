@@ -57,6 +57,7 @@ dependencies {
 
     // Debug
     implementation Libs.timber
+    implementation Libs.sentry
 
     // Dagger-hilt
     implementation Libs.hiltAndroid
