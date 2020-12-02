@@ -8,4 +8,30 @@
     <string name="cd_voice_search">Voice search</string>
     <string name="cd_clear_button">Clear field</string>
     <string name="cd_suggestion_icon">List item icon</string>
+    <string name="personal_information_processing_policy">
+       <![CDATA[
+<p>
+<b>1. 개인 정보의 처리 목적.</b>
+<p>
+<b>본 개발자가 작성한 앱은(는) 다음의 목적을 위하여 개인정보를 처리하고 있으며, 다음의 목적 이외의 용도로는 이용하지 않습니다.<br />
+1) 무료 앱에서 AdMob(애드몹) 광고 라이브러리(Google Play Lib)가 필요로 하는 권한 위임을 위해 사용합니다.<br /></b>
+<p>
+<b>2. 개인 정보 처리 위탁 여부: 본 개발자의 앱은 타 업체에 개인 정보 처리를 위탁하지 않습니다.<b>
+<p>
+<b>3. 정보 주체의 권리, 의무 및 그 행사 방법이용자는 개인 정보 주체로서 언제든지 개인 정보 보호 관련 권리를 행사할 수 있습니다. 다만, 본 앱은 앱 사용자의 사용정보를 수집 및 보유하지 않습니다.</b><br />
+앱 기능의 활용에만 사용합니다.
+<p>
+<b>4. 처리하는 개인 정보의 항목 작성다음의 개인정보 항목을 처리하고 있습니다.</b>
+<p>
+android.permission.INTERNET: AdMob 광고를 위해 사용합니다.<br />
+android.permission.ACCESS_NETWORK_STATE: 사용자 알림 제공 및 모바일 네트워크 사용 유무 확인을 위해 사용합니다.<br />
+android.permission.RECEIVE_BOOT_COMPLETED: 사용자 알림 제공을 위해서 사용합니다.<br />
+<p>
+<b>5. 개인 정보의 파기앱 사용자의 사용정보를 수집 및 보유하지 않습니다. 따라서 파기 해야 하는 개인정보를 가지고 있지 않습니다.</b>
+<p>
+<b>6. 개인 정보의 안전성 확보 조치앱 사용자의 사용 정보를 수집 및 보유하지 않습니다.</b>
+<p>
+<b>해당 개인정보처리방침은 2020년 12월 1일부터 적용 됩니다.</b>
+ ]]>
+    </string>
 </resources>

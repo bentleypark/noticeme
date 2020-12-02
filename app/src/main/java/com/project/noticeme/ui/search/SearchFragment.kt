@@ -42,7 +42,7 @@ class SearchFragment : Fragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentSearchBinding.inflate(layoutInflater), this) {
+    ): View = initBinding(FragmentSearchBinding.inflate(layoutInflater), this) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -57,6 +57,7 @@ object Versions {
     const val flexboxLayoutVersion = "1.1.1"
     const val firebaseCrashlyticsVersion = "17.2.2"
     const val firebaseAnalyticsVersion = "17.5.0"
+    const val playCoreVersion = "1.8.1"
 
     // Google Cloud Speech
     const val grpcVersion = "1.32.1"

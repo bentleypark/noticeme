@@ -87,7 +87,6 @@ dependencies {
 
     implementation Libs.hiltAndroid
     implementation Libs.hiltViewModel
-    implementation 'androidx.appcompat:appcompat:1.2.0'
     kapt Libs.hiltAndroidCompiler
     kapt Libs.hiltCompiler
 
@@ -102,6 +101,7 @@ dependencies {
 //    debugImplementation Libs.leakcanary
 
     implementation Libs.admob
+    implementation Libs.playCore
     implementation 'com.firebase:firebase-jobdispatcher:0.8.6'
 
     testImplementation Libs.junit4

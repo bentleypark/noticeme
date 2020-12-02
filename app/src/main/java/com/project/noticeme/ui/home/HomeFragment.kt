@@ -57,8 +57,6 @@ class HomeFragment : Fragment(),
 
         setUpView()
         setUpObserve()
-//        registerDeleteDataItemAction()
-//        registerTestItemAction()
     }
 
     override fun onResume() {
@@ -98,6 +96,10 @@ class HomeFragment : Fragment(),
 
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
+
+        binding.btnSetting.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingFragment)
+        }
     }
 
     private fun setUpObserve() {
@@ -198,34 +200,4 @@ class HomeFragment : Fragment(),
     private fun refresh() {
         findNavController().navigate(R.id.action_homeFragment_self)
     }
-
-//    private fun registerDeleteDataItemAction() {
-//        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
-//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-//
-//                viewModel.delete(listAdapter.removeAt(viewHolder.adapterPosition))
-//                viewModel.deleteResult.observe(
-//                    viewLifecycleOwner,
-//                    {
-//                        when (it) {
-//                            is DataState.Success<List<UserConsumableEntity>> -> {
-//                                makeToast("소모품이 삭제돠었습니다.")
-//                                if (it.data.isEmpty()) {
-//                                    binding!!.apply {
-//                                        ivGuideMsg.isVisible = true
-//                                        emptyList.isVisible = true
-//                                        rvList.isVisible = false
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                )
-//            }
-//        }
-//
-//        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-//        itemTouchHelper.attachToRecyclerView(binding!!.rvList)
-//    }
-
 }

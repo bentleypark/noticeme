@@ -13,6 +13,7 @@
     <color name="above_layout_text_color">#60979e</color>
     <color name="edit_hint_color">#d4d4d4</color>
     <color name="status_bar_color">#4C676B</color>
+    <color name="color_accent">#629fa8</color>
 
     <color name="search_layover_bg">@color/gray</color>
     <color name="search_field_bg">@color/white_ish</color>
@@ -25,4 +26,5 @@
     <color name="gray_50">#88888888</color>
 
     <color name="white_ish">#fffefefe</color>
+    <color name="border_view_color">#a0a0a0</color>
 </resources>
