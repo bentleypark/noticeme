@@ -37,12 +37,22 @@ class SettingFragment : Fragment(),
     private fun setupSettings() {
         binding!!.apply {
             swNotificationSetting.isChecked = pref.getNotificationSetting()
-            tvVersionInfo.text = requireActivity().packageManager.getPackageInfo(requireActivity().packageName, 0).versionName
+
+            swNotificationSetting.setOnCheckedChangeListener { _, isChecked ->
+                swNotificationSetting.isChecked = isChecked
+                pref.setNotificationSetting(isChecked)
+            }
+
+            tvVersionInfo.text = requireActivity().packageManager.getPackageInfo(
+                requireActivity().packageName,
+                0
+            ).versionName
 
 
             ivArrow1.setOnClickListener {
                 findNavController().navigate(R.id.action_settingFragment_to_ruleFragment)
             }
+
 
             ivArrow3.setOnClickListener {
                 initReview()

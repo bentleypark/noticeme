@@ -54,7 +54,7 @@ class SharedPreferenceManager @Inject constructor(
     fun getNotificationSetting() = pref.getBoolean(KEY_NOTIFICATION, true)
 
     fun setNotificationSetting(state: Boolean) {
-        pref.edit { putBoolean(KEY_ON_BOARDING, state) }
+        pref.edit { putBoolean(KEY_NOTIFICATION, state) }
     }
 
     companion object {
