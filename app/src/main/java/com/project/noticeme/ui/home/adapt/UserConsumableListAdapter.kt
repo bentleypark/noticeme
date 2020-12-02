@@ -14,6 +14,7 @@ import com.project.noticeme.R
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
+import com.project.noticeme.service.JobSchedulerStart
 import com.project.noticeme.ui.home.HomeFragmentDirections
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
@@ -107,6 +108,7 @@ class UserConsumableListAdapter(
                 item.priority
             )
         )
+        JobSchedulerStart.start(context, item.duration)
     }
 
     private fun getExpiredDay(startDate: Long, endDate: Long): Long {

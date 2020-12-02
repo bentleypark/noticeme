@@ -128,7 +128,7 @@ class HomeFragment : Fragment(),
                 }
             )
 
-            consumableList?.observe(
+            consumableList.observe(
                 viewLifecycleOwner, {
                     binding!!.apply {
                         rvList.visibility = View.GONE
