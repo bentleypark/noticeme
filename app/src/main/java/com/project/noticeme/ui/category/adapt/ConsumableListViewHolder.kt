@@ -31,7 +31,7 @@ class ConsumableListViewHolder(
             consumableItem.setOnClickListener {
 
                 if(!viewModel.checkIfItemIsAlreadyInserted(item.title)){
-                    JobSchedulerStart.start(context)
+                    JobSchedulerStart.start(context, item.duration)
                     viewModel.insert(
                         UserConsumableEntity(
                             item.title,

@@ -5,17 +5,17 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import timber.log.Timber
+import kotlin.random.Random
 
 class JobSchedulerStart {
 
     companion object {
-        fun start(context: Context) {
+        fun start(context: Context, duration: Long) {
 
             val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val intent = Intent(context, AlarmBroadCastReceiver::class.java)
             val pendingIntent = PendingIntent.getBroadcast(     // 2
-                context, AlarmBroadCastReceiver.NOTIFICATION_ID, intent,
+                context, Random.nextInt(), intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
 
@@ -25,7 +25,6 @@ class JobSchedulerStart {
                     System.currentTimeMillis() + 15000,
                     pendingIntent
                 )
-                Timber.d("setExactAndAllowWhileIdle")
             } else
                 manager.setExact(
                     AlarmManager.RTC_WAKEUP,

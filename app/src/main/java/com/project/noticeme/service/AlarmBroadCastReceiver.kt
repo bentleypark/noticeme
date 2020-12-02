@@ -69,8 +69,8 @@ class AlarmBroadCastReceiver : BroadcastReceiver() {
         val builder =
             NotificationCompat.Builder(context, "NOTICEME")
                 .setSmallIcon(R.drawable.icon)
-                .setContentTitle("Alert")
-                .setContentText("This is repeating alarm")
+                .setContentTitle("소모품 교체 알림")
+                .setContentText("오늘 날짜로 교체할 소모품이 있습니다. 확인해주세요!")
                 .setContentIntent(contentPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
