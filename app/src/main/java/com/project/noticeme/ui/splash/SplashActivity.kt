@@ -6,11 +6,18 @@ import androidx.lifecycle.lifecycleScope
 import com.project.noticeme.ui.MainActivity
 import com.project.noticeme.R
 import com.project.noticeme.common.ex.launchActivityWithFinish
+import com.project.noticeme.common.utils.preference.SharedPreferenceManager
+import com.project.noticeme.ui.guide.GuideActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var pref: SharedPreferenceManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -20,7 +27,11 @@ class SplashActivity : AppCompatActivity() {
     private fun moveToMainScreen() {
         lifecycleScope.launchWhenCreated {
             delay(SPLASH_DELAY)
-            launchActivityWithFinish<MainActivity>()
+            if (pref.getIsOnBoardingShowed()) {
+                launchActivityWithFinish<MainActivity>()
+            } else {
+                launchActivityWithFinish<GuideActivity>()
+            }
         }
     }
 

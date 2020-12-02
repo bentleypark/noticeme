@@ -5,7 +5,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
 class JobSchedulerStart {
@@ -23,13 +22,13 @@ class JobSchedulerStart {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 manager.setExactAndAllowWhileIdle(
                     AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS) * 1,
+                    System.currentTimeMillis() + duration,
                     pendingIntent
                 )
             } else
                 manager.setExact(
                     AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + 15000,
+                    System.currentTimeMillis() + duration,
                     pendingIntent
                 )
         }

@@ -67,6 +67,7 @@ dependencies {
     implementation Libs.activityKtx
     implementation Libs.legacySupport
     implementation Libs.recyclerview
+    implementation Libs.viewpager2
 
     implementation Libs.lifeCyle
     implementation Libs.viewModel
@@ -86,6 +87,7 @@ dependencies {
 
     implementation Libs.hiltAndroid
     implementation Libs.hiltViewModel
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     kapt Libs.hiltAndroidCompiler
     kapt Libs.hiltCompiler
 

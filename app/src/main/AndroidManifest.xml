@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Noticeme"
         tools:ignore="AllowBackup">
+        <activity android:name=".ui.guide.GuideActivity"></activity>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/FullscreenTheme">
@@ -52,4 +53,5 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
     </application>
+
 </manifest>
