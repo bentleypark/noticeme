@@ -14,10 +14,10 @@ object Versions {
     const val navSafArgPluginVersion = "2.3.0"
 
     // Kotlin
-    const val kotlinVersion = "1.4.10"
+    const val kotlinVersion = "1.4.20"
 
     // Coroutines
-    const val androidVersion = "1.4.1"
+    const val androidVersion = "1.4.2"
 
     // RxJava
     const val rxJavaVersion = "2.2.20"
