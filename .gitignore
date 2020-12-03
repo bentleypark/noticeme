@@ -18,3 +18,5 @@ local.properties
 fastlane/README.md
 fastlane/report.xml
 fastlane/.env
+
+sentry.properties
