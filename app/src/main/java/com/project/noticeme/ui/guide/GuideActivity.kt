@@ -2,6 +2,7 @@ package com.project.noticeme.ui.guide
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import coil.load
@@ -12,6 +13,7 @@ import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.databinding.ActivityGuideBinding
 import com.project.noticeme.ui.MainActivity
 import com.project.noticeme.ui.splash.SplashActivity
+import com.project.noticeme.ui.splash.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -23,9 +25,13 @@ class GuideActivity : AppCompatActivity() {
     @Inject
     lateinit var pref: SharedPreferenceManager
 
+    private val viewModel: SplashViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        viewModel.checkIsInitialDataSet()
 
         OnBoardingAdapter(centeredImageResources).also {
             binding.introScreenViewPager.adapter = it

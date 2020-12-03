@@ -17,7 +17,7 @@ constructor(
 //    private val cacheMapper: CacheMapper,
 //    private val networkMapper: NetworkMapper
 ) {
-    suspend fun insertConsumable(consumables: List<ConsumableEntity>): Flow<DataState<String>> =
+    suspend fun insertConsumable(consumables: List<ConsumableEntity>): Flow<DataState<Boolean>> =
 
         flow {
             emit(DataState.Loading)
@@ -27,7 +27,7 @@ constructor(
                 for (consumable in consumables) {
                     consumableDao.insert(consumable)
                 }
-                emit(DataState.Success("작업이 완료되었습니다."))
+                emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
                 Sentry.captureException(java.lang.Exception("Exception - $e"))

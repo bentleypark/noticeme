@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.project.noticeme.R
 import kotlinx.android.synthetic.main.onboarding_slide_item_container.view.*
 
@@ -16,7 +17,8 @@ class OnBoardingAdapter(private val imageList: List<Int>) :
     class OnBoardingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindImage(image: Int) {
             with(itemView) {
-                iv_center_img.setImageResource(image)
+//                iv_center_img.setImageResource(image)
+                iv_center_img.load(image)
             }
         }
     }

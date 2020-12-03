@@ -1,4 +1,4 @@
-package com.project.noticeme.ui.home.initialdata
+package com.project.noticeme.ui.splash.initialdata
 
 import com.project.noticeme.R
 import com.project.noticeme.data.room.ConsumableEntity
