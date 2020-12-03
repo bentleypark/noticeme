@@ -127,4 +127,20 @@
         <item name="android:fontFamily">@font/noto_bold</item>
     </style>
 
+    <style name="ConsumableEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:inputType">number</item>
+        <item name="android:textColor">@color/edit_text_text_color</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/noto_bold</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="CardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="cardCornerRadius">6dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+
 </resources>

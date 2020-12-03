@@ -114,13 +114,10 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_title"
+                style="@style/CardViewStyle"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="7dp"
-                android:background="?attr/selectableItemBackground"
-                app:cardCornerRadius="6dp"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
                 app:layout_constraintTop_toBottomOf="@+id/tv_guide_msg1">
@@ -182,26 +179,19 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_duration"
+                style="@style/CardViewStyle"
                 android:layout_width="75dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="7dp"
-                android:background="?attr/selectableItemBackground"
-                app:cardCornerRadius="6dp"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
                 app:layout_constraintTop_toBottomOf="@+id/tv_guide_msg3">
 
                 <EditText
                     android:id="@+id/tv_duration"
+                    style="@style/ConsumableEditTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/noto_bold"
-                    android:inputType="number"
-                    android:textColor="#505050"
-                    android:textCursorDrawable="@null"
-                    android:textSize="18sp"
                     tools:text="90" />
             </androidx.cardview.widget.CardView>
 
@@ -273,7 +263,7 @@
                     android:text="낮음"
                     android:textColor="#d2d2d2"
                     android:textSize="20sp"
-                    app:cornerRadius="5dp"
+                    app:cornerRadius="10dp"
                     app:strokeColor="#f4f9ff"
                     app:strokeWidth="5dp" />
 
@@ -288,7 +278,7 @@
                     android:text="중간"
                     android:textColor="#d2d2d2"
                     android:textSize="20sp"
-                    app:cornerRadius="5dp"
+                    app:cornerRadius="10dp"
                     app:strokeColor="#f4f9ff"
                     app:strokeWidth="5dp" />
 
@@ -303,7 +293,7 @@
                     android:text="높음"
                     android:textColor="#d2d2d2"
                     android:textSize="20sp"
-                    app:cornerRadius="5dp"
+                    app:cornerRadius="10dp"
                     app:strokeColor="#f4f9ff"
                     app:strokeWidth="5dp" />
 
@@ -318,7 +308,7 @@
                     android:text="없음"
                     android:textColor="#d2d2d2"
                     android:textSize="20sp"
-                    app:cornerRadius="5dp"
+                    app:cornerRadius="10dp"
                     app:strokeColor="#f4f9ff"
                     app:strokeWidth="5dp" />
             </com.google.android.material.button.MaterialButtonToggleGroup>
