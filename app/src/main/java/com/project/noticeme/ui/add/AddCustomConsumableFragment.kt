@@ -58,7 +58,7 @@ class AddCustomConsumableFragment : Fragment(),
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigate(R.id.action_addCustomConsumableFragment_to_searchFragment)
+                    findNavController().navigate(R.id.action_addCustomConsumableFragment_pop)
                 }
             })
     }
@@ -68,7 +68,7 @@ class AddCustomConsumableFragment : Fragment(),
 
         binding!!.apply {
             btnBack.setOnClickListener {
-                findNavController().navigate(R.id.action_addCustomConsumableFragment_to_searchFragment)
+                findNavController().navigate(R.id.action_addCustomConsumableFragment_pop)
             }
 
             priorityBtnGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
