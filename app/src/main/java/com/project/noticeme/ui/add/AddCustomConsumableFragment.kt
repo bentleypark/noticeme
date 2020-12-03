@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -52,8 +53,14 @@ class AddCustomConsumableFragment : Fragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentAddCustomConsumableBinding.inflate(layoutInflater), this) {
-
+    ): View = initBinding(FragmentAddCustomConsumableBinding.inflate(layoutInflater), this) {
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.action_addCustomConsumableFragment_to_searchFragment)
+                }
+            })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,7 +68,7 @@ class AddCustomConsumableFragment : Fragment(),
 
         binding!!.apply {
             btnBack.setOnClickListener {
-                findNavController().navigate(R.id.action_addCustomConsumableFragment_pop)
+                findNavController().navigate(R.id.action_addCustomConsumableFragment_to_searchFragment)
             }
 
             priorityBtnGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->

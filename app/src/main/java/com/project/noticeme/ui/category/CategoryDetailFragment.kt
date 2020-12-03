@@ -44,8 +44,7 @@ class CategoryDetailFragment : Fragment(),
         val itemTitle = arguments?.getString(ARGS_KEY)
 
         binding!!.tvTitle.text = itemTitle
-        val categoryName = itemTitle
-        viewModel.findConsumableWithCategory(categoryName!!)
+        viewModel.findConsumableWithCategory(itemTitle!!)
         viewModel.apply {
             consumableList.observe(viewLifecycleOwner,
                 {

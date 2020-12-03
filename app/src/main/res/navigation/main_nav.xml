@@ -82,9 +82,9 @@
             app:destination="@id/homeFragment"
             app:launchSingleTop="true" />
         <action
-            android:id="@+id/action_addCustomConsumableFragment_pop"
-            app:popUpTo="@id/addCustomConsumableFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_addCustomConsumableFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/searchFragment"

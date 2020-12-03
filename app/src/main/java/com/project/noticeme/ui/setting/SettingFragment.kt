@@ -1,5 +1,6 @@
 package com.project.noticeme.ui.setting
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -53,6 +54,12 @@ class SettingFragment : Fragment(),
                 findNavController().navigate(R.id.action_settingFragment_to_ruleFragment)
             }
 
+            ivArrow2.setOnClickListener {
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "text/plain"
+                intent.putExtra(Intent.EXTRA_EMAIL, "p2c2kbf@gmail.com")
+                requireContext().startActivity(intent)
+            }
 
             ivArrow3.setOnClickListener {
                 initReview()
