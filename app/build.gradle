@@ -146,7 +146,7 @@ dependencyUpdates {
 
 sentry {
     autoProguardConfig false
-    autoUpload true
+    autoUpload false
     uploadNativeSymbols false
     includeNativeSources false
 }
