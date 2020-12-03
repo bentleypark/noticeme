@@ -108,7 +108,10 @@ class UserConsumableListAdapter(
                 item.priority
             )
         )
-        JobSchedulerStart.start(context, item.duration)
+
+        if (viewModel.checkIsNotificationSettingOn()) {
+            JobSchedulerStart.start(context, item.duration)
+        }
     }
 
     private fun getExpiredDay(startDate: Long, endDate: Long): Long {

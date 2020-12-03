@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.project.noticeme.common.base.BaseViewModel
+import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.repository.MainRepository
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class CategoryDetailViewModel @ViewModelInject
 constructor(private val mainRepository: MainRepository) : BaseViewModel() {
@@ -29,6 +31,9 @@ constructor(private val mainRepository: MainRepository) : BaseViewModel() {
         get() = _dataState
 
     private val userConsumableList = MutableLiveData<List<UserConsumableEntity>>()
+
+    @Inject
+    lateinit var pref: SharedPreferenceManager
 
     init {
         getUserConsumableData()
@@ -77,4 +82,6 @@ constructor(private val mainRepository: MainRepository) : BaseViewModel() {
 
     fun checkIfItemIsAlreadyInserted(title: String) =
         (userConsumableList.value!!.find { it.title == title } != null)
+
+    fun checkIsNotificationSettingOn() = pref.getNotificationSetting()
 }

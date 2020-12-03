@@ -1,6 +1,5 @@
 package com.project.noticeme.ui.home.viewmodel
 
-import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.project.noticeme.common.base.BaseViewModel
@@ -11,12 +10,11 @@ import com.project.noticeme.data.state.DataState
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class HomeViewModel @ViewModelInject
 constructor(
     private val mainRepository: MainRepository,
-    private val pref: SharedPreferenceManager,
-    @Assisted private val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
     private val _consumableList = MutableLiveData<DataState<List<UserConsumableEntity>>>()
@@ -35,6 +33,9 @@ constructor(
     private val _dataStateForUpdate = MutableLiveData<DataState<Boolean>>()
     val dataStateForUpdate: LiveData<DataState<Boolean>>
         get() = _dataStateForUpdate
+
+    @Inject
+    lateinit var pref: SharedPreferenceManager
 
     init {
         getUserConsumableData()
@@ -69,4 +70,6 @@ constructor(
                 .launchIn(viewModelScope)
         }
     }
+
+    fun checkIsNotificationSettingOn() = pref.getNotificationSetting()
 }

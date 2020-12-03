@@ -134,7 +134,6 @@ class HomeFragment : Fragment(),
                 viewLifecycleOwner, {
                     binding!!.apply {
                         rvList.visibility = View.GONE
-                        ivGuideMsg.isVisible = false
                         emptyList.isVisible = false
                         progressCircular.isVisible = false
                     }
@@ -150,7 +149,6 @@ class HomeFragment : Fragment(),
                                             .toMutableList())
                                     }
                                 } else {
-                                    binding.ivGuideMsg.isVisible = true
                                     binding.emptyList.isVisible = true
                                 }
                             }

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainActivity_background"
+    android:background="@color/main_background_color"
     tools:context=".ui.home.HomeFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -121,16 +121,6 @@
                 android:textSize="18sp" />
 
         </FrameLayout>
-
-        <ImageView
-            android:id="@+id/iv_guide_msg"
-            android:layout_width="205dp"
-            android:layout_height="122dp"
-            android:background="@drawable/guide_msg"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/btn_add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_add"

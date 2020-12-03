@@ -30,8 +30,10 @@ class ConsumableListViewHolder(
             tvExpireTime.text = getDurationWithDay(item.duration)
             consumableItem.setOnClickListener {
 
-                if(!viewModel.checkIfItemIsAlreadyInserted(item.title)){
-                    JobSchedulerStart.start(context, item.duration)
+                if (!viewModel.checkIfItemIsAlreadyInserted(item.title)) {
+                    if (viewModel.checkIsNotificationSettingOn()) {
+                        JobSchedulerStart.start(context, item.duration)
+                    }
                     viewModel.insert(
                         UserConsumableEntity(
                             item.title,
