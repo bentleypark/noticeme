@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import coil.load
 import com.project.noticeme.R
 import com.project.noticeme.common.ex.launchActivityWithFinish
 import com.project.noticeme.common.ex.viewBinding
@@ -39,8 +40,10 @@ class GuideActivity : AppCompatActivity() {
     private val viewPagerOnChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
 
-            binding.ivCenterImg.setImageResource(centeredImageResources[position])
-            binding.ivBottomDot.setImageResource(bottomDotImageResource[position])
+//            binding.ivCenterImg.setImageResource(centeredImageResources[position])
+            binding.ivCenterImg.load(centeredImageResources[position])
+//            binding.ivBottomDot.setImageResource(bottomDotImageResource[position])
+            binding.ivBottomDot.load(bottomDotImageResource[position])
             if (position == 3) {
                 pref.setOnBoardingShowed(true)
                 lifecycleScope.launchWhenCreated {

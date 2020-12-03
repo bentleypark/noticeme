@@ -202,4 +202,7 @@ object Libs {
 
     // Admob
     const val admob = "com.google.android.gms:play-services-ads:${Versions.admobVersion}"
+
+    // Colil
+    const val coil = "io.coil-kt:coil:${Versions.coilVersion}"
 }

@@ -33,7 +33,7 @@ object Versions {
     const val activityVersion = "1.2.0-beta01"
     const val fragmentVersion = "1.3.0-beta01"
     const val recyclerviewVersion = "1.1.0"
-    const val viewpager2Version = "1.0.0"
+    const val viewpager2Version = "1.1.0-alpha01"
     const val swipeRefreshLayoutVersion = "1.1.0"
     const val databindingVersion = "4.0.1"
     const val prefernceVersion = "1.1.1"
@@ -87,7 +87,7 @@ object Versions {
     const val timberVersion = "4.7.1"
     const val rxLogsVersion = "1.0.14"
     const val stethoVersion = "1.5.1"
-    const val sentryVersion = "3.0.0"
+    const val sentryVersion = "3.2.0"
 
     // File Downloader
     const val fetch2Version = "3.1.5"
@@ -113,4 +113,7 @@ object Versions {
 
     // Admob
     const val admobVersion = "19.5.0"
+
+    // Coil
+    const val coilVersion = "1.1.0"
 }
