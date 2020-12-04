@@ -3,6 +3,7 @@ package com.project.noticeme.ui.category.adapt
 import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.project.noticeme.R
 import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.ConsumableEntity
@@ -47,13 +48,18 @@ class ConsumableListViewHolder(
                         )
                     )
                 } else {
-                    context.makeToast("이미 추가된 소모품입니다!")
+                    context.makeToast(context.getString(R.string.consumable_add_warning_msg))
                 }
             }
         }
     }
 
     private fun getDurationWithDay(milliseconds: Long): String {
-        return "${(milliseconds / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS))}일"
+        return "${
+            (milliseconds / TimeUnit.MILLISECONDS.convert(
+                1,
+                TimeUnit.DAYS
+            ))
+        }${context.getString(R.string.tv_day_title)}"
     }
 }

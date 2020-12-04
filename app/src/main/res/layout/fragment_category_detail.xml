@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/noto_bold"
-                    android:text="카테고리"
+                    android:text="@string/tv_category_title"
                     android:textColor="#ababab"
                     android:textSize="20sp" />
 
@@ -128,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="소모품 리스트가 비었습니다."
+                    android:text="@string/tv_no_list_title"
                     android:textColor="#cecece"
                     android:textSize="18sp" />
             </FrameLayout>

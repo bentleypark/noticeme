@@ -156,12 +156,12 @@ class UserConsumableListAdapter(
         MaterialAlertDialogBuilder(
             context, R.style.AlertDialogTheme
         )
-            .setTitle("소모품을 삭제하시겠습니까?")
-            .setPositiveButton("확인") { dialog, _ ->
+            .setTitle(context.getString(R.string.remove_dialog_title))
+            .setPositiveButton(context.getString(R.string.btn_confirm_title)) { dialog, _ ->
                 dialog.dismiss()
                 removeAt(position)
             }
-            .setNegativeButton("취소") { dialog, _ ->
+            .setNegativeButton(context.getString(R.string.btn_cancel_title)) { dialog, _ ->
                 dialog.dismiss()
             }
             .setCancelable(false)
@@ -172,12 +172,12 @@ class UserConsumableListAdapter(
         MaterialAlertDialogBuilder(
             context, R.style.AlertDialogTheme
         )
-            .setTitle("소모품의 교체 날짜를 오늘 날짜로 변경하시겠습니까?")
-            .setPositiveButton("확인") { dialog, _ ->
+            .setTitle(context.getString(R.string.renewal_dialog_title))
+            .setPositiveButton(context.getString(R.string.btn_confirm_title)) { dialog, _ ->
                 dialog.dismiss()
                 updateAt(position)
             }
-            .setNegativeButton("취소") { dialog, _ ->
+            .setNegativeButton(context.getString(R.string.btn_cancel_title)) { dialog, _ ->
                 dialog.dismiss()
             }
             .setCancelable(false)

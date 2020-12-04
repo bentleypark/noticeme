@@ -113,8 +113,6 @@ class CategoryDetailFragment : Fragment(),
     }
 
     companion object {
-        fun newInstance() = CategoryDetailFragment()
-
         const val ARGS_KEY = "categoryName"
     }
 }

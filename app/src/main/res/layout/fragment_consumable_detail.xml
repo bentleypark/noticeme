@@ -42,7 +42,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:fontFamily="@font/noto_bold"
-                    android:text="확인"
+                    android:text="@string/btn_confirm_title"
                     android:textColor="@color/above_layout_text_color"
                     android:textSize="20sp" />
 
@@ -55,7 +55,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:fontFamily="@font/noto_bold"
-                    android:text="삭제"
+                    android:text="@string/btn_remove_title"
                     android:textColor="@color/above_layout_text_color"
                     android:textSize="20sp" />
 
@@ -68,6 +68,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -106,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_bold"
-                android:text="소모품명"
+                android:text="@string/tv_consumable_title"
                 android:textColor="@color/above_layout_text_color"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -146,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:fontFamily="@font/noto_bold"
-                android:text="마지막 교체시기가 언제인가요?"
+                android:text="@string/tv_guide_msg_title1"
                 android:textColor="@color/above_layout_text_color"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -171,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/noto_bold"
-                android:text="얼마나 자주 교체할거에요?"
+                android:text="@string/tv_guide_msg_title2"
                 android:textColor="@color/above_layout_text_color"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -180,7 +181,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_duration"
                 style="@style/CardViewStyle"
-                android:layout_width="75dp"
+                android:layout_width="80dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="7dp"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -190,9 +191,7 @@
                     android:id="@+id/tv_duration"
                     style="@style/ConsumableEditTextStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    tools:text="90" />
+                    android:layout_height="wrap_content" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -235,7 +234,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/noto_bold"
-                android:text="우선 순위"
+                android:text="@string/tv_guide_msg_title3"
                 android:textColor="@color/above_layout_text_color"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -260,7 +259,7 @@
                     android:backgroundTint="@color/priority_button_group_selector"
                     android:fontFamily="@font/noto_bold"
                     android:stateListAnimator="@null"
-                    android:text="낮음"
+                    android:text="@string/btn_priority_low_title"
                     android:textColor="#d2d2d2"
                     android:textSize="20sp"
                     app:cornerRadius="10dp"
@@ -275,7 +274,7 @@
                     android:backgroundTint="@color/priority_button_group_selector"
                     android:fontFamily="@font/noto_bold"
                     android:stateListAnimator="@null"
-                    android:text="중간"
+                    android:text="@string/btn_priority_middle_title"
                     android:textColor="#d2d2d2"
                     android:textSize="20sp"
                     app:cornerRadius="10dp"
@@ -290,7 +289,7 @@
                     android:backgroundTint="@color/priority_button_group_selector"
                     android:fontFamily="@font/noto_bold"
                     android:stateListAnimator="@null"
-                    android:text="높음"
+                    android:text="@string/btn_priority_high_title"
                     android:textColor="#d2d2d2"
                     android:textSize="20sp"
                     app:cornerRadius="10dp"
@@ -305,7 +304,7 @@
                     android:backgroundTint="@color/priority_button_group_selector"
                     android:fontFamily="@font/noto_bold"
                     android:stateListAnimator="@null"
-                    android:text="없음"
+                    android:text="@string/btn_priority_none_title"
                     android:textColor="#d2d2d2"
                     android:textSize="20sp"
                     app:cornerRadius="10dp"

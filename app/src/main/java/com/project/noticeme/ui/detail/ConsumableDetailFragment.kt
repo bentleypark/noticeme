@@ -14,7 +14,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
-import com.project.noticeme.common.ex.makeToast
+import com.project.noticeme.common.ex.makeSnackBar
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
@@ -30,13 +30,13 @@ class ConsumableDetailFragment : Fragment(),
 
     private val viewModel: ConsumableDetailViewModel by viewModels()
     private lateinit var userConsumableItem: UserConsumableEntity
-    var prioirty = 0
-    var startDate: Long = 0
+    private var prioirty = 0
+    private var startDate: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentConsumableDetailBinding.inflate(layoutInflater), this) {}
+    ): View = initBinding(FragmentConsumableDetailBinding.inflate(layoutInflater), this) {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,7 +57,7 @@ class ConsumableDetailFragment : Fragment(),
                 findNavController().navigate(R.id.action_consumableDetailFragment_pop)
             }
 
-            priorityBtnGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            priorityBtnGroup.addOnButtonCheckedListener { _, checkedId, _ ->
                 when (checkedId) {
                     btnPriority0.id -> {
                         prioirty = 0
@@ -82,15 +82,14 @@ class ConsumableDetailFragment : Fragment(),
 
                 val duration = tvDuration.text.toString().toInt() * DAY_MILLISECONDS
 
-                val title = tvTitle.text.toString()
                 if (startDate == 0.toLong()) {
                     startDate = userConsumableItem.startDate
                 }
 
                 viewModel.update(
                     UserConsumableEntity(
-                        id,
-                        title,
+                        userConsumableItem.id,
+                        userConsumableItem.title,
                         userConsumableItem.image,
                         userConsumableItem.category,
                         duration,
@@ -158,7 +157,7 @@ class ConsumableDetailFragment : Fragment(),
                             progressCircular.isVisible = false
                         }
 
-                        makeToast("소모품의 정보가 수정돠었습니다.")
+                        binding.mainView.makeSnackBar(getString(R.string.consumable_modification_msg))
                         findNavController().navigate(R.id.action_consumableDetailFragment_pop)
                     }
                 }
@@ -171,7 +170,7 @@ class ConsumableDetailFragment : Fragment(),
                 when (it) {
                     is DataState.Success<Boolean> -> {
                         findNavController().navigate(R.id.action_consumableDetailFragment_pop)
-                        makeToast("소모품이 삭제돠었습니다.")
+                        binding!!.mainView.makeSnackBar(getString(R.string.consumable_remove_msg))
                     }
                 }
             }
@@ -183,12 +182,12 @@ class ConsumableDetailFragment : Fragment(),
         MaterialAlertDialogBuilder(
             requireContext(), R.style.AlertDialogTheme
         )
-            .setTitle("소모품을 삭제하시겠습니까?")
-            .setPositiveButton("확인") { dialog, _ ->
+            .setTitle(getString(R.string.remove_dialog_title))
+            .setPositiveButton(getString(R.string.btn_confirm_title)) { dialog, _ ->
                 dialog.dismiss()
                 deleteItem()
             }
-            .setNegativeButton("취소") { dialog, _ ->
+            .setNegativeButton(getString(R.string.btn_cancel_title)) { dialog, _ ->
                 dialog.dismiss()
             }
             .setCancelable(false)
@@ -213,8 +212,6 @@ class ConsumableDetailFragment : Fragment(),
     }
 
     companion object {
-        fun newInstance() = ConsumableDetailFragment()
-
         const val ARGS_KEY = "itemTitle"
     }
 }

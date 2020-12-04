@@ -1,7 +1,3 @@
-/*
- * COPYRIGHT © SOVORO 2020 ALL RIGHTS RESERVED
- */
-
 package com.project.noticeme.ui.guide
 
 import android.view.LayoutInflater
@@ -17,7 +13,6 @@ class OnBoardingAdapter(private val imageList: List<Int>) :
     class OnBoardingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindImage(image: Int) {
             with(itemView) {
-//                iv_center_img.setImageResource(image)
                 iv_center_img.load(image)
             }
         }

@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/noto_bold"
-                    android:text="설정"
+                    android:text="@string/setting_layout_title"
                     android:textColor="#ababab"
                     android:textSize="20sp" />
 
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
-            android:text="알람 설정"
+            android:text="@string/tv_notification_setting_title"
             ads:layout_constraintStart_toStartOf="parent"
             ads:layout_constraintTop_toTopOf="@+id/guideline2" />
 
@@ -111,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
-            android:text="앱 버전 정보"
+            android:text="@string/tv_version_info_title"
             ads:layout_constraintStart_toStartOf="parent"
             ads:layout_constraintTop_toTopOf="@+id/boarder_view1" />
 
@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
-            android:text="개인정보 처리방침"
+            android:text="@string/tv_personal_privacy_policy_title"
             ads:layout_constraintStart_toStartOf="parent"
             ads:layout_constraintTop_toTopOf="@+id/boarder_view2" />
 
@@ -176,7 +176,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
-            android:text="문의하기"
+            android:text="@string/tv_query_title"
             ads:layout_constraintStart_toStartOf="parent"
             ads:layout_constraintTop_toTopOf="@+id/boarder_view3" />
 
@@ -208,7 +208,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
-            android:text="앱 평가하기"
+            android:text="@string/tv_evaluation_title"
             ads:layout_constraintStart_toStartOf="parent"
             ads:layout_constraintTop_toTopOf="@+id/boarder_view4" />
 

@@ -57,7 +57,7 @@ class SettingFragment : Fragment(),
             ivArrow2.setOnClickListener {
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.type = "text/plain"
-                intent.putExtra(Intent.EXTRA_EMAIL, "p2c2kbf@gmail.com")
+                intent.putExtra(Intent.EXTRA_EMAIL, getString(R.string.email_address))
                 requireContext().startActivity(intent)
             }
 
@@ -85,6 +85,5 @@ class SettingFragment : Fragment(),
                 Timber.e("In-app review request failed, reason=${request.exception}")
             }
         }
-
     }
 }

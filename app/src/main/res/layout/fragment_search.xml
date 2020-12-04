@@ -57,7 +57,7 @@
                         android:layout_gravity="start"
                         android:layout_weight="1"
                         android:background="@drawable/editext_search_layout_background"
-                        android:hint="소모품 검색: e.g.)칫솔"
+                        android:hint="@string/ed_search_hint"
                         android:imeOptions="actionSearch"
                         android:inputType="text"
                         android:maxLength="23"
@@ -89,6 +89,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -143,7 +144,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="16dp"
-                android:text="전체삭제"
+                android:text="@string/btn_all_remove_title"
                 android:textColor="#888888"
                 android:textSize="12sp" />
 
@@ -164,7 +165,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/noto_bold"
-            android:text="검색 결과가 없습니다."
+            android:text="@string/no_search_result_msg"
             android:textColor="#7c7c7c"
             android:textSize="20sp"
             android:visibility="gone"
@@ -177,7 +178,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="100dp"
             android:fontFamily="@font/noto_bold"
-            android:text="찾으시는 물건이 없나요?\n아래 버튼으로 직접 등록해 보세요!"
+            android:text="@string/tv_search_guide_msg"
             android:textAlignment="center"
             android:textColor="#505050"
             android:textSize="25sp"

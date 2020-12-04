@@ -12,7 +12,6 @@ import com.project.noticeme.common.ex.viewBinding
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.databinding.ActivityGuideBinding
 import com.project.noticeme.ui.MainActivity
-import com.project.noticeme.ui.splash.SplashActivity
 import com.project.noticeme.ui.splash.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -46,9 +45,7 @@ class GuideActivity : AppCompatActivity() {
     private val viewPagerOnChangeCallback = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
 
-//            binding.ivCenterImg.setImageResource(centeredImageResources[position])
             binding.ivCenterImg.load(centeredImageResources[position])
-//            binding.ivBottomDot.setImageResource(bottomDotImageResource[position])
             binding.ivBottomDot.load(bottomDotImageResource[position])
             if (position == 3) {
                 pref.setOnBoardingShowed(true)

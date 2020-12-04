@@ -215,26 +215,14 @@ class SearchFragment : Fragment(),
         detailViewModel.dataState.observe(viewLifecycleOwner, {
             when (it) {
                 is DataState.Success<Boolean> -> {
-                    makeToast("소모품이 추가되었습니다.")
+                    binding.mainView.makeSnackBar(getString(R.string.consumable_add_success_msg))
                 }
                 is DataState.Error -> {
-                    makeToast("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
+                    binding.mainView.makeSnackBar(getString(R.string.consumable_add_fail_msg))
                 }
             }
         })
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        Timber.d("onResume")
-//
-//        binding!!.apply {
-//            tvSearchResultEmpty.makeGone()
-//            tvGuideMsg.makeGone()
-//            btnAdd.makeGone()
-//            adView.makeGone()
-//        }
-//    }
 
     private fun search() {
         val calendar = Calendar.getInstance()
@@ -260,9 +248,5 @@ class SearchFragment : Fragment(),
             viewModel.searchWithTitle(title)
             binding!!.searchHistoryLayout.makeGone()
         }
-    }
-
-    companion object {
-        fun newInstance() = SearchFragment()
     }
 }
