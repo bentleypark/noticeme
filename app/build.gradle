@@ -11,6 +11,15 @@ plugins {
 
 //apply from: "${rootProject.projectDir}/flavors.gradle"
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+// Initialize a new Properties() object called keystoreProperties.
+def keystoreProperties = new Properties()
+
+// Load your keystore.properties file into the keystoreProperties object.
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+
 android {
     compileSdkVersion Config.compileSdkVersion
     buildToolsVersion "30.0.2"
@@ -24,18 +33,17 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
-        releaseWithSignedKey {
-            storeFile file(SIGNED_STORE_FILE)
-            storePassword SIGNED_STORE_PASSWORD
-            keyAlias SIGNED_KEY_ALIAS
-            keyPassword SIGNED_KEY_PASSWORD
+        config {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.releaseWithSignedKey
             manifestPlaceholders = [environment: "production"]
             applicationVariants.all { variant ->
                 variant.outputs.all {
