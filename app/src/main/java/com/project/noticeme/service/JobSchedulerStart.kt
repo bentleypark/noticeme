@@ -10,12 +10,12 @@ import kotlin.random.Random
 class JobSchedulerStart {
 
     companion object {
-        fun start(context: Context, duration: Long) {
+        fun start(context: Context, duration: Long, id: Int) {
 
             val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val intent = Intent(context, AlarmBroadCastReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(     // 2
-                context, Random.nextInt(), intent,
+            val pendingIntent = PendingIntent.getBroadcast(
+                context, id, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
 

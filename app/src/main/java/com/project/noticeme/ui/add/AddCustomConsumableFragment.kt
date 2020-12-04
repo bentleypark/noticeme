@@ -104,6 +104,7 @@ class AddCustomConsumableFragment : Fragment(),
 
                 viewModel.insertUserConsumable(
                     UserConsumableEntity(
+                        0,
                         SpannableStringBuilder(tvTitle.text).toString(),
                         randomIcon.random(),
                         "나의 목록",

@@ -32,10 +32,11 @@ class ConsumableListViewHolder(
 
                 if (!viewModel.checkIfItemIsAlreadyInserted(item.title)) {
                     if (viewModel.checkIsNotificationSettingOn()) {
-                        JobSchedulerStart.start(context, item.duration)
+                        JobSchedulerStart.start(context, item.duration, item.id)
                     }
                     viewModel.insert(
                         UserConsumableEntity(
+                            item.id,
                             item.title,
                             item.image,
                             item.category,

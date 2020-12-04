@@ -99,6 +99,7 @@ class UserConsumableListAdapter(
         val currentDate = System.currentTimeMillis()
         viewModel.update(
             UserConsumableEntity(
+                item.id,
                 item.title,
                 item.image,
                 item.category,
@@ -110,7 +111,7 @@ class UserConsumableListAdapter(
         )
 
         if (viewModel.checkIsNotificationSettingOn()) {
-            JobSchedulerStart.start(context, item.duration)
+            JobSchedulerStart.start(context, item.duration, item.id)
         }
     }
 
