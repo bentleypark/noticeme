@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class HomeViewModel @ViewModelInject
 constructor(
-    private val mainRepository: MainRepository,
+    private val mainRepository: MainRepository, private val pref: SharedPreferenceManager
 ) : BaseViewModel() {
 
     private val _consumableList = MutableLiveData<DataState<List<UserConsumableEntity>>>()
@@ -33,9 +33,6 @@ constructor(
     private val _dataStateForUpdate = MutableLiveData<DataState<Boolean>>()
     val dataStateForUpdate: LiveData<DataState<Boolean>>
         get() = _dataStateForUpdate
-
-    @Inject
-    lateinit var pref: SharedPreferenceManager
 
     init {
         getUserConsumableData()
@@ -62,7 +59,7 @@ constructor(
     }
 
     fun update(item: UserConsumableEntity) {
-        viewModelScope.launch{
+        viewModelScope.launch {
             mainRepository.update(item)
                 .onEach { dataState ->
                     _dataStateForUpdate.value = dataState

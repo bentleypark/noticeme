@@ -17,6 +17,7 @@ import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.hideKeyboard
+import com.project.noticeme.common.ex.makeSnackBar
 import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.ConsumableEntity
@@ -152,8 +153,9 @@ class AddCustomConsumableFragment : Fragment(),
                             binding.apply {
                                 progressCircular.isVisible = true
                             }
-                            delay(1000)
-                            makeToast("소모품의 추가가 진행 중입니다. 잠시만 기다려주세요!")
+                            delay(1500)
+//                            binding.mainView.makeSnackBar("소모품의 추가가 진행 중입니다. 잠시만 기다려주세요!")
+//                            makeToast("소모품의 추가가 진행 중입니다. 잠시만 기다려주세요!")
                         }
                     }
                 }
@@ -169,8 +171,12 @@ class AddCustomConsumableFragment : Fragment(),
                             tvTitle.hideKeyboard()
                             tvDuration.hideKeyboard()
                         }
-                        makeToast("소모품이 추가되었습니다. \n추가된 소모품은 홈스크린과 나의 목록에서 확인할 수 있습니다.")
-                        findNavController().navigate(R.id.action_addCustomConsumableFragment_to_homeFragment)
+                        lifecycleScope.launch {
+                            binding.mainView.makeSnackBar("소모품이 추가되었습니다!")
+                            delay(1500)
+//                        makeToast("소모품이 추가되었습니다. \n추가된 소모품은 홈스크린과 나의 목록에서 확인할 수 있습니다.")
+                            findNavController().navigate(R.id.action_addCustomConsumableFragment_to_homeFragment)
+                        }
                     }
                 }
             })

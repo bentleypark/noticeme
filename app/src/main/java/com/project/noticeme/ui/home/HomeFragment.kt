@@ -105,30 +105,30 @@ class HomeFragment : Fragment(),
     private fun setUpObserve() {
         viewModel.apply {
 
-            dataState.observe(
-                viewLifecycleOwner, {
-                    when (it) {
-                        is DataState.Success<String> -> {
-                            binding!!.apply {
-                                progressCircular.isVisible = false
-                            }
-                            if (!pref.getInitialData()) {
-                                makeToast(it.data)
-                            }
-                            pref.setInitialData(true)
-                        }
-
-                        is DataState.Loading -> {
-                            lifecycleScope.launch {
-                                binding!!.apply {
-                                    progressCircular.isVisible = true
-                                }
-                                makeToast("초기 데이터 설정 중입니다. 잠시만 기다려주세요!")
-                            }
-                        }
-                    }
-                }
-            )
+//            dataState.observe(
+//                viewLifecycleOwner, {
+//                    when (it) {
+//                        is DataState.Success<String> -> {
+//                            binding!!.apply {
+//                                progressCircular.isVisible = false
+//                            }
+//                            if (!pref.getInitialData()) {
+//                                makeToast(it.data)
+//                            }
+//                            pref.setInitialData(true)
+//                        }
+//
+//                        is DataState.Loading -> {
+//                            lifecycleScope.launch {
+//                                binding!!.apply {
+//                                    progressCircular.isVisible = true
+//                                }
+//                                makeToast("초기 데이터 설정 중입니다. 잠시만 기다려주세요!")
+//                            }
+//                        }
+//                    }
+//                }
+//            )
 
             consumableList.observe(
                 viewLifecycleOwner, {

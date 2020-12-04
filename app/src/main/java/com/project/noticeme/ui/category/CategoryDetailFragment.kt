@@ -13,10 +13,7 @@ import com.google.android.gms.ads.AdRequest
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
-import com.project.noticeme.common.ex.makeGone
-import com.project.noticeme.common.ex.makeToast
-import com.project.noticeme.common.ex.makeVisible
-import com.project.noticeme.common.ex.runLayoutAnimation
+import com.project.noticeme.common.ex.*
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentCategoryDetailBinding
@@ -96,10 +93,12 @@ class CategoryDetailFragment : Fragment(),
             dataState.observe(viewLifecycleOwner, {
                 when (it) {
                     is DataState.Success<Boolean> -> {
-                        makeToast("소모품이 추가되었습니다.")
+//                        makeToast("소모품이 추가되었습니다.")
+                        binding.mainView.makeSnackBar("소모품이 추가되었습니다.")
                     }
                     is DataState.Error -> {
-                        makeToast("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
+//                        makeToast("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
+                        binding.mainView.makeSnackBar("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
                     }
                 }
             })

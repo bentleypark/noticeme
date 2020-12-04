@@ -14,11 +14,10 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 class CategoryDetailViewModel @ViewModelInject
-constructor(private val mainRepository: MainRepository) : BaseViewModel() {
+constructor(private val mainRepository: MainRepository, private val pref: SharedPreferenceManager) :
+    BaseViewModel() {
 
     private val _consumableList = MutableLiveData<DataState<List<ConsumableEntity>>>()
 
@@ -31,9 +30,6 @@ constructor(private val mainRepository: MainRepository) : BaseViewModel() {
         get() = _dataState
 
     private val userConsumableList = MutableLiveData<List<UserConsumableEntity>>()
-
-    @Inject
-    lateinit var pref: SharedPreferenceManager
 
     init {
         getUserConsumableData()
