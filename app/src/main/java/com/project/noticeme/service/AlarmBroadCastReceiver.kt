@@ -10,35 +10,39 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.PowerManager
-import android.view.WindowManager
-import android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+import androidx.annotation.CallSuper
 import androidx.core.app.NotificationCompat
 import com.project.noticeme.R
+import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.ui.MainActivity
-import timber.log.Timber
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class AlarmBroadCastReceiver : BroadcastReceiver() {
+abstract class HiltBroadcastReceiver : BroadcastReceiver() {
+    @CallSuper
+    override fun onReceive(context: Context, intent: Intent) {
+    }
+}
+
+@AndroidEntryPoint
+class AlarmBroadCastReceiver : HiltBroadcastReceiver() {
 
     lateinit var notificationManager: NotificationManager
 
+    @Inject
+    lateinit var pref: SharedPreferenceManager
+
     override fun onReceive(context: Context, intent: Intent) {
+        super.onReceive(context, intent)
 
-        notificationManager = context.getSystemService(
-            Context.NOTIFICATION_SERVICE
-        ) as NotificationManager
+        if (pref.getNotificationSetting()) {
+            notificationManager = context.getSystemService(
+                Context.NOTIFICATION_SERVICE
+            ) as NotificationManager
 
-        createNotificationChannel()
-
-        deliverNotification(context)
-
-//        val builder = NotificationCompat.Builder(context!!, "test")
-//            .setSmallIcon(R.drawable.icon)
-//            .setContentTitle("Title")  //알람 제목
-//            .setContentText("Text") //알람 내용
-//            .setPriority(NotificationCompat.PRIORITY_HIGH)
-//
-//        val notificationManager = NotificationManagerCompat.from(context)
-//        notificationManager.notify(NOTIFICATION_ID, builder.build())
+            createNotificationChannel()
+            deliverNotification(context)
+        }
     }
 
     private fun createNotificationChannel() {
@@ -70,8 +74,8 @@ class AlarmBroadCastReceiver : BroadcastReceiver() {
         val builder =
             NotificationCompat.Builder(context, "NOTICEME")
                 .setSmallIcon(R.drawable.icon)
-                .setContentTitle("소모품 교체 알림")
-                .setContentText("오늘 날짜로 교체할 소모품이 있습니다. 확인해주세요!")
+                .setContentTitle(context.getString(R.string.notification_title))
+                .setContentText(context.getString(R.string.notification_content))
                 .setContentIntent(contentPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
@@ -87,7 +91,8 @@ class AlarmBroadCastReceiver : BroadcastReceiver() {
 
         (context.getSystemService(Context.POWER_SERVICE) as PowerManager).run {
             newWakeLock(
-                PowerManager.SCREEN_DIM_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP, "noticeme:tag"
+                PowerManager.SCREEN_DIM_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
+                "noticeme:tag"
             ).apply {
                 acquire(5000)
             }

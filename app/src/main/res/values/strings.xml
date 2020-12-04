@@ -30,7 +30,7 @@ android.permission.RECEIVE_BOOT_COMPLETED: 사용자 알림 제공을 위해서 
     <string name="ed_consumable_hint">e.g.)에어컨 필터</string>
     <string name="tv_guide_msg_title1">마지막 교체시기가 언제인가요?</string>
     <string name="btn_confirm_title">확인</string>
-    <string name="btn_cancel_title">취</string>
+    <string name="btn_cancel_title">취소</string>
     <string name="tv_guide_msg_title2">얼마나 자주 교체할거에요?</string>
     <string name="ed_duration_hint">e.g.)30</string>
     <string name="tv_day_title">일</string>
@@ -67,4 +67,6 @@ android.permission.RECEIVE_BOOT_COMPLETED: 사용자 알림 제공을 위해서 
     <string name="category_title4">침실</string>
     <string name="category_title5">욕실</string>
     <string name="email_address">p2c2kbf@gmail.com</string>
+    <string name="notification_title">소모품 교체 알림</string>
+    <string name="notification_content">오늘 날짜로 교체할 소모품이 있습니다. 확인해주세요!</string>
 </resources>
