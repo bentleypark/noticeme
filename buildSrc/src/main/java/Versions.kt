@@ -2,13 +2,11 @@ object Versions {
 
     // Class Path for Plugin
     const val buildGradleVersion = "4.1.1"
-    const val protobufGradleVersion = "0.8.13"
     const val googleServiceVersion = "4.3.3"
     const val firebaseCrashlyticsGradleVersion = "2.2.0"
     const val sentryGradleVersion = "1.7.35"
-    const val r8Version = "2.1.66"
+    const val r8Version = "2.1.67"
     const val androidJunit5Version = "1.6.2.0"
-    const val perfPluginVersion = "1.3.1"
     const val androidMavenGradleVersion = "2.1"
     const val detektGradleVersion = "1.12.0"
     const val navSafArgPluginVersion = "2.3.0"
@@ -42,7 +40,7 @@ object Versions {
     const val workVersion = "2.4.0"
     const val lifeCycleVersion = "2.2.0"
     const val roomVersion = "2.2.5"
-    const val navigationVersion = "2.3.1"
+    const val navigationVersion = "2.3.2"
     const val startupVersion = "1.0.0"
 
     const val testVersion = "1.3.0"

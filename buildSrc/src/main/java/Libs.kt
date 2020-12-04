@@ -4,8 +4,6 @@ object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.buildGradleVersion}"
     const val kotlinGradlePlugin =
         "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinVersion}"
-    const val protobufGradle =
-        "com.google.protobuf:protobuf-gradle-plugin:${Versions.protobufGradleVersion}"
     const val googleService = "com.google.gms:google-services:${Versions.googleServiceVersion}"
     const val firebaseCrashlyticsGradle =
         "com.google.firebase:firebase-crashlytics-gradle:${Versions.firebaseCrashlyticsGradleVersion}"
@@ -14,7 +12,6 @@ object Libs {
     const val r8 = "com.android.tools:r8:${Versions.r8Version}"
     const val androidJunit5Version =
         "de.mannodermaus.gradle.plugins:android-junit5:${Versions.androidJunit5Version}"
-    const val perfPlugin = "com.google.firebase:perf-plugin:${Versions.perfPluginVersion}"
     const val androidMavenGradle =
         "com.github.dcendents:android-maven-gradle-plugin:${Versions.androidMavenGradleVersion}"
     const val detektGradle =

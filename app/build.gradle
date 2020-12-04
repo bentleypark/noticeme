@@ -59,6 +59,9 @@ android {
         abortOnError false
         disable 'UnsafeExperimentalUsageError', 'UnsafeExperimentalUsageWarning', 'ContentDescription'
     }
+    configurations {
+        ktlint
+    }
 }
 
 dependencies {
@@ -118,6 +121,8 @@ dependencies {
     implementation 'com.firebase:firebase-jobdispatcher:0.8.6'
 
     implementation Libs.coil
+
+    ktlint Libs.klint
 
     testImplementation Libs.junit4
     androidTestImplementation Libs.junitExt
