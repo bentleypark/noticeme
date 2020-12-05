@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
@@ -68,6 +69,9 @@ class SettingFragment : Fragment(),
             btnBack.setOnClickListener {
                 findNavController().navigate(R.id.action_settingActivity_pop)
             }
+
+            val adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
         }
     }
 

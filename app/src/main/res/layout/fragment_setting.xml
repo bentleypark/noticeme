@@ -222,5 +222,17 @@
             ads:layout_constraintEnd_toEndOf="parent"
             ads:layout_constraintTop_toTopOf="@+id/boarder_view4" />
 
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="16dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/admob_unit_id"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintHorizontal_bias="0.0"
+            ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintTop_toBottomOf="@+id/tv_evaluation" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
