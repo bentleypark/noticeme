@@ -330,7 +330,7 @@
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="10dp"
                 ads:adSize="BANNER"
-                ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                ads:adUnitId="ca-app-pub-8361469378729423/4274872497"
                 ads:layout_constraintBottom_toBottomOf="parent"
                 ads:layout_constraintEnd_toEndOf="parent"
                 ads:layout_constraintStart_toStartOf="parent"

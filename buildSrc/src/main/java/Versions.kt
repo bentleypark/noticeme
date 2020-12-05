@@ -103,14 +103,14 @@ object Versions {
     const val itextpdfVersion = "5.5.13.2"
 
     // Klint
-    const val klintVersion = "0.39.0"
+    const val klintVersion = "0.40.0"
 
     // Hilt
     const val hiltVersion = "2.29.1-alpha"
     const val hiltViewModel = "1.0.0-alpha02"
 
     // Admob
-    const val admobVersion = "19.5.0"
+    const val admobVersion = "19.6.0"
 
     // Coil
     const val coilVersion = "1.1.0"
