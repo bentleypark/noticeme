@@ -148,4 +148,10 @@
         <item name="cardUseCompatPadding">true</item>
     </style>
 
+    <style name="TextViewButtonStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/noto_bold</item>
+        <item name="android:textColor">@color/textview_button_title_color</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>
