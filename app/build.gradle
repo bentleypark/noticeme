@@ -5,10 +5,15 @@ plugins {
     id 'kotlin-android-extensions'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'com.github.ben-manes.versions' version "0.35.0"
+    id 'com.github.ben-manes.versions' version "0.36.0"
+    id 'io.sentry.android.gradle'
 }
 
 //apply from: "${rootProject.projectDir}/flavors.gradle"
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdkVersion Config.compileSdkVersion
@@ -20,14 +25,31 @@ android {
         targetSdkVersion Config.targetSdkVersion
         versionCode Config.versionCode
         versionName Config.versionName
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    signingConfigs {
+        config {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
     buildTypes {
         release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [environment: "production"]
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "noticeme-${variant.versionName}.apk"
+                }
+            }
+        }
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [environment: "staging"]
         }
     }
 
@@ -47,6 +69,9 @@ android {
     lintOptions {
         abortOnError false
         disable 'UnsafeExperimentalUsageError', 'UnsafeExperimentalUsageWarning', 'ContentDescription'
+    }
+    configurations {
+        ktlint
     }
 }
 
@@ -68,6 +93,7 @@ dependencies {
     implementation Libs.activityKtx
     implementation Libs.legacySupport
     implementation Libs.recyclerview
+    implementation Libs.viewpager2
 
     implementation Libs.lifeCyle
     implementation Libs.viewModel
@@ -98,10 +124,16 @@ dependencies {
     implementation Libs.timber
     implementation Libs.stetho
     implementation Libs.stethoOkhttp3
+    implementation Libs.sentry
 //    debugImplementation Libs.leakcanary
 
     implementation Libs.admob
+    implementation Libs.playCore
     implementation 'com.firebase:firebase-jobdispatcher:0.8.6'
+
+    implementation Libs.coil
+
+    ktlint Libs.klint
 
     testImplementation Libs.junit4
     androidTestImplementation Libs.junitExt
@@ -126,6 +158,13 @@ dependencyUpdates {
     rejectVersionIf {
         isNonStable(it.candidate.version)
     }
+}
+
+sentry {
+    autoProguardConfig false
+    autoUpload false
+    uploadNativeSymbols false
+    includeNativeSources false
 }
 
 //apply plugin: 'com.google.gms.google-services'

@@ -1,10 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'com.github.ben-manes.versions' version "0.35.0"
+    id 'com.github.ben-manes.versions' version "0.36.0"
 }
 
 android {
@@ -16,6 +15,13 @@ android {
         targetSdkVersion Config.targetSdkVersion
         versionCode Config.versionCode
         versionName Config.versionName
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.incremental":"true",
+                ]
+            }
+        }
     }
 
     buildTypes {
@@ -51,6 +57,7 @@ dependencies {
 
     // Debug
     implementation Libs.timber
+    implementation Libs.sentry
 
     // Dagger-hilt
     implementation Libs.hiltAndroid

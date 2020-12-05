@@ -45,7 +45,21 @@ class SharedPreferenceManager @Inject constructor(
         pref.edit { putBoolean(KEY_INITIAL_DATA, state) }
     }
 
+    fun getIsOnBoardingShowed() = pref.getBoolean(KEY_ON_BOARDING, false)
+
+    fun setOnBoardingShowed(state: Boolean) {
+        pref.edit { putBoolean(KEY_ON_BOARDING, state) }
+    }
+
+    fun getNotificationSetting() = pref.getBoolean(KEY_NOTIFICATION, true)
+
+    fun setNotificationSetting(state: Boolean) {
+        pref.edit { putBoolean(KEY_NOTIFICATION, state) }
+    }
+
     companion object {
         const val KEY_INITIAL_DATA = "initialData"
+        const val KEY_ON_BOARDING = "onBoarding"
+        const val KEY_NOTIFICATION = "notification"
     }
 }

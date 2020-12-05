@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainActivity_background"
+    android:background="@color/main_background_color"
     tools:context=".ui.home.HomeFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -83,10 +83,9 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="80dp"
                 android:fontFamily="@font/noto_bold"
-                android:text="다음 교체"
+                android:text="@string/tv_next_change_title"
                 android:textColor="#60979e"
                 android:textSize="18sp" />
-
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -98,7 +97,7 @@
             android:scrollbarSize="2dp"
             android:scrollbars="vertical"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/blur_view"
+            app:layout_constraintBottom_toTopOf="@+id/btn_add"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/above_layout"
             tools:listitem="@layout/consumable_item" />
@@ -117,42 +116,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="소모품 리스트가 비었습니다."
+                android:text="@string/tv_no_list_title"
                 android:textColor="#cecece"
                 android:textSize="18sp" />
 
         </FrameLayout>
-
-        <ImageView
-            android:id="@+id/iv_guide_msg"
-            android:layout_width="205dp"
-            android:layout_height="122dp"
-            android:background="@drawable/guide_msg"
-            android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/btn_add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <!--        <ImageButton-->
-        <!--            android:id="@+id/btn_add"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginBottom="8dp"-->
-        <!--            android:background="@drawable/ic_btn_add"-->
-        <!--            android:elevation="50dp"-->
-        <!--            android:foreground="?attr/selectableItemBackground"-->
-        <!--            app:layout_constraintBottom_toTopOf="@+id/adView"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent" />-->
-
-        <View
-            android:id="@+id/blur_view"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginBottom="1dp"
-            android:background="@drawable/blur_background"
-            ads:layout_constraintBottom_toTopOf="@+id/btn_add"
-            ads:layout_constraintTop_toBottomOf="@+id/rv_list" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_add"
@@ -191,7 +159,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="16dp"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            ads:adUnitId="@string/admob_unit_id"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

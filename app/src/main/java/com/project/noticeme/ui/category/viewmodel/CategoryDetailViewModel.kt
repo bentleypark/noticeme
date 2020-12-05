@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.project.noticeme.common.base.BaseViewModel
+import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.repository.MainRepository
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
@@ -13,10 +14,10 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 
 class CategoryDetailViewModel @ViewModelInject
-constructor(private val mainRepository: MainRepository) : BaseViewModel() {
+constructor(private val mainRepository: MainRepository, private val pref: SharedPreferenceManager) :
+    BaseViewModel() {
 
     private val _consumableList = MutableLiveData<DataState<List<ConsumableEntity>>>()
 
@@ -27,6 +28,12 @@ constructor(private val mainRepository: MainRepository) : BaseViewModel() {
 
     val dataState: LiveData<DataState<Boolean>>
         get() = _dataState
+
+    private val userConsumableList = MutableLiveData<List<UserConsumableEntity>>()
+
+    init {
+        getUserConsumableData()
+    }
 
     fun findConsumableWithCategory(categoryName: String) {
         viewModelScope.launch {
@@ -57,4 +64,20 @@ constructor(private val mainRepository: MainRepository) : BaseViewModel() {
                 .launchIn(viewModelScope)
         }
     }
+
+    private fun getUserConsumableData() {
+        Timber.d("getUserConsumableData")
+        viewModelScope.launch {
+            mainRepository.getUserConsumableFromDetail()
+                .onEach { dataState ->
+                    userConsumableList.value = dataState
+                }
+                .launchIn(viewModelScope)
+        }
+    }
+
+    fun checkIfItemIsAlreadyInserted(title: String) =
+        (userConsumableList.value!!.find { it.title == title } != null)
+
+    fun checkIsNotificationSettingOn() = pref.getNotificationSetting()
 }

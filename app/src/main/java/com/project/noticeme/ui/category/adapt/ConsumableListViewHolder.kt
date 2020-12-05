@@ -3,6 +3,8 @@ package com.project.noticeme.ui.category.adapt
 import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.project.noticeme.R
+import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
@@ -19,7 +21,7 @@ class ConsumableListViewHolder(
 ) :
     RecyclerView.ViewHolder(binding.root), LayoutContainer {
 
-    override val containerView: View?
+    override val containerView: View
         get() = binding.root
 
     fun bind(item: ConsumableEntity) {
@@ -28,23 +30,36 @@ class ConsumableListViewHolder(
             ivMaterialImg.setImageResource(item.image)
             tvExpireTime.text = getDurationWithDay(item.duration)
             consumableItem.setOnClickListener {
-                JobSchedulerStart.start(context)
-                viewModel.insert(
-                    UserConsumableEntity(
-                        item.title,
-                        item.image,
-                        item.category,
-                        item.duration,
-                        System.currentTimeMillis(),
-                        System.currentTimeMillis() + item.duration + DAY_MILLISECONDS,
-                        0
+
+                if (!viewModel.checkIfItemIsAlreadyInserted(item.title)) {
+                    if (viewModel.checkIsNotificationSettingOn()) {
+                        JobSchedulerStart.start(context, item.duration, item.id)
+                    }
+                    viewModel.insert(
+                        UserConsumableEntity(
+                            item.id,
+                            item.title,
+                            item.image,
+                            item.category,
+                            item.duration,
+                            System.currentTimeMillis(),
+                            System.currentTimeMillis() + item.duration + DAY_MILLISECONDS,
+                            0
+                        )
                     )
-                )
+                } else {
+                    context.makeToast(context.getString(R.string.consumable_add_warning_msg))
+                }
             }
         }
     }
 
     private fun getDurationWithDay(milliseconds: Long): String {
-        return "${(milliseconds / TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS))}일"
+        return "${
+            (milliseconds / TimeUnit.MILLISECONDS.convert(
+                1,
+                TimeUnit.DAYS
+            ))
+        }${context.getString(R.string.tv_day_title)}"
     }
 }

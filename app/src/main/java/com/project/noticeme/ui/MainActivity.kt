@@ -3,7 +3,6 @@ package com.project.noticeme.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
-import com.google.android.gms.ads.MobileAds
 import com.project.noticeme.R
 import com.project.noticeme.common.ex.viewBinding
 import com.project.noticeme.databinding.ActivityMainBinding

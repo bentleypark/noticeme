@@ -10,6 +10,9 @@ buildscript {
         classpath Libs.hiltPlugin
         classpath Libs.navSafeArgPlugin
         classpath Libs.kotlinAndroidExtension
+        classpath Libs.googleService
+        classpath Libs.sentryGradle
+        classpath Libs.detektGradle
     }
 }
 
@@ -22,4 +25,8 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+subprojects {
+    apply from: '../build-detekt.gradle'
 }

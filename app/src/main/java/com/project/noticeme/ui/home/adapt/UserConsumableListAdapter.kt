@@ -14,6 +14,7 @@ import com.project.noticeme.R
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
+import com.project.noticeme.service.JobSchedulerStart
 import com.project.noticeme.ui.home.HomeFragmentDirections
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
@@ -98,6 +99,7 @@ class UserConsumableListAdapter(
         val currentDate = System.currentTimeMillis()
         viewModel.update(
             UserConsumableEntity(
+                item.id,
                 item.title,
                 item.image,
                 item.category,
@@ -107,6 +109,10 @@ class UserConsumableListAdapter(
                 item.priority
             )
         )
+
+        if (viewModel.checkIsNotificationSettingOn()) {
+            JobSchedulerStart.start(context, item.duration, item.id)
+        }
     }
 
     private fun getExpiredDay(startDate: Long, endDate: Long): Long {
@@ -150,12 +156,12 @@ class UserConsumableListAdapter(
         MaterialAlertDialogBuilder(
             context, R.style.AlertDialogTheme
         )
-            .setTitle("소모품을 삭제하시겠습니까?")
-            .setPositiveButton("확인") { dialog, _ ->
+            .setTitle(context.getString(R.string.remove_dialog_title))
+            .setPositiveButton(context.getString(R.string.btn_confirm_title)) { dialog, _ ->
                 dialog.dismiss()
                 removeAt(position)
             }
-            .setNegativeButton("취소") { dialog, _ ->
+            .setNegativeButton(context.getString(R.string.btn_cancel_title)) { dialog, _ ->
                 dialog.dismiss()
             }
             .setCancelable(false)
@@ -166,12 +172,12 @@ class UserConsumableListAdapter(
         MaterialAlertDialogBuilder(
             context, R.style.AlertDialogTheme
         )
-            .setTitle("소모품의 교체 날짜를 오늘 날짜로 변경하시겠습니까?")
-            .setPositiveButton("확인") { dialog, _ ->
+            .setTitle(context.getString(R.string.renewal_dialog_title))
+            .setPositiveButton(context.getString(R.string.btn_confirm_title)) { dialog, _ ->
                 dialog.dismiss()
                 updateAt(position)
             }
-            .setNegativeButton("취소") { dialog, _ ->
+            .setNegativeButton(context.getString(R.string.btn_cancel_title)) { dialog, _ ->
                 dialog.dismiss()
             }
             .setCancelable(false)

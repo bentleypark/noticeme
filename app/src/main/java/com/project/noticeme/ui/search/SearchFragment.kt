@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -42,13 +43,53 @@ class SearchFragment : Fragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentSearchBinding.inflate(layoutInflater), this) {
+    ): View = initBinding(FragmentSearchBinding.inflate(layoutInflater), this) {
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    binding!!.etSearch.apply {
+                        clearFocus()
+                        hideKeyboard()
+                    }
+                    findNavController().navigate(R.id.action_searchFragment_pop)
+                }
+            })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding!!.btnBack.setOnClickListener {
+        binding!!.etSearch.apply {
+            requestFocus()
+            showKeyboard()
+
+            setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    search()
+                }
+                true
+            }
+
+            setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    binding.apply {
+                        lifecycleScope.launch {
+                            viewModel.getSearchHistory()
+                            delay(1000)
+                            tvSearchResultEmpty.makeGone()
+                            tvGuideMsg.makeGone()
+                            btnAdd.makeGone()
+                            searchHistoryLayout.makeVisible()
+                            searchList.makeGone()
+                            adView.makeGone()
+                        }
+                    }
+                }
+            }
+        }
+
+        binding.btnBack.setOnClickListener {
             binding.etSearch.apply {
                 clearFocus()
                 hideKeyboard()
@@ -77,39 +118,7 @@ class SearchFragment : Fragment(),
             addItemDecoration(SpaceDecoration(resources.getDimensionPixelSize(R.dimen.material_item_size)))
         }
 
-//        binding.etSearch.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//            }
-//
-//            override fun afterTextChanged(s: Editable?) {
-//                lifecycleScope.launch {
-//                    delay(1000)
-//                    val inputText = s.toString().trim()
-//                    if (inputText.isNotEmpty()) {
-//                        viewModel.searchWithTitle(inputText)
-//                        binding.searchHistoryLayout.makeGone()
-//                    } else {
-//                        binding.apply {
-//                            searchHistoryLayout.makeVisible()
-//                            tvGuideMsg.makeGone()
-//                            tvSearchResultEmpty.makeGone()
-//                            btnAdd.makeGone()
-//
-//                            etSearch.apply {
-//                                requestFocus()
-//                                showKeyboard()
-//                            }
-//                        }
-//                        if (searchAdapter.itemCount != 0) {
-//                            searchAdapter.clear()
-//                        }
-//                    }
-//                }
-//            }
-//        })
+
 
         binding.btnSearch.setOnClickListener {
             search()
@@ -206,46 +215,13 @@ class SearchFragment : Fragment(),
         detailViewModel.dataState.observe(viewLifecycleOwner, {
             when (it) {
                 is DataState.Success<Boolean> -> {
-                    makeToast("소모품이 추가되었습니다.")
+                    binding.mainView.makeSnackBar(getString(R.string.consumable_add_success_msg))
                 }
                 is DataState.Error -> {
-                    makeToast("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
+                    binding.mainView.makeSnackBar(getString(R.string.consumable_add_fail_msg))
                 }
             }
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        binding!!.etSearch.apply {
-            requestFocus()
-            showKeyboard()
-
-            setOnEditorActionListener { _, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    search()
-                }
-                true
-            }
-
-            setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    binding.apply {
-                        lifecycleScope.launch {
-                            viewModel.getSearchHistory()
-                            delay(1000)
-                            tvSearchResultEmpty.makeGone()
-                            tvGuideMsg.makeGone()
-                            btnAdd.makeGone()
-                            searchHistoryLayout.makeVisible()
-                            searchList.makeGone()
-                            adView.makeGone()
-                        }
-                    }
-                }
-            }
-        }
     }
 
     private fun search() {
@@ -272,9 +248,5 @@ class SearchFragment : Fragment(),
             viewModel.searchWithTitle(title)
             binding!!.searchHistoryLayout.makeGone()
         }
-    }
-
-    companion object {
-        fun newInstance() = SearchFragment()
     }
 }

@@ -17,7 +17,6 @@ import com.google.android.gms.ads.MobileAds
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
-import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.common.ex.runLayoutAnimation
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
@@ -35,7 +34,7 @@ class HomeFragment : Fragment(),
     ViewBindingHolder<FragmentHomeBinding> by ViewBindingHolderImpl() {
 
     private val viewModel: HomeViewModel by viewModels()
-    private var consumableList = mutableListOf<UserConsumableEntity>()
+    private var userConsumableList = mutableListOf<UserConsumableEntity>()
     private lateinit var listAdapter: UserConsumableListAdapter
     private val swipeHelperCallback = SwipeHelperCallback().apply {
         setClamp(420f)
@@ -57,8 +56,6 @@ class HomeFragment : Fragment(),
 
         setUpView()
         setUpObserve()
-//        registerDeleteDataItemAction()
-//        registerTestItemAction()
     }
 
     override fun onResume() {
@@ -73,7 +70,7 @@ class HomeFragment : Fragment(),
         itemTouchHelper.attachToRecyclerView(binding!!.rvList)
 
         listAdapter = UserConsumableListAdapter(
-            consumableList,
+            userConsumableList,
             viewModel,
             requireContext(),
             swipeHelperCallback
@@ -98,41 +95,18 @@ class HomeFragment : Fragment(),
 
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
+
+        binding.btnSetting.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingFragment)
+        }
     }
 
     private fun setUpObserve() {
         viewModel.apply {
-
-            dataState.observe(
-                viewLifecycleOwner, {
-                    when (it) {
-                        is DataState.Success<String> -> {
-                            binding!!.apply {
-                                progressCircular.isVisible = false
-                            }
-                            if (!pref.getInitialData()) {
-                                makeToast(it.data)
-                            }
-                            pref.setInitialData(true)
-                        }
-
-                        is DataState.Loading -> {
-                            lifecycleScope.launch {
-                                binding!!.apply {
-                                    progressCircular.isVisible = true
-                                }
-                                makeToast("초기 데이터 설정 중입니다. 잠시만 기다려주세요!")
-                            }
-                        }
-                    }
-                }
-            )
-
-            consumableList?.observe(
+            consumableList.observe(
                 viewLifecycleOwner, {
                     binding!!.apply {
                         rvList.visibility = View.GONE
-                        ivGuideMsg.isVisible = false
                         emptyList.isVisible = false
                         progressCircular.isVisible = false
                     }
@@ -148,7 +122,6 @@ class HomeFragment : Fragment(),
                                             .toMutableList())
                                     }
                                 } else {
-                                    binding.ivGuideMsg.isVisible = true
                                     binding.emptyList.isVisible = true
                                 }
                             }
@@ -198,34 +171,4 @@ class HomeFragment : Fragment(),
     private fun refresh() {
         findNavController().navigate(R.id.action_homeFragment_self)
     }
-
-//    private fun registerDeleteDataItemAction() {
-//        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
-//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-//
-//                viewModel.delete(listAdapter.removeAt(viewHolder.adapterPosition))
-//                viewModel.deleteResult.observe(
-//                    viewLifecycleOwner,
-//                    {
-//                        when (it) {
-//                            is DataState.Success<List<UserConsumableEntity>> -> {
-//                                makeToast("소모품이 삭제돠었습니다.")
-//                                if (it.data.isEmpty()) {
-//                                    binding!!.apply {
-//                                        ivGuideMsg.isVisible = true
-//                                        emptyList.isVisible = true
-//                                        rvList.isVisible = false
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                )
-//            }
-//        }
-//
-//        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-//        itemTouchHelper.attachToRecyclerView(binding!!.rvList)
-//    }
-
 }

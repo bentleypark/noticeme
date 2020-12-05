@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainActivity_background"
+    android:background="@color/main_background_color"
     tools:context=".ui.category.CategoryFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/noto_bold"
-                    android:text="카테고리"
+                    android:text="@string/tv_category_title"
                     android:textColor="#ababab"
                     android:textSize="20sp" />
 
@@ -112,7 +112,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="16dp"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            ads:adUnitId="@string/admob_unit_id"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
