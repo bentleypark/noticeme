@@ -28,7 +28,7 @@ class GuideScreen4Fragment : Fragment(),
         savedInstanceState: Bundle?
     ): View = initBinding(FragmentGuideScreen4Binding.inflate(layoutInflater), this) {
 
-        binding!!.tvFinish.setOnClickListener {
+        binding!!.btnFinish.setOnClickListener {
             pref.setOnBoardingShowed(true)
             lifecycleScope.launchWhenCreated {
                 delay(1_000)
