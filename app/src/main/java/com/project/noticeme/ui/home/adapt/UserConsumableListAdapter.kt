@@ -19,6 +19,7 @@ import com.project.noticeme.ui.home.HomeFragmentDirections
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import kotlinx.android.extensions.LayoutContainer
+import timber.log.Timber
 import kotlin.math.absoluteValue
 
 class UserConsumableListAdapter(
@@ -116,6 +117,7 @@ class UserConsumableListAdapter(
     }
 
     private fun getExpiredDay(startDate: Long, endDate: Long): Long {
+        Timber.d("$startDate")
         return (endDate - startDate) / DAY_MILLISECONDS
     }
 
