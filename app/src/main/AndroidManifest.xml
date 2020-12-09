@@ -16,9 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Noticeme"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.guide.GuideActivity" />
+        <activity
+            android:name=".ui.guide.GuideActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.splash.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +34,7 @@
             android:screenOrientation="portrait" />
 
         <receiver
-            android:name=".service.AlarmBroadCastReceiver"
+            android:name=".notification.BootCompleteBroadCastReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>

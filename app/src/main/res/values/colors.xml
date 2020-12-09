@@ -28,4 +28,5 @@
     <color name="white_ish">#fffefefe</color>
     <color name="border_view_color">#a0a0a0</color>
     <color name="edit_text_text_color">#505050</color>
+    <color name="textview_button_title_color">#60979e</color>
 </resources>

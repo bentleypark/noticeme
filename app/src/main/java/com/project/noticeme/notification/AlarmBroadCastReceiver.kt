@@ -1,4 +1,4 @@
-package com.project.noticeme.service
+package com.project.noticeme.notification
 
 import android.app.Notification
 import android.app.NotificationChannel

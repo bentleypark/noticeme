@@ -9,7 +9,7 @@ import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
-import com.project.noticeme.service.JobSchedulerStart
+import com.project.noticeme.notification.JobSchedulerStart
 import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
 import kotlinx.android.extensions.LayoutContainer
 import java.util.concurrent.TimeUnit
