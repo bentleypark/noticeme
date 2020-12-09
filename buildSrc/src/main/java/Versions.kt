@@ -2,17 +2,17 @@ object Versions {
 
     // Class Path for Plugin
     const val buildGradleVersion = "4.1.1"
-    const val googleServiceVersion = "4.3.3"
+    const val googleServiceVersion = "4.3.4"
     const val firebaseCrashlyticsGradleVersion = "2.2.0"
-    const val sentryGradleVersion = "1.7.35"
+    const val sentryGradleVersion = "1.7.36"
     const val r8Version = "2.1.67"
     const val androidJunit5Version = "1.6.2.0"
     const val androidMavenGradleVersion = "2.1"
     const val detektGradleVersion = "1.12.0"
-    const val navSafArgPluginVersion = "2.3.0"
+    const val navSafArgPluginVersion = "2.3.1"
 
     // Kotlin
-    const val kotlinVersion = "1.4.20"
+    const val kotlinVersion = "1.4.21"
 
     // Coroutines
     const val androidVersion = "1.4.2"

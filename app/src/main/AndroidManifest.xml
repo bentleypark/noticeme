@@ -34,7 +34,7 @@
             android:screenOrientation="portrait" />
 
         <receiver
-            android:name=".service.AlarmBroadCastReceiver"
+            android:name=".notification.BootCompleteBroadCastReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>

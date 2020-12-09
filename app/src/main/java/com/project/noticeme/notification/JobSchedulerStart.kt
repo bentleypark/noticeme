@@ -1,4 +1,4 @@
-package com.project.noticeme.service
+package com.project.noticeme.notification
 
 import android.app.AlarmManager
 import android.app.PendingIntent
