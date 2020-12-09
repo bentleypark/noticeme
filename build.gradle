@@ -1,7 +1,4 @@
 buildscript {
-    ext {
-        kotlin_version = '1.4.20'
-    }
     repositories {
         google()
         jcenter()
@@ -16,7 +13,6 @@ buildscript {
         classpath Libs.googleService
         classpath Libs.sentryGradle
         classpath Libs.detektGradle
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
