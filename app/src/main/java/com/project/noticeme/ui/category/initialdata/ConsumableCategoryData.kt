@@ -46,7 +46,7 @@ object ConsumableCategoryData {
             dataList.add(
                 ConsumableCategory(
                     4,
-                    context.getString(R.string.category_title5),
+                    context.getString(R.string.personal_category_title),
                     R.drawable.ic_category_user_custom
                 )
             )

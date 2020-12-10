@@ -15,6 +15,7 @@ import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.makeSnackBar
+import com.project.noticeme.common.ex.showKeyboard
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
@@ -55,6 +56,11 @@ class ConsumableDetailFragment : Fragment(),
         binding!!.apply {
             btnBack.setOnClickListener {
                 findNavController().navigate(R.id.action_consumableDetailFragment_pop)
+            }
+
+            tvDuration.apply {
+                requestFocus()
+                showKeyboard()
             }
 
             priorityBtnGroup.addOnButtonCheckedListener { _, checkedId, _ ->
