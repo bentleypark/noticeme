@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,7 +13,6 @@ import com.google.android.gms.ads.MobileAds
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
-import com.project.noticeme.common.ex.makeGone
 import com.project.noticeme.databinding.FragmentCategoryBinding
 import com.project.noticeme.ui.category.adapt.ConsumableCategoryListAdapter
 import com.project.noticeme.ui.category.viewmodel.CategoryViewModel
@@ -60,22 +58,11 @@ class CategoryFragment : Fragment(),
             findNavController().navigate(R.id.action_categoryFragment_to_addCustomConsumableFragment)
         }
 
-        binding.etSearch.setOnFocusChangeListener { _, hasFocus ->
-            binding.searchHistoryLayout.isGone = !hasFocus
-        }
-
-
         binding.btnSearch.setOnClickListener {
             binding.apply {
                 findNavController().navigate(R.id.action_categoryFragment_to_searchFragment)
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        binding!!.searchHistoryLayout.makeGone()
     }
 
     companion object {

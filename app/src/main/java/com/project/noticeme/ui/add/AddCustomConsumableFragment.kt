@@ -7,15 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.hideKeyboard
+import com.project.noticeme.common.ex.makeSnackBar
 import com.project.noticeme.common.ex.makeToast
+import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
@@ -23,7 +27,6 @@ import com.project.noticeme.databinding.FragmentAddCustomConsumableBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -51,8 +54,14 @@ class AddCustomConsumableFragment : Fragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentAddCustomConsumableBinding.inflate(layoutInflater), this) {
-
+    ): View = initBinding(FragmentAddCustomConsumableBinding.inflate(layoutInflater), this) {
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.action_addCustomConsumableFragment_pop)
+                }
+            })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,12 +104,13 @@ class AddCustomConsumableFragment : Fragment(),
 
                 viewModel.insertUserConsumable(
                     UserConsumableEntity(
+                        0,
                         SpannableStringBuilder(tvTitle.text).toString(),
                         randomIcon.random(),
-                        "나의 목록",
+                        getString(R.string.personal_category_title),
                         duration,
                         startDate,
-                        startDate + duration,
+                        startDate + duration + DAY_MILLISECONDS,
                         prioirty
                     )
                 )
@@ -113,7 +123,6 @@ class AddCustomConsumableFragment : Fragment(),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             ) { _, year, monthOfYear, dayOfMonth ->
-                Timber.d("dateChange()")
                 calendar.set(year, monthOfYear, dayOfMonth)
                 startDate = calendar.timeInMillis
             }
@@ -128,7 +137,7 @@ class AddCustomConsumableFragment : Fragment(),
                                 0,
                                 SpannableStringBuilder(binding.tvTitle.text).toString(),
                                 randomIcon.random(),
-                                "나의 목록",
+                                getString(R.string.personal_category_title),
                                 binding.tvDuration.text.toString()
                                     .toInt() * TimeUnit.MILLISECONDS.convert(
                                     1,
@@ -138,15 +147,13 @@ class AddCustomConsumableFragment : Fragment(),
                         )
                     }
                     is DataState.Error -> {
-                        makeToast("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
+                        makeToast(getString(R.string.consumable_add_fail_msg))
                     }
                     is DataState.Loading -> {
                         lifecycleScope.launch {
                             binding.apply {
                                 progressCircular.isVisible = true
                             }
-                            delay(1000)
-                            makeToast("소모품의 추가가 진행 중입니다. 잠시만 기다려주세요!")
                         }
                     }
                 }
@@ -162,15 +169,17 @@ class AddCustomConsumableFragment : Fragment(),
                             tvTitle.hideKeyboard()
                             tvDuration.hideKeyboard()
                         }
-                        makeToast("소모품이 추가되었습니다. \n추가된 소모품은 홈스크린과 나의 목록에서 확인할 수 있습니다.")
-                        findNavController().navigate(R.id.action_addCustomConsumableFragment_pop)
+                        lifecycleScope.launch {
+                            binding.mainView.makeSnackBar(getString(R.string.consumable_add_success_msg))
+                            delay(1500)
+                            findNavController().navigate(R.id.action_addCustomConsumableFragment_to_homeFragment)
+                        }
                     }
                 }
             })
-    }
 
-    companion object {
-        fun newInstance() = AddCustomConsumableFragment()
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
     override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {

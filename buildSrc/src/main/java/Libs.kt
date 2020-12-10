@@ -4,8 +4,6 @@ object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.buildGradleVersion}"
     const val kotlinGradlePlugin =
         "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinVersion}"
-    const val protobufGradle =
-        "com.google.protobuf:protobuf-gradle-plugin:${Versions.protobufGradleVersion}"
     const val googleService = "com.google.gms:google-services:${Versions.googleServiceVersion}"
     const val firebaseCrashlyticsGradle =
         "com.google.firebase:firebase-crashlytics-gradle:${Versions.firebaseCrashlyticsGradleVersion}"
@@ -14,7 +12,6 @@ object Libs {
     const val r8 = "com.android.tools:r8:${Versions.r8Version}"
     const val androidJunit5Version =
         "de.mannodermaus.gradle.plugins:android-junit5:${Versions.androidJunit5Version}"
-    const val perfPlugin = "com.google.firebase:perf-plugin:${Versions.perfPluginVersion}"
     const val androidMavenGradle =
         "com.github.dcendents:android-maven-gradle-plugin:${Versions.androidMavenGradleVersion}"
     const val detektGradle =
@@ -56,6 +53,7 @@ object Libs {
         "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshLayoutVersion}"
     const val databindingCompiler =
         "com.android.databinding:compiler:${Versions.databindingVersion}"
+    const val preference = "androidx.preference:preference-ktx:${Versions.prefernceVersion}"
 
     // Work
     const val workRuntime = "androidx.work:work-runtime:${Versions.workVersion}"
@@ -117,6 +115,8 @@ object Libs {
         "com.google.firebase:firebase-crashlytics:${Versions.firebaseCrashlyticsVersion}"
     const val firebaseAnalytics =
         "com.google.firebase:firebase-analytics:${Versions.firebaseAnalyticsVersion}"
+    const val playCore = "com.google.android.play:core-ktx:${Versions.playCoreVersion}"
+
 
     // Google Cloud Speech
     const val grpc = "io.grpc:grpc-okhttp:${Versions.grpcVersion}"
@@ -199,4 +199,7 @@ object Libs {
 
     // Admob
     const val admob = "com.google.android.gms:play-services-ads:${Versions.admobVersion}"
+
+    // Colil
+    const val coil = "io.coil-kt:coil:${Versions.coilVersion}"
 }

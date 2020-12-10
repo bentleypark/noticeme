@@ -2,6 +2,7 @@ package com.project.noticeme.data.repository
 
 import com.project.noticeme.data.room.*
 import com.project.noticeme.data.state.DataState
+import io.sentry.Sentry
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,7 +17,7 @@ constructor(
 //    private val cacheMapper: CacheMapper,
 //    private val networkMapper: NetworkMapper
 ) {
-    suspend fun insertConsumable(consumables: List<ConsumableEntity>): Flow<DataState<String>> =
+    suspend fun insertConsumable(consumables: List<ConsumableEntity>): Flow<DataState<Boolean>> =
 
         flow {
             emit(DataState.Loading)
@@ -26,9 +27,10 @@ constructor(
                 for (consumable in consumables) {
                     consumableDao.insert(consumable)
                 }
-                emit(DataState.Success("작업이 완료되었습니다."))
+                emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -42,6 +44,7 @@ constructor(
                 emit(DataState.Success(resultList))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -56,6 +59,7 @@ constructor(
                 emit(DataState.Success(result))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -68,6 +72,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -80,20 +85,32 @@ constructor(
                 emit(DataState.Success(resultList))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
-    suspend fun delete(item: UserConsumableEntity): Flow<DataState<List<UserConsumableEntity>>> =
+    suspend fun getUserConsumableFromDetail(): Flow<List<UserConsumableEntity>> =
+        flow {
+            delay(1000)
+            try {
+                val resultList = userConsumableDao.get()
+                emit(resultList)
+            } catch (e: Exception) {
+                Timber.e(e)
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
+            }
+        }
+
+    suspend fun delete(item: UserConsumableEntity): Flow<DataState<Boolean>> =
         flow {
             emit(DataState.Loading)
             delay(1000)
             try {
                 userConsumableDao.delete(item)
-//                emit(DataState.Success(true))
-                val resultList = userConsumableDao.get()
-                emit(DataState.Success(resultList))
+                emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -118,6 +135,7 @@ constructor(
                 emit(DataState.Success(resultList))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -130,6 +148,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -143,6 +162,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -156,6 +176,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -168,6 +189,7 @@ constructor(
                 emit(DataState.Success(resultList))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -180,6 +202,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 
@@ -192,6 +215,7 @@ constructor(
                 emit(DataState.Success(true))
             } catch (e: Exception) {
                 emit(DataState.Error(e))
+                Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
 }

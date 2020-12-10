@@ -1,4 +1,4 @@
-package com.project.noticeme.ui.home.initialdata
+package com.project.noticeme.ui.splash.initialdata
 
 import com.project.noticeme.R
 import com.project.noticeme.data.room.ConsumableEntity
@@ -127,6 +127,16 @@ object InitialConsumableData {
                 R.drawable.ic_img_makeup_brush,
                 "개인위생",
                 TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 90
+            )
+        )
+
+        dataList.add(
+            ConsumableEntity(
+                0,
+                "브래지어",
+                R.drawable.ic_img_underware,
+                "개인위생",
+                TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS) * 180
             )
         )
 

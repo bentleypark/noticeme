@@ -18,3 +18,8 @@ local.properties
 fastlane/README.md
 fastlane/report.xml
 fastlane/.env
+
+sentry.properties
+noticeme-upload-keystore.jks
+app/release/
+keystore.properties

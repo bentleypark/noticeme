@@ -1,23 +1,21 @@
 object Versions {
 
     // Class Path for Plugin
-    const val buildGradleVersion = "4.1.0"
-    const val protobufGradleVersion = "0.8.13"
-    const val googleServiceVersion = "4.3.3"
+    const val buildGradleVersion = "4.1.1"
+    const val googleServiceVersion = "4.3.4"
     const val firebaseCrashlyticsGradleVersion = "2.2.0"
-    const val sentryGradleVersion = "1.7.35"
-    const val r8Version = "2.1.66"
+    const val sentryGradleVersion = "1.7.36"
+    const val r8Version = "2.1.67"
     const val androidJunit5Version = "1.6.2.0"
-    const val perfPluginVersion = "1.3.1"
     const val androidMavenGradleVersion = "2.1"
     const val detektGradleVersion = "1.12.0"
-    const val navSafArgPluginVersion = "2.3.0"
+    const val navSafArgPluginVersion = "2.3.1"
 
     // Kotlin
-    const val kotlinVersion = "1.4.10"
+    const val kotlinVersion = "1.4.21"
 
     // Coroutines
-    const val androidVersion = "1.4.1"
+    const val androidVersion = "1.4.2"
 
     // RxJava
     const val rxJavaVersion = "2.2.20"
@@ -30,18 +28,19 @@ object Versions {
     const val constraintLayoutVersion = "2.0.4"
     const val coreKtxVersion = "1.3.2"
     const val legacySupportVersion = "1.0.0"
-    const val activityVersion = "1.1.0"
-    const val fragmentVersion = "1.2.5"
+    const val activityVersion = "1.2.0-beta01"
+    const val fragmentVersion = "1.3.0-beta01"
     const val recyclerviewVersion = "1.1.0"
-    const val viewpager2Version = "1.0.0"
+    const val viewpager2Version = "1.1.0-alpha01"
     const val swipeRefreshLayoutVersion = "1.1.0"
     const val databindingVersion = "4.0.1"
+    const val prefernceVersion = "1.1.1"
 
     // Jetpack
     const val workVersion = "2.4.0"
     const val lifeCycleVersion = "2.2.0"
     const val roomVersion = "2.2.5"
-    const val navigationVersion = "2.3.1"
+    const val navigationVersion = "2.3.2"
     const val startupVersion = "1.0.0"
 
     const val testVersion = "1.3.0"
@@ -56,6 +55,7 @@ object Versions {
     const val flexboxLayoutVersion = "1.1.1"
     const val firebaseCrashlyticsVersion = "17.2.2"
     const val firebaseAnalyticsVersion = "17.5.0"
+    const val playCoreVersion = "1.8.1"
 
     // Google Cloud Speech
     const val grpcVersion = "1.32.1"
@@ -85,7 +85,7 @@ object Versions {
     const val timberVersion = "4.7.1"
     const val rxLogsVersion = "1.0.14"
     const val stethoVersion = "1.5.1"
-    const val sentryVersion = "3.0.0"
+    const val sentryVersion = "3.2.0"
 
     // File Downloader
     const val fetch2Version = "3.1.5"
@@ -103,12 +103,15 @@ object Versions {
     const val itextpdfVersion = "5.5.13.2"
 
     // Klint
-    const val klintVersion = "0.39.0"
+    const val klintVersion = "0.40.0"
 
     // Hilt
     const val hiltVersion = "2.29.1-alpha"
     const val hiltViewModel = "1.0.0-alpha02"
 
     // Admob
-    const val admobVersion = "19.5.0"
+    const val admobVersion = "19.6.0"
+
+    // Coil
+    const val coilVersion = "1.1.0"
 }

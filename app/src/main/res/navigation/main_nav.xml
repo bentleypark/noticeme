@@ -14,7 +14,18 @@
             app:destination="@id/categoryFragment" />
         <action
             android:id="@+id/action_homeFragment_to_consumableDetailFragment"
-            app:destination="@id/consumableDetailFragment" />
+            app:destination="@id/consumableDetailFragment" >
+            <argument
+                android:name="itemTitle"
+                app:argType="string"
+                android:defaultValue='""' />
+        </action>
+        <action
+            android:id="@+id/action_homeFragment_self"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -26,7 +37,7 @@
             app:popUpTo="@id/categoryFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_addConsumableFragment_to_categoryDetailFragment"
+            android:id="@+id/action_categoryFragment_to_categoryDetailFragment"
             app:destination="@id/categoryDetailFragment">
             <argument
                 android:name="categoryName"
@@ -74,18 +85,43 @@
             android:id="@+id/action_addCustomConsumableFragment_pop"
             app:popUpTo="@id/addCustomConsumableFragment"
             app:popUpToInclusive="true" />
+
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.project.noticeme.ui.search.SearchFragment"
         android:label="SearchFragment" >
+
+        <action
+            android:id="@+id/action_searchFragment_to_addCustomConsumableFragment"
+            app:destination="@id/addCustomConsumableFragment" />
         <action
             android:id="@+id/action_searchFragment_pop"
             app:popUpTo="@id/searchFragment"
             app:popUpToInclusive="true" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.project.noticeme.ui.setting.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" >
         <action
-            android:id="@+id/action_searchFragment_to_addCustomConsumableFragment"
-            app:destination="@id/addCustomConsumableFragment" />
+            android:id="@+id/action_settingActivity_pop"
+            app:popUpTo="@id/settingFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_settingFragment_to_ruleFragment"
+            app:destination="@id/ruleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ruleFragment"
+        android:name="com.project.noticeme.ui.setting.RuleFragment"
+        android:label="RuleFragment" >
+        <action
+            android:id="@+id/action_ruleFragment_pop"
+            app:popUpTo="@id/ruleFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

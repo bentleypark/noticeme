@@ -1,7 +1,4 @@
 buildscript {
-    ext {
-        kotlin_version = '1.4.10'
-    }
     repositories {
         google()
         jcenter()
@@ -13,7 +10,9 @@ buildscript {
         classpath Libs.hiltPlugin
         classpath Libs.navSafeArgPlugin
         classpath Libs.kotlinAndroidExtension
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath Libs.googleService
+        classpath Libs.sentryGradle
+        classpath Libs.detektGradle
     }
 }
 
@@ -26,4 +25,8 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+subprojects {
+    apply from: '../build-detekt.gradle'
 }

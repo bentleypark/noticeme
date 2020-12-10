@@ -9,10 +9,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
-import com.project.noticeme.common.ex.makeToast
+import com.project.noticeme.common.ex.*
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentCategoryDetailBinding
@@ -37,31 +38,34 @@ class CategoryDetailFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding!!.tvTitle.text = arguments?.getString("category_name")
-        val categoryName = arguments?.getString("category_name")
-        viewModel.findConsumableWithCategory(categoryName!!)
+        val itemTitle = arguments?.getString(ARGS_KEY)
+
+        binding!!.tvTitle.text = itemTitle
+        viewModel.findConsumableWithCategory(itemTitle!!)
         viewModel.apply {
             consumableList.observe(viewLifecycleOwner,
                 {
                     when (it) {
                         is DataState.Success<List<ConsumableEntity>> -> {
                             binding.apply {
-                                progressCircular.isVisible = false
+                                progressCircular.makeGone()
                             }
 
                             if (it.data.isEmpty()) {
                                 binding.apply {
-                                    rvList.isVisible = false
-                                    emptyList.isVisible = true
+                                    rvList.makeGone()
+                                    aboveLayoutTitle.makeGone()
+                                    emptyList.makeVisible()
                                 }
                             } else {
                                 binding.apply {
-                                    rvList.isVisible = true
-                                    emptyList.isVisible = false
+                                    rvList.makeVisible()
+                                    aboveLayoutTitle.makeVisible()
+                                    emptyList.makeGone()
                                 }
                             }
 
-                            listAdapter = ConsumableListAdapter(it.data.toMutableList(), viewModel)
+                            listAdapter = ConsumableListAdapter(it.data.toMutableList(), viewModel, requireContext())
 
                             val size = resources.getDimensionPixelSize(R.dimen.material_item_size)
                             binding.rvList.apply {
@@ -74,6 +78,7 @@ class CategoryDetailFragment : Fragment(),
                                     )
                                 setHasFixedSize(true)
                                 addItemDecoration(SpaceDecoration(size))
+                                runLayoutAnimation()
                             }
                         }
                         is DataState.Loading -> {
@@ -88,10 +93,12 @@ class CategoryDetailFragment : Fragment(),
             dataState.observe(viewLifecycleOwner, {
                 when (it) {
                     is DataState.Success<Boolean> -> {
-                        makeToast("소모품이 추가되었습니다.")
+//                        makeToast("소모품이 추가되었습니다.")
+                        binding.mainView.makeSnackBar("소모품이 추가되었습니다.")
                     }
                     is DataState.Error -> {
-                        makeToast("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
+//                        makeToast("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
+                        binding.mainView.makeSnackBar("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
                     }
                 }
             })
@@ -100,9 +107,12 @@ class CategoryDetailFragment : Fragment(),
         binding.btnBack.setOnClickListener {
             findNavController().navigate(R.id.action_categoryDetailFragment_pop)
         }
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
     companion object {
-        fun newInstance() = CategoryDetailFragment()
+        const val ARGS_KEY = "categoryName"
     }
 }

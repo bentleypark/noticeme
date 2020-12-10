@@ -1,11 +1,75 @@
 <resources>
     <string name="app_name">Noticeme</string>
-
-    <string name="search_hint">Search&#8230;</string>
-    <string name="hint_prompt">Speak an item name or a number</string>
-
-    <string name="cd_up_button">Up navigation button</string>
-    <string name="cd_voice_search">Voice search</string>
-    <string name="cd_clear_button">Clear field</string>
-    <string name="cd_suggestion_icon">List item icon</string>
+    <string name="personal_information_processing_policy">
+       <![CDATA[
+<p>
+<b>1. 개인 정보의 처리 목적.</b>
+<p>
+<b>본 개발자가 작성한 앱은(는) 다음의 목적을 위하여 개인정보를 처리하고 있으며, 다음의 목적 이외의 용도로는 이용하지 않습니다.<br />
+1) 무료 앱에서 AdMob(애드몹) 광고 라이브러리(Google Play Lib)가 필요로 하는 권한 위임을 위해 사용합니다.<br /></b>
+<p>
+<b>2. 개인 정보 처리 위탁 여부: 본 개발자의 앱은 타 업체에 개인 정보 처리를 위탁하지 않습니다.<b>
+<p>
+<b>3. 정보 주체의 권리, 의무 및 그 행사 방법이용자는 개인 정보 주체로서 언제든지 개인 정보 보호 관련 권리를 행사할 수 있습니다. 다만, 본 앱은 앱 사용자의 사용정보를 수집 및 보유하지 않습니다.</b><br />
+앱 기능의 활용에만 사용합니다.
+<p>
+<b>4. 처리하는 개인 정보의 항목 작성다음의 개인정보 항목을 처리하고 있습니다.</b>
+<p>
+android.permission.INTERNET: AdMob 광고를 위해 사용합니다.<br />
+android.permission.ACCESS_NETWORK_STATE: 사용자 알림 제공 및 모바일 네트워크 사용 유무 확인을 위해 사용합니다.<br />
+android.permission.RECEIVE_BOOT_COMPLETED: 사용자 알림 제공을 위해서 사용합니다.<br />
+<p>
+<b>5. 개인 정보의 파기앱 사용자의 사용정보를 수집 및 보유하지 않습니다. 따라서 파기 해야 하는 개인정보를 가지고 있지 않습니다.</b>
+<p>
+<b>6. 개인 정보의 안전성 확보 조치앱 사용자의 사용 정보를 수집 및 보유하지 않습니다.</b>
+<p>
+<b>해당 개인정보처리방침은 2020년 12월 1일부터 적용 됩니다.</b>
+ ]]>
+    </string>
+    <string name="tv_consumable_title">소모품명</string>
+    <string name="ed_consumable_hint">e.g.)에어컨 필터</string>
+    <string name="tv_guide_msg_title1">마지막 교체시기가 언제인가요?</string>
+    <string name="btn_confirm_title">확인</string>
+    <string name="btn_cancel_title">취소</string>
+    <string name="tv_guide_msg_title2">얼마나 자주 교체할거에요?</string>
+    <string name="ed_duration_hint">e.g.)30</string>
+    <string name="tv_day_title">일</string>
+    <string name="tv_guide_msg_title3">우선 순위</string>
+    <string name="btn_priority_low_title">낮음</string>
+    <string name="btn_priority_middle_title">중간</string>
+    <string name="btn_priority_high_title">높음</string>
+    <string name="btn_priority_none_title">없음</string>
+    <string name="tv_category_title">카테고리</string>
+    <string name="tv_no_list_title">소모품 리스트가 비었습니다.</string>
+    <string name="btn_remove_title">삭제</string>
+    <string name="tv_next_change_title">다음 교체</string>
+    <string name="ed_search_hint">소모품 검색: e.g.)칫솔</string>
+    <string name="btn_all_remove_title">전체삭제</string>
+    <string name="no_search_result_msg">검색 결과가 없습니다.</string>
+    <string name="tv_search_guide_msg">찾으시는 물건이 없나요?\n아래 버튼으로 직접 등록해 보세요!</string>
+    <string name="setting_layout_title">설정</string>
+    <string name="tv_notification_setting_title">알람 설정</string>
+    <string name="tv_version_info_title">앱 버전 정보</string>
+    <string name="tv_personal_privacy_policy_title">개인정보 처리방침</string>
+    <string name="tv_query_title">문의하기</string>
+    <string name="tv_evaluation_title">앱 평가하기</string>
+    <string name="remove_dialog_title">"소모품을 삭제하시겠습니까?"</string>
+    <string name="renewal_dialog_title">"소모품의 교체 날짜를 오늘 날짜로 변경하시겠습니까?"</string>
+    <string name="personal_category_title">나의 목록</string>
+    <string name="consumable_add_fail_msg">"소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!"</string>
+    <string name="consumable_add_success_msg">소모품이 추가되었습니다!</string>
+    <string name="consumable_add_warning_msg">이미 추가된 소모품입니다!</string>
+    <string name="consumable_modification_msg">소모품의 정보가 수정돠었습니다!</string>
+    <string name="consumable_remove_msg">소모품이 삭제돠었습니다!</string>
+    <string name="category_title1">욕실</string>
+    <string name="category_title2">주방</string>
+    <string name="category_title3">개인위생</string>
+    <string name="category_title4">침실</string>
+    <string name="email_address">p2c2kbf@gmail.com</string>
+    <string name="notification_title">소모품 교체 알림</string>
+    <string name="notification_content">오늘 날짜로 교체할 소모품이 있습니다. 확인해주세요!</string>
+    <string name="tv_start_title">시작하기</string>
+    <string name="admob_unit_id">ca-app-pub-8361469378729423/4274872497</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
