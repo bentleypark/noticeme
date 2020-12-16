@@ -93,27 +93,11 @@ class AddCustomConsumableFragment : Fragment(),
             }
 
             tvConfirm.setOnClickListener {
-                val duration = tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
-                    1,
-                    TimeUnit.DAYS
-                )
-
-                if (startDate == 0.toLong()) {
-                    startDate = System.currentTimeMillis()
+                if(tvDuration.text.isNotEmpty() && tvTitle.text.isNotEmpty()) {
+                    insertNewUserConsumable()
+                } else {
+                    mainView.makeSnackBar(getString(R.string.consumable_add_warning_msg2))
                 }
-
-                viewModel.insertUserConsumable(
-                    UserConsumableEntity(
-                        0,
-                        SpannableStringBuilder(tvTitle.text).toString(),
-                        randomIcon.random(),
-                        getString(R.string.personal_category_title),
-                        duration,
-                        startDate,
-                        startDate + duration + DAY_MILLISECONDS,
-                        prioirty
-                    )
-                )
             }
 
             val calendar = Calendar.getInstance()
@@ -180,6 +164,30 @@ class AddCustomConsumableFragment : Fragment(),
 
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
+    }
+
+    private fun insertNewUserConsumable() {
+        val duration = binding!!.tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
+            1,
+            TimeUnit.DAYS
+        )
+
+        if (startDate == 0.toLong()) {
+            startDate = System.currentTimeMillis()
+        }
+
+        viewModel.insertUserConsumable(
+            UserConsumableEntity(
+                0,
+                SpannableStringBuilder(binding.tvTitle.text).toString(),
+                randomIcon.random(),
+                getString(R.string.personal_category_title),
+                duration,
+                startDate,
+                startDate + duration + DAY_MILLISECONDS,
+                prioirty
+            )
+        )
     }
 
     override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
