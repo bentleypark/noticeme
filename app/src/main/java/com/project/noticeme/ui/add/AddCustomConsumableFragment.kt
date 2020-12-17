@@ -20,6 +20,7 @@ import com.project.noticeme.common.ex.hideKeyboard
 import com.project.noticeme.common.ex.makeSnackBar
 import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
+import com.project.noticeme.common.utils.date.TimeInMillis
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
@@ -57,6 +58,9 @@ class AddCustomConsumableFragment : Fragment(),
 
     @Inject
     lateinit var pref: SharedPreferenceManager
+
+    @Inject
+    lateinit var currentTimeMillis: TimeInMillis
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -108,13 +112,19 @@ class AddCustomConsumableFragment : Fragment(),
             }
 
             val calendar = Calendar.getInstance()
-            calendar.timeInMillis = System.currentTimeMillis()
+            calendar.time = Date()
+            calendar.clear(Calendar.HOUR_OF_DAY)
+            calendar.clear(Calendar.HOUR)
+            calendar.clear(Calendar.MINUTE)
+            calendar.clear(Calendar.SECOND)
+            calendar.clear(Calendar.MILLISECOND)
             dataPicker.init(
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             ) { _, year, monthOfYear, dayOfMonth ->
                 calendar.set(year, monthOfYear, dayOfMonth)
+
                 startDate = calendar.timeInMillis
             }
         }
@@ -201,18 +211,11 @@ class AddCustomConsumableFragment : Fragment(),
     }
 
     private fun setUpNotification() {
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        calendar.clear(Calendar.HOUR_OF_DAY)
-        calendar.clear(Calendar.HOUR)
-        calendar.clear(Calendar.MINUTE)
-        calendar.clear(Calendar.SECOND)
-        calendar.clear(Calendar.MILLISECOND)
 
         if (pref.getNotificationSetting()) {
             JobSchedulerStart.start(
                 requireContext(),
-                calendar.timeInMillis + duration,
+                currentTimeMillis.getCurrentTimeMillis() + duration,
                 viewModel.getLastItemId()!! + 1
             )
         }
