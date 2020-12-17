@@ -102,7 +102,7 @@ object InitialConsumableData {
 
         dataList.add(
             ConsumableEntity(
-                22,
+                0,
                 "소프트렌즈",
                 R.drawable.ic_img_soft_lens,
                 "개인위생",

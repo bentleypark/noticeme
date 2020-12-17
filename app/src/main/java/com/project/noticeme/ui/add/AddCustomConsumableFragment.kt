@@ -20,15 +20,18 @@ import com.project.noticeme.common.ex.hideKeyboard
 import com.project.noticeme.common.ex.makeSnackBar
 import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
+import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentAddCustomConsumableBinding
+import com.project.noticeme.notification.JobSchedulerStart
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddCustomConsumableFragment : Fragment(),
@@ -50,6 +53,10 @@ class AddCustomConsumableFragment : Fragment(),
     )
     var prioirty = 0
     var startDate: Long = 0
+    var duration: Long = 0
+
+    @Inject
+    lateinit var pref: SharedPreferenceManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,7 +100,7 @@ class AddCustomConsumableFragment : Fragment(),
             }
 
             tvConfirm.setOnClickListener {
-                if(tvDuration.text.isNotEmpty() && tvTitle.text.isNotEmpty()) {
+                if (tvDuration.text.isNotEmpty() && tvTitle.text.isNotEmpty()) {
                     insertNewUserConsumable()
                 } else {
                     mainView.makeSnackBar(getString(R.string.consumable_add_warning_msg2))
@@ -154,6 +161,9 @@ class AddCustomConsumableFragment : Fragment(),
                             tvDuration.hideKeyboard()
                         }
                         lifecycleScope.launch {
+
+                            setUpNotification()
+
                             binding.mainView.makeSnackBar(getString(R.string.consumable_add_success_msg))
                             delay(1500)
                             findNavController().navigate(R.id.action_addCustomConsumableFragment_to_homeFragment)
@@ -167,7 +177,7 @@ class AddCustomConsumableFragment : Fragment(),
     }
 
     private fun insertNewUserConsumable() {
-        val duration = binding!!.tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
+        duration = binding!!.tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
             1,
             TimeUnit.DAYS
         )
@@ -188,6 +198,24 @@ class AddCustomConsumableFragment : Fragment(),
                 prioirty
             )
         )
+    }
+
+    private fun setUpNotification() {
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+        calendar.clear(Calendar.HOUR_OF_DAY)
+        calendar.clear(Calendar.HOUR)
+        calendar.clear(Calendar.MINUTE)
+        calendar.clear(Calendar.SECOND)
+        calendar.clear(Calendar.MILLISECOND)
+
+        if (pref.getNotificationSetting()) {
+            JobSchedulerStart.start(
+                requireContext(),
+                calendar.timeInMillis + duration,
+                viewModel.getLastItemId()!! + 1
+            )
+        }
     }
 
     override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {

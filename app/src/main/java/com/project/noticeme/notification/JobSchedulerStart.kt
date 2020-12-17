@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import timber.log.Timber
 
 class JobSchedulerStart {
 
@@ -19,15 +20,16 @@ class JobSchedulerStart {
             )
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                Timber.d("JobSchedulerStart")
                 manager.setExactAndAllowWhileIdle(
                     AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + duration,
+                    duration,
                     pendingIntent
                 )
             } else
                 manager.setExact(
                     AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + duration,
+                    duration,
                     pendingIntent
                 )
         }

@@ -218,5 +218,9 @@ constructor(
                 Sentry.captureException(java.lang.Exception("Exception - $e"))
             }
         }
+
+    suspend fun getLastItem(): ConsumableEntity {
+        return consumableDao.getLastItem()
+    }
 }
 
