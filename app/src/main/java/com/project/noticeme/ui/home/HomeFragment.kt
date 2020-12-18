@@ -23,11 +23,13 @@ import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentHomeBinding
+import com.project.noticeme.notification.JobSchedulerStart
 import com.project.noticeme.ui.home.adapt.UserConsumableListAdapter
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -129,6 +131,13 @@ class HomeFragment : Fragment(),
                                         binding.rvList.isVisible = true
                                         listAdapter.addAll(it.data.sortedByDescending { item -> item.priority }
                                             .toMutableList())
+
+
+                                        userConsumableList = it.data.toMutableList()
+                                        if (!pref.getIsOldNotificationUpdated()) {
+                                            updateOldNotification()
+                                        }
+
                                     }
                                 } else {
                                     binding.emptyList.isVisible = true
@@ -174,6 +183,20 @@ class HomeFragment : Fragment(),
                     }
                 }
             )
+        }
+    }
+
+    private fun updateOldNotification() {
+        Timber.d("updateOldNotification")
+        userConsumableList.forEach { item ->
+            setUpNotification(item.startDate + item.duration, item.id)
+        }
+        pref.setOldNotificationUpdated(true)
+    }
+
+    private fun setUpNotification(expiredDate: Long, id: Int) {
+        if (pref.getNotificationSetting()) {
+            JobSchedulerStart.start(requireContext(), expiredDate, id)
         }
     }
 

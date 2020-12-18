@@ -20,7 +20,6 @@ class JobSchedulerStart {
             )
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                Timber.d("JobSchedulerStart")
                 manager.setExactAndAllowWhileIdle(
                     AlarmManager.RTC_WAKEUP,
                     duration,
