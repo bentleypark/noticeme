@@ -52,7 +52,7 @@ android.permission.RECEIVE_BOOT_COMPLETED: 사용자 알림 제공을 위해서 
     <string name="tv_version_info_title">앱 버전 정보</string>
     <string name="tv_personal_privacy_policy_title">개인정보 처리방침</string>
     <string name="tv_query_title">문의하기</string>
-    <string name="tv_evaluation_title">앱 평가하기</string>
+    <string name="tv_guide_title">튜토리얼 다시보기</string>
     <string name="remove_dialog_title">"소모품을 삭제하시겠습니까?"</string>
     <string name="renewal_dialog_title">"소모품의 교체 날짜를 오늘 날짜로 변경하시겠습니까?"</string>
     <string name="personal_category_title">나의 목록</string>

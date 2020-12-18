@@ -11,8 +11,11 @@ import com.google.android.gms.ads.AdRequest
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
+import com.project.noticeme.common.ex.launchActivityWithFinish
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.databinding.FragmentSettingBinding
+import com.project.noticeme.ui.MainActivity
+import com.project.noticeme.ui.guide.GuideActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -60,9 +63,9 @@ class SettingFragment : Fragment(),
                 requireContext().startActivity(intent)
             }
 
-//            ivArrow3.setOnClickListener {
-//                askForReview()
-//            }
+            ivArrow3.setOnClickListener {
+                requireActivity().launchActivityWithFinish<GuideActivity>()
+            }
 
             btnBack.setOnClickListener {
                 findNavController().navigate(R.id.action_settingActivity_pop)
