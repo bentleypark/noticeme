@@ -83,7 +83,7 @@ class AddCustomConsumableFragment : Fragment(),
                 findNavController().navigate(R.id.action_addCustomConsumableFragment_pop)
             }
 
-            priorityBtnGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            priorityBtnGroup.addOnButtonCheckedListener { _, checkedId, _ ->
                 when (checkedId) {
                     btnPriority0.id -> {
                         prioirty = 0
