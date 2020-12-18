@@ -115,7 +115,7 @@ object Libs {
         "com.google.firebase:firebase-crashlytics:${Versions.firebaseCrashlyticsVersion}"
     const val firebaseAnalytics =
         "com.google.firebase:firebase-analytics:${Versions.firebaseAnalyticsVersion}"
-    const val playCore = "com.google.android.play:core-ktx:${Versions.playCoreVersion}"
+    const val playCoreKtx = "com.google.android.play:core-ktx:${Versions.playCoreVersion}"
 
 
     // Google Cloud Speech

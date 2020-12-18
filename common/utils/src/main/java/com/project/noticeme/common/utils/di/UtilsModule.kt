@@ -3,6 +3,7 @@ package com.project.noticeme.common.utils.di
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.project.noticeme.common.utils.date.TimeInMillis
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import dagger.Module
 import dagger.Provides
@@ -27,4 +28,7 @@ object UtilsModule {
                 Context.MODE_PRIVATE
             )
         )
+
+    @Provides
+    fun provideTimemillis() = TimeInMillis()
 }

@@ -19,4 +19,7 @@ interface ConsumableDao {
 
     @Query("SELECT * FROM consumables WHERE title LIKE :search")
     suspend fun findConsumableWithTitle(search: String): List<ConsumableEntity>
+
+    @Query("SELECT * FROM consumables ORDER BY id DESC LIMIT 1")
+    suspend fun getLastItem(): ConsumableEntity
 }

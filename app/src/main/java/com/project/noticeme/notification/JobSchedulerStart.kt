@@ -21,13 +21,13 @@ class JobSchedulerStart {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 manager.setExactAndAllowWhileIdle(
                     AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + duration,
+                    duration,
                     pendingIntent
                 )
             } else
                 manager.setExact(
                     AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + duration,
+                    duration,
                     pendingIntent
                 )
         }

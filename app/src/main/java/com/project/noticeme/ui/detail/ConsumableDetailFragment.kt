@@ -17,13 +17,16 @@ import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.makeSnackBar
 import com.project.noticeme.common.ex.showKeyboard
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
+import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentConsumableDetailBinding
+import com.project.noticeme.notification.JobSchedulerStart
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ConsumableDetailFragment : Fragment(),
@@ -33,6 +36,10 @@ class ConsumableDetailFragment : Fragment(),
     private lateinit var userConsumableItem: UserConsumableEntity
     private var prioirty = 0
     private var startDate: Long = 0
+    private var duration: Long = 0
+
+    @Inject
+    lateinit var pref: SharedPreferenceManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,7 +93,7 @@ class ConsumableDetailFragment : Fragment(),
             tvConfirm.setOnClickListener {
                 progressCircular.isVisible = true
 
-                val duration = tvDuration.text.toString().toInt() * DAY_MILLISECONDS
+                duration = tvDuration.text.toString().toInt() * DAY_MILLISECONDS
 
                 if (startDate == 0.toLong()) {
                     startDate = userConsumableItem.startDate
@@ -104,6 +111,8 @@ class ConsumableDetailFragment : Fragment(),
                         prioirty
                     )
                 )
+
+                setUpNotification(userConsumableItem.id, startDate + duration)
             }
 
             tvDelete.setOnClickListener {
@@ -213,6 +222,24 @@ class ConsumableDetailFragment : Fragment(),
                     userConsumableItem.endDate,
                     prioirty
                 )
+            )
+        }
+    }
+
+    private fun setUpNotification(id: Int, expiredDate: Long) {
+        val calendar = Calendar.getInstance()
+        calendar.time = Date()
+        calendar.clear(Calendar.HOUR_OF_DAY)
+        calendar.clear(Calendar.HOUR)
+        calendar.clear(Calendar.MINUTE)
+        calendar.clear(Calendar.SECOND)
+        calendar.clear(Calendar.MILLISECOND)
+
+        if (pref.getNotificationSetting()) {
+            JobSchedulerStart.start(
+                requireContext(),
+                expiredDate,
+                id
             )
         }
     }
