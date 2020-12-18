@@ -141,8 +141,7 @@ dependencies {
 //    debugImplementation Libs.leakcanary
 
     implementation Libs.admob
-    implementation Libs.playCore
-    implementation 'com.firebase:firebase-jobdispatcher:0.8.6'
+    implementation Libs.playCoreKtx
 
     implementation Libs.coil
 

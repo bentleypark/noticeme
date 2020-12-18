@@ -28,6 +28,13 @@ constructor(
     val dataStateUserConsumable: LiveData<DataState<Boolean>>
         get() = _dataStateUserConsumable
 
+
+    private val lastItem = MutableLiveData<ConsumableEntity>()
+
+    init {
+        getLastItemFromConsumable()
+    }
+
     fun insert(item: ConsumableEntity) {
         viewModelScope.launch {
             mainRepository.insertCustomConsumable(item)
@@ -47,4 +54,12 @@ constructor(
                 .launchIn(viewModelScope)
         }
     }
+
+    private fun getLastItemFromConsumable() {
+        viewModelScope.launch {
+            lastItem.value = mainRepository.getLastItem()
+        }
+    }
+
+    fun getLastItemId() = lastItem.value?.id
 }
