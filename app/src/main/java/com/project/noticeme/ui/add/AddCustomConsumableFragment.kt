@@ -20,15 +20,19 @@ import com.project.noticeme.common.ex.hideKeyboard
 import com.project.noticeme.common.ex.makeSnackBar
 import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
+import com.project.noticeme.common.utils.date.TimeInMillis
+import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentAddCustomConsumableBinding
+import com.project.noticeme.notification.JobSchedulerStart
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddCustomConsumableFragment : Fragment(),
@@ -50,6 +54,13 @@ class AddCustomConsumableFragment : Fragment(),
     )
     var prioirty = 0
     var startDate: Long = 0
+    var duration: Long = 0
+
+    @Inject
+    lateinit var pref: SharedPreferenceManager
+
+    @Inject
+    lateinit var currentTimeMillis: TimeInMillis
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,7 +83,7 @@ class AddCustomConsumableFragment : Fragment(),
                 findNavController().navigate(R.id.action_addCustomConsumableFragment_pop)
             }
 
-            priorityBtnGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            priorityBtnGroup.addOnButtonCheckedListener { _, checkedId, _ ->
                 when (checkedId) {
                     btnPriority0.id -> {
                         prioirty = 0
@@ -93,37 +104,27 @@ class AddCustomConsumableFragment : Fragment(),
             }
 
             tvConfirm.setOnClickListener {
-                val duration = tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
-                    1,
-                    TimeUnit.DAYS
-                )
-
-                if (startDate == 0.toLong()) {
-                    startDate = System.currentTimeMillis()
+                if (tvDuration.text.isNotEmpty() && tvTitle.text.isNotEmpty()) {
+                    insertNewUserConsumable()
+                } else {
+                    mainView.makeSnackBar(getString(R.string.consumable_add_warning_msg2))
                 }
-
-                viewModel.insertUserConsumable(
-                    UserConsumableEntity(
-                        0,
-                        SpannableStringBuilder(tvTitle.text).toString(),
-                        randomIcon.random(),
-                        getString(R.string.personal_category_title),
-                        duration,
-                        startDate,
-                        startDate + duration + DAY_MILLISECONDS,
-                        prioirty
-                    )
-                )
             }
 
             val calendar = Calendar.getInstance()
-            calendar.timeInMillis = System.currentTimeMillis()
+            calendar.time = Date()
+            calendar.clear(Calendar.HOUR_OF_DAY)
+            calendar.clear(Calendar.HOUR)
+            calendar.clear(Calendar.MINUTE)
+            calendar.clear(Calendar.SECOND)
+            calendar.clear(Calendar.MILLISECOND)
             dataPicker.init(
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             ) { _, year, monthOfYear, dayOfMonth ->
                 calendar.set(year, monthOfYear, dayOfMonth)
+
                 startDate = calendar.timeInMillis
             }
         }
@@ -170,6 +171,9 @@ class AddCustomConsumableFragment : Fragment(),
                             tvDuration.hideKeyboard()
                         }
                         lifecycleScope.launch {
+
+                            setUpNotification()
+
                             binding.mainView.makeSnackBar(getString(R.string.consumable_add_success_msg))
                             delay(1500)
                             findNavController().navigate(R.id.action_addCustomConsumableFragment_to_homeFragment)
@@ -180,6 +184,41 @@ class AddCustomConsumableFragment : Fragment(),
 
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
+    }
+
+    private fun insertNewUserConsumable() {
+        duration = binding!!.tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
+            1,
+            TimeUnit.DAYS
+        )
+
+        if (startDate == 0.toLong()) {
+            startDate = System.currentTimeMillis()
+        }
+
+        viewModel.insertUserConsumable(
+            UserConsumableEntity(
+                0,
+                SpannableStringBuilder(binding.tvTitle.text).toString(),
+                randomIcon.random(),
+                getString(R.string.personal_category_title),
+                duration,
+                startDate,
+                startDate + duration + DAY_MILLISECONDS,
+                prioirty
+            )
+        )
+    }
+
+    private fun setUpNotification() {
+
+        if (pref.getNotificationSetting()) {
+            JobSchedulerStart.start(
+                requireContext(),
+                currentTimeMillis.getCurrentTimeMillis() + duration,
+                viewModel.getLastItemId()!! + 1
+            )
+        }
     }
 
     override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {

@@ -202,13 +202,13 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/tv_evaluation"
+            android:id="@+id/tv_guide"
             style="@style/SettingTextViewStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
-            android:text="@string/tv_evaluation_title"
+            android:text="@string/tv_guide_title"
             ads:layout_constraintStart_toStartOf="parent"
             ads:layout_constraintTop_toTopOf="@+id/boarder_view4" />
 
@@ -233,6 +233,6 @@
             ads:layout_constraintEnd_toEndOf="parent"
             ads:layout_constraintHorizontal_bias="0.0"
             ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/tv_evaluation" />
+            ads:layout_constraintTop_toBottomOf="@+id/tv_guide" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

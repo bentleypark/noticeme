@@ -15,10 +15,11 @@ def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+
+
 android {
     compileSdkVersion Config.compileSdkVersion
     buildToolsVersion "30.0.2"
-
     defaultConfig {
         applicationId "com.project.noticeme"
         minSdkVersion Config.minSdkVersion
@@ -26,6 +27,18 @@ android {
         versionCode Config.versionCode
         versionName Config.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            debugSymbolLevel 'SYMBOL_TABLE'
+            debugSymbolLevel 'FULL'
+        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation":"$projectDir/schemas".toString(),
+                        "room.incremental":"true",
+                        "room.expandProjection":"true"]
+            }
+        }
     }
     signingConfigs {
         config {
@@ -128,8 +141,7 @@ dependencies {
 //    debugImplementation Libs.leakcanary
 
     implementation Libs.admob
-    implementation Libs.playCore
-    implementation 'com.firebase:firebase-jobdispatcher:0.8.6'
+    implementation Libs.playCoreKtx
 
     implementation Libs.coil
 

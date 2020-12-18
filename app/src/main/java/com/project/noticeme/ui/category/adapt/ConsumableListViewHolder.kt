@@ -12,6 +12,8 @@ import com.project.noticeme.databinding.ConsumableItemBinding
 import com.project.noticeme.notification.JobSchedulerStart
 import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
 import kotlinx.android.extensions.LayoutContainer
+import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -31,19 +33,14 @@ class ConsumableListViewHolder(
             ivMaterialImg.setImageResource(item.image)
             tvExpireTime.text = getDurationWithDay(item.duration)
 
-
-            val calendar = Calendar.getInstance()
-            calendar.time = Date()
-            calendar.clear(Calendar.HOUR_OF_DAY)
-            calendar.clear(Calendar.HOUR)
-            calendar.clear(Calendar.MINUTE)
-            calendar.clear(Calendar.SECOND)
-            calendar.clear(Calendar.MILLISECOND)
             consumableItem.setOnClickListener {
-
                 if (!viewModel.checkIfItemIsAlreadyInserted(item.title)) {
                     if (viewModel.checkIsNotificationSettingOn()) {
-                        JobSchedulerStart.start(context, item.duration, item.id)
+                        JobSchedulerStart.start(
+                            context,
+                            viewModel.getCurrentTimeMillis() + item.duration,
+                            item.id
+                        )
                     }
                     viewModel.insert(
                         UserConsumableEntity(
@@ -52,8 +49,8 @@ class ConsumableListViewHolder(
                             item.image,
                             item.category,
                             item.duration,
-                            calendar.timeInMillis,
-                            calendar.timeInMillis + item.duration + DAY_MILLISECONDS,
+                            viewModel.getCurrentTimeMillis(),
+                            viewModel.getCurrentTimeMillis() + item.duration + DAY_MILLISECONDS,
                             0
                         )
                     )

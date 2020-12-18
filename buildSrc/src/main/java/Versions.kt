@@ -39,7 +39,7 @@ object Versions {
     // Jetpack
     const val workVersion = "2.4.0"
     const val lifeCycleVersion = "2.2.0"
-    const val roomVersion = "2.2.5"
+    const val roomVersion = "2.2.6"
     const val navigationVersion = "2.3.2"
     const val startupVersion = "1.0.0"
 

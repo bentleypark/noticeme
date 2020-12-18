@@ -33,6 +33,8 @@
             android:name=".ui.MainActivity"
             android:screenOrientation="portrait" />
 
+        <receiver android:name=".notification.AlarmBroadCastReceiver" />
+
         <receiver
             android:name=".notification.BootCompleteBroadCastReceiver"
             android:enabled="true"
