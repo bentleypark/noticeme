@@ -8,14 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdRequest
-import com.google.android.play.core.review.ReviewManagerFactory
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.databinding.FragmentSettingBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -62,9 +60,9 @@ class SettingFragment : Fragment(),
                 requireContext().startActivity(intent)
             }
 
-            ivArrow3.setOnClickListener {
-                initReview()
-            }
+//            ivArrow3.setOnClickListener {
+//                askForReview()
+//            }
 
             btnBack.setOnClickListener {
                 findNavController().navigate(R.id.action_settingActivity_pop)
@@ -75,19 +73,34 @@ class SettingFragment : Fragment(),
         }
     }
 
-    private fun initReview() {
-        val manager = ReviewManagerFactory.create(requireContext())
-        manager.requestReviewFlow().addOnCompleteListener { request ->
-            if (request.isSuccessful) {
-                val reviewInfo = request.result
-                manager.launchReviewFlow(requireActivity(), reviewInfo).addOnFailureListener {
-                    Timber.i("In-app review request failed, reason=$it")
-                }.addOnCompleteListener {
-                    Timber.i("In-app review finished")
-                }
-            } else {
-                Timber.e("In-app review request failed, reason=${request.exception}")
-            }
-        }
-    }
+//    private fun initReview() {
+////        val manager = ReviewManagerFactory.create(requireContext())
+////        manager.requestReviewFlow().addOnCompleteListener { request ->
+////            if (request.isSuccessful) {
+////                val reviewInfo = request.result
+////                manager.launchReviewFlow(requireActivity(), reviewInfo).addOnFailureListener {
+////                    Timber.i("In-app review request failed, reason=$it")
+////                }.addOnCompleteListener {
+////                    Timber.i("In-app review finished")
+////                }
+////            } else {
+////                Timber.e("In-app review request failed, reason=${request.exception}")
+////            }
+////        }
+//
+//        manager = ReviewManagerFactory.create(requireContext())
+//        val request = manager.requestReviewFlow()
+//        request.addOnCompleteListener { request ->
+//            if (request.isSuccessful) {
+//                // We got the ReviewInfo object
+//                reviewInfo = request.result
+//                manager.launchReviewFlow(requireActivity(), reviewInfo!!)
+//                Timber.i("In-app review finished")
+//            } else {
+//                // There was some problem, continue regardless of the result.
+//                Timber.e("In-app review request failed, reason=${request.exception}")
+//
+//            }
+//        }
+//    }
 }

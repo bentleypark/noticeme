@@ -201,26 +201,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_evaluation"
-            style="@style/SettingTextViewStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/tv_evaluation_title"
-            ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toTopOf="@+id/boarder_view4" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_evaluation"-->
+<!--            style="@style/SettingTextViewStyle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:text="@string/tv_evaluation_title"-->
+<!--            ads:layout_constraintStart_toStartOf="parent"-->
+<!--            ads:layout_constraintTop_toTopOf="@+id/boarder_view4" />-->
 
-        <ImageButton
-            android:id="@+id/iv_arrow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/ic_img_arrow_gray"
-            ads:layout_constraintEnd_toEndOf="parent"
-            ads:layout_constraintTop_toTopOf="@+id/boarder_view4" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/iv_arrow3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:layout_marginEnd="32dp"-->
+<!--            android:background="@drawable/ic_img_arrow_gray"-->
+<!--            ads:layout_constraintEnd_toEndOf="parent"-->
+<!--            ads:layout_constraintTop_toTopOf="@+id/boarder_view4" />-->
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
@@ -233,6 +233,6 @@
             ads:layout_constraintEnd_toEndOf="parent"
             ads:layout_constraintHorizontal_bias="0.0"
             ads:layout_constraintStart_toStartOf="parent"
-            ads:layout_constraintTop_toBottomOf="@+id/tv_evaluation" />
+            ads:layout_constraintTop_toBottomOf="@+id/boarder_view4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
