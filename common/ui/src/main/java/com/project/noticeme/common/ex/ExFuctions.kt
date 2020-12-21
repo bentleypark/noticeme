@@ -3,6 +3,7 @@ package com.project.noticeme.common.ex
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -70,4 +71,10 @@ fun Context.makeToast(text: String) {
 
 fun View.makeSnackBar(text: String) {
     Snackbar.make(this, text, Snackbar.LENGTH_SHORT).show()
+}
+
+fun Context.isConnected(): Boolean {
+    val connectivityManager =
+        (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetwork
+    return connectivityManager != null
 }

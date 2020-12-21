@@ -1,6 +1,8 @@
 package com.project.noticeme.ui.setting
 
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +10,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdRequest
+import com.project.noticeme.BuildConfig
 import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
+import com.project.noticeme.common.ex.isConnected
 import com.project.noticeme.common.ex.launchActivityWithFinish
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.databinding.FragmentSettingBinding
@@ -57,10 +61,26 @@ class SettingFragment : Fragment(),
             }
 
             ivArrow2.setOnClickListener {
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.type = "text/plain"
-                intent.putExtra(Intent.EXTRA_EMAIL, getString(R.string.email_address))
-                requireContext().startActivity(intent)
+//                val intent = Intent(Intent.ACTION_SEND)
+//                intent.type = "text/plain"
+//                intent.setType("message/rfc822")
+//                intent.putExtra(Intent.EXTRA_SUBJECT,"test")
+//                intent.putExtra(Intent.EXTRA_EMAIL, "contact@sovoro.kr")
+//                requireContext().startActivity(intent)
+                if (context!!.isConnected()) {
+                    val intent = Intent(Intent.ACTION_SEND)
+                    intent.type = "text/plain"
+                    intent.putExtra(
+                        Intent.EXTRA_EMAIL,
+                        arrayOf(context!!.getString(R.string.email_address))
+                    )
+                    intent.putExtra(Intent.EXTRA_SUBJECT, context!!.getString(R.string.email_title))
+                    intent.putExtra(
+                        Intent.EXTRA_TEXT,
+                        "앱 버전 (AppVersion): ${BuildConfig.VERSION_NAME}\n기기명 (Device):\n안드로이드 OS (Android OS): ${Build.VERSION.RELEASE + ".0"}\n내용 (Content):\n"
+                    )
+                    context!!.startActivity(intent)
+                }
             }
 
             ivArrow3.setOnClickListener {
