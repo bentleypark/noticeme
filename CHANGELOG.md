@@ -12,7 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - 유저 설정이 초기화 되는 버그 수정.
 
-## v1.0.1 - 2020-12-18
+## [v1.0.1] - 2020-12-18
 ### Changed
 - 온보딩 화면 수정.
 ### Fixed
