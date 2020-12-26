@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import coil.load
+import coil.size.Scale
+import com.project.noticeme.R
 import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.launchActivityWithFinish
@@ -28,7 +31,10 @@ class GuideScreen4Fragment : Fragment(),
         savedInstanceState: Bundle?
     ): View = initBinding(FragmentGuideScreen4Binding.inflate(layoutInflater), this) {
 
-        binding!!.btnFinish.setOnClickListener {
+        binding!!.ivGuideImg.load(R.drawable.guide_image4) {
+            scale(Scale.FILL)
+        }
+        binding.btnFinish.setOnClickListener {
             pref.setOnBoardingShowed(true)
             lifecycleScope.launchWhenCreated {
                 delay(1_000)
