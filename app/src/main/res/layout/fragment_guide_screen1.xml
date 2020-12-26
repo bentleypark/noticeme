@@ -6,8 +6,9 @@
     tools:context=".ui.guide.screen.GuideScreen1Fragment">
 
     <ImageView
+        android:id="@+id/iv_guide_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/guide_image1" />
+        android:scaleType="fitXY"/>
 
 </FrameLayout>

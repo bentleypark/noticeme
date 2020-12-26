@@ -22,7 +22,7 @@ class GuideFragment : Fragment(),
     ): View = initBinding(FragmentGuideBinding.inflate(layoutInflater), this) {
 
 
-        val fragmentList = arrayListOf(
+        val fragmentList = arrayListOf<Any>(
             GuideScreen1Fragment(),
             GuideScreen2Fragment(),
             GuideScreen3Fragment(),
