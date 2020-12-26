@@ -5,11 +5,11 @@ object Versions {
     const val googleServiceVersion = "4.3.4"
     const val firebaseCrashlyticsGradleVersion = "2.2.0"
     const val sentryGradleVersion = "1.7.36"
-    const val r8Version = "2.1.67"
+    const val r8Version = "2.1.75"
     const val androidJunit5Version = "1.6.2.0"
     const val androidMavenGradleVersion = "2.1"
-    const val detektGradleVersion = "1.12.0"
-    const val navSafArgPluginVersion = "2.3.1"
+    const val detektGradleVersion = "1.15.0"
+    const val navSafArgPluginVersion = "2.3.2"
 
     // Kotlin
     const val kotlinVersion = "1.4.21"
@@ -106,7 +106,7 @@ object Versions {
     const val klintVersion = "0.40.0"
 
     // Hilt
-    const val hiltVersion = "2.29.1-alpha"
+    const val hiltVersion = "2.30.1-alpha"
     const val hiltViewModel = "1.0.0-alpha02"
 
     // Admob
