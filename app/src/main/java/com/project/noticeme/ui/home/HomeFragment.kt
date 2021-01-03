@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -47,6 +49,13 @@ class HomeFragment : Fragment(),
     lateinit var pref: SharedPreferenceManager
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewLifecycleOwnerLiveData.observe(this, {
+            setUpObserve(it)
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,7 +75,7 @@ class HomeFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         setUpView()
-        setUpObserve()
+//        setUpObserve()
     }
 
     override fun onResume() {
@@ -112,7 +121,7 @@ class HomeFragment : Fragment(),
         }
     }
 
-    private fun setUpObserve() {
+    private fun setUpObserve(viewLifecycleOwner: LifecycleOwner) {
         viewModel.apply {
             consumableList.observe(
                 viewLifecycleOwner, {
