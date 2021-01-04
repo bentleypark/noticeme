@@ -12,7 +12,7 @@ object Versions {
     const val navSafArgPluginVersion = "2.3.2"
 
     // Kotlin
-    const val kotlinVersion = "1.4.21"
+    const val kotlinVersion = "1.4.21-2"
 
     // Coroutines
     const val androidVersion = "1.4.2"

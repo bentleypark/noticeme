@@ -9,11 +9,11 @@ import com.project.noticeme.data.room.UserConsumableDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
     @Singleton
@@ -22,9 +22,6 @@ object RepositoryModule {
         consumableDao: ConsumableDao,
         userConsumableDao: UserConsumableDao,
         searchHistoryDao: SearchHistoryDao
-//        apiService: ApiService,
-//        cacheMapper: CacheMapper,
-//        networkMapper: NetworkMapper
     ): MainRepository {
         return MainRepository(consumableDao, userConsumableDao, searchHistoryDao)
     }

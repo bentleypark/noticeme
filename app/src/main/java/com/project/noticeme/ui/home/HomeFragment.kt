@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -47,26 +49,32 @@ class HomeFragment : Fragment(),
     lateinit var pref: SharedPreferenceManager
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentHomeBinding.inflate(layoutInflater), this) {
-        MobileAds.initialize(activity) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewLifecycleOwnerLiveData.observe(this, {
+            setUpObserve(it)
             activity?.onBackPressedDispatcher?.addCallback(
-                viewLifecycleOwner,
+                it,
                 object : OnBackPressedCallback(true) {
                     override fun handleOnBackPressed() {
                         requireActivity().finish()
                     }
                 })
-        }
+        })
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = initBinding(FragmentHomeBinding.inflate(layoutInflater), this) {
+        MobileAds.initialize(activity)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setUpView()
-        setUpObserve()
+//        setUpObserve()
     }
 
     override fun onResume() {
@@ -112,7 +120,7 @@ class HomeFragment : Fragment(),
         }
     }
 
-    private fun setUpObserve() {
+    private fun setUpObserve(viewLifecycleOwner: LifecycleOwner) {
         viewModel.apply {
             consumableList.observe(
                 viewLifecycleOwner, {
@@ -187,7 +195,6 @@ class HomeFragment : Fragment(),
     }
 
     private fun updateOldNotification() {
-        Timber.d("updateOldNotification")
         userConsumableList.forEach { item ->
             setUpNotification(item.startDate + item.duration, item.id)
         }
