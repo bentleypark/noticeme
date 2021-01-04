@@ -53,6 +53,13 @@ class HomeFragment : Fragment(),
         super.onCreate(savedInstanceState)
         viewLifecycleOwnerLiveData.observe(this, {
             setUpObserve(it)
+            activity?.onBackPressedDispatcher?.addCallback(
+                it,
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        requireActivity().finish()
+                    }
+                })
         })
     }
 
@@ -60,15 +67,7 @@ class HomeFragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = initBinding(FragmentHomeBinding.inflate(layoutInflater), this) {
-        MobileAds.initialize(activity) {
-            activity?.onBackPressedDispatcher?.addCallback(
-                viewLifecycleOwner,
-                object : OnBackPressedCallback(true) {
-                    override fun handleOnBackPressed() {
-                        requireActivity().finish()
-                    }
-                })
-        }
+        MobileAds.initialize(activity)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -196,7 +195,6 @@ class HomeFragment : Fragment(),
     }
 
     private fun updateOldNotification() {
-        Timber.d("updateOldNotification")
         userConsumableList.forEach { item ->
             setUpNotification(item.startDate + item.duration, item.id)
         }
