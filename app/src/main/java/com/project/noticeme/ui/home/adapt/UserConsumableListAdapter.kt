@@ -12,6 +12,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.noticeme.App
 import com.project.noticeme.R
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
+import com.project.noticeme.common.utils.date.TimeInMillis
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
 import com.project.noticeme.notification.JobSchedulerStart
@@ -112,7 +113,11 @@ class UserConsumableListAdapter(
         )
 
         if (viewModel.checkIsNotificationSettingOn()) {
-            JobSchedulerStart.start(context, item.duration, item.id)
+            JobSchedulerStart.start(
+                context,
+                TimeInMillis().getCurrentTimeMillis() + item.duration,
+                item.id
+            )
         }
     }
 

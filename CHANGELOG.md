@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v1.0.4] - 2020-12-26
+### Fixed
+- Oreo(6.0~7.0)에서 App Crush 되는 버그 수정.
+
 ## [v1.0.3] - 2020-12-21
 ### Fixed
 - 문의하기 기능 버그 수정.
@@ -26,3 +30,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [v1.0.1]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.1
 [v1.0.2]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.2
 [v1.0.3]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.3
+[v1.0.4]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.4
