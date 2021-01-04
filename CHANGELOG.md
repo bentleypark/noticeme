@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v1.0.5] - 2021-01-05
+### Fixed
+- 소모품 날짜를 초기화 할 때, 알림 동작 버그 수정.
+- 홈화면에서 간헐적으로 crash 되는 버그 수정.
+
 ## [v1.0.4] - 2020-12-26
 ### Fixed
 - Oreo(6.0~7.0)에서 App Crush 되는 버그 수정.
@@ -31,3 +36,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [v1.0.2]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.2
 [v1.0.3]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.3
 [v1.0.4]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.4
+[v1.0.5]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.5
