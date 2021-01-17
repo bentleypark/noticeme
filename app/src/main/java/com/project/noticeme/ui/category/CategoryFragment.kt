@@ -9,27 +9,26 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
 import com.project.noticeme.R
-import com.project.noticeme.common.base.ViewBindingHolder
-import com.project.noticeme.common.base.ViewBindingHolderImpl
+import com.project.noticeme.common.ex.viewLifecycle
 import com.project.noticeme.databinding.FragmentCategoryBinding
 import com.project.noticeme.ui.category.adapt.ConsumableCategoryListAdapter
 import com.project.noticeme.ui.category.viewmodel.CategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoryFragment : Fragment(),
-    ViewBindingHolder<FragmentCategoryBinding> by ViewBindingHolderImpl() {
+class CategoryFragment : Fragment() {
 
+    private var binding: FragmentCategoryBinding by viewLifecycle()
     private val viewModel: CategoryViewModel by viewModels()
     private lateinit var listAdapter: ConsumableCategoryListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentCategoryBinding.inflate(layoutInflater), this) {
-        MobileAds.initialize(activity) {}
+    ): View {
+        binding = FragmentCategoryBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,27 +38,27 @@ class CategoryFragment : Fragment(),
             {
                 listAdapter = ConsumableCategoryListAdapter(it)
 
-                binding!!.categoryList.apply {
+                binding.categoryList.apply {
                     adapter = listAdapter
                     layoutManager = GridLayoutManager(context, SPAN_COUNT_PORTRAIT)
-                    addItemDecoration(ItemDivideDecoration(15))
+                    addItemDecoration(ItemDivideDecoration(ITEM_DIV_HEIGHT))
                     setHasFixedSize(true)
                 }
             })
 
-        binding!!.btnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_categoryFragment_pop)
-        }
+        binding.apply {
+            btnBack.setOnClickListener {
+                findNavController().navigate(R.id.action_categoryFragment_pop)
+            }
 
-        val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
+            val adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
 
-        binding.btnAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_categoryFragment_to_addCustomConsumableFragment)
-        }
+            btnAdd.setOnClickListener {
+                findNavController().navigate(R.id.action_categoryFragment_to_addCustomConsumableFragment)
+            }
 
-        binding.btnSearch.setOnClickListener {
-            binding.apply {
+            btnSearch.setOnClickListener {
                 findNavController().navigate(R.id.action_categoryFragment_to_searchFragment)
             }
         }
@@ -67,5 +66,6 @@ class CategoryFragment : Fragment(),
 
     companion object {
         private const val SPAN_COUNT_PORTRAIT = 3
+        private const val ITEM_DIV_HEIGHT = 15
     }
 }

@@ -44,6 +44,7 @@ dependencies {
     implementation Libs.appcompat
     implementation Libs.recyclerview
     implementation Libs.material
+    implementation Libs.commonJava8
 
     // Coroutine
     implementation Libs.coroutineAndroid

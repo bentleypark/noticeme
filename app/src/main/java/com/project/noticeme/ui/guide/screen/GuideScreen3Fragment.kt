@@ -21,7 +21,7 @@ class GuideScreen3Fragment : Fragment(),
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = initBinding(FragmentGuideScreen3Binding.inflate(layoutInflater), this) {
-        binding!!.ivGuideImg.load(R.drawable.guide_image3) {
+        binding?.ivGuideImg?.load(R.drawable.guide_image3) {
             scale(Scale.FILL)
         }
     }

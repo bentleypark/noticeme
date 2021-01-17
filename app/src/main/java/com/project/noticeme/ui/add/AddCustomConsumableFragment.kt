@@ -14,11 +14,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdRequest
 import com.project.noticeme.R
-import com.project.noticeme.common.base.ViewBindingHolder
-import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.hideKeyboard
 import com.project.noticeme.common.ex.makeSnackBar
 import com.project.noticeme.common.ex.makeToast
+import com.project.noticeme.common.ex.viewLifecycle
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.common.utils.date.TimeInMillis
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
@@ -36,9 +35,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddCustomConsumableFragment : Fragment(),
-    ViewBindingHolder<FragmentAddCustomConsumableBinding> by ViewBindingHolderImpl(),
     DatePicker.OnDateChangedListener {
 
+    private var binding: FragmentAddCustomConsumableBinding by viewLifecycle()
     private val viewModel: AddCustomConsumableViewModel by viewModels()
     private val randomIcon = listOf(
         R.drawable.ic_random_icon_1_alien,
@@ -65,7 +64,7 @@ class AddCustomConsumableFragment : Fragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = initBinding(FragmentAddCustomConsumableBinding.inflate(layoutInflater), this) {
+    ): View {
         activity?.onBackPressedDispatcher?.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
@@ -73,12 +72,15 @@ class AddCustomConsumableFragment : Fragment(),
                     findNavController().navigate(R.id.action_addCustomConsumableFragment_pop)
                 }
             })
+
+        binding = FragmentAddCustomConsumableBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding!!.apply {
+        binding.apply {
             btnBack.setOnClickListener {
                 findNavController().navigate(R.id.action_addCustomConsumableFragment_pop)
             }
@@ -187,7 +189,7 @@ class AddCustomConsumableFragment : Fragment(),
     }
 
     private fun insertNewUserConsumable() {
-        duration = binding!!.tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
+        duration = binding.tvDuration.text.toString().toInt() * TimeUnit.MILLISECONDS.convert(
             1,
             TimeUnit.DAYS
         )
@@ -211,7 +213,6 @@ class AddCustomConsumableFragment : Fragment(),
     }
 
     private fun setUpNotification() {
-
         if (pref.getNotificationSetting()) {
             JobSchedulerStart.start(
                 requireContext(),

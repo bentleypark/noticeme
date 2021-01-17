@@ -31,14 +31,16 @@ class GuideScreen4Fragment : Fragment(),
         savedInstanceState: Bundle?
     ): View = initBinding(FragmentGuideScreen4Binding.inflate(layoutInflater), this) {
 
-        binding!!.ivGuideImg.load(R.drawable.guide_image4) {
-            scale(Scale.FILL)
-        }
-        binding.btnFinish.setOnClickListener {
-            pref.setOnBoardingShowed(true)
-            lifecycleScope.launchWhenCreated {
-                delay(1_000)
-                requireActivity().launchActivityWithFinish<MainActivity>()
+        binding?.apply {
+            ivGuideImg.load(R.drawable.guide_image4) {
+                scale(Scale.FILL)
+            }
+            btnFinish.setOnClickListener {
+                pref.setOnBoardingShowed(true)
+                lifecycleScope.launchWhenCreated {
+                    delay(1_000)
+                    requireActivity().launchActivityWithFinish<MainActivity>()
+                }
             }
         }
     }

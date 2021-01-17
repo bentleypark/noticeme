@@ -16,11 +16,13 @@ import com.project.noticeme.common.base.ViewBindingHolder
 import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.makeSnackBar
 import com.project.noticeme.common.ex.showKeyboard
+import com.project.noticeme.common.ex.viewLifecycle
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentConsumableDetailBinding
+import com.project.noticeme.databinding.FragmentGuideBinding
 import com.project.noticeme.notification.JobSchedulerStart
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -29,9 +31,9 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ConsumableDetailFragment : Fragment(),
-    ViewBindingHolder<FragmentConsumableDetailBinding> by ViewBindingHolderImpl() {
+class ConsumableDetailFragment : Fragment() {
 
+    private var binding: FragmentConsumableDetailBinding by viewLifecycle()
     private val viewModel: ConsumableDetailViewModel by viewModels()
     private lateinit var userConsumableItem: UserConsumableEntity
     private var prioirty = 0
@@ -44,7 +46,10 @@ class ConsumableDetailFragment : Fragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = initBinding(FragmentConsumableDetailBinding.inflate(layoutInflater), this) {}
+    ): View {
+        binding = FragmentConsumableDetailBinding.inflate(layoutInflater)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -60,7 +65,7 @@ class ConsumableDetailFragment : Fragment(),
 
 
     private fun setView() {
-        binding!!.apply {
+        binding.apply {
             btnBack.setOnClickListener {
                 findNavController().navigate(R.id.action_consumableDetailFragment_pop)
             }
@@ -129,7 +134,7 @@ class ConsumableDetailFragment : Fragment(),
             {
                 when (it) {
                     is DataState.Success<UserConsumableEntity> -> {
-                        binding!!.apply {
+                        binding.apply {
                             progressCircular.isVisible = false
                         }
 
@@ -168,7 +173,7 @@ class ConsumableDetailFragment : Fragment(),
             {
                 when (it) {
                     is DataState.Success<Boolean> -> {
-                        binding!!.apply {
+                        binding.apply {
                             progressCircular.isVisible = false
                         }
 
@@ -185,7 +190,7 @@ class ConsumableDetailFragment : Fragment(),
                 when (it) {
                     is DataState.Success<Boolean> -> {
                         findNavController().navigate(R.id.action_consumableDetailFragment_pop)
-                        binding!!.mainView.makeSnackBar(getString(R.string.consumable_remove_msg))
+                        binding.mainView.makeSnackBar(getString(R.string.consumable_remove_msg))
                     }
                 }
             }
@@ -210,7 +215,7 @@ class ConsumableDetailFragment : Fragment(),
     }
 
     private fun deleteItem() {
-        binding!!.apply {
+        binding.apply {
             viewModel.delete(
                 UserConsumableEntity(
                     userConsumableItem.id,
