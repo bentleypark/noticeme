@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
     private fun setUpView() {
 
         val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
-        itemTouchHelper.attachToRecyclerView(binding!!.rvList)
+        itemTouchHelper.attachToRecyclerView(binding.rvList)
 
         listAdapter = UserConsumableListAdapter(
             userConsumableList,
@@ -119,7 +119,7 @@ class HomeFragment : Fragment() {
         viewModel.apply {
             consumableList.observe(
                 viewLifecycleOwner, {
-                    binding!!.apply {
+                    binding.apply {
                         rvList.visibility = View.GONE
                         emptyList.isVisible = false
                         progressCircular.isVisible = false

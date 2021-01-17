@@ -106,12 +106,12 @@ object Versions {
     const val klintVersion = "0.40.0"
 
     // Hilt
-    const val hiltVersion = "2.30.1-alpha"
+    const val hiltVersion = "2.31-alpha"
     const val hiltViewModel = "1.0.0-alpha02"
 
     // Admob
     const val admobVersion = "19.6.0"
 
     // Coil
-    const val coilVersion = "1.1.0"
+    const val coilVersion = "1.1.1"
 }
