@@ -1,24 +1,17 @@
 package com.project.noticeme.common.utils.di
 
 import android.content.Context
-import android.content.SharedPreferences
-import androidx.preference.PreferenceManager
 import com.project.noticeme.common.utils.date.TimeInMillis
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object UtilsModule {
-
-//    @Provides
-//    fun provideDefaultSharedPreferences(
-//        @ApplicationContext context: Context
-//    ): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     @Provides
     fun providePreferenceManager(@ApplicationContext context: Context): SharedPreferenceManager =
@@ -30,5 +23,5 @@ object UtilsModule {
         )
 
     @Provides
-    fun provideTimemillis() = TimeInMillis()
+    fun provideTimeMillis() = TimeInMillis()
 }

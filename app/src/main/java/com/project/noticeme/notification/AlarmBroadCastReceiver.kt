@@ -10,6 +10,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.PowerManager
+import android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 import androidx.annotation.CallSuper
 import androidx.core.app.NotificationCompat
 import com.project.noticeme.R
@@ -91,7 +92,7 @@ class AlarmBroadCastReceiver : HiltBroadcastReceiver() {
 
         (context.getSystemService(Context.POWER_SERVICE) as PowerManager).run {
             newWakeLock(
-                PowerManager.SCREEN_DIM_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP,
+                FLAG_KEEP_SCREEN_ON or PowerManager.ACQUIRE_CAUSES_WAKEUP,
                 "noticeme:tag"
             ).apply {
                 acquire(5000)

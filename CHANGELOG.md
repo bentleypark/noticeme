@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v1.0.6] - 2021-02-04
+### Fixed
+- 소모품 리스트 UI 수정.
+- 소모품의 교체주기 수정할 때, 발생되는 버그 수정.
+- 소모품 검색 쿼리 개선.
+
 ## [v1.0.5] - 2021-01-05
 ### Fixed
 - 소모품 날짜를 초기화 할 때, 알림 동작 버그 수정.
@@ -37,3 +43,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [v1.0.3]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.3
 [v1.0.4]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.4
 [v1.0.5]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.5
+[v1.0.5]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.6

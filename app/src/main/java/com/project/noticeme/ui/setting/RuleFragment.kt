@@ -8,22 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.text.HtmlCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.project.noticeme.R
-import com.project.noticeme.common.base.ViewBindingHolder
-import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.databinding.FragmentRuleBinding
+import com.project.noticeme.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RuleFragment : Fragment(),
-    ViewBindingHolder<FragmentRuleBinding> by ViewBindingHolderImpl() {
+class RuleFragment : BaseFragment<FragmentRuleBinding>() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = initBinding(FragmentRuleBinding.inflate(layoutInflater), this) {
+    ): View {
+        binding = FragmentRuleBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -31,7 +30,7 @@ class RuleFragment : Fragment(),
         super.onViewCreated(view, savedInstanceState)
 
         val content = getText(R.string.personal_information_processing_policy).toString()
-        binding!!.ruleContent.text = Html.fromHtml(content, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        binding.ruleContent.text = Html.fromHtml(content, HtmlCompat.FROM_HTML_MODE_LEGACY)
 
         binding.btnBack.setOnClickListener {
             findNavController().navigate(R.id.action_ruleFragment_pop)

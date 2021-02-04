@@ -4,20 +4,20 @@ import com.project.noticeme.data.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 object RetrofitModule {
 
-    @Singleton
+    @ViewModelScoped
     @Provides
     fun provideOkhttpClient(): OkHttpClient {
         val logger = HttpLoggingInterceptor()
@@ -38,7 +38,7 @@ object RetrofitModule {
         return httpClient.build()
     }
 
-    @Singleton
+    @ViewModelScoped
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit.Builder {
         return Retrofit.Builder()
@@ -47,7 +47,7 @@ object RetrofitModule {
             .addConverterFactory(GsonConverterFactory.create())
     }
 
-    @Singleton
+    @ViewModelScoped
     @Provides
     fun provideApiService(retrofit: Retrofit.Builder): ApiService {
         return retrofit

@@ -11,20 +11,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdRequest
 import com.project.noticeme.R
-import com.project.noticeme.common.base.ViewBindingHolder
-import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.*
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentCategoryDetailBinding
+import com.project.noticeme.ui.base.BaseFragment
 import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
 import com.project.noticeme.ui.home.SpaceDecoration
 import com.project.noticeme.ui.category.adapt.ConsumableListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoryDetailFragment : Fragment(),
-    ViewBindingHolder<FragmentCategoryDetailBinding> by ViewBindingHolderImpl() {
+class CategoryDetailFragment : BaseFragment<FragmentCategoryDetailBinding>() {
 
     private val viewModel: CategoryDetailViewModel by viewModels()
     private lateinit var listAdapter: ConsumableListAdapter
@@ -32,7 +30,9 @@ class CategoryDetailFragment : Fragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentCategoryDetailBinding.inflate(layoutInflater), this) {
+    ): View {
+        binding = FragmentCategoryDetailBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class CategoryDetailFragment : Fragment(),
 
         val itemTitle = arguments?.getString(ARGS_KEY)
 
-        binding!!.tvTitle.text = itemTitle
+        binding.tvTitle.text = itemTitle
         viewModel.findConsumableWithCategory(itemTitle!!)
         viewModel.apply {
             consumableList.observe(viewLifecycleOwner,
@@ -65,7 +65,11 @@ class CategoryDetailFragment : Fragment(),
                                 }
                             }
 
-                            listAdapter = ConsumableListAdapter(it.data.toMutableList(), viewModel, requireContext())
+                            listAdapter = ConsumableListAdapter(
+                                it.data.toMutableList(),
+                                viewModel,
+                                requireContext()
+                            )
 
                             val size = resources.getDimensionPixelSize(R.dimen.material_item_size)
                             binding.rvList.apply {
@@ -93,11 +97,9 @@ class CategoryDetailFragment : Fragment(),
             dataState.observe(viewLifecycleOwner, {
                 when (it) {
                     is DataState.Success<Boolean> -> {
-//                        makeToast("소모품이 추가되었습니다.")
                         binding.mainView.makeSnackBar("소모품이 추가되었습니다.")
                     }
                     is DataState.Error -> {
-//                        makeToast("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
                         binding.mainView.makeSnackBar("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
                     }
                 }
