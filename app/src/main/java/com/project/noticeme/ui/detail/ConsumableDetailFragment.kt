@@ -2,28 +2,27 @@ package com.project.noticeme.ui.detail
 
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.isDigitsOnly
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdRequest
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.noticeme.R
-import com.project.noticeme.common.base.ViewBindingHolder
-import com.project.noticeme.common.base.ViewBindingHolderImpl
+import com.project.noticeme.common.ex.makeGone
 import com.project.noticeme.common.ex.makeSnackBar
+import com.project.noticeme.common.ex.makeVisible
 import com.project.noticeme.common.ex.showKeyboard
-import com.project.noticeme.common.ex.viewLifecycle
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentConsumableDetailBinding
-import com.project.noticeme.databinding.FragmentGuideBinding
 import com.project.noticeme.notification.JobSchedulerStart
+import com.project.noticeme.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.util.*
@@ -31,9 +30,8 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ConsumableDetailFragment : Fragment() {
+class ConsumableDetailFragment : BaseFragment<FragmentConsumableDetailBinding>() {
 
-    private var binding: FragmentConsumableDetailBinding by viewLifecycle()
     private val viewModel: ConsumableDetailViewModel by viewModels()
     private lateinit var userConsumableItem: UserConsumableEntity
     private var prioirty = 0
@@ -96,28 +94,35 @@ class ConsumableDetailFragment : Fragment() {
             }
 
             tvConfirm.setOnClickListener {
-                progressCircular.isVisible = true
+                progressCircular.makeVisible()
 
-                duration = tvDuration.text.toString().toInt() * DAY_MILLISECONDS
+                val durationStr = tvDuration.text.toString()
+                if (durationStr.isNotEmpty() && durationStr.isDigitsOnly()) {
+                    duration = durationStr.toInt() * DAY_MILLISECONDS
 
-                if (startDate == 0.toLong()) {
-                    startDate = userConsumableItem.startDate
-                }
+                    if (startDate == 0.toLong()) {
+                        startDate = userConsumableItem.startDate
+                    }
 
-                viewModel.update(
-                    UserConsumableEntity(
-                        userConsumableItem.id,
-                        userConsumableItem.title,
-                        userConsumableItem.image,
-                        userConsumableItem.category,
-                        duration,
-                        startDate,
-                        startDate + duration + DAY_MILLISECONDS,
-                        prioirty
+                    viewModel.update(
+                        UserConsumableEntity(
+                            userConsumableItem.id,
+                            userConsumableItem.title,
+                            userConsumableItem.image,
+                            userConsumableItem.category,
+                            duration,
+                            startDate,
+                            startDate + duration + DAY_MILLISECONDS,
+                            prioirty
+                        )
                     )
-                )
 
-                setUpNotification(userConsumableItem.id, startDate + duration)
+                    setUpNotification(userConsumableItem.id, startDate + duration)
+
+                } else {
+                    progressCircular.makeGone()
+                    binding.mainView.makeSnackBar(resources.getString(R.string.detail_fragment_no_duration_msg))
+                }
             }
 
             tvDelete.setOnClickListener {

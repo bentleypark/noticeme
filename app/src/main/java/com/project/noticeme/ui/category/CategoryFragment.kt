@@ -1,7 +1,6 @@
 package com.project.noticeme.ui.category
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,16 +9,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.ads.AdRequest
 import com.project.noticeme.R
-import com.project.noticeme.common.ex.viewLifecycle
 import com.project.noticeme.databinding.FragmentCategoryBinding
+import com.project.noticeme.ui.base.BaseFragment
 import com.project.noticeme.ui.category.adapt.ConsumableCategoryListAdapter
 import com.project.noticeme.ui.category.viewmodel.CategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoryFragment : Fragment() {
+class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
 
-    private var binding: FragmentCategoryBinding by viewLifecycle()
     private val viewModel: CategoryViewModel by viewModels()
     private lateinit var listAdapter: ConsumableCategoryListAdapter
 

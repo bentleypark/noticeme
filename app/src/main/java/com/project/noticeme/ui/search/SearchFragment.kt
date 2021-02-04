@@ -21,6 +21,7 @@ import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.SearchHistoryEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentSearchBinding
+import com.project.noticeme.ui.base.BaseFragment
 import com.project.noticeme.ui.category.adapt.ConsumableListAdapter
 import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
 import com.project.noticeme.ui.home.SpaceDecoration
@@ -32,8 +33,7 @@ import timber.log.Timber
 import java.util.*
 
 @AndroidEntryPoint
-class SearchFragment : Fragment(),
-    ViewBindingHolder<FragmentSearchBinding> by ViewBindingHolderImpl() {
+class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private val viewModel: SearchViewModel by viewModels()
     private val detailViewModel: CategoryDetailViewModel by viewModels()
@@ -43,7 +43,7 @@ class SearchFragment : Fragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = initBinding(FragmentSearchBinding.inflate(layoutInflater), this) {
+    ): View {
         activity?.onBackPressedDispatcher?.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
@@ -55,12 +55,15 @@ class SearchFragment : Fragment(),
                     findNavController().navigate(R.id.action_searchFragment_pop)
                 }
             })
+
+        binding = FragmentSearchBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding!!.etSearch.apply {
+        binding.etSearch.apply {
             requestFocus()
             showKeyboard()
 
@@ -165,7 +168,11 @@ class SearchFragment : Fragment(),
                         }
 
                         searchAdapter =
-                            ConsumableListAdapter(it.data.toMutableList(), detailViewModel, requireContext())
+                            ConsumableListAdapter(
+                                it.data.toMutableList(),
+                                detailViewModel,
+                                requireContext()
+                            )
                         binding.searchList.apply {
                             adapter = searchAdapter
                             layoutManager =
@@ -232,7 +239,7 @@ class SearchFragment : Fragment(),
 
         lifecycleScope.launch {
             delay(1000)
-            val inputText = SpannableStringBuilder(binding!!.etSearch.text).toString().trim()
+            val inputText = SpannableStringBuilder(binding.etSearch.text).toString().trim()
             if (inputText.isNotEmpty()) {
                 viewModel.searchWithTitle(inputText)
                 val historyItem = SearchHistoryEntity(0, currentDate, inputText)
@@ -246,7 +253,7 @@ class SearchFragment : Fragment(),
     private fun searchWithHistory(title: String) {
         lifecycleScope.launch {
             viewModel.searchWithTitle(title)
-            binding!!.searchHistoryLayout.makeGone()
+            binding.searchHistoryLayout.makeGone()
         }
     }
 }

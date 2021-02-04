@@ -1,20 +1,17 @@
 package com.project.noticeme.ui.guide
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.project.noticeme.common.ex.viewLifecycle
 import com.project.noticeme.databinding.FragmentGuideBinding
+import com.project.noticeme.ui.base.BaseFragment
 import com.project.noticeme.ui.guide.screen.GuideScreen1Fragment
 import com.project.noticeme.ui.guide.screen.GuideScreen2Fragment
 import com.project.noticeme.ui.guide.screen.GuideScreen3Fragment
 import com.project.noticeme.ui.guide.screen.GuideScreen4Fragment
 
-class GuideFragment : Fragment() {
-
-    private var binding: FragmentGuideBinding by viewLifecycle()
+class GuideFragment : BaseFragment<FragmentGuideBinding>() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
