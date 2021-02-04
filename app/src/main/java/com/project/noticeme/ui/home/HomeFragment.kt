@@ -2,7 +2,6 @@ package com.project.noticeme.ui.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,12 +17,12 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.project.noticeme.R
 import com.project.noticeme.common.ex.runLayoutAnimation
-import com.project.noticeme.common.ex.viewLifecycle
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentHomeBinding
 import com.project.noticeme.notification.JobSchedulerStart
+import com.project.noticeme.ui.base.BaseFragment
 import com.project.noticeme.ui.home.adapt.UserConsumableListAdapter
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
@@ -32,9 +31,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val viewModel: HomeViewModel by viewModels()
-    private var binding: FragmentHomeBinding by viewLifecycle()
     private var userConsumableList = mutableListOf<UserConsumableEntity>()
     private lateinit var listAdapter: UserConsumableListAdapter
     private val swipeHelperCallback = SwipeHelperCallback().apply {

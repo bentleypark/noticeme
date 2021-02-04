@@ -15,15 +15,15 @@ import com.project.noticeme.common.ex.*
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentCategoryDetailBinding
+import com.project.noticeme.ui.base.BaseFragment
 import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
 import com.project.noticeme.ui.home.SpaceDecoration
 import com.project.noticeme.ui.category.adapt.ConsumableListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoryDetailFragment : Fragment() {
+class CategoryDetailFragment : BaseFragment<FragmentCategoryDetailBinding>() {
 
-    private var binding: FragmentCategoryDetailBinding by viewLifecycle()
     private val viewModel: CategoryDetailViewModel by viewModels()
     private lateinit var listAdapter: ConsumableListAdapter
 

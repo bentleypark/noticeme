@@ -2,7 +2,6 @@ package com.project.noticeme.ui.add
 
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import com.project.noticeme.R
 import com.project.noticeme.common.ex.hideKeyboard
 import com.project.noticeme.common.ex.makeSnackBar
 import com.project.noticeme.common.ex.makeToast
-import com.project.noticeme.common.ex.viewLifecycle
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.common.utils.date.TimeInMillis
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
@@ -26,6 +24,7 @@ import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentAddCustomConsumableBinding
 import com.project.noticeme.notification.JobSchedulerStart
+import com.project.noticeme.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -34,10 +33,9 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddCustomConsumableFragment : Fragment(),
+class AddCustomConsumableFragment : BaseFragment<FragmentAddCustomConsumableBinding>(),
     DatePicker.OnDateChangedListener {
 
-    private var binding: FragmentAddCustomConsumableBinding by viewLifecycle()
     private val viewModel: AddCustomConsumableViewModel by viewModels()
     private val randomIcon = listOf(
         R.drawable.ic_random_icon_1_alien,

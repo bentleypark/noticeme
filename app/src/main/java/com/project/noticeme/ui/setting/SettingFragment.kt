@@ -1,31 +1,26 @@
 package com.project.noticeme.ui.setting
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdRequest
 import com.project.noticeme.BuildConfig
 import com.project.noticeme.R
-import com.project.noticeme.common.base.ViewBindingHolder
-import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.isConnected
 import com.project.noticeme.common.ex.launchActivityWithFinish
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.databinding.FragmentSettingBinding
-import com.project.noticeme.ui.MainActivity
+import com.project.noticeme.ui.base.BaseFragment
 import com.project.noticeme.ui.guide.GuideActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SettingFragment : Fragment(),
-    ViewBindingHolder<FragmentSettingBinding> by ViewBindingHolderImpl() {
+class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
     @Inject
     lateinit var pref: SharedPreferenceManager
@@ -33,7 +28,9 @@ class SettingFragment : Fragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = initBinding(FragmentSettingBinding.inflate(layoutInflater), this) {
+    ): View {
+        binding = FragmentSettingBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +39,7 @@ class SettingFragment : Fragment(),
     }
 
     private fun setupSettings() {
-        binding!!.apply {
+        binding.apply {
             swNotificationSetting.isChecked = pref.getNotificationSetting()
 
             swNotificationSetting.setOnCheckedChangeListener { _, isChecked ->
@@ -67,19 +64,22 @@ class SettingFragment : Fragment(),
 //                intent.putExtra(Intent.EXTRA_SUBJECT,"test")
 //                intent.putExtra(Intent.EXTRA_EMAIL, "contact@sovoro.kr")
 //                requireContext().startActivity(intent)
-                if (context!!.isConnected()) {
+                if (requireContext().isConnected()) {
                     val intent = Intent(Intent.ACTION_SEND)
                     intent.type = "text/plain"
                     intent.putExtra(
                         Intent.EXTRA_EMAIL,
-                        arrayOf(context!!.getString(R.string.email_address))
+                        arrayOf(requireContext().getString(R.string.email_address))
                     )
-                    intent.putExtra(Intent.EXTRA_SUBJECT, context!!.getString(R.string.email_title))
+                    intent.putExtra(
+                        Intent.EXTRA_SUBJECT,
+                        requireContext().getString(R.string.email_title)
+                    )
                     intent.putExtra(
                         Intent.EXTRA_TEXT,
                         "앱 버전 (AppVersion): ${BuildConfig.VERSION_NAME}\n기기명 (Device):\n안드로이드 OS (Android OS): ${Build.VERSION.RELEASE + ".0"}\n내용 (Content):\n"
                     )
-                    context!!.startActivity(intent)
+                    requireContext().startActivity(intent)
                 }
             }
 
