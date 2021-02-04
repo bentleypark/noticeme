@@ -38,7 +38,6 @@ dependencies {
     implementation Libs.kotlinStdLib
     implementation Libs.appcompat
     implementation Libs.coreKtx
-    implementation Libs.preference
 
     // JetPack
     implementation Libs.startUp

@@ -19,7 +19,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdkVersion Config.compileSdkVersion
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.project.noticeme"
         minSdkVersion Config.minSdkVersion

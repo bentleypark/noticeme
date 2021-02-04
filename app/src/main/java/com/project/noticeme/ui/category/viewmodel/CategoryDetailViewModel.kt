@@ -1,6 +1,5 @@
 package com.project.noticeme.ui.category.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,13 +10,15 @@ import com.project.noticeme.data.repository.MainRepository
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-class CategoryDetailViewModel @ViewModelInject
+@HiltViewModel
+class CategoryDetailViewModel @Inject
 constructor(
     private val mainRepository: MainRepository,
     private val pref: SharedPreferenceManager,
