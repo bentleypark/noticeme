@@ -1,18 +1,19 @@
 package com.project.noticeme.ui.home.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.project.noticeme.common.base.BaseViewModel
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.repository.MainRepository
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class HomeViewModel @ViewModelInject
+@HiltViewModel
+class HomeViewModel @Inject
 constructor(
     private val mainRepository: MainRepository, private val pref: SharedPreferenceManager
 ) : BaseViewModel() {

@@ -7,6 +7,7 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.github.ben-manes.versions' version "0.36.0"
     id 'io.sentry.android.gradle'
+    id "org.gradle.android.cache-fix" version "1.0.14" apply false
 }
 
 //apply from: "${rootProject.projectDir}/flavors.gradle"
@@ -16,10 +17,9 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 
-
 android {
     compileSdkVersion Config.compileSdkVersion
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.project.noticeme"
         minSdkVersion Config.minSdkVersion
@@ -85,6 +85,23 @@ android {
     }
     configurations {
         ktlint
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude("META-INF/*.kotlin_module")
     }
 }
 
@@ -177,6 +194,10 @@ sentry {
     autoUpload false
     uploadNativeSymbols false
     includeNativeSources false
+}
+
+subprojects {
+    apply plugin: "org.gradle.android.cache-fix"
 }
 
 //apply plugin: 'com.google.gms.google-services'

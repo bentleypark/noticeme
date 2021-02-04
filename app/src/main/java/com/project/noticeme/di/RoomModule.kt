@@ -9,15 +9,15 @@ import com.project.noticeme.data.room.UserConsumableDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.scopes.ViewModelScoped
 
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 @Module
 class RoomModule {
 
-    @Singleton
+    @ViewModelScoped
     @Provides
     fun provideConsumableDb(@ApplicationContext context: Context): ConsumableDatabase {
         return Room
@@ -30,20 +30,20 @@ class RoomModule {
             .build()
     }
 
-    @Singleton
+    @ViewModelScoped
     @Provides
     fun provideConsumableDAO(consumableDatabase: ConsumableDatabase): ConsumableDao {
         return consumableDatabase.consumableDao()
     }
 
 
-    @Singleton
+    @ViewModelScoped
     @Provides
     fun provideUserConsumableDao(consumableDatabase: ConsumableDatabase): UserConsumableDao {
         return consumableDatabase.userConsumableDao()
     }
 
-    @Singleton
+    @ViewModelScoped
     @Provides
     fun provideSearchHistoryDao(consumableDatabase: ConsumableDatabase): SearchHistoryDao {
         return consumableDatabase.searchHistoryDao()

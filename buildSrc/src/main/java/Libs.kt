@@ -5,8 +5,6 @@ object Libs {
     const val kotlinGradlePlugin =
         "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinVersion}"
     const val googleService = "com.google.gms:google-services:${Versions.googleServiceVersion}"
-    const val firebaseCrashlyticsGradle =
-        "com.google.firebase:firebase-crashlytics-gradle:${Versions.firebaseCrashlyticsGradleVersion}"
     const val sentryGradle =
         "io.sentry:sentry-android-gradle-plugin:${Versions.sentryGradleVersion}"
     const val r8 = "com.android.tools:r8:${Versions.r8Version}"
@@ -53,7 +51,6 @@ object Libs {
         "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshLayoutVersion}"
     const val databindingCompiler =
         "com.android.databinding:compiler:${Versions.databindingVersion}"
-    const val preference = "androidx.preference:preference-ktx:${Versions.prefernceVersion}"
 
     // Work
     const val workRuntime = "androidx.work:work-runtime:${Versions.workVersion}"
@@ -102,33 +99,9 @@ object Libs {
     // Google
     const val material = "com.google.android.material:material:${Versions.materialVersion}"
     const val gson = "com.google.code.gson:gson:${Versions.gsonVersion}"
-    const val glide = "com.github.bumptech.glide:glide:${Versions.glideVersion}"
-    const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glideVersion}"
-    const val exoplayer = "com.google.android.exoplayer:exoplayer:${Versions.exoplayerVersion}"
-    const val exoplayerCore =
-        "com.google.android.exoplayer:exoplayer-core:${Versions.exoplayerVersion}"
-    const val exoplayerDash =
-        "com.google.android.exoplayer:exoplayer-dash:${Versions.exoplayerVersion}"
-    const val exoplayerUi = "com.google.android.exoplayer:exoplayer-ui:${Versions.exoplayerVersion}"
-    const val flexboxLayout = "com.google.android:flexbox:${Versions.flexboxLayoutVersion}"
-    const val firebaseCrashlytics =
-        "com.google.firebase:firebase-crashlytics:${Versions.firebaseCrashlyticsVersion}"
     const val firebaseAnalytics =
         "com.google.firebase:firebase-analytics:${Versions.firebaseAnalyticsVersion}"
     const val playCoreKtx = "com.google.android.play:core-ktx:${Versions.playCoreVersion}"
-
-
-    // Google Cloud Speech
-    const val grpc = "io.grpc:grpc-okhttp:${Versions.grpcVersion}"
-    const val grpcStub = "io.grpc:grpc-stub:${Versions.grpcVersion}"
-    const val googleCloudSpeech =
-        "com.google.cloud:google-cloud-speech:${Versions.googleCloudSpeechVersion}"
-    const val grpcGoogleCloudSpeech =
-        "com.google.api.grpc:grpc-google-cloud-speech-v1p1beta1:${Versions.grpcGoogleCloudSpeechVersion}"
-
-    // Google Protobuf
-    const val protoc = "com.google.protobuf:protoc:${Versions.protocVersion}"
-    const val protocGrpc = "io.grpc:protoc-gen-grpc-java:${Versions.protocGrpcVersion}"
 
     // Junit
     const val junit4 = "junit:junit:${Versions.junitVersion}"
@@ -154,38 +127,14 @@ object Libs {
     // Lottie
     const val lottie = "com.airbnb.android:lottie:${Versions.lottieVerison}"
 
-    // Aws Sdk
-    const val awsSdkCognito = "com.amazonaws:aws-android-sdk-cognito:${Versions.awsSdkVersion}"
-    const val awsSdkS3 = "com.amazonaws:aws-android-sdk-s3:${Versions.awsSdkVersion}"
-
     // Debug
     const val timber = "com.jakewharton.timber:timber:${Versions.timberVersion}"
-    const val rxLogs = "com.github.umair13adil:RxLogs:${Versions.rxLogsVersion}"
     const val leakcanary =
         "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanaryVersion}"
     const val stetho = "com.facebook.stetho:stetho:${Versions.stethoVersion}"
     const val stethoOkhttp3 = "com.facebook.stetho:stetho-okhttp3:${Versions.stethoVersion}"
     const val stethoJs = "com.facebook.stetho:stetho-js-rhino:${Versions.stethoVersion}"
     const val sentry = "io.sentry:sentry-android:${Versions.sentryVersion}"
-
-    // File Downloader
-    const val fetch2 = "androidx.tonyodev.fetch2:xfetch2:${Versions.fetch2Version}"
-
-    // CustomView
-    const val materialSpinner = "com.jaredrummler:material-spinner:${Versions.materialSpinner}"
-    const val fancybuttonsVersion = "com.github.medyo:fancybuttons:${Versions.fancybuttonsVersion}"
-    const val indicatorseekbar =
-        "com.github.warkiz.widget:indicatorseekbar:${Versions.indicatorseekbar}"
-    const val circleIndicatorVersion = "me.relex:circleindicator:${Versions.circleIndicatorVersion}"
-
-    // Recyclerview Delegate
-    const val adapterdelegates =
-        "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:${Versions.adapterdelegatesVersion}"
-    const val adapterdelegatesViewBinding =
-        "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:${Versions.adapterdelegatesVersion}"
-
-    // Pdf Generator
-    const val itextpdf = "com.itextpdf:itextpdf:${Versions.itextpdfVersion}"
 
     // Klint
     const val klint = "com.pinterest:ktlint:${Versions.klintVersion}"

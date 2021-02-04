@@ -1,12 +1,14 @@
 package com.project.noticeme.ui.category.viewmodel
 
 import android.app.Application
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.project.noticeme.data.model.ConsumableCategory
 import com.project.noticeme.ui.category.initialdata.ConsumableCategoryData
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CategoryViewModel @ViewModelInject
+@HiltViewModel
+class CategoryViewModel @Inject
 constructor(application: Application) : AndroidViewModel(application) {
 
     private val _categoryList = liveData {

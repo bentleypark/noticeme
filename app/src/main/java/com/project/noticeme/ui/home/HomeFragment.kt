@@ -2,7 +2,6 @@ package com.project.noticeme.ui.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -18,26 +16,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.project.noticeme.R
-import com.project.noticeme.common.base.ViewBindingHolder
-import com.project.noticeme.common.base.ViewBindingHolderImpl
 import com.project.noticeme.common.ex.runLayoutAnimation
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.databinding.FragmentHomeBinding
 import com.project.noticeme.notification.JobSchedulerStart
+import com.project.noticeme.ui.base.BaseFragment
 import com.project.noticeme.ui.home.adapt.UserConsumableListAdapter
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(),
-    ViewBindingHolder<FragmentHomeBinding> by ViewBindingHolderImpl() {
-
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val viewModel: HomeViewModel by viewModels()
     private var userConsumableList = mutableListOf<UserConsumableEntity>()
     private lateinit var listAdapter: UserConsumableListAdapter
@@ -47,7 +41,6 @@ class HomeFragment : Fragment(),
 
     @Inject
     lateinit var pref: SharedPreferenceManager
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,15 +59,15 @@ class HomeFragment : Fragment(),
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = initBinding(FragmentHomeBinding.inflate(layoutInflater), this) {
-        MobileAds.initialize(activity)
+    ): View {
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setUpView()
-//        setUpObserve()
+        MobileAds.initialize(activity)
     }
 
     override fun onResume() {
@@ -86,7 +79,7 @@ class HomeFragment : Fragment(),
     private fun setUpView() {
 
         val itemTouchHelper = ItemTouchHelper(swipeHelperCallback)
-        itemTouchHelper.attachToRecyclerView(binding!!.rvList)
+        itemTouchHelper.attachToRecyclerView(binding.rvList)
 
         listAdapter = UserConsumableListAdapter(
             userConsumableList,
@@ -124,7 +117,7 @@ class HomeFragment : Fragment(),
         viewModel.apply {
             consumableList.observe(
                 viewLifecycleOwner, {
-                    binding!!.apply {
+                    binding.apply {
                         rvList.visibility = View.GONE
                         emptyList.isVisible = false
                         progressCircular.isVisible = false

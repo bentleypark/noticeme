@@ -1,6 +1,5 @@
 package com.project.noticeme.ui.add
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,11 +8,14 @@ import com.project.noticeme.data.repository.MainRepository
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.data.state.DataState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AddCustomConsumableViewModel @ViewModelInject
+@HiltViewModel
+class AddCustomConsumableViewModel @Inject
 constructor(
     private val mainRepository: MainRepository
 ) : BaseViewModel() {

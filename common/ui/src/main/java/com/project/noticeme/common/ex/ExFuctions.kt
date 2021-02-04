@@ -12,10 +12,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.project.noticeme.common.ui.R
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
     crossinline bindingInflater: (LayoutInflater) -> T
@@ -31,6 +35,39 @@ inline fun <reified T : Activity> Activity.launchActivityWithFinish() {
     overridePendingTransition(0, 0)
     finish()
 }
+
+fun <T> Fragment.viewLifecycle(): ReadWriteProperty<Fragment, T> =
+    object : ReadWriteProperty<Fragment, T>, DefaultLifecycleObserver {
+
+        private var binding: T? = null
+
+        init {
+            this@viewLifecycle
+                .viewLifecycleOwnerLiveData
+                .observe(this@viewLifecycle, { owner: LifecycleOwner? ->
+                    owner?.lifecycle?.addObserver(this)
+                })
+        }
+
+        override fun onDestroy(owner: LifecycleOwner) {
+            binding = null
+        }
+
+        override fun getValue(
+            thisRef: Fragment,
+            property: KProperty<*>
+        ): T {
+            return this.binding ?: error("Called before onCreateView or after onDestroyView.")
+        }
+
+        override fun setValue(
+            thisRef: Fragment,
+            property: KProperty<*>,
+            value: T
+        ) {
+            this.binding = value
+        }
+    }
 
 fun Fragment.makeToast(text: String) {
     val toast = Toast.makeText(activity, text, Toast.LENGTH_SHORT)
