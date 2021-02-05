@@ -101,6 +101,15 @@ constructor(
             }
         }
 
+    suspend fun getAll(): List<ConsumableEntity> =
+        try {
+            val resultList = consumableDao.getAll()
+            resultList
+        } catch (e: Exception) {
+            emptyList()
+        }
+
+
     suspend fun delete(item: UserConsumableEntity): Flow<DataState<Boolean>> =
         flow {
             emit(DataState.Loading)

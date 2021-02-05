@@ -48,7 +48,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    binding!!.etSearch.apply {
+                    binding.etSearch.apply {
                         clearFocus()
                         hideKeyboard()
                     }

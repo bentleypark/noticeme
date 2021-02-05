@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v1.0.7] - 2021-02-06
+### Fixed
+- 가이드 화면에서 초기 데이터 중복으로 삽입되는 버그 수정.
+- Andorid Extention 코드 제거.
+
 ## [v1.0.6] - 2021-02-04
 ### Fixed
 - 소모품 리스트 UI 수정.
@@ -43,4 +48,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [v1.0.3]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.3
 [v1.0.4]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.4
 [v1.0.5]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.5
-[v1.0.5]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.6
+[v1.0.6]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.6
+[v1.0.7]: https://github.com/bentleypark/noticeme/releases/tag/v1.0.7
