@@ -19,7 +19,6 @@ import com.project.noticeme.notification.JobSchedulerStart
 import com.project.noticeme.ui.home.HomeFragmentDirections
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
-import kotlinx.android.extensions.LayoutContainer
 import timber.log.Timber
 import kotlin.math.absoluteValue
 
@@ -34,10 +33,7 @@ class UserConsumableListAdapter(
     private lateinit var bindingItem: ConsumableItemBinding
 
     inner class UserConsumableListViewHolder(private val binding: ConsumableItemBinding) :
-        RecyclerView.ViewHolder(binding.root), LayoutContainer {
-
-        override val containerView: View
-            get() = binding.root
+        RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
         fun bind(item: UserConsumableEntity, position: Int) {
@@ -65,6 +61,12 @@ class UserConsumableListAdapter(
                 }
             }
         }
+
+        fun getBtnDelete(): View = binding.btnDelete
+
+        fun getBtnReset(): View = binding.btnReset
+
+        fun getSwipeView(): View = binding.swipeItem
     }
 
     override fun onCreateViewHolder(

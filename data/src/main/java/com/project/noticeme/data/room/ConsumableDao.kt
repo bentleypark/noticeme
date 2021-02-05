@@ -22,4 +22,7 @@ interface ConsumableDao {
 
     @Query("SELECT * FROM consumables ORDER BY id DESC LIMIT 1")
     suspend fun getLastItem(): ConsumableEntity
+
+    @Query("SELECT * FROM consumables")
+    suspend fun getAll(): List<ConsumableEntity>
 }

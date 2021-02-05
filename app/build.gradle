@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'kotlin-android-extensions'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.github.ben-manes.versions' version "0.36.0"
@@ -171,10 +170,6 @@ dependencies {
 
 kapt {
     correctErrorTypes true
-}
-
-androidExtensions {
-    experimental = true
 }
 
 def isNonStable = { String version ->
