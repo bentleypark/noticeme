@@ -1,7 +1,6 @@
 package com.project.noticeme.ui.category.adapt
 
 import android.content.Context
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.project.noticeme.R
 import com.project.noticeme.common.ex.makeToast
@@ -11,21 +10,13 @@ import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
 import com.project.noticeme.notification.JobSchedulerStart
 import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
-import kotlinx.android.extensions.LayoutContainer
-import timber.log.Timber
-import java.text.SimpleDateFormat
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 class ConsumableListViewHolder(
     private val binding: ConsumableItemBinding,
     private val viewModel: CategoryDetailViewModel,
     private val context: Context
-) :
-    RecyclerView.ViewHolder(binding.root), LayoutContainer {
-
-    override val containerView: View
-        get() = binding.root
+) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: ConsumableEntity) {
         binding.apply {

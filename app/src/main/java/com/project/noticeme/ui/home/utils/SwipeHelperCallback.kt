@@ -5,8 +5,8 @@ import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.RecyclerView
+import com.project.noticeme.R
 import com.project.noticeme.ui.home.adapt.UserConsumableListAdapter
-import kotlinx.android.synthetic.main.consumable_item.view.*
 import kotlin.math.max
 import kotlin.math.min
 
@@ -123,15 +123,15 @@ class SwipeHelperCallback : ItemTouchHelper.Callback() {
     }
 
     private fun getView(viewHolder: RecyclerView.ViewHolder): View {
-        return (viewHolder as UserConsumableListAdapter.UserConsumableListViewHolder).itemView.swipe_item
+        return (viewHolder as UserConsumableListAdapter.UserConsumableListViewHolder).getSwipeView()
     }
 
     private fun getDeleteView(viewHolder: RecyclerView.ViewHolder): View {
-        return (viewHolder as UserConsumableListAdapter.UserConsumableListViewHolder).itemView.btn_delete
+        return (viewHolder as UserConsumableListAdapter.UserConsumableListViewHolder).getBtnDelete()
     }
 
     private fun getResetView(viewHolder: RecyclerView.ViewHolder): View {
-        return (viewHolder as UserConsumableListAdapter.UserConsumableListViewHolder).itemView.btn_reset
+        return (viewHolder as UserConsumableListAdapter.UserConsumableListViewHolder).getBtnReset()
     }
 
     fun setClamp(clamp: Float) {
