@@ -9,7 +9,6 @@ buildscript {
         classpath Libs.googleService
         classpath Libs.hiltPlugin
         classpath Libs.navSafeArgPlugin
-        classpath Libs.kotlinAndroidExtension
         classpath Libs.googleService
         classpath Libs.sentryGradle
         classpath Libs.detektGradle

@@ -1,16 +1,16 @@
 package com.project.noticeme.ui.splash
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.project.noticeme.common.utils.preference.SharedPreferenceManager
 import com.project.noticeme.data.repository.MainRepository
 import com.project.noticeme.data.room.ConsumableEntity
 import com.project.noticeme.data.state.DataState
 import com.project.noticeme.ui.splash.initialdata.InitialConsumableData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,6 +20,7 @@ class SplashViewModel @Inject constructor(
 ) : ViewModel() {
 
     var dataList = emptyList<ConsumableEntity>()
+    var consumableList = emptyList<ConsumableEntity>()
 
     private fun insertData(list: List<ConsumableEntity>) {
         viewModelScope.launch {
@@ -35,11 +36,27 @@ class SplashViewModel @Inject constructor(
         }
     }
 
+    fun getAll() {
+        viewModelScope.launch {
+            consumableList = mainRepository.getAll()
+        }
+    }
+
+
     fun checkIsInitialDataSet() {
-        val result = pref.getInitialData()
-        if (!result) {
-            dataList = InitialConsumableData.fetchData()
-            insertData(dataList)
+        viewModelScope.launch {
+            val deferredList = ArrayList<Deferred<*>>()
+            deferredList.add(async { getAll() })
+            delay(1000)
+            deferredList.add(async {
+                Timber.d(consumableList.toString())
+                if (consumableList.isEmpty()) {
+                    dataList = InitialConsumableData.fetchData()
+                    insertData(dataList)
+                }
+            })
+
+            deferredList.joinAll()
         }
     }
 }

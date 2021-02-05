@@ -46,7 +46,7 @@ object Versions {
     const val junitExtVersion = "1.1.2"
 
     // Google
-    const val materialVersion = "1.2.1"
+    const val materialVersion = "1.3.0"
     const val gsonVersion = "2.8.6"
     const val firebaseAnalyticsVersion = "17.5.0"
     const val playCoreVersion = "1.8.1"
@@ -76,7 +76,7 @@ object Versions {
     const val hiltViewModel = "1.0.0-alpha02"
 
     // Admob
-    const val admobVersion = "19.6.0"
+    const val admobVersion = "19.7.0"
 
     // Coil
     const val coilVersion = "1.1.1"
