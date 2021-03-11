@@ -20,6 +20,7 @@ This is android app which informs you of daily routine job at the right time.
 ## Table of Contents
 - [Techstack](#techstack)
 - [Architecture](#architecture)
+- [Package](#package)
 - [Screenshot](#screenshot)
 
 ## Techstack
@@ -41,10 +42,13 @@ This is android app which informs you of daily routine job at the right time.
 - Admob : In-app advertisement
 
 ## Architecture
-This project is developed based on MVVM architecture which is recommended by Google. 
+This project is developed based on MVVM architecture which is recommended by Google.
 
 <img src="/images/final-architecture.png" height="700"/>
 
+
+## Package
+<img src="/images/package_tree.png" />
 
 ## Screenshot
 
