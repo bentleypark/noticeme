@@ -3,11 +3,16 @@
 <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
  <a href="https://github.com/bentleypark/noticeme/actions"><img alt="Build Status" src="https://github.com/bentleypark/noticeme/workflows/Android%20CI/badge.svg"/></a>
 </p>
+
+<p align="center">
+This is android app which informs you of daily routine job at the right time.
+</p>
+</br>
+
 <p align="center">
 <img src="/images/notieme_main_image.png"/>
 </p>
 
-This is android app which informs you of daily routine job at the right time.
 
 ## Table of Contents
 - [Prerequisite](#prerequisite)
