@@ -8,27 +8,27 @@ object Versions {
     const val androidJunit5Version = "1.6.2.0"
     const val androidMavenGradleVersion = "2.1"
     const val detektGradleVersion = "1.15.0"
-    const val navSafArgPluginVersion = "2.3.2"
+    const val navSafArgPluginVersion = "2.3.3"
 
     // Kotlin
-    const val kotlinVersion = "1.4.30"
+    const val kotlinVersion = "1.4.31"
 
     // Coroutines
-    const val androidVersion = "1.4.2"
+    const val androidVersion = "1.4.3"
 
     // RxJava
-    const val rxJavaVersion = "2.2.20"
+    const val rxJavaVersion = "2.2.21"
     const val rxAndroidVersion = "2.1.1"
 
-    const val junitVersion = "4.13.1"
+    const val junitVersion = "4.13.2"
 
     // AndroidX
     const val appCompatVersion = "1.2.0"
     const val constraintLayoutVersion = "2.0.4"
     const val coreKtxVersion = "1.3.2"
     const val legacySupportVersion = "1.0.0"
-    const val activityVersion = "1.2.0-rc01"
-    const val fragmentVersion = "1.3.0-rc01"
+    const val activityVersion = "1.2.1"
+    const val fragmentVersion = "1.3.1"
     const val recyclerviewVersion = "1.1.0"
     const val viewpager2Version = "1.1.0-alpha01"
     const val swipeRefreshLayoutVersion = "1.1.0"
@@ -36,9 +36,9 @@ object Versions {
 
     // Jetpack
     const val workVersion = "2.4.0"
-    const val lifeCycleVersion = "2.2.0"
+    const val lifeCycleVersion = "2.3.0"
     const val roomVersion = "2.2.6"
-    const val navigationVersion = "2.3.3"
+    const val navigationVersion = "2.3.4"
     const val startupVersion = "1.0.0"
 
     const val testVersion = "1.3.0"
@@ -66,7 +66,7 @@ object Versions {
     // Debug
     const val timberVersion = "4.7.1"
     const val stethoVersion = "1.5.1"
-    const val sentryVersion = "4.1.0"
+    const val sentryVersion = "4.3.0"
 
     // Klint
     const val klintVersion = "0.40.0"
