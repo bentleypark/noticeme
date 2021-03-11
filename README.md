@@ -18,9 +18,9 @@ This is android app which informs you of daily routine job at the right time.
 - Currently only Korean version is available on playstore.
 
 ## Table of Contents
-- [Tech stack](#tech stack)
+- [Techstack](#techstack)
 
-## Tech stack
+## Techstack
 
 - Android 5.0 (API level 21) or later
 - Kotlin
@@ -31,8 +31,9 @@ This is android app which informs you of daily routine job at the right time.
     - ViewModel
     - Lifecycle
     - Room
-    - Navigation
     - Startup
+    - Navigation
+
 
 ## Screemshot
 
