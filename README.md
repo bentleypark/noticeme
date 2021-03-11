@@ -1,7 +1,7 @@
 # Noticeme
 <p align="center">
 <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat"/></a>
- <a href="https://github.com/bentleypark/noticeme/actions"><img alt="Build Status" src="https://github.com/bentleypark/noticeme/workflows/Android%20CI/badge.svg"/></a>
+<a href="https://github.com/bentleypark/noticeme/actions"><img alt="Build Status" src="https://github.com/bentleypark/noticeme/workflows/Android%20CI/badge.svg"/></a>
 </p>
 
 <p align="center">
@@ -14,7 +14,7 @@ This is android app which informs you of daily routine job at the right time.
 </p>
 
 ## Download
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="100">][https://play.google.com/store/apps/details?id=com.project.noticeme]
+<a href="https://play.google.com/store/apps/details?id=com.project.noticeme"><img alt="Build Status" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"/></a>
 
 
 ## Table of Contents
