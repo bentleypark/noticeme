@@ -15,13 +15,15 @@ This is android app which informs you of daily routine job at the right time.
 
 ## Download
 <a href="https://play.google.com/store/apps/details?id=com.project.noticeme"><img alt="Build Status" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="100"/></a>
-- Currently only Korean version is available on playstore.
+
+Currently only Korean version is available on playstore.
 
 ## Table of Contents
 - [Techstack](#techstack)
 - [Architecture](#architecture)
 - [Package](#package)
 - [Screenshot](#screenshot)
+- [Documentation](#documentation)
 
 ## Techstack
 
@@ -54,3 +56,7 @@ This project is developed based on MVVM architecture which is recommended by Goo
 
 <img src="/images/screenshot01.png" height="500"/>
 <img src="/images/screenshot02.png" height="500"/> <img src="/images/screenshot03.png" height="500"/>
+
+
+## Documentation
+See [`CHANGELOG.md`](CHANGELOG.md) for a brief history of the project
