@@ -13,6 +13,9 @@ This is android app which informs you of daily routine job at the right time.
 <img src="/images/notieme_main_image.png"/>
 </p>
 
+## Download
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="100">][https://play.google.com/store/apps/details?id=com.project.noticeme]
+
 
 ## Table of Contents
 - [Prerequisite](#prerequisite)
