@@ -41,7 +41,8 @@ This is android app which informs you of daily routine job at the right time.
 
 ## Screemshot
 
-![screenshot01](images/screenshot01.png)
+<img src="/images/screenshot01.png" height="300"/>
+//![screenshot01](images/screenshot01.png)
 
 ![screenshot02](images/screenshot02.png)
 
