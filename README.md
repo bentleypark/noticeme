@@ -15,19 +15,24 @@ This is android app which informs you of daily routine job at the right time.
 
 ## Download
 <a href="https://play.google.com/store/apps/details?id=com.project.noticeme"><img alt="Build Status" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="100"/></a>
-
+- Currently only Korean version is available on playstore.
 
 ## Table of Contents
-- [Prerequisite](#prerequisite)
+- [Tech stack & Open-source libraries](#Tech stack & Open-source libraries)
 
-## Prerequisite
+## Tech stack & Open-source libraries
 
 - Android 5.0 (API level 21) or later
-- Java 1.8
-- Kotlin jvmTarget 1.8
-- Build Feature
-    - viewBinding true
--
+- Kotlin
+- Coroutine + Flow : Asynchronous event handling
+- Dagger-Hilt : Dependency injection
+- Jetpack
+    - LiveData
+    - ViewModel
+    - Lifecycle
+    - Room
+    - Navigation
+    - Startup
 
 ## Screemshot
 
