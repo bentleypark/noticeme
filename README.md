@@ -19,6 +19,7 @@ This is android app which informs you of daily routine job at the right time.
 
 ## Table of Contents
 - [Techstack](#techstack)
+- [Architecture](#architecture)
 - [Screenshot](#screenshot)
 
 ## Techstack
@@ -38,6 +39,11 @@ This is android app which informs you of daily routine job at the right time.
 - Timber: Debug Log
 - Sentry: Error Monitor
 - Admob : In-app advertisement
+
+## Architecture
+
+<img src="/images/final-architecture.png" height="700"/>
+
 
 ## Screenshot
 
