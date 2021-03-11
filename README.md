@@ -19,6 +19,7 @@ This is android app which informs you of daily routine job at the right time.
 
 ## Table of Contents
 - [Techstack](#techstack)
+- [Screemshot](#screemshot)
 
 ## Techstack
 
@@ -33,7 +34,10 @@ This is android app which informs you of daily routine job at the right time.
     - Room
     - Startup
     - Navigation
-
+- Coil : Image Loader
+- Timber: Debug Log
+- Sentry: Error Monitor
+- Admob : In-app advertisement
 
 ## Screemshot
 
