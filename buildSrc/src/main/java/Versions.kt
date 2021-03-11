@@ -14,7 +14,7 @@ object Versions {
     const val kotlinVersion = "1.4.31"
 
     // Coroutines
-    const val androidVersion = "1.4.2"
+    const val androidVersion = "1.4.3"
 
     // RxJava
     const val rxJavaVersion = "2.2.21"
@@ -27,8 +27,8 @@ object Versions {
     const val constraintLayoutVersion = "2.0.4"
     const val coreKtxVersion = "1.3.2"
     const val legacySupportVersion = "1.0.0"
-    const val activityVersion = "1.2.0"
-    const val fragmentVersion = "1.3.0"
+    const val activityVersion = "1.2.1"
+    const val fragmentVersion = "1.3.1"
     const val recyclerviewVersion = "1.1.0"
     const val viewpager2Version = "1.1.0-alpha01"
     const val swipeRefreshLayoutVersion = "1.1.0"
@@ -38,7 +38,7 @@ object Versions {
     const val workVersion = "2.4.0"
     const val lifeCycleVersion = "2.3.0"
     const val roomVersion = "2.2.6"
-    const val navigationVersion = "2.3.3"
+    const val navigationVersion = "2.3.4"
     const val startupVersion = "1.0.0"
 
     const val testVersion = "1.3.0"
