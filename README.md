@@ -14,7 +14,7 @@ This is android app which informs you of daily routine job at the right time.
 </p>
 
 ## Download
-<a href="https://play.google.com/store/apps/details?id=com.project.noticeme"><img alt="Build Status" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"/></a>
+<a href="https://play.google.com/store/apps/details?id=com.project.noticeme"><img alt="Build Status" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="100"/></a>
 
 
 ## Table of Contents
