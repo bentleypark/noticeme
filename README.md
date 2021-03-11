@@ -3,7 +3,7 @@
 [![Android API](https://img.shields.io/badge/API-21%2B-blue.svg?label=API&maxAge=300)](https://www.android.com/history/)
  <a href="https://github.com/bentleypark/noticeme/actions"><img alt="Build Status" src="https://github.com/bentleypark/noticeme/workflows/Android%20CI/badge.svg"/></a>
 </p>
-![Logo](images/notieme_main_image.jpg)
+![Logo](images/notieme_main_image.png)
 
 This is android app which informs you of daily routine job at the right time.
 
