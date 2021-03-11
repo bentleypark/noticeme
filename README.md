@@ -9,6 +9,11 @@ This is android app which informs you of daily routine job at the right time.
 - [Prerequisite](#prerequisite)
 
 ## Prerequisite
+* Android 5.0 (API level 21) or later
+* Java 1.8 
+* Kotlin jvmTarket 1.8 
+
+
 
 ## Screemshot
 
