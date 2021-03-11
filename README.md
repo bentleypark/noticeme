@@ -19,7 +19,7 @@ This is android app which informs you of daily routine job at the right time.
 
 ## Table of Contents
 - [Techstack](#techstack)
-- [Screemshot](#screemshot)
+- [Screenshot](#screenshot)
 
 ## Techstack
 
@@ -39,7 +39,7 @@ This is android app which informs you of daily routine job at the right time.
 - Sentry: Error Monitor
 - Admob : In-app advertisement
 
-## Screemshot
+## Screenshot
 
 <img src="/images/screenshot01.png" height="500"/>
 <img src="/images/screenshot02.png" height="500"/> <img src="/images/screenshot03.png" height="500"/>
