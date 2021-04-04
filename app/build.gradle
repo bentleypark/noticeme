@@ -26,6 +26,7 @@ android {
         versionCode Config.versionCode
         versionName Config.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndkVersion '22.1.7171670'
         ndk {
             debugSymbolLevel 'SYMBOL_TABLE'
             debugSymbolLevel 'FULL'
