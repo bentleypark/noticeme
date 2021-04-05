@@ -18,7 +18,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdkVersion Config.compileSdkVersion
-    buildToolsVersion "30.0.3"
+    buildToolsVersion Config.buildToolVersion
     defaultConfig {
         applicationId "com.project.noticeme"
         minSdkVersion Config.minSdkVersion
@@ -26,6 +26,7 @@ android {
         versionCode Config.versionCode
         versionName Config.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndkVersion '22.1.7171670'
         ndk {
             debugSymbolLevel 'SYMBOL_TABLE'
             debugSymbolLevel 'FULL'

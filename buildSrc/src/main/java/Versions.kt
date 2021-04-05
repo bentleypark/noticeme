@@ -1,17 +1,17 @@
 object Versions {
 
     // Class Path for Plugin
-    const val buildGradleVersion = "4.1.2"
-    const val googleServiceVersion = "4.3.4"
+    const val buildGradleVersion = "4.1.3"
+    const val googleServiceVersion = "4.3.5"
     const val sentryGradleVersion = "1.7.36"
-    const val r8Version = "2.1.75"
+    const val r8Version = "2.2.60"
     const val androidJunit5Version = "1.6.2.0"
     const val androidMavenGradleVersion = "2.1"
-    const val detektGradleVersion = "1.15.0"
-    const val navSafArgPluginVersion = "2.3.3"
+    const val detektGradleVersion = "1.16.0"
+    const val navSafArgPluginVersion = "2.3.4"
 
     // Kotlin
-    const val kotlinVersion = "1.4.31"
+    const val kotlinVersion = "1.4.32"
 
     // Coroutines
     const val androidVersion = "1.4.3"
@@ -27,8 +27,8 @@ object Versions {
     const val constraintLayoutVersion = "2.0.4"
     const val coreKtxVersion = "1.3.2"
     const val legacySupportVersion = "1.0.0"
-    const val activityVersion = "1.2.1"
-    const val fragmentVersion = "1.3.1"
+    const val activityVersion = "1.2.2"
+    const val fragmentVersion = "1.3.2"
     const val recyclerviewVersion = "1.1.0"
     const val viewpager2Version = "1.1.0-alpha01"
     const val swipeRefreshLayoutVersion = "1.1.0"
@@ -36,7 +36,7 @@ object Versions {
 
     // Jetpack
     const val workVersion = "2.4.0"
-    const val lifeCycleVersion = "2.3.0"
+    const val lifeCycleVersion = "2.3.1"
     const val roomVersion = "2.2.6"
     const val navigationVersion = "2.3.4"
     const val startupVersion = "1.0.0"
@@ -69,14 +69,14 @@ object Versions {
     const val sentryVersion = "4.3.0"
 
     // Klint
-    const val klintVersion = "0.40.0"
+    const val klintVersion = "0.41.0"
 
     // Hilt
-    const val hiltVersion = "2.31.2-alpha"
+    const val hiltVersion = "2.33-beta"
     const val hiltViewModel = "1.0.0-alpha02"
 
     // Admob
-    const val admobVersion = "19.7.0"
+    const val admobVersion = "20.0.0"
 
     // Coil
     const val coilVersion = "1.1.1"
