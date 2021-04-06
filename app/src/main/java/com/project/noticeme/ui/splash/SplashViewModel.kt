@@ -44,19 +44,21 @@ class SplashViewModel @Inject constructor(
 
 
     fun checkIsInitialDataSet() {
-        viewModelScope.launch {
-            val deferredList = ArrayList<Deferred<*>>()
-            deferredList.add(async { getAll() })
-            delay(1000)
-            deferredList.add(async {
-                Timber.d(consumableList.toString())
-                if (consumableList.isEmpty()) {
-                    dataList = InitialConsumableData.fetchData()
-                    insertData(dataList)
-                }
-            })
+        if (!pref.getInitialData()) {
+            viewModelScope.launch {
+                val deferredList = ArrayList<Deferred<*>>()
+                deferredList.add(async { getAll() })
+                delay(1000)
+                deferredList.add(async {
+                    Timber.d(consumableList.toString())
+                    if (consumableList.isEmpty()) {
+                        dataList = InitialConsumableData.fetchData()
+                        insertData(dataList)
+                    }
+                })
 
-            deferredList.joinAll()
+                deferredList.joinAll()
+            }
         }
     }
 }
