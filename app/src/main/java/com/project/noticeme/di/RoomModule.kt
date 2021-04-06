@@ -2,6 +2,8 @@ package com.project.noticeme.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.project.noticeme.data.room.ConsumableDao
 import com.project.noticeme.data.room.ConsumableDatabase
 import com.project.noticeme.data.room.SearchHistoryDao
@@ -27,7 +29,22 @@ class RoomModule {
                 ConsumableDatabase.DATABASE_NAME
             )
             .fallbackToDestructiveMigration()
+            .addMigrations(migration_1_2)
             .build()
+    }
+
+    private val migration_1_2 = object : Migration(1, 2) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("CREATE TABLE consumables_new (id INTEGER NOT NULL, title TEXT NOT NULL, imageTitle TEXT NOT NULL, category TEXT NOT NULL, duration LONG NOT NULL, PRIMARY KEY(id))")
+            database.execSQL("INSERT INTO consumables_new (id, title, imageTitle, category, duration) SELECT id, title, '', category, duration FROM consumables")
+            database.execSQL("DROP TABLE consumables")
+            database.execSQL("ALTER TABLE consumables_new RENAME TO consumables")
+
+            database.execSQL("CREATE TABLE userConsumables_new (id INTEGER NOT NULL, title TEXT NOT NULL, imageTitle TEXT NOT NULL, category TEXT NOT NULL, duration LONG NOT NULL, startDate LONG NOT NULL, endDate LONG NOT NULL, priority INTEGER NOT NULL, PRIMARY KEY(id))")
+            database.execSQL("INSERT INTO userConsumables_new (id, title, imageTitle, category, duration, startDate, endDate, priority) SELECT id, title, '', category, duration, startDate, endDate, priority FROM userConsumables")
+            database.execSQL("DROP TABLE userConsumables")
+            database.execSQL("ALTER TABLE userConsumables_new RENAME TO userConsumables")
+        }
     }
 
     @ViewModelScoped

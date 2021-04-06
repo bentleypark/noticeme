@@ -115,3 +115,5 @@ fun Context.isConnected(): Boolean {
         (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetwork
     return connectivityManager != null
 }
+
+fun Context.getResourceId(title: String) = resources.getIdentifier(title,"drawable", packageName)

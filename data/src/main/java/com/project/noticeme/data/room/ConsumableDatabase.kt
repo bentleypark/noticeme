@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [ConsumableEntity::class, UserConsumableEntity::class, SearchHistoryEntity::class],
-    version = 1, exportSchema = false
+    version = 2, exportSchema = false
 )
 abstract class ConsumableDatabase : RoomDatabase() {
 

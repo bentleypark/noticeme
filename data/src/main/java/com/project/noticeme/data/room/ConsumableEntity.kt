@@ -13,8 +13,11 @@ data class ConsumableEntity(
     @ColumnInfo(name = "title")
     var title: String,
 
-    @ColumnInfo(name = "image")
-    var image: Int,
+//    @ColumnInfo(name = "image")
+//    var image: Int,
+
+    @ColumnInfo(name = "imageTitle")
+    val imageTitle: String,
 
     @ColumnInfo(name = "category")
     var category: String,

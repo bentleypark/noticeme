@@ -3,6 +3,7 @@ package com.project.noticeme.ui.category.adapt
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
 import com.project.noticeme.R
+import com.project.noticeme.common.ex.getResourceId
 import com.project.noticeme.common.ex.makeToast
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.data.room.ConsumableEntity
@@ -10,6 +11,7 @@ import com.project.noticeme.data.room.UserConsumableEntity
 import com.project.noticeme.databinding.ConsumableItemBinding
 import com.project.noticeme.notification.JobSchedulerStart
 import com.project.noticeme.ui.category.viewmodel.CategoryDetailViewModel
+import com.project.noticeme.ui.splash.initialdata.InitialConsumableData
 import java.util.concurrent.TimeUnit
 
 class ConsumableListViewHolder(
@@ -21,7 +23,17 @@ class ConsumableListViewHolder(
     fun bind(item: ConsumableEntity) {
         binding.apply {
             tvTitle.text = item.title
-            ivMaterialImg.setImageResource(item.image)
+
+            if (item.imageTitle.isEmpty()) {
+                ivMaterialImg.setImageResource(
+                    ivMaterialImg.context.getResourceId(
+                        InitialConsumableData.fetchImageTitle(item.title)
+                    )
+                )
+            } else {
+                ivMaterialImg.setImageResource(ivMaterialImg.context.getResourceId(item.imageTitle))
+            }
+
             tvExpireTime.text = getDurationWithDay(item.duration)
 
             consumableItem.setOnClickListener {
@@ -37,7 +49,7 @@ class ConsumableListViewHolder(
                         UserConsumableEntity(
                             item.id,
                             item.title,
-                            item.image,
+                            item.imageTitle,
                             item.category,
                             item.duration,
                             viewModel.getCurrentTimeMillis(),

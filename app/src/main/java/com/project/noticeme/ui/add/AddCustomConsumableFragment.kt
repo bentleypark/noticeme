@@ -38,16 +38,16 @@ class AddCustomConsumableFragment : BaseFragment<FragmentAddCustomConsumableBind
 
     private val viewModel: AddCustomConsumableViewModel by viewModels()
     private val randomIcon = listOf(
-        R.drawable.ic_random_icon_1_alien,
-        R.drawable.ic_random_icon_2_cake,
-        R.drawable.ic_random_icon_3_donut,
-        R.drawable.ic_random_icon_4_flower_1,
-        R.drawable.ic_random_icon_5_alien_2,
-        R.drawable.ic_random_icon_6_flower_2,
-        R.drawable.ic_random_icon_7_flower_3,
-        R.drawable.ic_random_icon_8_smile,
-        R.drawable.ic_random_icon_9_heart,
-        R.drawable.ic_random_icon_10_planet
+        ".ic_random_icon_1_alien",
+        ".ic_random_icon_2_cake",
+        ".ic_random_icon_3_donut",
+        ".ic_random_icon_4_flower_1",
+        ".ic_random_icon_5_alien_2",
+        ".ic_random_icon_6_flower_2",
+        ".ic_random_icon_7_flower_3",
+        ".ic_random_icon_8_smile",
+        ".ic_random_icon_9_heart",
+        ".ic_random_icon_10_planet"
     )
     var prioirty = 0
     var startDate: Long = 0

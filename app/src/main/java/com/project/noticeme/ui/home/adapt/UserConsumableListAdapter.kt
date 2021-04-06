@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.project.noticeme.App
 import com.project.noticeme.R
+import com.project.noticeme.common.ex.getResourceId
 import com.project.noticeme.common.utils.const.Const.DAY_MILLISECONDS
 import com.project.noticeme.common.utils.date.TimeInMillis
 import com.project.noticeme.data.room.UserConsumableEntity
@@ -19,6 +20,7 @@ import com.project.noticeme.notification.JobSchedulerStart
 import com.project.noticeme.ui.home.HomeFragmentDirections
 import com.project.noticeme.ui.home.utils.SwipeHelperCallback
 import com.project.noticeme.ui.home.viewmodel.HomeViewModel
+import com.project.noticeme.ui.splash.initialdata.InitialConsumableData.fetchImageTitle
 import timber.log.Timber
 import kotlin.math.absoluteValue
 
@@ -39,7 +41,17 @@ class UserConsumableListAdapter(
         fun bind(item: UserConsumableEntity, position: Int) {
             binding.apply {
                 tvTitle.text = item.title
-                ivMaterialImg.setImageResource(item.image)
+
+                if (item.imageTitle.isEmpty()) {
+                    ivMaterialImg.setImageResource(
+                        ivMaterialImg.context.getResourceId(
+                            fetchImageTitle(item.title)
+                        )
+                    )
+                } else {
+                    ivMaterialImg.setImageResource(ivMaterialImg.context.getResourceId(item.imageTitle))
+                }
+
                 val result = getExpiredDay(System.currentTimeMillis(), item.endDate)
                 getExpiredDayForTextView(result, tvExpireTime)
 
@@ -105,7 +117,7 @@ class UserConsumableListAdapter(
             UserConsumableEntity(
                 item.id,
                 item.title,
-                item.image,
+                item.imageTitle,
                 item.category,
                 item.duration,
                 currentDate,

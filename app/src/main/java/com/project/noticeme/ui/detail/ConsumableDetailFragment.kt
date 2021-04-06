@@ -108,7 +108,7 @@ class ConsumableDetailFragment : BaseFragment<FragmentConsumableDetailBinding>()
                         UserConsumableEntity(
                             userConsumableItem.id,
                             userConsumableItem.title,
-                            userConsumableItem.image,
+                            userConsumableItem.imageTitle,
                             userConsumableItem.category,
                             duration,
                             startDate,
@@ -225,7 +225,7 @@ class ConsumableDetailFragment : BaseFragment<FragmentConsumableDetailBinding>()
                 UserConsumableEntity(
                     userConsumableItem.id,
                     userConsumableItem.title,
-                    userConsumableItem.image,
+                    userConsumableItem.imageTitle,
                     userConsumableItem.category,
                     tvDuration.text.toString().toInt() * DAY_MILLISECONDS,
                     userConsumableItem.startDate,
