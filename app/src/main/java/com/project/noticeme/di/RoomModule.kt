@@ -14,12 +14,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 class RoomModule {
 
-    @ViewModelScoped
+    @Singleton
     @Provides
     fun provideConsumableDb(@ApplicationContext context: Context): ConsumableDatabase {
         return Room
@@ -29,7 +31,7 @@ class RoomModule {
                 ConsumableDatabase.DATABASE_NAME
             )
             .allowMainThreadQueries()
-//            .fallbackToDestructiveMigration()
+            .fallbackToDestructiveMigration()
             .addMigrations(migration_1_2)
             .build()
     }
@@ -48,20 +50,20 @@ class RoomModule {
         }
     }
 
-    @ViewModelScoped
+    @Singleton
     @Provides
     fun provideConsumableDAO(consumableDatabase: ConsumableDatabase): ConsumableDao {
         return consumableDatabase.consumableDao()
     }
 
 
-    @ViewModelScoped
+    @Singleton
     @Provides
     fun provideUserConsumableDao(consumableDatabase: ConsumableDatabase): UserConsumableDao {
         return consumableDatabase.userConsumableDao()
     }
 
-    @ViewModelScoped
+    @Singleton
     @Provides
     fun provideSearchHistoryDao(consumableDatabase: ConsumableDatabase): SearchHistoryDao {
         return consumableDatabase.searchHistoryDao()
