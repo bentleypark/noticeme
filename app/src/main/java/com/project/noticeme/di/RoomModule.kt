@@ -29,7 +29,7 @@ class RoomModule {
                 ConsumableDatabase.DATABASE_NAME
             )
             .allowMainThreadQueries()
-            .fallbackToDestructiveMigration()
+//            .fallbackToDestructiveMigration()
             .addMigrations(migration_1_2)
             .build()
     }
