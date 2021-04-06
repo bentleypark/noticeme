@@ -28,6 +28,7 @@ class RoomModule {
                 ConsumableDatabase::class.java,
                 ConsumableDatabase.DATABASE_NAME
             )
+            .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
             .addMigrations(migration_1_2)
             .build()
