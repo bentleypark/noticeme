@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'com.github.ben-manes.versions' version "0.38.0"
+    id 'com.github.ben-manes.versions' version "0.39.0"
     id 'io.sentry.android.gradle'
     id "org.gradle.android.cache-fix" version "2.2.0" apply false
 }
