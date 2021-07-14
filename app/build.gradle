@@ -142,7 +142,7 @@ dependencies {
     implementation Libs.loggingInterceptor
 
     implementation Libs.hiltAndroid
-    implementation Libs.hiltViewModel
+//    implementation Libs.hiltViewModel
     kapt Libs.hiltAndroidCompiler
     kapt Libs.hiltCompiler
 
