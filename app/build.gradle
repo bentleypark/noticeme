@@ -4,9 +4,9 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'com.github.ben-manes.versions' version "0.38.0"
+    id 'com.github.ben-manes.versions' version "0.39.0"
     id 'io.sentry.android.gradle'
-    id "org.gradle.android.cache-fix" version "2.2.0" apply false
+    id "org.gradle.android.cache-fix" version "2.3.3" apply false
 }
 
 //apply from: "${rootProject.projectDir}/flavors.gradle"
@@ -18,7 +18,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdkVersion Config.compileSdkVersion
-    buildToolsVersion "30.0.3"
+    buildToolsVersion Config.buildToolVersion
     defaultConfig {
         applicationId "com.project.noticeme"
         minSdkVersion Config.minSdkVersion
@@ -26,6 +26,7 @@ android {
         versionCode Config.versionCode
         versionName Config.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndkVersion '22.1.7171670'
         ndk {
             debugSymbolLevel 'SYMBOL_TABLE'
             debugSymbolLevel 'FULL'
@@ -141,7 +142,7 @@ dependencies {
     implementation Libs.loggingInterceptor
 
     implementation Libs.hiltAndroid
-    implementation Libs.hiltViewModel
+//    implementation Libs.hiltViewModel
     kapt Libs.hiltAndroidCompiler
     kapt Libs.hiltCompiler
 

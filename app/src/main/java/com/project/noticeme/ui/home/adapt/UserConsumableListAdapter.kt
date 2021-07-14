@@ -133,7 +133,7 @@ class UserConsumableListAdapter(
         when {
             result > 0 -> {
                 textView.setTextColor(
-                    App.globalApplicationContext.resources.getColor(
+                    textView.context.resources.getColor(
                         R.color.black,
                         null
                     )
@@ -142,7 +142,7 @@ class UserConsumableListAdapter(
             }
             result == 0.toLong() -> {
                 textView.setTextColor(
-                    App.globalApplicationContext.resources.getColor(
+                    textView.context.resources.getColor(
                         R.color.expired_day_color_red,
                         null
                     )
@@ -151,7 +151,7 @@ class UserConsumableListAdapter(
             }
             else -> {
                 textView.setTextColor(
-                    App.globalApplicationContext.resources.getColor(
+                    textView.context.resources.getColor(
                         R.color.expired_day_color_red,
                         null
                     )

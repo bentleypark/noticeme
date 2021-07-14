@@ -67,7 +67,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpView()
-        MobileAds.initialize(activity)
+        MobileAds.initialize(requireContext())
     }
 
     override fun onResume() {

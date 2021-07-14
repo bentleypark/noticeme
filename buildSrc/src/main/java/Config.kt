@@ -4,4 +4,5 @@ object Config {
     const val targetSdkVersion = 30
     const val versionCode = 8
     const val versionName = "1.0.7"
+    const val buildToolVersion = "30.0.3"
 }
