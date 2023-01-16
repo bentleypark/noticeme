@@ -6,7 +6,7 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.github.ben-manes.versions' version "0.39.0"
     id 'io.sentry.android.gradle'
-    id "org.gradle.android.cache-fix" version "2.3.3" apply false
+    id "org.gradle.android.cache-fix" version "2.6.2" apply false
 }
 
 //apply from: "${rootProject.projectDir}/flavors.gradle"
