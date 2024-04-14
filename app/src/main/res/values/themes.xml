@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.Noticeme" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.Noticeme.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">@color/green_orange
+        </item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_dummy</item>
+        <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="31">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.Noticeme</item>
+    </style>
+</resources>
