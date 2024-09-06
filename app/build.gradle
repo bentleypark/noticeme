@@ -158,7 +158,7 @@ dependencies {
 //    debugImplementation Libs.leakcanary
 
     implementation Libs.admob
-    implementation Libs.playCoreKtx
+//    implementation Libs.playCoreKtx
 
     implementation Libs.coil
 
@@ -186,13 +186,6 @@ dependencyUpdates {
     rejectVersionIf {
         isNonStable(it.candidate.version)
     }
-}
-
-sentry {
-    autoProguardConfig false
-    autoUpload false
-    uploadNativeSymbols false
-    includeNativeSources false
 }
 
 subprojects {

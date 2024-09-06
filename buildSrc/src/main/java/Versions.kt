@@ -3,7 +3,7 @@ object Versions {
     // Class Path for Plugin
     const val buildGradleVersion = "8.6.0"
     const val googleServiceVersion = "4.3.5"
-    const val sentryGradleVersion = "1.7.36"
+    const val sentryGradleVersion = "4.11.0"
     const val r8Version = "8.5.35"
     const val androidJunit5Version = "1.6.2.0"
     const val androidMavenGradleVersion = "2.1"
@@ -66,7 +66,7 @@ object Versions {
     // Debug
     const val timberVersion = "4.7.1"
     const val stethoVersion = "1.5.1"
-    const val sentryVersion = "5.0.1"
+    const val sentryVersion = "7.14.0"
 
     // Klint
     const val klintVersion = "0.41.0"
