@@ -70,7 +70,7 @@ class AlarmBroadCastReceiver : HiltBroadcastReceiver() {
             context,
             NOTIFICATION_ID,
             contentIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         val builder =
             NotificationCompat.Builder(context, "NOTICEME")

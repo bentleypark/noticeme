@@ -6,8 +6,8 @@ plugins {
 }
 
 android {
+    namespace "com.project.noticeme.common.utils"
     compileSdkVersion Config.compileSdkVersion
-    buildToolsVersion Config.buildToolVersion
 
     defaultConfig {
         minSdkVersion Config.minSdkVersion
@@ -32,6 +32,9 @@ android {
         abortOnError false
         disable 'UnsafeExperimentalUsageError', 'UnsafeExperimentalUsageWarning', 'ContentDescription'
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -50,9 +53,7 @@ dependencies {
 
     // Dagger-hilt
     implementation Libs.hiltAndroid
-    implementation Libs.hiltViewModel
     kapt Libs.hiltAndroidCompiler
-    kapt Libs.hiltCompiler
 
     // Debug
     implementation Libs.timber

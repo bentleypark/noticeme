@@ -30,6 +30,8 @@ class SplashViewModel @Inject constructor(
                         is DataState.Success<Boolean> -> {
                             pref.setInitialData(true)
                         }
+
+                        else -> {}
                     }
                 }
                 .launchIn(viewModelScope)

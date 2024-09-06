@@ -170,6 +170,8 @@ class ConsumableDetailFragment : BaseFragment<FragmentConsumableDetailBinding>()
                             startDate = calendar.timeInMillis
                         }
                     }
+
+                    else -> {}
                 }
             }
         )
@@ -185,6 +187,8 @@ class ConsumableDetailFragment : BaseFragment<FragmentConsumableDetailBinding>()
                         binding.mainView.makeSnackBar(getString(R.string.consumable_modification_msg))
                         findNavController().navigate(R.id.action_consumableDetailFragment_pop)
                     }
+
+                    else -> {}
                 }
             }
         )
@@ -197,6 +201,8 @@ class ConsumableDetailFragment : BaseFragment<FragmentConsumableDetailBinding>()
                         findNavController().navigate(R.id.action_consumableDetailFragment_pop)
                         binding.mainView.makeSnackBar(getString(R.string.consumable_remove_msg))
                     }
+
+                    else -> {}
                 }
             }
         )

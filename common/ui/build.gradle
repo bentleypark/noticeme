@@ -6,8 +6,8 @@ plugins {
 }
 
 android {
+    namespace "com.project.noticeme.common.ui"
     compileSdkVersion Config.compileSdkVersion
-    buildToolsVersion Config.buildToolVersion
 
     defaultConfig {
         minSdkVersion Config.minSdkVersion
@@ -25,6 +25,7 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = 1.8
@@ -59,6 +60,7 @@ dependencies {
 
     // Debug
     implementation Libs.timber
+    implementation 'androidx.test.ext:junit-ktx:1.2.1'
 }
 
 def isNonStable = { String version ->

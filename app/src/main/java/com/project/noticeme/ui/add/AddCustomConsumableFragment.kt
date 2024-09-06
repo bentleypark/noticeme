@@ -179,6 +179,8 @@ class AddCustomConsumableFragment : BaseFragment<FragmentAddCustomConsumableBind
                             findNavController().navigate(R.id.action_addCustomConsumableFragment_to_homeFragment)
                         }
                     }
+
+                    else -> {}
                 }
             })
 

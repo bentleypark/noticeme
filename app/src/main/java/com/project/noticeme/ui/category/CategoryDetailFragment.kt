@@ -91,6 +91,8 @@ class CategoryDetailFragment : BaseFragment<FragmentCategoryDetailBinding>() {
                                 rvList.isVisible = false
                             }
                         }
+
+                        else -> {}
                     }
                 })
 
@@ -102,6 +104,8 @@ class CategoryDetailFragment : BaseFragment<FragmentCategoryDetailBinding>() {
                     is DataState.Error -> {
                         binding.mainView.makeSnackBar("소모품이 정상적으로 추가되지않았습니다. 다시 한번 시도해주세요!.")
                     }
+
+                    else -> {}
                 }
             })
         }
