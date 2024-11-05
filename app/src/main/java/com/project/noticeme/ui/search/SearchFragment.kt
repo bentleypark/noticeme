@@ -208,6 +208,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     is DataState.Success<List<SearchHistoryEntity>> -> {
                         searchHistoryAdapter.addAll(it.data)
                     }
+
+                    else -> {}
                 }
             }
         )
@@ -227,6 +229,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 is DataState.Error -> {
                     binding.mainView.makeSnackBar(getString(R.string.consumable_add_fail_msg))
                 }
+
+                else -> {}
             }
         })
     }

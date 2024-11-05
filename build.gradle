@@ -1,7 +1,8 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        maven { url 'https://jitpack.io' }
+        mavenCentral()
     }
     dependencies {
         classpath Libs.androidGradlePlugin
@@ -19,12 +20,11 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register('clean', Delete) {
+    delete rootProject.getLayout().getBuildDirectory()
 }
 
 subprojects {

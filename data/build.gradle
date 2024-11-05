@@ -7,8 +7,8 @@ plugins {
 }
 
 android {
+    namespace "com.project.noticeme.data"
     compileSdkVersion Config.compileSdkVersion
-    buildToolsVersion Config.buildToolVersion
 
     defaultConfig {
         minSdkVersion Config.minSdkVersion
@@ -18,7 +18,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [
-                        "room.incremental":"true",
+                        "room.incremental": "true",
                 ]
             }
         }
@@ -41,6 +41,9 @@ android {
         abortOnError false
         disable 'UnsafeExperimentalUsageError', 'UnsafeExperimentalUsageWarning', 'ContentDescription'
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -61,9 +64,8 @@ dependencies {
 
     // Dagger-hilt
     implementation Libs.hiltAndroid
-    implementation Libs.hiltViewModel
+    testImplementation 'org.testng:testng:6.9.6'
     kapt Libs.hiltAndroidCompiler
-    kapt Libs.hiltCompiler
 
     // Room
     implementation Libs.roomRuntime
@@ -73,6 +75,7 @@ dependencies {
 
 kapt {
     correctErrorTypes true
+    useBuildCache true
 }
 
 def isNonStable = { String version ->

@@ -150,6 +150,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                                     progressCircular.isVisible = true
                                 }
                             }
+
+                            else -> {}
                         }
                     }
                 }
@@ -166,6 +168,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                                 }
                             }
                         }
+
+                        else -> {}
                     }
                 }
             )
@@ -181,6 +185,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                                 }
                             }
                         }
+
+                        else -> {}
                     }
                 }
             )

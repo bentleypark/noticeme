@@ -17,16 +17,15 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 
 android {
+    namespace "com.project.noticeme"
     compileSdkVersion Config.compileSdkVersion
-    buildToolsVersion Config.buildToolVersion
     defaultConfig {
-        applicationId "com.project.noticeme"
         minSdkVersion Config.minSdkVersion
         targetSdkVersion Config.targetSdkVersion
         versionCode Config.versionCode
         versionName Config.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        ndkVersion '22.1.7171670'
+        ndkVersion '27.0.12077973'
         ndk {
             debugSymbolLevel 'SYMBOL_TABLE'
             debugSymbolLevel 'FULL'
@@ -69,6 +68,7 @@ android {
 //    with flavorConfig
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -78,6 +78,7 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
+        buildConfig = true
     }
     lintOptions {
         abortOnError false
@@ -144,7 +145,6 @@ dependencies {
     implementation Libs.hiltAndroid
 //    implementation Libs.hiltViewModel
     kapt Libs.hiltAndroidCompiler
-    kapt Libs.hiltCompiler
 
     // Room
     implementation Libs.roomRuntime
@@ -158,7 +158,7 @@ dependencies {
 //    debugImplementation Libs.leakcanary
 
     implementation Libs.admob
-    implementation Libs.playCoreKtx
+//    implementation Libs.playCoreKtx
 
     implementation Libs.coil
 
@@ -167,10 +167,13 @@ dependencies {
     testImplementation Libs.junit4
     androidTestImplementation Libs.junitExt
     androidTestImplementation Libs.espressoCore
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.2'
 }
 
 kapt {
     correctErrorTypes true
+    generateStubs true
 }
 
 def isNonStable = { String version ->
@@ -183,13 +186,6 @@ dependencyUpdates {
     rejectVersionIf {
         isNonStable(it.candidate.version)
     }
-}
-
-sentry {
-    autoProguardConfig false
-    autoUpload false
-    uploadNativeSymbols false
-    includeNativeSources false
 }
 
 subprojects {
