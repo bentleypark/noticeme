@@ -1,64 +1,71 @@
 plugins {
     id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'com.github.ben-manes.versions' version "0.38.0"
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
+    id 'dagger.hilt.android.plugin'
+    id 'com.github.ben-manes.versions' version "0.51.0"
 }
 
 android {
     namespace "com.project.noticeme.common.utils"
-    compileSdkVersion Config.compileSdkVersion
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        minSdkVersion Config.minSdkVersion
-        targetSdkVersion Config.targetSdkVersion
-        versionCode Config.versionCode
-        versionName Config.versionName
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
+        versionCode libs.versions.versionCode.get().toInteger()
+        versionName libs.versions.versionName.get()
     }
+    
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    
     compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+    
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
+    
     lintOptions {
         abortOnError false
         disable 'UnsafeExperimentalUsageError', 'UnsafeExperimentalUsageWarning', 'ContentDescription'
     }
+    
     buildFeatures {
         buildConfig = true
     }
 }
 
 dependencies {
-    implementation Libs.kotlinStdLib
-    implementation Libs.appcompat
-    implementation Libs.coreKtx
+    // Kotlin
+    implementation libs.kotlin.stdlib
+    
+    // AndroidX Core
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.core.ktx
 
-    // JetPack
-    implementation Libs.startUp
+    // Startup
+    implementation libs.androidx.startup.runtime
 
-    // Google
-    implementation Libs.gson
+    // Networking
+    implementation libs.gson
+    implementation libs.okhttp3.okhttp
 
-    // Square
-    implementation Libs.okhttp
-
-    // Dagger-hilt
-    implementation Libs.hiltAndroid
-    kapt Libs.hiltAndroidCompiler
+    // Dependency Injection
+    implementation libs.hilt.android
+    ksp libs.hilt.android.compiler
 
     // Debug
-    implementation Libs.timber
-    implementation Libs.stetho
-    implementation Libs.stethoOkhttp3
+    implementation libs.timber
+    implementation libs.stetho
+    implementation libs.stetho.okhttp3
 }
 
 def isNonStable = { String version ->

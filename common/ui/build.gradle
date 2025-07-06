@@ -1,19 +1,19 @@
 plugins {
     id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'com.github.ben-manes.versions' version "0.36.0"
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
+    id 'com.github.ben-manes.versions' version "0.51.0"
 }
 
 android {
     namespace "com.project.noticeme.common.ui"
-    compileSdkVersion Config.compileSdkVersion
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        minSdkVersion Config.minSdkVersion
-        targetSdkVersion Config.targetSdkVersion
-        versionCode Config.versionCode
-        versionName Config.versionName
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
+        versionCode libs.versions.versionCode.get().toInteger()
+        versionName libs.versions.versionName.get()
     }
 
     buildTypes {
@@ -22,18 +22,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    
     buildFeatures {
         dataBinding = true
         viewBinding = true
         buildConfig = true
     }
+    
     compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+    
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
+    
     lintOptions {
         abortOnError false
         disable 'UnsafeExperimentalUsageError', 'UnsafeExperimentalUsageWarning', 'ContentDescription'
@@ -41,25 +45,23 @@ android {
 }
 
 dependencies {
-    implementation Libs.kotlinStdLib
-    implementation Libs.appcompat
-    implementation Libs.recyclerview
-    implementation Libs.material
-    implementation Libs.commonJava8
+    // Kotlin
+    implementation libs.kotlin.stdlib
+    
+    // AndroidX Core
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.recyclerview
+    implementation libs.material
+    implementation libs.androidx.lifecycle.runtime.ktx
 
-    // Coroutine
-    implementation Libs.coroutineAndroid
-    implementation Libs.coroutineCore
+    // Coroutines
+    implementation libs.bundles.coroutines
 
-    // RxJava
-    implementation Libs.rxJava
-    implementation Libs.rxAndroid
-
-    // Square
-    implementation Libs.retrofit
+    // Networking
+    implementation libs.retrofit2.retrofit
 
     // Debug
-    implementation Libs.timber
+    implementation libs.timber
     implementation 'androidx.test.ext:junit-ktx:1.2.1'
 }
 

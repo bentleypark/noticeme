@@ -1,12 +1,12 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'com.github.ben-manes.versions' version "0.39.0"
-    id 'io.sentry.android.gradle'
-    id "org.gradle.android.cache-fix" version "2.3.3" apply false
+    id 'com.github.ben-manes.versions' version "0.52.0"
+//    id 'io.sentry.android.gradle'
+    id "org.gradle.android.cache-fix" version "3.0.1" apply false
 }
 
 //apply from: "${rootProject.projectDir}/flavors.gradle"
@@ -15,30 +15,23 @@ def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-
 android {
     namespace "com.project.noticeme"
-    compileSdkVersion Config.compileSdkVersion
+    compileSdk libs.versions.compileSdk.get().toInteger()
+    
     defaultConfig {
-        minSdkVersion Config.minSdkVersion
-        targetSdkVersion Config.targetSdkVersion
-        versionCode Config.versionCode
-        versionName Config.versionName
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
+        versionCode libs.versions.versionCode.get().toInteger()
+        versionName libs.versions.versionName.get()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         ndkVersion '27.0.12077973'
         ndk {
             debugSymbolLevel 'SYMBOL_TABLE'
             debugSymbolLevel 'FULL'
         }
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += [
-                        "room.schemaLocation":"$projectDir/schemas".toString(),
-                        "room.incremental":"true",
-                        "room.expandProjection":"true"]
-            }
-        }
     }
+    
     signingConfigs {
         config {
             keyAlias keystoreProperties['keyAlias']
@@ -47,6 +40,7 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
+    
     buildTypes {
         release {
             minifyEnabled true
@@ -69,30 +63,36 @@ android {
 
     compileOptions {
         coreLibraryDesugaringEnabled true
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+    
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
+    
     buildFeatures {
-        dataBinding = true
+//        dataBinding = true
         viewBinding = true
         buildConfig = true
     }
+    
     lintOptions {
         abortOnError false
         disable 'UnsafeExperimentalUsageError', 'UnsafeExperimentalUsageWarning', 'ContentDescription'
     }
+    
     configurations {
         ktlint
     }
+    
     testOptions {
         unitTests {
             includeAndroidResources = true
             returnDefaultValues = true
         }
     }
+    
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'
@@ -106,74 +106,66 @@ android {
     }
 }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(Modules.commonUi)
-    implementation project(Modules.commonUtils)
-    implementation project(Modules.data)
-
-    implementation Libs.kotlinStdLib
-    implementation Libs.coroutineCore
-    implementation Libs.coroutineAndroid
-
-    implementation Libs.appcompat
-    implementation Libs.coreKtx
-    implementation Libs.constraintlayout
-    implementation Libs.material
-    implementation Libs.activity
-    implementation Libs.activityKtx
-    implementation Libs.legacySupport
-    implementation Libs.recyclerview
-    implementation Libs.viewpager2
-
-    implementation Libs.lifeCyle
-    implementation Libs.viewModel
-    implementation Libs.liveData
-
-    implementation Libs.startUp
-    implementation Libs.navUi
-    implementation Libs.navUiKtx
-    implementation Libs.navFragment
-    implementation Libs.navFragmentKtx
-
-    implementation Libs.retrofit
-    implementation Libs.gson
-    implementation Libs.gsonConverter
-    implementation Libs.okhttp
-    implementation Libs.loggingInterceptor
-
-    implementation Libs.hiltAndroid
-//    implementation Libs.hiltViewModel
-    kapt Libs.hiltAndroidCompiler
-
-    // Room
-    implementation Libs.roomRuntime
-    implementation Libs.roomKtx
-    kapt Libs.roomCompiler
-
-    implementation Libs.timber
-    implementation Libs.stetho
-    implementation Libs.stethoOkhttp3
-    implementation Libs.sentry
-//    debugImplementation Libs.leakcanary
-
-    implementation Libs.admob
-//    implementation Libs.playCoreKtx
-
-    implementation Libs.coil
-
-    ktlint Libs.klint
-
-    testImplementation Libs.junit4
-    androidTestImplementation Libs.junitExt
-    androidTestImplementation Libs.espressoCore
-
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.2'
+ksp {
+    arg('room.schemaLocation', "$projectDir/schemas")
+    arg('room.incremental', 'true')
+    arg('room.expandProjection', 'true')
 }
 
-kapt {
-    correctErrorTypes true
-    generateStubs true
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':common:ui')
+    implementation project(':common:utils')
+    implementation project(':data')
+
+    // Kotlin
+    implementation libs.kotlin.stdlib
+
+    // Coroutines
+    implementation libs.bundles.coroutines
+
+    // AndroidX Core
+    implementation libs.bundles.androidx.core
+
+    // Lifecycle
+    implementation libs.bundles.lifecycle
+
+    // Startup
+    implementation libs.androidx.startup.runtime
+    
+    // Navigation
+    implementation libs.bundles.navigation
+
+    // Networking
+    implementation libs.bundles.networking
+
+    // Dependency Injection
+    implementation libs.hilt.android
+    ksp libs.hilt.android.compiler
+
+    // Room
+    implementation libs.bundles.room
+    ksp libs.androidx.room.compiler
+
+    // Image Loading
+    implementation libs.coil
+
+    // Debug & Tools
+    implementation libs.bundles.debug
+
+    // Admob
+    implementation libs.play.services.ads
+
+    // Linting
+    ktlint libs.ktlint
+
+    // Testing
+    testImplementation libs.bundles.testing
+    androidTestImplementation libs.androidx.test.ext.junit
+    androidTestImplementation libs.androidx.test.espresso.core
+
+    // Desugaring
+    coreLibraryDesugaring libs.android.desugar.jdk.libs
 }
 
 def isNonStable = { String version ->

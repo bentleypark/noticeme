@@ -2,7 +2,6 @@ package com.project.noticeme.ui.splash.initialdata
 
 import com.project.noticeme.R
 import com.project.noticeme.data.room.ConsumableEntity
-import okhttp3.internal.toImmutableList
 import java.util.concurrent.TimeUnit
 
 object InitialConsumableData {
@@ -170,6 +169,6 @@ object InitialConsumableData {
             )
         )
 
-        return dataList.toImmutableList()
+        return dataList.toList()
     }
 }

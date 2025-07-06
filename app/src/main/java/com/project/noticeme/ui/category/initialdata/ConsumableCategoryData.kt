@@ -3,7 +3,6 @@ package com.project.noticeme.ui.category.initialdata
 import android.content.Context
 import com.project.noticeme.R
 import com.project.noticeme.data.model.ConsumableCategory
-import okhttp3.internal.toImmutableList
 
 object ConsumableCategoryData {
     private val dataList = mutableListOf<ConsumableCategory>()
@@ -52,6 +51,6 @@ object ConsumableCategoryData {
             )
         }
 
-        return dataList.toImmutableList()
+        return dataList.toList()
     }
 }
